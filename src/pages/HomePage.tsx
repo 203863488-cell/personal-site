@@ -1,9 +1,12 @@
 import { EntryCard } from "../components/EntryCard";
+import { TopShowcase } from "../components/TopShowcase";
 import { assetUrl } from "../utils/assetUrl";
 
 export function HomePage() {
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
+      <TopShowcase />
+
       <section className="section-shell pb-12 pt-24 sm:pt-28">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
@@ -62,7 +65,7 @@ export function HomePage() {
         <div className="mb-10">
           <p className="section-kicker">Portfolio Entrance</p>
           <h2 className="section-title">请选择一条项目主线进入</h2>
-          <p className="section-copy">首页只保留入口与定位，具体项目和详情需要点击后进入对应页面查看。</p>
+          <p className="section-copy">首页保留你喜欢的顶部展示区，同时把具体项目和详情收进点击式页面里，避免信息一口气全部铺开。</p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
