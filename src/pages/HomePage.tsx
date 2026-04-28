@@ -1,4 +1,5 @@
 import { EntryCard } from "../components/EntryCard";
+import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
 import { TopShowcase } from "../components/home/TopShowcase";
 import { Pill } from "../components/ui/Pill";
@@ -79,6 +80,7 @@ export function HomePage() {
       </section>
 
       <ContactBand />
+      <ClosingVisual />
     </div>
   );
 }
