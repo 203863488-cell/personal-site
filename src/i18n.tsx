@@ -24,7 +24,7 @@ interface GatewayCardCopy {
 interface CapabilityTrackCopy {
   title: string;
   subtitle: string;
-  tiles: string[];
+  tiles: Array<string | { title: string; image: string }>;
 }
 
 interface EntryCopy {
@@ -204,7 +204,11 @@ export const copy: Record<Language, SiteCopy> = {
         { title: "求职方向", subtitle: "功率变换器与数字电源岗位", image: "images/circuit-board-abstract.jpg" }
       ],
       capabilityTracks: [
-        { title: "电赛模块能力", subtitle: "采样、辅助供电、控制板与功率板", tiles: ["隔离采样板", "辅助电源模块", "STM32G4 控制板"] },
+        {
+          title: "电赛模块能力",
+          subtitle: "采样、辅助供电、控制板与功率板",
+          tiles: [{ title: "隔离采样板", image: "images/isolated-sampling-board.png" }, "辅助电源模块", "STM32G4 控制板"]
+        },
         { title: "个人硬核项目", subtitle: "PFC、LLC 与高频功率控制", tiles: ["1kW Totem-Pole PFC", "半桥 LLC", "MEMS 调理电路"] },
         { title: "测试与复盘", subtitle: "波形、指标、问题定位与文档沉淀", tiles: ["示波器波形", "测试记录", "设计复盘"] }
       ]
@@ -371,7 +375,11 @@ export const copy: Record<Language, SiteCopy> = {
         { title: "Career Direction", subtitle: "Converters and digital power roles", image: "images/circuit-board-abstract.jpg" }
       ],
       capabilityTracks: [
-        { title: "Competition Modules", subtitle: "Sensing, auxiliary power, control, and power boards", tiles: ["Isolated Sensing Board", "Auxiliary Power Module", "STM32G4 Control Board"] },
+        {
+          title: "Competition Modules",
+          subtitle: "Sensing, auxiliary power, control, and power boards",
+          tiles: [{ title: "Isolated Sensing Board", image: "images/isolated-sampling-board.png" }, "Auxiliary Power Module", "STM32G4 Control Board"]
+        },
         { title: "Personal Core Projects", subtitle: "PFC, LLC, and high-frequency power control", tiles: ["1kW Totem-Pole PFC", "Half-Bridge LLC", "MEMS Conditioning Circuit"] },
         { title: "Testing and Review", subtitle: "Waveforms, metrics, troubleshooting, and documentation", tiles: ["Oscilloscope Waveforms", "Test Records", "Design Review"] }
       ]

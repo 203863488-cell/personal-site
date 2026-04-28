@@ -64,23 +64,38 @@ function DarkCapabilityPanel() {
         </div>
 
         <div className="grid min-h-[520px] grid-cols-1 sm:grid-cols-2">
-          {currentTrack.tiles.map((tile, index) => (
-            <article
-              key={tile}
-              className={`group relative overflow-hidden border border-white/8 bg-[#273442] p-7 transition duration-300 hover:bg-[#2E3E4E] ${
-                index === 2 ? "sm:col-span-2" : ""
-              }`}
-            >
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
-              <svg className="absolute inset-0 h-full w-full text-[#7AA2F7]/28 transition duration-300 group-hover:text-[#7AA2F7]/45" viewBox="0 0 460 260" fill="none" aria-hidden="true">
-                <path d="M40 90H150C180 90 180 58 210 58H360" stroke="currentColor" />
-                <path d="M60 178C96 138 132 218 168 178C204 138 240 218 276 178C312 138 348 218 384 178" stroke="currentColor" />
-              </svg>
-              <div className="relative flex h-full min-h-40 items-end">
-                <h4 className="text-2xl font-semibold transition duration-300 group-hover:-translate-y-1">{tile}</h4>
-              </div>
-            </article>
-          ))}
+          {currentTrack.tiles.map((tile, index) => {
+            const tileTitle = typeof tile === "string" ? tile : tile.title;
+            const tileImage = typeof tile === "string" ? undefined : tile.image;
+
+            return (
+              <article
+                key={tileTitle}
+                className={`group relative overflow-hidden border border-white/8 bg-[#273442] p-7 transition duration-300 hover:bg-[#2E3E4E] ${
+                  index === 2 ? "sm:col-span-2" : ""
+                }`}
+              >
+                {tileImage && (
+                  <img
+                    src={assetUrl(tileImage)}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-contain p-6 opacity-74 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
+                  />
+                )}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
+                <div className={`absolute inset-0 ${tileImage ? "bg-[linear-gradient(180deg,rgba(31,41,51,0.12),rgba(31,41,51,0.72))]" : ""}`} />
+                {!tileImage && (
+                  <svg className="absolute inset-0 h-full w-full text-[#7AA2F7]/28 transition duration-300 group-hover:text-[#7AA2F7]/45" viewBox="0 0 460 260" fill="none" aria-hidden="true">
+                    <path d="M40 90H150C180 90 180 58 210 58H360" stroke="currentColor" />
+                    <path d="M60 178C96 138 132 218 168 178C204 138 240 218 276 178C312 138 348 218 384 178" stroke="currentColor" />
+                  </svg>
+                )}
+                <div className="relative flex h-full min-h-40 items-end">
+                  <h4 className="text-2xl font-semibold transition duration-300 group-hover:-translate-y-1">{tileTitle}</h4>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
