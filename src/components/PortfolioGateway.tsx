@@ -104,7 +104,7 @@ export function PortfolioGateway({ language }: PortfolioGatewayProps) {
   return (
     <section className="relative z-10 bg-[#FAFAF7]">
       <div className="relative isolate overflow-hidden border-y border-[#D8E0E7]/80 py-20 md:py-24">
-        <img src="/images/pcb-closeup.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img src="images/pcb-closeup.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(250,250,247,0.94),rgba(250,250,247,0.58)_48%,rgba(250,250,247,0.82))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_46%,rgba(255,255,255,0.72),transparent_34%),linear-gradient(120deg,rgba(255,255,255,0.48),transparent_52%)]" />
         <div className="relative w-full px-5 sm:px-8 lg:px-12">

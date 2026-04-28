@@ -26,19 +26,19 @@ export const portfolioGatewayContent: Record<Language, PortfolioGatewayContent> 
       {
         title: "工程定位",
         subtitle: "电力电子硬件 / 嵌入式控制",
-        imageUrl: "/images/electronics-lab-oscilloscope.jpg",
+        imageUrl: "images/electronics-lab-oscilloscope.jpg",
         kind: "photo"
       },
       {
         title: "项目方法",
         subtitle: "从原理图、PCB 到调试验证",
-        imageUrl: "/images/pcb-closeup.jpg",
+        imageUrl: "images/pcb-closeup.jpg",
         kind: "diagram"
       },
       {
         title: "求职方向",
         subtitle: "功率变换器与数字电源岗位",
-        imageUrl: "/images/circuit-board-abstract.jpg",
+        imageUrl: "images/circuit-board-abstract.jpg",
         kind: "wave"
       }
     ],
@@ -65,19 +65,19 @@ export const portfolioGatewayContent: Record<Language, PortfolioGatewayContent> 
       {
         title: "Engineering Profile",
         subtitle: "Power electronics hardware / embedded control",
-        imageUrl: "/images/electronics-lab-oscilloscope.jpg",
+        imageUrl: "images/electronics-lab-oscilloscope.jpg",
         kind: "photo"
       },
       {
         title: "Project Method",
         subtitle: "From schematic and PCB to validation",
-        imageUrl: "/images/pcb-closeup.jpg",
+        imageUrl: "images/pcb-closeup.jpg",
         kind: "diagram"
       },
       {
         title: "Career Focus",
         subtitle: "Converter and digital power roles",
-        imageUrl: "/images/circuit-board-abstract.jpg",
+        imageUrl: "images/circuit-board-abstract.jpg",
         kind: "wave"
       }
     ],

@@ -44,7 +44,7 @@ export const featureSlides: FeatureSlide[] = [
       }
     },
     visual: "welcome",
-    imageUrl: "/images/electronics-lab-oscilloscope.jpg"
+    imageUrl: "images/electronics-lab-oscilloscope.jpg"
   },
   {
     id: "pfc",
@@ -73,7 +73,7 @@ export const featureSlides: FeatureSlide[] = [
       }
     },
     visual: "pfc",
-    imageUrl: "/images/power-board-components.jpg"
+    imageUrl: "images/power-board-components.jpg"
   },
   {
     id: "sampling",
@@ -102,7 +102,7 @@ export const featureSlides: FeatureSlide[] = [
       }
     },
     visual: "sampling",
-    imageUrl: "/images/pcb-closeup.jpg"
+    imageUrl: "images/pcb-closeup.jpg"
   },
   {
     id: "llc",
@@ -131,6 +131,6 @@ export const featureSlides: FeatureSlide[] = [
       }
     },
     visual: "llc",
-    imageUrl: "/images/circuit-board-abstract.jpg"
+    imageUrl: "images/circuit-board-abstract.jpg"
   }
 ];
