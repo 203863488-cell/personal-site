@@ -45,7 +45,13 @@ function SlideRail({ activeSlide, setActiveSlide }: SlideRailProps) {
             }`}
             aria-pressed={index === activeSlide}
           >
-            <img src={assetUrl(item.image)} alt="" className="h-12 w-16 rounded-lg object-cover opacity-78 transition group-hover:opacity-100" />
+            <img
+              src={assetUrl(item.image)}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-12 w-16 rounded-lg object-cover opacity-78 transition group-hover:opacity-100"
+            />
             <span>
               <span className="block text-sm font-semibold text-[#111827]">{item.title}</span>
               <span className="block text-xs text-[#6B7280]">{item.kicker}</span>
@@ -70,6 +76,11 @@ export function HeroShowcase() {
     goToNext
   } = useAutoCarousel({ itemCount: heroSlides.length, intervalMs: AUTO_PLAY_MS });
   const slide = heroSlides[activeSlide];
+  const nearbySlides = new Set([
+    activeSlide,
+    (activeSlide + 1) % heroSlides.length,
+    (activeSlide - 1 + heroSlides.length) % heroSlides.length
+  ]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "ArrowLeft") {
@@ -95,11 +106,13 @@ export function HeroShowcase() {
       aria-label={siteCopy.topShowcase.heroStatus}
       tabIndex={-1}
     >
-      {heroSlides.map((item, index) => (
+      {heroSlides.map((item, index) => nearbySlides.has(index) && (
         <img
           key={item.id}
           src={assetUrl(item.image)}
           alt=""
+          decoding="async"
+          fetchPriority={index === activeSlide ? "high" : "low"}
           className={`absolute inset-0 h-full w-full object-cover transition duration-700 ${
             index === activeSlide ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
           }`}

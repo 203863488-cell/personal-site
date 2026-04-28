@@ -22,7 +22,13 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
       href={href}
       className={`group relative min-h-[31rem] overflow-hidden rounded-[1.75rem] border border-[#D8E0E7]/90 bg-white/78 shadow-[0_22px_70px_rgba(31,41,51,0.07)] backdrop-blur-xl transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9] hover:shadow-[0_28px_80px_rgba(31,41,51,0.1)] motion-safe:hover:-translate-y-1 ${accentBorder}`}
     >
-      <img src={assetUrl(image)} alt="" className="absolute inset-x-0 top-0 h-56 w-full object-cover opacity-72 transition duration-500 motion-safe:group-hover:scale-[1.03]" />
+      <img
+        src={assetUrl(image)}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-x-0 top-0 h-56 w-full object-cover opacity-72 transition duration-500 motion-safe:group-hover:scale-[1.03]"
+      />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,247,0.18),rgba(250,250,247,0.92)_42%,rgba(250,250,247,0.98))]" />
       <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 rotate-12 bg-white/20 blur-2xl transition duration-700 motion-safe:group-hover:left-full" />
       <svg className="absolute right-6 top-8 h-56 w-[72%] text-[#4F9CF9]/28" viewBox="0 0 520 260" fill="none" aria-hidden="true">

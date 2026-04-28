@@ -73,7 +73,13 @@ function ProjectImageGallery({ project }: { project: PortfolioProject }) {
         {project.detailImages.map((image) => (
           <article key={image.src} className="overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78">
             <div className="relative h-64 overflow-hidden bg-[#F7F9FB]">
-              <img src={assetUrl(image.src)} alt={image.title} className="h-full w-full object-contain p-3" />
+              <img
+                src={assetUrl(image.src)}
+                alt={image.title}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-contain p-3"
+              />
             </div>
             <div className="border-t border-[#D8E0E7]/80 p-5">
               <h4 className="font-semibold text-[#111827]">{image.title}</h4>

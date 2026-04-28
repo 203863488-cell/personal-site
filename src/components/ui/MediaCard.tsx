@@ -13,7 +13,13 @@ export function MediaCard({ image, title, subtitle, className = "" }: MediaCardP
     <article
       className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-[0_18px_55px_rgba(31,41,51,0.08)] transition duration-300 focus-within:border-[#9BC9FF] hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(31,41,51,0.13)] ${className}`}
     >
-      <img src={assetUrl(image)} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 motion-safe:group-hover:scale-[1.045]" />
+      <img
+        src={assetUrl(image)}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover transition duration-500 motion-safe:group-hover:scale-[1.045]"
+      />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.06),rgba(17,24,39,0.64))]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:28px_28px] opacity-38" />
       <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 rotate-12 bg-white/12 blur-xl transition duration-700 motion-safe:group-hover:left-full" />

@@ -9,7 +9,7 @@ export function CapabilitySection() {
   const currentTrack = capabilityTracks[activeTrack];
 
   return (
-    <section className="mt-16 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933] text-white shadow-[0_24px_70px_rgba(31,41,51,0.14)]">
+    <section className="content-auto mt-16 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933] text-white shadow-[0_24px_70px_rgba(31,41,51,0.14)]">
       <div className="grid min-h-[520px] lg:grid-cols-[0.38fr_0.62fr]">
         <div className="px-5 py-16 sm:px-8 lg:py-24 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] lg:pr-12">
           <div className="space-y-10" role="tablist" aria-label={siteCopy.topShowcase.capabilityLabel}>
@@ -49,6 +49,8 @@ export function CapabilitySection() {
                   <img
                     src={assetUrl(tileImage)}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-contain p-6 opacity-74 transition duration-500 motion-safe:group-hover:scale-[1.03] group-hover:opacity-90"
                   />
                 )}

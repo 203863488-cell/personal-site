@@ -14,7 +14,7 @@ export function HomePage() {
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <TopShowcase />
 
-      <section className="section-shell pb-12 pt-24 sm:pt-28">
+      <section className="content-auto section-shell pb-12 pt-24 sm:pt-28">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
@@ -38,7 +38,13 @@ export function HomePage() {
 
           <div className="paper-card overflow-hidden">
             <div className="relative h-80">
-              <img src={assetUrl("images/electronics-lab-oscilloscope.jpg")} alt="" className="h-full w-full object-cover opacity-82" />
+              <img
+                src={assetUrl("images/electronics-lab-oscilloscope.jpg")}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover opacity-82"
+              />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,247,0.1),rgba(248,250,247,0.82))]" />
               <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/30" viewBox="0 0 620 360" fill="none" aria-hidden="true">
                 <rect x="70" y="72" width="120" height="64" rx="6" stroke="currentColor" />
@@ -62,7 +68,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell pt-8">
+      <section className="content-auto section-shell pt-8">
         <SectionHeader className="mb-10" kicker={home.entranceKicker} title={home.entranceTitle} description={home.entranceDescription} />
 
         <div className="grid gap-6 lg:grid-cols-2">

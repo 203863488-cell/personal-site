@@ -9,10 +9,22 @@ interface AutoCarouselOptions {
 export function useAutoCarousel({ itemCount, intervalMs }: AutoCarouselOptions) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (paused || reducedMotion || itemCount <= 1) {
+    const handleVisibilityChange = () => {
+      setPageVisible(document.visibilityState === "visible");
+    };
+
+    handleVisibilityChange();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    if (paused || !pageVisible || reducedMotion || itemCount <= 1) {
       return;
     }
 
@@ -21,7 +33,7 @@ export function useAutoCarousel({ itemCount, intervalMs }: AutoCarouselOptions) 
     }, intervalMs);
 
     return () => window.clearInterval(timer);
-  }, [intervalMs, itemCount, paused, reducedMotion]);
+  }, [intervalMs, itemCount, pageVisible, paused, reducedMotion]);
 
   const goToPrevious = () => {
     setActiveIndex((current) => (current - 1 + itemCount) % itemCount);

@@ -14,7 +14,7 @@ export function ContactBand() {
   };
 
   return (
-    <section id="contact" className="relative mt-16 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933]">
+    <section id="contact" className="content-auto relative mt-16 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933]">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
       <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/25" viewBox="0 0 1440 320" fill="none" aria-hidden="true">
         <path d="M90 88H210C250 88 250 50 290 50H430" stroke="currentColor" />

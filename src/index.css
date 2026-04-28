@@ -170,4 +170,11 @@ body {
   .contact-link {
     @apply mt-3 inline-flex rounded-full border border-[#BFD0DF] bg-white px-4 py-2 text-sm font-medium text-[#1F2933] transition hover:border-[#4F9CF9] hover:text-[#2563EB];
   }
+
+  @supports (content-visibility: auto) {
+    .content-auto {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 760px;
+    }
+  }
 }
