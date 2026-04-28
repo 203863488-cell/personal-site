@@ -219,8 +219,8 @@ export const copy: Record<Language, SiteCopy> = {
         { label: "形式", value: "点击式作品集" }
       ],
       entranceKicker: "Portfolio Entrance",
-      entranceTitle: "请选择一条项目主线进入",
-      entranceDescription: "首页保留你喜欢的顶部展示区，同时把具体项目和详情收进点击式页面里，避免信息一口气全部铺开。",
+      entranceTitle: "选择你想了解的项目方向",
+      entranceDescription: "电赛项目体系偏向模块化硬件平台与团队协作，个人项目作品集中展示 PFC、LLC、MEMS 等独立工程实践。",
       entries: [
         {
           title: "电赛项目体系",
@@ -384,8 +384,8 @@ export const copy: Record<Language, SiteCopy> = {
         { label: "Format", value: "Clickable Portfolio" }
       ],
       entranceKicker: "Portfolio Entrance",
-      entranceTitle: "Choose a project track",
-      entranceDescription: "The homepage keeps the top showcase you like, while detailed projects live in focused pages so the information stays easy to scan.",
+      entranceTitle: "Choose a project direction",
+      entranceDescription: "Competition projects focus on modular hardware platforms and teamwork, while personal projects highlight independent work such as PFC, LLC, and MEMS circuits.",
       entries: [
         {
           title: "Competition Project System",
