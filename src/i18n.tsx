@@ -99,6 +99,8 @@ interface SiteCopy {
   };
   projectDetail: {
     kicker: string;
+    imagesKicker: string;
+    imagesTitle: string;
     responsibilities: string;
     metrics: string;
     systemDiagram: string;
@@ -268,6 +270,8 @@ export const copy: Record<Language, SiteCopy> = {
     },
     projectDetail: {
       kicker: "Project Detail",
+      imagesKicker: "Project Images",
+      imagesTitle: "项目图纸与板卡",
       responsibilities: "我的职责",
       metrics: "技术指标",
       systemDiagram: "System Diagram",
@@ -433,6 +437,8 @@ export const copy: Record<Language, SiteCopy> = {
     },
     projectDetail: {
       kicker: "Project Detail",
+      imagesKicker: "Project Images",
+      imagesTitle: "Schematics and Board",
       responsibilities: "My Role",
       metrics: "Technical Metrics",
       systemDiagram: "System Diagram",
@@ -455,6 +461,23 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       title: "AC/DC Voltage and Current Isolated Sensing Board",
       subtitle: "Dual-channel isolated sensing front end based on AMC1301",
       summary: "An isolated AC/DC voltage and current sensing board for power-electronics competition topics. The voltage channel scales the P-to-GND bus voltage into the AMC1301 input range, while the current channel converts P-to-N current into a millivolt-level drop through a 20mΩ shunt before isolation, biasing, and 3.3V ADC conditioning.",
+      detailImages: [
+        {
+          src: "images/isolated-sampling-board.png",
+          title: "Isolated Sensing PCB",
+          description: "The PCB labels P/N/GND inputs, the 20mΩ shunt, 85V peak voltage, 4A peak current, ADC conversion formulas, and key test points for fast wiring and debugging."
+        },
+        {
+          src: "images/isolated-sampling-schematic-main.png",
+          title: "Voltage / Current Isolated Sensing Schematic",
+          description: "The left side is the voltage sensing chain, and the right side is the 20mΩ shunt current sensing chain. Both channels use AMC1301 isolation followed by TLV9062 biasing and ADC conditioning around 1.65V."
+        },
+        {
+          src: "images/isolated-sampling-schematic-power.png",
+          title: "Isolated Power and 3.3V Reference",
+          description: "This part covers 5V input protection, 3.3V regulation, B0505S isolated supplies, ISO_5V_1 / ISO_5V_2 decoupling, and the bias/reference support circuitry."
+        }
+      ],
       tags: ["AMC1301", "TLV9062", "20mΩ Shunt", "Isolated Power"],
       status: "PCB completed",
       goal: "Build a reusable isolated sensing module with clear boundaries between the power stage, sensing board, and control board: the high-voltage side handles voltage/current input, the isolation stage handles safety and scaling, and the control side reads 1.65V-biased ADC signals directly.",

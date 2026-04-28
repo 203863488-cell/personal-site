@@ -7,7 +7,24 @@ export const competitionProjects: PortfolioProject[] = [
     title: "交直流电压电流隔离采样板",
     subtitle: "基于 AMC1301 的双通道隔离采样前端",
     summary: "面向电赛电源类题目设计的交直流电压、电流隔离采样板，电压通道负责把 P 对 GND 的母线电压缩放到隔离放大器可接受范围，电流通道通过 P-N 之间的 20mΩ 分流电阻把电流转换为毫伏级压降，再经过隔离放大和运放偏置调理，最终输出适配 3.3V ADC 的采样信号。",
-    image: "images/pcb-closeup.jpg",
+    image: "images/isolated-sampling-board.png",
+    detailImages: [
+      {
+        src: "images/isolated-sampling-board.png",
+        title: "隔离采样板 PCB",
+        description: "板上集中标注 P/N/GND 输入、20mΩ 分流电阻、峰值电压 85V、峰值电流 4A、ADC 换算公式和关键测试点，便于现场接线与调试。"
+      },
+      {
+        src: "images/isolated-sampling-schematic-main.png",
+        title: "电压 / 电流隔离采样主原理图",
+        description: "左侧为电压采样链路，右侧为 20mΩ 分流电流采样链路，两路均经过 AMC1301 隔离放大，再由 TLV9062 完成 1.65V 偏置和 ADC 调理。"
+      },
+      {
+        src: "images/isolated-sampling-schematic-power.png",
+        title: "隔离供电与 3.3V 参考部分",
+        description: "包含 5V 输入保护、3.3V 稳压、B0505S 隔离电源、ISO_5V_1 / ISO_5V_2 去耦和 1.65V 偏置相关电路。"
+      }
+    ],
     tags: ["AMC1301", "TLV9062", "20mΩ 分流采样", "隔离供电"],
     status: "已完成打板",
     goal: "构建一块可复用的交直流电压电流隔离采样模块，让功率级、采样板和控制板之间形成清晰接口：高压侧只负责接入待测电压/电流，隔离侧完成安全隔离与比例缩放，控制侧直接读取以 1.65V 为零点偏置的 ADC 信号。",

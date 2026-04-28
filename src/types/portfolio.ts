@@ -5,6 +5,12 @@ export interface PortfolioMetric {
   value: string;
 }
 
+export interface PortfolioImage {
+  src: string;
+  title: string;
+  description: string;
+}
+
 export interface PortfolioProject {
   id: string;
   category: ProjectCategory;
@@ -12,6 +18,7 @@ export interface PortfolioProject {
   subtitle: string;
   summary: string;
   image: string;
+  detailImages?: PortfolioImage[];
   tags: string[];
   status: string;
   goal: string;

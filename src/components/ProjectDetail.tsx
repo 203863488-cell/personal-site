@@ -1,5 +1,6 @@
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../i18n";
+import { assetUrl } from "../utils/assetUrl";
 
 interface ProjectDetailProps {
   project: PortfolioProject;
@@ -54,6 +55,37 @@ function SystemDiagram({ project }: { project: PortfolioProject }) {
   );
 }
 
+function ProjectImageGallery({ project }: { project: PortfolioProject }) {
+  const { siteCopy } = useLanguage();
+
+  if (!project.detailImages?.length) {
+    return null;
+  }
+
+  return (
+    <section className="paper-card p-6">
+      <div>
+        <p className="section-kicker">{siteCopy.projectDetail.imagesKicker}</p>
+        <h3 className="mt-3 text-2xl font-semibold text-[#111827]">{siteCopy.projectDetail.imagesTitle}</h3>
+      </div>
+
+      <div className="mt-6 grid gap-5 lg:grid-cols-3">
+        {project.detailImages.map((image) => (
+          <article key={image.src} className="overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78">
+            <div className="relative h-64 overflow-hidden bg-[#F7F9FB]">
+              <img src={assetUrl(image.src)} alt={image.title} className="h-full w-full object-contain p-3" />
+            </div>
+            <div className="border-t border-[#D8E0E7]/80 p-5">
+              <h4 className="font-semibold text-[#111827]">{image.title}</h4>
+              <p className="mt-3 text-sm leading-7 text-[#5D6673]">{image.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function ProjectDetail({ project }: ProjectDetailProps) {
   const { siteCopy } = useLanguage();
   const labels = siteCopy.projectDetail;
@@ -72,6 +104,8 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           </span>
         </div>
       </section>
+
+      <ProjectImageGallery project={project} />
 
       <div className="grid gap-5 xl:grid-cols-2">
         <DetailList title={labels.responsibilities} items={project.responsibilities} />
