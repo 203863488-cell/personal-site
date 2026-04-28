@@ -1,4 +1,4 @@
-import { useLanguage } from "../i18n";
+import { useLanguage } from "../languageContext";
 
 export function Footer() {
   const { siteCopy } = useLanguage();

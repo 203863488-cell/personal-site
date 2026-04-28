@@ -1,6 +1,7 @@
 import { ProjectDetail } from "../components/ProjectDetail";
 import { allProjects } from "../data/allProjects";
-import { localizeProject, useLanguage } from "../i18n";
+import { localizeProject } from "../data/siteCopy";
+import { useLanguage } from "../languageContext";
 
 interface ProjectDetailPageProps {
   projectId: string;

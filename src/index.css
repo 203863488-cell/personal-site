@@ -22,6 +22,17 @@ body {
   background: rgba(79, 156, 249, 0.18);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 @keyframes soft-drift {
   0%,
   100% {
@@ -116,11 +127,11 @@ body {
   }
 
   .primary-button {
-    @apply inline-flex items-center justify-center rounded-full bg-[#1F2933] px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-[#111827];
+    @apply inline-flex items-center justify-center rounded-full bg-[#1F2933] px-5 py-3 text-sm font-medium text-white transition hover:bg-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] motion-safe:hover:-translate-y-0.5;
   }
 
   .secondary-button {
-    @apply inline-flex items-center justify-center rounded-full border border-[#D8E0E7] bg-white/70 px-5 py-3 text-sm font-medium text-[#1F2933] transition hover:-translate-y-0.5 hover:border-[#AFC0CF] hover:bg-white;
+    @apply inline-flex items-center justify-center rounded-full border border-[#D8E0E7] bg-white/70 px-5 py-3 text-sm font-medium text-[#1F2933] transition hover:border-[#AFC0CF] hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] motion-safe:hover:-translate-y-0.5;
   }
 
   .card-block {

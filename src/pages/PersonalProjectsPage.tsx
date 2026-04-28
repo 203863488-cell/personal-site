@@ -1,6 +1,7 @@
 import { ProjectCard } from "../components/ProjectCard";
 import { personalProjects } from "../data/personalProjects";
-import { localizeProject, useLanguage } from "../i18n";
+import { localizeProject } from "../data/siteCopy";
+import { useLanguage } from "../languageContext";
 
 export function PersonalProjectsPage() {
   const { language, siteCopy } = useLanguage();

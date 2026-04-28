@@ -1,5 +1,5 @@
 import type { PortfolioProject } from "../types/portfolio";
-import { useLanguage } from "../i18n";
+import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
 
 interface ProjectDetailProps {

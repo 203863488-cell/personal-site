@@ -1,5 +1,5 @@
 import type { PortfolioProject } from "../types/portfolio";
-import { useLanguage } from "../i18n";
+import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
 
 interface ProjectCardProps {
@@ -10,9 +10,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const { siteCopy } = useLanguage();
 
   return (
-    <a href={`#/project/${project.id}`} className="paper-card paper-card-hover group block overflow-hidden">
+    <a
+      href={`#/project/${project.id}`}
+      className="paper-card paper-card-hover group block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
+    >
       <div className="relative h-48 overflow-hidden border-b border-[#D8E0E7]/80">
-        <img src={assetUrl(project.image)} alt="" className="h-full w-full object-cover opacity-78 transition duration-500 group-hover:scale-[1.04]" />
+        <img src={assetUrl(project.image)} alt="" className="h-full w-full object-cover opacity-78 transition duration-500 motion-safe:group-hover:scale-[1.04]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,247,0.1),rgba(250,250,247,0.78))]" />
         <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/26" viewBox="0 0 520 220" fill="none" aria-hidden="true">
           <path d="M56 72H160C196 72 196 42 232 42H380" stroke="currentColor" />

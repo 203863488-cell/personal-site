@@ -1,6 +1,7 @@
 import { ProjectCard } from "../components/ProjectCard";
 import { competitionProjects } from "../data/competitionProjects";
-import { localizeProject, useLanguage } from "../i18n";
+import { localizeProject } from "../data/siteCopy";
+import { useLanguage } from "../languageContext";
 
 export function CompetitionPage() {
   const { language, siteCopy } = useLanguage();
