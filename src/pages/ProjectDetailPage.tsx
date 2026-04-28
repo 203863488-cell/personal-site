@@ -18,8 +18,8 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
         <a href="#/" className="secondary-button mb-10 py-2">← {siteCopy.common.backHome}</a>
         <div className="paper-card p-8">
           <p className="section-kicker">{siteCopy.pages.notFound.kicker}</p>
-          <h1 className="mt-4 text-3xl font-semibold text-[#111827]">{siteCopy.pages.notFound.title}</h1>
-          <p className="mt-4 text-[#6B7280]">{siteCopy.pages.notFound.description}</p>
+          <h1 className="mt-4 text-3xl font-semibold text-[var(--text-strong)]">{siteCopy.pages.notFound.title}</h1>
+          <p className="mt-4 text-[var(--text-muted)]">{siteCopy.pages.notFound.description}</p>
         </div>
       </section>
     );
