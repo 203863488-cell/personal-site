@@ -26,8 +26,8 @@ export class AppErrorBoundary extends Component<AppErrorBoundaryProps, AppErrorB
         <main className="relative z-10 grid min-h-screen place-items-center px-5 text-center">
           <section className="paper-card max-w-xl p-8">
             <p className="section-kicker">Runtime Guard</p>
-            <h1 className="mt-4 text-3xl font-semibold text-[var(--text-strong)]">页面暂时没有正确加载</h1>
-            <p className="mt-4 text-sm leading-7 text-[var(--text-base)]">
+            <h1 className="mt-4 text-3xl font-semibold text-[#111827]">页面暂时没有正确加载</h1>
+            <p className="mt-4 text-sm leading-7 text-[#5D6673]">
               请刷新页面重试。如果仍然异常，可以从首页重新进入项目列表。
             </p>
             <a className="primary-button mt-6" href="#/">

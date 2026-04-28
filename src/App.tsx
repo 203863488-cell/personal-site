@@ -44,7 +44,7 @@ function App() {
   return (
     <LanguageProvider>
       <AppErrorBoundary>
-        <div className="min-h-screen overflow-x-hidden bg-transparent text-[var(--text-strong)] antialiased">
+        <div className="min-h-screen overflow-x-hidden bg-[#F8FAF7] text-[#1F2933] antialiased">
           <BackgroundLines />
           <Navbar currentRoute={route} />
           <main className="relative z-10">
