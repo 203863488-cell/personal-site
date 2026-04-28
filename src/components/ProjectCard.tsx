@@ -1,4 +1,5 @@
 import type { PortfolioProject } from "../types/portfolio";
+import { useLanguage } from "../i18n";
 import { assetUrl } from "../utils/assetUrl";
 
 interface ProjectCardProps {
@@ -6,6 +7,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { siteCopy } = useLanguage();
+
   return (
     <a href={`#/project/${project.id}`} className="paper-card paper-card-hover group block overflow-hidden">
       <div className="relative h-48 overflow-hidden border-b border-[#D8E0E7]/80">
@@ -48,7 +51,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1F2933]">
-          查看详情
+          {siteCopy.common.viewDetails}
           <span className="transition group-hover:translate-x-1">→</span>
         </div>
       </div>

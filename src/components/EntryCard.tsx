@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n";
 import { assetUrl } from "../utils/assetUrl";
 
 interface EntryCardProps {
@@ -11,6 +12,7 @@ interface EntryCardProps {
 }
 
 export function EntryCard({ title, subtitle, description, href, image, tags, accent }: EntryCardProps) {
+  const { siteCopy } = useLanguage();
   const accentColor = accent === "blue" ? "text-[#4F9CF9]" : "text-[#5CC8A7]";
   const accentBorder = accent === "blue" ? "group-hover:border-[#9BC9FF]" : "group-hover:border-[#9EDFCF]";
 
@@ -43,7 +45,7 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
         </div>
 
         <div className="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-[#111827]">
-          进入查看
+          {siteCopy.common.enter}
           <span className="grid h-9 w-9 place-items-center rounded-full border border-[#D8E0E7] bg-white transition group-hover:translate-x-1">
             →
           </span>

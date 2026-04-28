@@ -1,4 +1,5 @@
 import type { PortfolioProject } from "../types/portfolio";
+import { useLanguage } from "../i18n";
 
 interface ProjectDetailProps {
   project: PortfolioProject;
@@ -18,14 +19,16 @@ function DetailList({ title, items }: { title: string; items: string[] }) {
 }
 
 function SystemDiagram({ project }: { project: PortfolioProject }) {
+  const { siteCopy } = useLanguage();
+
   return (
     <section className="paper-card p-6">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="section-kicker">System Diagram</p>
+          <p className="section-kicker">{siteCopy.projectDetail.systemDiagram}</p>
           <h3 className="mt-3 text-2xl font-semibold text-[#111827]">{project.diagramTitle}</h3>
         </div>
-        <span className="text-sm text-[#6B7280]">后续可替换为真实系统框图</span>
+        <span className="text-sm text-[#6B7280]">{siteCopy.projectDetail.diagramPlaceholder}</span>
       </div>
 
       <div className="mt-8 overflow-hidden rounded-xl border border-[#D8E0E7] bg-[#F7F9FB]/70 p-5">
@@ -52,25 +55,28 @@ function SystemDiagram({ project }: { project: PortfolioProject }) {
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
+  const { siteCopy } = useLanguage();
+  const labels = siteCopy.projectDetail;
+
   return (
     <div className="space-y-6">
       <section className="paper-card p-6 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="section-kicker">Project Detail</p>
+            <p className="section-kicker">{labels.kicker}</p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">{project.title}</h2>
             <p className="mt-5 max-w-3xl text-base leading-8 text-[#5D6673]">{project.goal}</p>
           </div>
           <span className="w-fit rounded-full border border-[#D8E0E7] bg-white px-4 py-2 text-sm text-[#425466]">
-            当前进度：{project.status}
+            {siteCopy.common.currentProgress}: {project.status}
           </span>
         </div>
       </section>
 
       <div className="grid gap-5 xl:grid-cols-2">
-        <DetailList title="我的职责" items={project.responsibilities} />
+        <DetailList title={labels.responsibilities} items={project.responsibilities} />
         <section className="card-block">
-          <h3 className="detail-title">技术指标</h3>
+          <h3 className="detail-title">{labels.metrics}</h3>
           <div className="mt-5 grid gap-px overflow-hidden rounded-lg border border-[#D8E0E7] bg-[#D8E0E7] sm:grid-cols-3">
             {project.metrics.map((metric) => (
               <div key={metric.label} className="bg-white/82 p-4">
@@ -85,13 +91,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       <SystemDiagram project={project} />
 
       <div className="grid gap-5 xl:grid-cols-2">
-        <DetailList title="关键设计点" items={project.designPoints} />
+        <DetailList title={labels.designPoints} items={project.designPoints} />
         <section className="card-block">
-          <h3 className="detail-title">当前进度</h3>
+          <h3 className="detail-title">{labels.progress}</h3>
           <p className="mt-4 text-sm leading-7 text-[#5D6673]">{project.progress}</p>
         </section>
-        <DetailList title="测试与验证" items={project.validation} />
-        <DetailList title="后续改进" items={project.improvements} />
+        <DetailList title={labels.validation} items={project.validation} />
+        <DetailList title={labels.improvements} items={project.improvements} />
       </div>
     </div>
   );

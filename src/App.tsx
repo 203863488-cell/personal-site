@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BackgroundLines } from "./components/BackgroundLines";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import { LanguageProvider } from "./i18n";
 import { CompetitionPage } from "./pages/CompetitionPage";
 import { HomePage } from "./pages/HomePage";
 import { PersonalProjectsPage } from "./pages/PersonalProjectsPage";
@@ -50,12 +51,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#F8FAF7] text-[#1F2933] antialiased">
-      <BackgroundLines />
-      <Navbar currentRoute={route} />
-      <main className="relative z-10">{renderPage()}</main>
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen overflow-x-hidden bg-[#F8FAF7] text-[#1F2933] antialiased">
+        <BackgroundLines />
+        <Navbar currentRoute={route} />
+        <main className="relative z-10">{renderPage()}</main>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
 

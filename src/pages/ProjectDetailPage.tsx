@@ -1,35 +1,38 @@
 import { ProjectDetail } from "../components/ProjectDetail";
 import { allProjects } from "../data/allProjects";
+import { localizeProject, useLanguage } from "../i18n";
 
 interface ProjectDetailPageProps {
   projectId: string;
 }
 
 export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
-  const project = allProjects.find((item) => item.id === projectId);
+  const { language, siteCopy } = useLanguage();
+  const sourceProject = allProjects.find((item) => item.id === projectId);
+  const project = sourceProject ? localizeProject(sourceProject, language) : undefined;
 
   if (!project) {
     return (
       <section className="section-shell pt-16">
-        <a href="#/" className="secondary-button mb-10 py-2">← 返回首页</a>
+        <a href="#/" className="secondary-button mb-10 py-2">← {siteCopy.common.backHome}</a>
         <div className="paper-card p-8">
-          <p className="section-kicker">Not Found</p>
-          <h1 className="mt-4 text-3xl font-semibold text-[#111827]">没有找到这个项目</h1>
-          <p className="mt-4 text-[#6B7280]">请从电赛项目体系或个人项目作品页面重新进入。</p>
+          <p className="section-kicker">{siteCopy.pages.notFound.kicker}</p>
+          <h1 className="mt-4 text-3xl font-semibold text-[#111827]">{siteCopy.pages.notFound.title}</h1>
+          <p className="mt-4 text-[#6B7280]">{siteCopy.pages.notFound.description}</p>
         </div>
       </section>
     );
   }
 
   const backHref = project.category === "competition" ? "#/competition" : "#/personal";
-  const backLabel = project.category === "competition" ? "返回电赛项目体系" : "返回个人项目作品";
+  const backLabel = project.category === "competition" ? siteCopy.pages.competition.title : siteCopy.pages.personal.title;
 
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <section className="section-shell pt-16">
         <div className="mb-10 flex flex-wrap gap-3">
           <a href={backHref} className="secondary-button py-2">← {backLabel}</a>
-          <a href="#/" className="secondary-button py-2">返回首页</a>
+          <a href="#/" className="secondary-button py-2">{siteCopy.common.backHome}</a>
         </div>
         <ProjectDetail project={project} />
       </section>
