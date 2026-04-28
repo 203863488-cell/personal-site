@@ -119,11 +119,11 @@ export function HeroShowcase() {
         />
       ))}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,247,0.9)_0%,rgba(248,250,247,0.68)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.18)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-36 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.92))]" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.78))]" />
 
       <div className="relative mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
         <div className="w-full">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(23rem,0.74fr)] lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-center">
             <div className="transition duration-500" key={slide.id}>
               <div className="flex flex-wrap items-center gap-3">
                 <p className="section-kicker">{slide.kicker}</p>
@@ -131,10 +131,10 @@ export function HeroShowcase() {
                   {paused || reducedMotion ? siteCopy.topShowcase.pausedStatus : siteCopy.topShowcase.playingStatus}
                 </span>
               </div>
-              <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight text-[#111827] sm:text-5xl lg:text-6xl">
+              <h1 className="balanced-text mt-6 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
                 {slide.title}
               </h1>
-              <p className="mt-6 max-w-3xl text-base leading-8 text-[#5F6B77] sm:text-lg">{slide.description}</p>
+              <p className="copy-text mt-6 max-w-3xl">{slide.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 {slide.tags.map((tag) => (
                   <Pill key={tag}>{tag}</Pill>

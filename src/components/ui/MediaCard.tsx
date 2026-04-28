@@ -20,12 +20,12 @@ export function MediaCard({ image, title, subtitle, className = "" }: MediaCardP
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover transition duration-500 motion-safe:group-hover:scale-[1.045]"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.06),rgba(17,24,39,0.64))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.14),rgba(17,24,39,0.56))]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:28px_28px] opacity-38" />
       <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 rotate-12 bg-white/12 blur-xl transition duration-700 motion-safe:group-hover:left-full" />
       <div className="absolute inset-x-0 bottom-0 p-6 text-white transition duration-300 motion-safe:group-hover:translate-y-[-4px]">
-        <h3 className="text-2xl font-semibold">{title}</h3>
-        {subtitle && <p className="mt-2 text-sm text-white/84">{subtitle}</p>}
+        <h3 className="balanced-text text-2xl font-semibold leading-[1.16]">{title}</h3>
+        {subtitle && <p className="mt-2 text-sm leading-6 text-white/84">{subtitle}</p>}
       </div>
     </article>
   );

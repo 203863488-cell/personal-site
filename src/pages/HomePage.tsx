@@ -15,16 +15,16 @@ export function HomePage() {
       <TopShowcase />
 
       <section className="content-auto section-shell pb-12 pt-24 sm:pt-28">
-        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-tight text-[#111827] sm:text-6xl lg:text-7xl">
+            <h1 className="balanced-text mt-5 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
               {home.title}
-              <span className="block text-3xl font-medium text-[#1F2933] sm:text-4xl lg:text-5xl">
+              <span className="mt-2 block text-2xl font-medium leading-[1.18] text-[#1F2933] sm:text-3xl lg:text-4xl">
                 {home.subtitle}
               </span>
             </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-9 text-[#5D6673]">
+            <p className="copy-text mt-6 max-w-3xl">
               {home.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -45,7 +45,7 @@ export function HomePage() {
                 decoding="async"
                 className="h-full w-full object-cover opacity-82"
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,247,0.1),rgba(248,250,247,0.82))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,247,0.12),rgba(248,250,247,0.68))]" />
               <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/30" viewBox="0 0 620 360" fill="none" aria-hidden="true">
                 <rect x="70" y="72" width="120" height="64" rx="6" stroke="currentColor" />
                 <rect x="260" y="72" width="120" height="64" rx="6" stroke="currentColor" />

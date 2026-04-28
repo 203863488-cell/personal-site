@@ -29,7 +29,7 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
         decoding="async"
         className="absolute inset-x-0 top-0 h-56 w-full object-cover opacity-72 transition duration-500 motion-safe:group-hover:scale-[1.03]"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,247,0.18),rgba(250,250,247,0.92)_42%,rgba(250,250,247,0.98))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,247,0.26),rgba(250,250,247,0.76)_50%,rgba(250,250,247,0.88))]" />
       <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 rotate-12 bg-white/20 blur-2xl transition duration-700 motion-safe:group-hover:left-full" />
       <svg className="absolute right-6 top-8 h-56 w-[72%] text-[#4F9CF9]/28" viewBox="0 0 520 260" fill="none" aria-hidden="true">
         <rect x="70" y="42" width="100" height="52" rx="5" stroke="currentColor" />
@@ -41,8 +41,8 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
 
       <div className="relative flex h-full min-h-[31rem] flex-col justify-end p-7 sm:p-8">
         <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${accentColor}`}>{subtitle}</p>
-        <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-4xl">{title}</h2>
-        <p className="mt-5 max-w-xl text-base leading-8 text-[#5D6673]">{description}</p>
+        <h2 className="balanced-text mt-4 text-3xl font-semibold leading-[1.16] text-[#111827] sm:text-4xl">{title}</h2>
+        <p className="copy-text mt-5 max-w-xl">{description}</p>
 
         <div className="mt-7 flex flex-wrap gap-2">
           {tags.map((tag) => (

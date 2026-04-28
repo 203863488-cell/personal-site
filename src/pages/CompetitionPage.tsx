@@ -15,7 +15,7 @@ export function CompetitionPage() {
 
         <div className="mb-12">
           <p className="section-kicker">{page.kicker}</p>
-          <h1 className="section-title text-4xl sm:text-5xl">{page.title}</h1>
+          <h1 className="section-title balanced-text">{page.title}</h1>
           <p className="section-copy">
             {page.description}
           </p>

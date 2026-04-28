@@ -25,8 +25,8 @@ export function CapabilitySection() {
                   index === activeTrack ? "border-[#4F9CF9] opacity-100" : "border-transparent opacity-42 hover:opacity-75"
                 }`}
               >
-                <span className="block text-3xl font-semibold">{track.title}</span>
-                <span className="mt-3 block max-w-xs text-sm leading-7 text-white/68">{track.subtitle}</span>
+                <span className="balanced-text block text-2xl font-semibold leading-[1.18] sm:text-3xl">{track.title}</span>
+                <span className="mt-3 block max-w-xs text-sm leading-6 text-white/68">{track.subtitle}</span>
                 {index === activeTrack && <span className="mt-5 block text-2xl leading-none">→</span>}
               </button>
             ))}
@@ -55,7 +55,7 @@ export function CapabilitySection() {
                   />
                 )}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
-                <div className={`absolute inset-0 transition duration-300 ${tileImage ? "bg-[linear-gradient(180deg,rgba(31,41,51,0.1),rgba(31,41,51,0.74))]" : "group-hover:bg-white/4"}`} />
+                <div className={`absolute inset-0 transition duration-300 ${tileImage ? "bg-[linear-gradient(180deg,rgba(31,41,51,0.18),rgba(31,41,51,0.64))]" : "group-hover:bg-white/4"}`} />
                 {!tileImage && (
                   <svg className="absolute inset-0 h-full w-full text-[#7AA2F7]/28 transition duration-300 group-hover:text-[#7AA2F7]/45" viewBox="0 0 460 260" fill="none" aria-hidden="true">
                     <path d="M40 90H150C180 90 180 58 210 58H360" stroke="currentColor" />
@@ -63,7 +63,7 @@ export function CapabilitySection() {
                   </svg>
                 )}
                 <div className="relative flex h-full min-h-40 items-end">
-                  <h4 className="text-2xl font-semibold transition duration-300 motion-safe:group-hover:-translate-y-1">{tileTitle}</h4>
+                  <h4 className="balanced-text text-2xl font-semibold leading-[1.18] transition duration-300 motion-safe:group-hover:-translate-y-1">{tileTitle}</h4>
                 </div>
               </article>
             );

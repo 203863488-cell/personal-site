@@ -103,15 +103,25 @@ body {
   }
 
   .section-kicker {
-    @apply text-xs font-semibold uppercase tracking-[0.22em] text-[#4F9CF9];
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-[#4F9CF9];
   }
 
   .section-title {
-    @apply mt-3 max-w-3xl text-3xl font-semibold leading-tight text-[#111827] sm:text-4xl;
+    @apply mt-3 max-w-3xl text-3xl font-semibold leading-[1.15] text-[#111827] sm:text-4xl;
   }
 
   .section-copy {
-    @apply mt-5 max-w-3xl text-base leading-8 text-[#6B7280];
+    @apply mt-5 max-w-3xl text-base leading-7 text-[#6B7280];
+  }
+
+  .balanced-text {
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  .copy-text {
+    @apply text-base leading-7 text-[#5D6673];
+    overflow-wrap: anywhere;
   }
 
   .paper-card {
@@ -123,7 +133,7 @@ body {
   }
 
   .pill {
-    @apply inline-flex items-center rounded-full border border-[#D8E0E7] bg-white/70 px-4 py-2 text-sm text-[#425466];
+    @apply inline-flex items-center rounded-full border border-[#D8E0E7] bg-white/70 px-3.5 py-1.5 text-sm leading-5 text-[#425466];
   }
 
   .primary-button {
@@ -143,7 +153,7 @@ body {
   }
 
   .detail-list {
-    @apply mt-4 space-y-3 text-sm leading-7 text-[#5D6673];
+    @apply mt-4 space-y-3 text-sm leading-6 text-[#5D6673];
   }
 
   .detail-list li {

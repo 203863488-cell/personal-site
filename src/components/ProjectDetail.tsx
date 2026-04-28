@@ -27,7 +27,7 @@ function SystemDiagram({ project }: { project: PortfolioProject }) {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="section-kicker">{siteCopy.projectDetail.systemDiagram}</p>
-          <h3 className="mt-3 text-2xl font-semibold text-[#111827]">{project.diagramTitle}</h3>
+          <h3 className="balanced-text mt-3 text-2xl font-semibold leading-[1.18] text-[#111827]">{project.diagramTitle}</h3>
         </div>
         <span className="text-sm text-[#6B7280]">{siteCopy.projectDetail.diagramPlaceholder}</span>
       </div>
@@ -66,7 +66,7 @@ function ProjectImageGallery({ project }: { project: PortfolioProject }) {
     <section className="paper-card p-6">
       <div>
         <p className="section-kicker">{siteCopy.projectDetail.imagesKicker}</p>
-        <h3 className="mt-3 text-2xl font-semibold text-[#111827]">{siteCopy.projectDetail.imagesTitle}</h3>
+        <h3 className="balanced-text mt-3 text-2xl font-semibold leading-[1.18] text-[#111827]">{siteCopy.projectDetail.imagesTitle}</h3>
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-3">
@@ -82,8 +82,8 @@ function ProjectImageGallery({ project }: { project: PortfolioProject }) {
               />
             </div>
             <div className="border-t border-[#D8E0E7]/80 p-5">
-              <h4 className="font-semibold text-[#111827]">{image.title}</h4>
-              <p className="mt-3 text-sm leading-7 text-[#5D6673]">{image.description}</p>
+              <h4 className="balanced-text font-semibold leading-[1.2] text-[#111827]">{image.title}</h4>
+              <p className="mt-3 text-sm leading-6 text-[#5D6673]">{image.description}</p>
             </div>
           </article>
         ))}
@@ -102,8 +102,8 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <p className="section-kicker">{labels.kicker}</p>
-            <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">{project.title}</h2>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-[#5D6673]">{project.goal}</p>
+            <h2 className="balanced-text mt-4 text-3xl font-semibold leading-[1.14] text-[#111827] sm:text-5xl">{project.title}</h2>
+            <p className="copy-text mt-5 max-w-3xl">{project.goal}</p>
           </div>
           <span className="w-fit rounded-full border border-[#D8E0E7] bg-white px-4 py-2 text-sm text-[#425466]">
             {siteCopy.common.currentProgress}: {project.status}
@@ -134,7 +134,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <DetailList title={labels.designPoints} items={project.designPoints} />
         <section className="card-block">
           <h3 className="detail-title">{labels.progress}</h3>
-          <p className="mt-4 text-sm leading-7 text-[#5D6673]">{project.progress}</p>
+          <p className="mt-4 text-sm leading-6 text-[#5D6673]">{project.progress}</p>
         </section>
         <DetailList title={labels.validation} items={project.validation} />
         <DetailList title={labels.improvements} items={project.improvements} />
