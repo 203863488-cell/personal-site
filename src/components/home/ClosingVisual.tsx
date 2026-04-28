@@ -13,21 +13,18 @@ export function ClosingVisual() {
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,247,0.68)_0%,rgba(248,250,247,0.22)_28%,rgba(17,24,39,0.05)_58%,rgba(17,24,39,0.28)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_19%_26%,rgba(248,250,247,0.78)_0%,rgba(248,250,247,0.26)_24%,rgba(248,250,247,0)_45%)]" />
-        <div className="absolute inset-x-0 top-0 h-36 bg-[linear-gradient(180deg,rgba(248,250,247,0.22),rgba(248,250,247,0))]" />
 
-        <div className="relative mx-auto flex min-h-[520px] max-w-7xl items-center px-5 py-14 sm:min-h-[620px] sm:px-8 lg:min-h-[760px] lg:px-10 lg:py-20">
-          <div className="w-full max-w-[19rem] text-[#0F172A] sm:max-w-[24rem] lg:ml-4 lg:max-w-[30rem]">
-            <div className="inline-flex flex-col [text-shadow:0_12px_30px_rgba(248,250,247,0.32)]">
-              <h2 className="font-['STKaiti','KaiTi','FangSong','Songti_SC',serif] text-[3.15rem] font-semibold leading-[1.08] tracking-[0.14em] sm:text-[4.4rem] lg:text-[5.25rem]">
+        <div className="relative flex min-h-[520px] items-end px-5 pb-14 pt-14 sm:min-h-[620px] sm:px-8 sm:pb-18 sm:pt-16 lg:min-h-[760px] lg:px-14 lg:pb-24 lg:pt-20 xl:px-20">
+          <div className="w-full max-w-[16rem] text-[#0F172A] sm:max-w-[20rem] lg:max-w-[24rem]">
+            <div className="inline-flex flex-col">
+              <h2 className="font-['STKaiti','KaiTi','FangSong','Songti_SC',serif] text-[3rem] font-semibold leading-[1.04] tracking-[0.16em] sm:text-[4.15rem] lg:text-[4.9rem]">
                 <span className="block">追风赶月</span>
                 <span className="mt-1 block">莫停留</span>
               </h2>
-              <p className="mt-6 font-['FangSong','STFangsong','Songti_SC',serif] text-base leading-7 tracking-[0.28em] text-[#1E293B]/80 sm:text-[1.45rem] sm:leading-9">
+              <p className="mt-6 font-['FangSong','STFangsong','Songti_SC',serif] text-sm leading-7 tracking-[0.3em] text-[#1E293B]/76 sm:text-[1.2rem] sm:leading-8">
                 平芜尽处是春山。
               </p>
-              <div className="mt-5 h-px w-18 bg-[#2563EB]/75 shadow-[0_0_24px_rgba(37,99,235,0.28)]" />
+              <div className="mt-5 h-px w-16 bg-[#2563EB]/72" />
             </div>
           </div>
         </div>
