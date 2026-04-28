@@ -39,7 +39,7 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
         <path d="M62 215C96 175 130 255 164 215C198 175 232 255 266 215C300 175 334 255 368 215" stroke="currentColor" />
       </svg>
 
-      <div className="relative flex h-full min-h-[31rem] flex-col justify-end p-7 sm:p-8">
+      <div className="relative flex h-full min-h-[31rem] flex-col px-7 pb-7 pt-[13.75rem] sm:px-8 sm:pb-8">
         <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${accentColor}`}>{subtitle}</p>
         <h2 className="balanced-text mt-4 text-3xl font-semibold leading-[1.16] text-[#111827] sm:text-4xl">{title}</h2>
         <p className="copy-text mt-5 max-w-xl">{description}</p>
@@ -52,10 +52,10 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
           ))}
         </div>
 
-        <div className="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-[#111827]">
+        <div className="mt-auto inline-flex items-center gap-3 pt-8 text-sm font-semibold text-[#111827]">
           {siteCopy.common.enter}
           <span className="grid h-9 w-9 place-items-center rounded-full border border-[#D8E0E7] bg-white transition group-hover:translate-x-1">
-            →
+            &rarr;
           </span>
         </div>
       </div>
