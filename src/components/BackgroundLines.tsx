@@ -1,10 +1,10 @@
-export function PageBackground() {
+export function BackgroundLines() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(89,108,130,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(89,108,130,0.055)_1px,transparent_1px)] bg-[size:48px_48px]" />
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(89,108,130,0.052)_1px,transparent_1px),linear-gradient(90deg,rgba(89,108,130,0.052)_1px,transparent_1px)] bg-[size:48px_48px]" />
       <div className="ambient-lines absolute inset-0 opacity-70" />
       <svg
-        className="signal-drawing absolute left-1/2 top-0 h-full w-[1500px] -translate-x-1/2 text-[#7AA2F7]/25"
+        className="signal-drawing absolute left-1/2 top-0 h-full w-[1500px] -translate-x-1/2 text-[#7AA2F7]/22"
         viewBox="0 0 1500 1100"
         fill="none"
         aria-hidden="true"
