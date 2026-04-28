@@ -5,24 +5,24 @@ export const competitionProjects: PortfolioProject[] = [
     id: "isolated-sampling-board",
     category: "competition",
     title: "交直流电压电流隔离采样板",
-    subtitle: "面向电源类题目的通用采样前端",
-    summary: "为控制系统提供可靠、隔离、可标定的电压电流采样链路，支撑多种 AC/DC、DC/DC 调试场景。",
+    subtitle: "基于 AMC1301 的双通道隔离采样前端",
+    summary: "面向电赛电源类题目设计的交直流电压、电流采样板，集成电压采样、电流分流采样、隔离放大、运放调理和隔离供电，可直接为控制板提供 3.3V ADC 信号。",
     image: "images/pcb-closeup.jpg",
-    tags: ["隔离采样", "ADC 调理", "运放前端", "校准"],
-    status: "已打板 / 持续优化",
-    goal: "构建一块可复用的交直流电压电流采样模块，降低电赛中重复搭建前端链路的时间成本。",
-    responsibilities: ["设计采样链路与接口定义", "规划隔离、调理和 ADC 输入范围", "整理调试流程与标定思路"],
+    tags: ["AMC1301", "TLV9062", "20mΩ 分流采样", "隔离供电"],
+    status: "已完成打板",
+    goal: "构建一块可复用的交直流电压电流隔离采样模块，在电赛调试中快速接入功率级和控制板，完成高低压侧安全隔离与 ADC 量程匹配。",
+    responsibilities: ["设计电压采样与 20mΩ 电流分流采样链路", "使用 AMC1301 实现采样信号隔离放大，并通过 TLV9062 完成偏置与 ADC 调理", "规划 5V、3.3V、ISO_5V 电源域和 B0505S 隔离供电", "在 PCB 上标注换算公式、接口方向和关键测试点，方便比赛现场快速接线与排查"],
     metrics: [
-      { label: "输入类型", value: "AC / DC" },
-      { label: "输出接口", value: "ADC" },
-      { label: "用途", value: "控制前端" }
+      { label: "峰值电压", value: "85V" },
+      { label: "峰值电流", value: "4A" },
+      { label: "采样电阻", value: "20mΩ" }
     ],
     diagramTitle: "采样链路系统框图",
-    diagramNodes: ["高压/电流输入", "隔离与调理", "ADC 接口", "控制板"],
-    designPoints: ["输入保护与量程规划", "模拟地与数字地的噪声隔离", "统一接口定义，方便快速接入控制板"],
-    progress: "模块结构已完成，后续重点补充实测数据、误差分析和标定记录。",
-    validation: ["低压信号注入验证", "输出范围与 ADC 匹配检查", "采样一致性与噪声观察"],
-    improvements: ["补充标定表格", "增加不同量程版本", "整理为电赛通用模块文档"]
+    diagramNodes: ["电压/电流输入", "AMC1301 隔离放大", "TLV9062 偏置调理", "3.3V ADC 输出"],
+    designPoints: ["电压通道换算关系：V(P->GND) ≈ 62.60 × (VADC_V - 1.65)", "电流通道换算关系：I(P->N) ≈ 3.049 × (VADC_I - 1.65)", "电流通道采用 20mΩ 分流电阻，配合 39Ω 输入电阻与滤波网络抑制采样噪声", "高压侧与控制侧通过 AMC1301 和 B0505S 隔离供电分离，降低调试风险"],
+    progress: "原理图与 PCB 已完成，板上预留电压采样、电流采样、5V 输入、ISO_5V、3.3V、AGND/GND 等接口，并放置关键测试点用于现场调试。",
+    validation: ["检查 5V、3.3V、ISO_5V 电源域上电状态", "通过 TP 测试点观察隔离侧与 ADC 侧信号", "按板载公式核对 VADC_V、VADC_I 与实际电压电流的对应关系"],
+    improvements: ["补充实测标定表和误差曲线", "记录不同输入电压、电流下的 ADC 输出数据", "整理接线说明和电赛现场调试流程"]
   },
   {
     id: "auxiliary-power-module",

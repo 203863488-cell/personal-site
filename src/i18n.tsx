@@ -453,23 +453,23 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
   en: {
     "isolated-sampling-board": {
       title: "AC/DC Voltage and Current Isolated Sensing Board",
-      subtitle: "Reusable sensing front end for power-supply competition problems",
-      summary: "Provides reliable, isolated, and calibratable voltage/current sensing for control systems across AC/DC and DC/DC debug scenarios.",
-      tags: ["Isolated Sensing", "ADC Conditioning", "Op-Amp Front End", "Calibration"],
-      status: "PCB built / optimizing",
-      goal: "Build a reusable AC/DC voltage and current sensing module to reduce repeated front-end setup time during competitions.",
-      responsibilities: ["Designed the sensing chain and interface definition", "Planned isolation, conditioning, and ADC input ranges", "Organized the debug and calibration workflow"],
+      subtitle: "Dual-channel isolated sensing front end based on AMC1301",
+      summary: "An AC/DC voltage and current sensing board for power-electronics competition topics, integrating voltage sensing, shunt current sensing, isolated amplification, op-amp conditioning, and isolated power for 3.3V ADC outputs.",
+      tags: ["AMC1301", "TLV9062", "20mΩ Shunt", "Isolated Power"],
+      status: "PCB completed",
+      goal: "Build a reusable isolated voltage and current sensing module that can quickly connect the power stage to the control board while maintaining high/low voltage isolation and ADC range matching.",
+      responsibilities: ["Designed the voltage sensing chain and 20mΩ shunt current sensing chain", "Used AMC1301 for isolated signal amplification and TLV9062 for biasing and ADC conditioning", "Planned the 5V, 3.3V, and ISO_5V power domains with B0505S isolated supplies", "Marked conversion formulas, connector directions, and key test points on the PCB for fast wiring and troubleshooting"],
       metrics: [
-        { label: "Input", value: "AC / DC" },
-        { label: "Output", value: "ADC" },
-        { label: "Use", value: "Control Front End" }
+        { label: "Peak Voltage", value: "85V" },
+        { label: "Peak Current", value: "4A" },
+        { label: "Shunt", value: "20mΩ" }
       ],
       diagramTitle: "Sensing Chain Block Diagram",
-      diagramNodes: ["Voltage / Current Input", "Isolation and Conditioning", "ADC Interface", "Control Board"],
-      designPoints: ["Input protection and range planning", "Noise isolation between analog and digital grounds", "Unified interface definition for quick control-board integration"],
-      progress: "The module structure is complete. Next steps focus on measured data, error analysis, and calibration records.",
-      validation: ["Low-voltage signal injection", "Output range and ADC matching check", "Sampling consistency and noise observation"],
-      improvements: ["Add calibration tables", "Create versions for different ranges", "Package it as a reusable competition module document"]
+      diagramNodes: ["Voltage / Current Input", "AMC1301 Isolation", "TLV9062 Conditioning", "3.3V ADC Output"],
+      designPoints: ["Voltage conversion: V(P->GND) ≈ 62.60 × (VADC_V - 1.65)", "Current conversion: I(P->N) ≈ 3.049 × (VADC_I - 1.65)", "The current channel uses a 20mΩ shunt with 39Ω input resistors and filtering to reduce sensing noise", "The high-voltage side and control side are separated by AMC1301 isolation and B0505S isolated power to reduce debug risk"],
+      progress: "The schematic and PCB are complete, with voltage sensing, current sensing, 5V input, ISO_5V, 3.3V, AGND/GND connectors, and key test points reserved for on-site debugging.",
+      validation: ["Check 5V, 3.3V, and ISO_5V power domains during startup", "Observe isolated-side and ADC-side signals through TP test points", "Verify VADC_V and VADC_I against real voltage and current using the PCB conversion formulas"],
+      improvements: ["Add measured calibration tables and error curves", "Record ADC output data under different voltage and current inputs", "Document wiring notes and competition on-site debug flow"]
     },
     "auxiliary-power-module": {
       title: "Auxiliary Power Module",
