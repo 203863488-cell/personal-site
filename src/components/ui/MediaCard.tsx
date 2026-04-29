@@ -23,9 +23,9 @@ export function MediaCard({ image, title, subtitle, className = "" }: MediaCardP
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.14),rgba(17,24,39,0.56))]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:28px_28px] opacity-38" />
       <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 rotate-12 bg-white/12 blur-xl transition duration-700 motion-safe:group-hover:left-full" />
-      <div className="absolute inset-x-0 bottom-0 p-6 text-white transition duration-300 motion-safe:group-hover:translate-y-[-4px]">
-        <h3 className="balanced-text text-2xl font-semibold leading-[1.16]">{title}</h3>
-        {subtitle && <p className="mt-2 text-sm leading-6 text-white/84">{subtitle}</p>}
+      <div className="absolute inset-x-0 bottom-0 p-5 text-white transition duration-300 motion-safe:group-hover:translate-y-[-4px] sm:p-6">
+        <h3 className="balanced-text text-[1.85rem] font-semibold leading-[1.12] sm:text-2xl sm:leading-[1.16]">{title}</h3>
+        {subtitle && <p className="mt-2 text-[0.95rem] leading-6 text-white/84 sm:text-sm">{subtitle}</p>}
       </div>
     </article>
   );

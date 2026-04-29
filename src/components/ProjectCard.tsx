@@ -14,7 +14,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       href={`#/project/${project.id}`}
       className="paper-card paper-card-hover group block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
     >
-      <div className="relative h-48 overflow-hidden border-b border-[#D8E0E7]/80">
+      <div className="relative h-40 overflow-hidden border-b border-[#D8E0E7]/80 sm:h-48">
         <img
           src={assetUrl(project.image)}
           alt=""
@@ -29,7 +29,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </svg>
       </div>
 
-      <div className="p-6">
+      <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="balanced-text text-xs font-semibold uppercase tracking-[0.16em] text-[#4F9CF9]">{project.subtitle}</p>
@@ -52,7 +52,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="mt-6 grid gap-px overflow-hidden rounded-lg border border-[#D8E0E7] bg-[#D8E0E7] sm:grid-cols-3">
           {project.metrics.map((metric) => (
-            <div key={metric.label} className="bg-white/82 p-4">
+            <div key={metric.label} className="bg-white/82 p-3.5 sm:p-4">
               <p className="text-xs uppercase tracking-[0.14em] text-[#6B7280]">{metric.label}</p>
               <p className="mt-2 text-base font-semibold text-[#111827]">{metric.value}</p>
             </div>

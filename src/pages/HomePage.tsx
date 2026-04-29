@@ -15,8 +15,8 @@ export function HomePage() {
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <TopShowcase />
 
-      <section className="content-auto section-shell pb-12 pt-24 sm:pt-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <section className="content-auto section-shell pb-10 pt-16 sm:pb-12 sm:pt-28">
+        <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
             <h1 className="balanced-text mt-5 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
@@ -69,7 +69,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="content-auto section-shell pt-8">
+      <section className="content-auto section-shell pt-6 sm:pt-8">
         <SectionHeader className="mb-10" kicker={home.entranceKicker} title={home.entranceTitle} description={home.entranceDescription} />
 
         <div className="grid gap-6 lg:grid-cols-2">
