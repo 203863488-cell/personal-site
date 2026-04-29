@@ -1,4 +1,6 @@
+import { ArrowLeft, Home } from "lucide-react";
 import { ProjectDetail } from "../components/ProjectDetail";
+import { SignalButton } from "../components/ui/SignalButton";
 import { allProjects } from "../data/allProjects";
 import { localizeProject } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
@@ -15,7 +17,9 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
   if (!project) {
     return (
       <section className="section-shell pt-16">
-        <a href="#/" className="secondary-button mb-10 py-2">← {siteCopy.common.backHome}</a>
+        <SignalButton href="#/" icon={ArrowLeft} iconPosition="start" className="mb-10 py-2">
+          {siteCopy.common.backHome}
+        </SignalButton>
         <div className="paper-card p-8">
           <p className="section-kicker">{siteCopy.pages.notFound.kicker}</p>
           <h1 className="mt-4 text-3xl font-semibold text-[#111827]">{siteCopy.pages.notFound.title}</h1>
@@ -32,8 +36,12 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <section className="section-shell pt-16">
         <div className="mb-10 flex flex-wrap gap-3">
-          <a href={backHref} className="secondary-button py-2">← {backLabel}</a>
-          <a href="#/" className="secondary-button py-2">{siteCopy.common.backHome}</a>
+          <SignalButton href={backHref} icon={ArrowLeft} iconPosition="start" className="py-2">
+            {backLabel}
+          </SignalButton>
+          <SignalButton href="#/" icon={Home} className="py-2">
+            {siteCopy.common.backHome}
+          </SignalButton>
         </div>
         <ProjectDetail project={project} />
       </section>

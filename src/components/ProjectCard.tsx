@@ -1,10 +1,15 @@
+import { Activity, ArrowRight, Cpu, Layers } from "lucide-react";
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
+import { MetricTile } from "./ui/MetricTile";
+import { SignalField } from "./ui/SignalField";
 
 interface ProjectCardProps {
   project: PortfolioProject;
 }
+
+const metricIcons = [Activity, Cpu, Layers];
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { siteCopy } = useLanguage();
@@ -22,11 +27,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
           decoding="async"
           className="h-full w-full object-cover opacity-78 transition duration-500 motion-safe:group-hover:scale-[1.04]"
         />
+        <SignalField className="opacity-46" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,250,247,0.14),rgba(250,250,247,0.66))]" />
-        <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/26" viewBox="0 0 520 220" fill="none" aria-hidden="true">
-          <path d="M56 72H160C196 72 196 42 232 42H380" stroke="currentColor" />
-          <path d="M70 155C104 120 138 190 172 155C206 120 240 190 274 155C308 120 342 190 376 155" stroke="currentColor" />
-        </svg>
       </div>
 
       <div className="p-5 sm:p-6">
@@ -50,18 +52,21 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-px overflow-hidden rounded-lg border border-[#D8E0E7] bg-[#D8E0E7] sm:grid-cols-3">
-          {project.metrics.map((metric) => (
-            <div key={metric.label} className="bg-white/82 p-3.5 sm:p-4">
-              <p className="text-xs uppercase tracking-[0.14em] text-[#6B7280]">{metric.label}</p>
-              <p className="mt-2 text-base font-semibold text-[#111827]">{metric.value}</p>
-            </div>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {project.metrics.map((metric, index) => (
+            <MetricTile
+              key={metric.label}
+              icon={metricIcons[index % metricIcons.length]}
+              label={metric.label}
+              value={metric.value}
+              className="p-3.5 shadow-[0_12px_32px_rgba(31,41,51,0.04)] sm:p-4"
+            />
           ))}
         </div>
 
         <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1F2933]">
           {siteCopy.common.viewDetails}
-          <span className="transition group-hover:translate-x-1">→</span>
+          <ArrowRight aria-hidden="true" className="h-4 w-4 transition group-hover:translate-x-1" strokeWidth={1.8} />
         </div>
       </div>
     </a>
