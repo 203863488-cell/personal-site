@@ -33,6 +33,83 @@ body {
   }
 }
 
+@media (max-width: 639px) {
+  .navbar-shell {
+    gap: 0.875rem;
+    padding-inline: 1rem;
+  }
+
+  .navbar-shell__brand {
+    min-width: 0;
+    max-width: calc(100% - 4.5rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-showcase {
+    min-height: 35rem;
+  }
+
+  .hero-showcase__shell {
+    min-height: 35rem;
+    align-items: flex-start;
+    padding-top: 6.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .hero-showcase__backdrop {
+    object-position: 72% center;
+  }
+
+  .hero-showcase__wash {
+    background: linear-gradient(90deg, rgba(248, 250, 247, 0.95) 0%, rgba(248, 250, 247, 0.82) 44%, rgba(248, 250, 247, 0.42) 84%, rgba(248, 250, 247, 0.2) 100%);
+  }
+
+  .hero-showcase__content {
+    max-width: 19.75rem;
+  }
+
+  .hero-showcase__eyebrow {
+    gap: 0.625rem;
+  }
+
+  .hero-showcase__title {
+    margin-top: 1.25rem;
+    max-width: 12ch;
+    font-size: clamp(2.35rem, 9.2vw, 3.15rem);
+    line-height: 1.06;
+    text-wrap: pretty;
+  }
+
+  .hero-showcase__copy {
+    margin-top: 1.25rem;
+    max-width: 19rem;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  .hero-showcase__tags {
+    margin-top: 1.5rem;
+    gap: 0.625rem;
+    max-width: 19rem;
+  }
+
+  .hero-showcase__tags .pill {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.76rem;
+    line-height: 1.2;
+  }
+
+  .hero-showcase__controls {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: auto;
+    transform: none;
+  }
+}
+
 @keyframes soft-drift {
   0%,
   100% {

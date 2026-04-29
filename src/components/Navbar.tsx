@@ -53,8 +53,12 @@ export function Navbar({ currentRoute }: NavbarProps) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#D8E0E7]/70 bg-[#F8FAF7]/86 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
-        <a href="#/" className="text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]" onClick={() => setOpen(false)}>
+      <div className="navbar-shell mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
+        <a
+          href="#/"
+          className="navbar-shell__brand text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
+          onClick={() => setOpen(false)}
+        >
           {siteCopy.nav.brand}
         </a>
 
@@ -81,7 +85,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
           aria-label={siteCopy.nav.menu}
           aria-expanded={open}
           onClick={() => setOpen((current) => !current)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#D8E0E7] bg-white/70 text-[#1F2933] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] md:hidden"
+          className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#D8E0E7] bg-white/70 text-[#1F2933] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] md:hidden"
         >
           <div className="space-y-1.5">
             <span className={`block h-0.5 w-5 bg-current transition ${open ? "translate-y-2 rotate-45" : ""}`} />

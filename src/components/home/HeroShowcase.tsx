@@ -96,7 +96,7 @@ export function HeroShowcase() {
 
   return (
     <section
-      className="relative min-h-[720px] overflow-hidden border-b border-[#D8E0E7]"
+      className="hero-showcase relative min-h-[720px] overflow-hidden border-b border-[#D8E0E7]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -113,29 +113,29 @@ export function HeroShowcase() {
           alt=""
           decoding="async"
           fetchPriority={index === activeSlide ? "high" : "low"}
-          className={`absolute inset-0 h-full w-full object-cover transition duration-700 ${
+          className={`hero-showcase__backdrop absolute inset-0 h-full w-full object-cover transition duration-700 ${
             index === activeSlide ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
           }`}
         />
       ))}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,247,0.9)_0%,rgba(248,250,247,0.68)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.18)_100%)]" />
+      <div className="hero-showcase__wash absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,247,0.9)_0%,rgba(248,250,247,0.68)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.18)_100%)]" />
       <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.78))]" />
 
-      <div className="relative mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
+      <div className="hero-showcase__shell relative mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
         <div className="w-full">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-center">
-            <div className="transition duration-500" key={slide.id}>
-              <div className="flex flex-wrap items-center gap-3">
+            <div className="hero-showcase__content transition duration-500" key={slide.id}>
+              <div className="hero-showcase__eyebrow flex flex-wrap items-center gap-3">
                 <p className="section-kicker">{slide.kicker}</p>
                 <span className="rounded-full border border-[#BFD0DF] bg-white/72 px-3 py-1 text-xs font-medium text-[#425466]">
                   {paused || reducedMotion ? siteCopy.topShowcase.pausedStatus : siteCopy.topShowcase.playingStatus}
                 </span>
               </div>
-              <h1 className="balanced-text mt-6 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
+              <h1 className="hero-showcase__title balanced-text mt-6 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
                 {slide.title}
               </h1>
-              <p className="copy-text mt-6 max-w-3xl">{slide.description}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <p className="hero-showcase__copy copy-text mt-6 max-w-3xl">{slide.description}</p>
+              <div className="hero-showcase__tags mt-8 flex flex-wrap gap-3">
                 {slide.tags.map((tag) => (
                   <Pill key={tag}>{tag}</Pill>
                 ))}
@@ -150,7 +150,7 @@ export function HeroShowcase() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-1/2 flex w-[min(100%-2.5rem,80rem)] -translate-x-1/2 items-center justify-between gap-4">
+          <div className="hero-showcase__controls absolute bottom-10 left-1/2 flex w-[min(100%-2.5rem,80rem)] -translate-x-1/2 items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {heroSlides.map((item, index) => (
                 <button
