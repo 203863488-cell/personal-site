@@ -17,7 +17,7 @@ export function ClosingVisual() {
         <div className="relative flex min-h-[420px] items-end px-5 pb-10 pt-12 sm:min-h-[620px] sm:px-8 sm:pb-18 sm:pt-16 lg:min-h-[760px] lg:px-14 lg:pb-24 lg:pt-20 xl:px-20">
           <div className="w-full max-w-[13rem] text-[#0F172A] sm:max-w-[20rem] lg:max-w-[24rem]">
             <div className="inline-flex flex-col">
-              <h2 className="font-['STKaiti','KaiTi','FangSong','Songti_SC',serif] text-[2.35rem] font-semibold leading-[1.02] tracking-[0.14em] sm:text-[4.15rem] sm:leading-[1.04] sm:tracking-[0.16em] lg:text-[4.9rem]">
+              <h2 className="font-['FangSong','STFangsong','Songti_SC',serif] text-[2rem] font-medium leading-[1.08] tracking-[0.12em] sm:text-[3.1rem] sm:leading-[1.08] sm:tracking-[0.16em] lg:text-[3.6rem]">
                 <span className="block">{"\u8FFD\u98CE\u8D76\u6708"}</span>
                 <span className="mt-1 block">{"\u83AB\u505C\u7559"}</span>
               </h2>
