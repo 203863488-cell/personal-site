@@ -2,16 +2,13 @@ import { EntryCard } from "../components/EntryCard";
 import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
 import { TopShowcase } from "../components/home/TopShowcase";
-import { MetricTile } from "../components/ui/MetricTile";
+import { MetricGrid } from "../components/ui/MetricGrid";
 import { Pill } from "../components/ui/Pill";
 import { Reveal } from "../components/ui/Reveal";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { SignalField } from "../components/ui/SignalField";
 import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
-import { Activity, Cpu, Layers } from "lucide-react";
-
-const homeMetricIcons = [Activity, Cpu, Layers];
 
 export function HomePage() {
   const { siteCopy } = useLanguage();
@@ -62,17 +59,11 @@ export function HomePage() {
                 <path d="M70 240C110 188 150 292 190 240C230 188 270 292 310 240C350 188 390 292 430 240" stroke="currentColor" />
               </svg>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {home.metricCards.map((metric, index) => (
-                    <MetricTile
-                      key={metric.label}
-                      className="bg-white/84 p-4 shadow-[0_14px_38px_rgba(31,41,51,0.055)]"
-                      icon={homeMetricIcons[index % homeMetricIcons.length]}
-                      label={metric.label}
-                      value={metric.value}
-                    />
-                  ))}
-                </div>
+                <MetricGrid
+                  metrics={home.metricCards}
+                  className="grid gap-3 sm:grid-cols-3"
+                  tileClassName="bg-white/84 p-4 shadow-[0_14px_38px_rgba(31,41,51,0.055)]"
+                />
               </div>
             </div>
           </div>

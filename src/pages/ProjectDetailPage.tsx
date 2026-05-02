@@ -1,9 +1,10 @@
 import { ArrowLeft, Home } from "lucide-react";
 import { ProjectDetail } from "../components/ProjectDetail";
 import { SignalButton } from "../components/ui/SignalButton";
-import { allProjects } from "../data/allProjects";
+import { findProjectById } from "../data/projectCatalog";
 import { localizeProject } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
+import { getCategoryHref, portfolioHrefs } from "../routes/portfolioRoutes";
 
 interface ProjectDetailPageProps {
   projectId: string;
@@ -11,13 +12,13 @@ interface ProjectDetailPageProps {
 
 export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
   const { language, siteCopy } = useLanguage();
-  const sourceProject = allProjects.find((item) => item.id === projectId);
+  const sourceProject = findProjectById(projectId);
   const project = sourceProject ? localizeProject(sourceProject, language) : undefined;
 
   if (!project) {
     return (
       <section className="section-shell pt-16">
-        <SignalButton href="#/" icon={ArrowLeft} iconPosition="start" className="mb-10 py-2">
+        <SignalButton href={portfolioHrefs.home} icon={ArrowLeft} iconPosition="start" className="mb-10 py-2">
           {siteCopy.common.backHome}
         </SignalButton>
         <div className="paper-card p-8">
@@ -29,7 +30,7 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
     );
   }
 
-  const backHref = project.category === "competition" ? "#/competition" : "#/personal";
+  const backHref = getCategoryHref(project.category);
   const backLabel = project.category === "competition" ? siteCopy.pages.competition.title : siteCopy.pages.personal.title;
 
   return (
@@ -39,7 +40,7 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
           <SignalButton href={backHref} icon={ArrowLeft} iconPosition="start" className="py-2">
             {backLabel}
           </SignalButton>
-          <SignalButton href="#/" icon={Home} className="py-2">
+          <SignalButton href={portfolioHrefs.home} icon={Home} className="py-2">
             {siteCopy.common.backHome}
           </SignalButton>
         </div>

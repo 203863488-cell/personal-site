@@ -1,22 +1,21 @@
-import { Activity, ArrowRight, Cpu, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
-import { MetricTile } from "./ui/MetricTile";
+import { getProjectHref } from "../routes/portfolioRoutes";
+import { MetricGrid } from "./ui/MetricGrid";
 import { SignalField } from "./ui/SignalField";
 
 interface ProjectCardProps {
   project: PortfolioProject;
 }
 
-const metricIcons = [Activity, Cpu, Layers];
-
 export function ProjectCard({ project }: ProjectCardProps) {
   const { siteCopy } = useLanguage();
 
   return (
     <a
-      href={`#/project/${project.id}`}
+      href={getProjectHref(project.id)}
       className="paper-card paper-card-hover group block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
     >
       <div className="relative h-40 overflow-hidden border-b border-[#D8E0E7]/80 sm:h-48">
@@ -52,17 +51,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {project.metrics.map((metric, index) => (
-            <MetricTile
-              key={metric.label}
-              icon={metricIcons[index % metricIcons.length]}
-              label={metric.label}
-              value={metric.value}
-              className="p-3.5 shadow-[0_12px_32px_rgba(31,41,51,0.04)] sm:p-4"
-            />
-          ))}
-        </div>
+        <MetricGrid
+          metrics={project.metrics}
+          className="mt-6 grid gap-3 sm:grid-cols-3"
+          tileClassName="p-3.5 shadow-[0_12px_32px_rgba(31,41,51,0.04)] sm:p-4"
+        />
 
         <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1F2933]">
           {siteCopy.common.viewDetails}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Download, Languages, Menu, X } from "lucide-react";
 import type { Language } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
+import { portfolioHrefs } from "../routes/portfolioRoutes";
 import { assetUrl } from "../utils/assetUrl";
 
 interface NavbarProps {
@@ -80,7 +81,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
     <header className="sticky top-0 z-50 border-b border-[#D8E0E7]/70 bg-[#F8FAF7]/86 backdrop-blur-xl">
       <div className="navbar-shell mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
         <a
-          href="#/"
+          href={portfolioHrefs.home}
           className="navbar-shell__brand text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
           onClick={() => setOpen(false)}
         >
@@ -140,7 +141,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
 
             <div className="relative flex items-center justify-between px-5 pb-4 pt-5">
               <a
-                href="#/"
+                href={portfolioHrefs.home}
                 className="min-w-0 pr-4 text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
                 onClick={() => setOpen(false)}
               >

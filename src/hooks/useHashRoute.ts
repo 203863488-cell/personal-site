@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { portfolioRoutes } from "../routes/portfolioRoutes";
 
 function getHashRoute() {
   const route = window.location.hash.replace(/^#/, "");
-  return route || "/";
+  return route || portfolioRoutes.home;
 }
 
 export function useHashRoute() {
@@ -16,7 +17,7 @@ export function useHashRoute() {
   }, []);
 
   useEffect(() => {
-    if (route === "/contact") {
+    if (route === portfolioRoutes.contact) {
       window.requestAnimationFrame(() => {
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
