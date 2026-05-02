@@ -2,8 +2,11 @@ import { EntryCard } from "../components/EntryCard";
 import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
 import { TopShowcase } from "../components/home/TopShowcase";
+import { MetricGrid } from "../components/ui/MetricGrid";
 import { Pill } from "../components/ui/Pill";
+import { Reveal } from "../components/ui/Reveal";
 import { SectionHeader } from "../components/ui/SectionHeader";
+import { SignalField } from "../components/ui/SignalField";
 import { useLanguage } from "../languageContext";
 import { assetUrl } from "../utils/assetUrl";
 
@@ -15,7 +18,7 @@ export function HomePage() {
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <TopShowcase />
 
-      <section className="content-auto section-shell pb-10 pt-16 sm:pb-12 sm:pt-28">
+      <Reveal as="section" className="content-auto section-shell pb-10 pt-16 sm:pb-12 sm:pt-28">
         <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
@@ -37,7 +40,7 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="paper-card overflow-hidden">
+          <div className="paper-card relative overflow-hidden">
             <div className="relative h-80">
               <img
                 src={assetUrl("images/electronics-lab-oscilloscope.jpg")}
@@ -46,6 +49,7 @@ export function HomePage() {
                 decoding="async"
                 className="h-full w-full object-cover opacity-82"
               />
+              <SignalField className="opacity-58" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,247,0.12),rgba(248,250,247,0.68))]" />
               <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/30" viewBox="0 0 620 360" fill="none" aria-hidden="true">
                 <rect x="70" y="72" width="120" height="64" rx="6" stroke="currentColor" />
@@ -55,21 +59,18 @@ export function HomePage() {
                 <path d="M70 240C110 188 150 292 190 240C230 188 270 292 310 240C350 188 390 292 430 240" stroke="currentColor" />
               </svg>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="grid gap-px overflow-hidden rounded-xl border border-[#D8E0E7] bg-[#D8E0E7] sm:grid-cols-3">
-                  {home.metricCards.map((metric) => (
-                    <div key={metric.label} className="bg-white/82 p-4 backdrop-blur-sm">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#6B7280]">{metric.label}</p>
-                      <p className="mt-2 font-semibold text-[#111827]">{metric.value}</p>
-                    </div>
-                  ))}
-                </div>
+                <MetricGrid
+                  metrics={home.metricCards}
+                  className="grid gap-3 sm:grid-cols-3"
+                  tileClassName="bg-white/84 p-4 shadow-[0_14px_38px_rgba(31,41,51,0.055)]"
+                />
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="content-auto section-shell pt-6 sm:pt-8">
+      <Reveal as="section" className="content-auto section-shell pt-6 sm:pt-8">
         <SectionHeader className="mb-10" kicker={home.entranceKicker} title={home.entranceTitle} description={home.entranceDescription} />
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -77,9 +78,11 @@ export function HomePage() {
             <EntryCard key={entry.href} {...entry} />
           ))}
         </div>
-      </section>
+      </Reveal>
 
-      <ContactBand />
+      <Reveal>
+        <ContactBand />
+      </Reveal>
       <ClosingVisual />
     </div>
   );

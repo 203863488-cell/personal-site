@@ -1,21 +1,22 @@
 import type { KeyboardEvent } from "react";
+import { Activity, ChevronLeft, ChevronRight, Cpu, Layers, Pause, Play } from "lucide-react";
 import type { PortfolioMetric } from "../../types/portfolio";
 import { useAutoCarousel } from "../../hooks/useAutoCarousel";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
+import { MetricTile } from "../ui/MetricTile";
 import { Pill } from "../ui/Pill";
+import { SignalField } from "../ui/SignalField";
 
 const AUTO_PLAY_MS = 3000;
+const metricIcons = [Activity, Cpu, Layers];
 
 function MetricPanel({ metrics }: { metrics: PortfolioMetric[] }) {
   return (
-    <div className="rounded-2xl border border-white/60 bg-white/58 p-5 shadow-[0_18px_55px_rgba(31,41,51,0.12)] backdrop-blur-md transition duration-300 hover:bg-white/70 motion-safe:hover:-translate-y-1">
+    <div className="rounded-lg border border-white/60 bg-white/58 p-3 shadow-[0_18px_55px_rgba(31,41,51,0.12)] backdrop-blur-md">
       <div className="grid grid-cols-3 gap-3">
-        {metrics.map((item) => (
-          <div key={item.label} className="rounded-xl border border-[#D8E0E7]/90 bg-white/88 p-4">
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#6B7280]">{item.label}</p>
-            <p className="mt-3 text-lg font-semibold text-[#111827]">{item.value}</p>
-          </div>
+        {metrics.map((item, index) => (
+          <MetricTile key={item.label} icon={metricIcons[index % metricIcons.length]} label={item.label} value={item.value} />
         ))}
       </div>
     </div>
@@ -32,7 +33,7 @@ function SlideRail({ activeSlide, setActiveSlide }: SlideRailProps) {
   const heroSlides = siteCopy.topShowcase.heroSlides;
 
   return (
-    <div className="rounded-2xl border border-white/55 bg-white/42 p-3 shadow-[0_18px_55px_rgba(31,41,51,0.1)] backdrop-blur-md">
+    <div className="rounded-lg border border-white/55 bg-white/42 p-3 shadow-[0_18px_55px_rgba(31,41,51,0.1)] backdrop-blur-md">
       <div className="grid gap-2">
         {heroSlides.map((item, index) => (
           <button
@@ -40,8 +41,8 @@ function SlideRail({ activeSlide, setActiveSlide }: SlideRailProps) {
             type="button"
             onClick={() => setActiveSlide(index)}
             onMouseEnter={() => setActiveSlide(index)}
-            className={`group flex items-center gap-3 rounded-xl border p-2 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
-              index === activeSlide ? "border-[#9BC9FF] bg-white/88" : "border-transparent hover:border-[#D8E0E7] hover:bg-white/66"
+            className={`group flex items-center gap-3 rounded-lg border p-2 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
+              index === activeSlide ? "border-[#9BC9FF] bg-white/90 shadow-sm" : "border-transparent hover:border-[#D8E0E7] hover:bg-white/66"
             }`}
             aria-pressed={index === activeSlide}
           >
@@ -50,14 +51,81 @@ function SlideRail({ activeSlide, setActiveSlide }: SlideRailProps) {
               alt=""
               loading="lazy"
               decoding="async"
-              className="h-12 w-16 rounded-lg object-cover opacity-78 transition group-hover:opacity-100"
+              className="h-12 w-16 rounded-md object-cover opacity-78 transition group-hover:opacity-100"
             />
-            <span>
-              <span className="block text-sm font-semibold text-[#111827]">{item.title}</span>
-              <span className="block text-xs text-[#6B7280]">{item.kicker}</span>
+            <span className="min-w-0">
+              <span className="balanced-text block text-sm font-semibold leading-tight text-[#111827]">{item.title}</span>
+              <span className="mt-1 block text-xs text-[#6B7280]">{item.kicker}</span>
             </span>
           </button>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function HeroBackdrop({ activeSlide, nearbySlides }: { activeSlide: number; nearbySlides: Set<number> }) {
+  const { siteCopy } = useLanguage();
+
+  return (
+    <>
+      {siteCopy.topShowcase.heroSlides.map(
+        (item, index) =>
+          nearbySlides.has(index) && (
+            <img
+              key={item.id}
+              src={assetUrl(item.image)}
+              alt=""
+              decoding="async"
+              fetchPriority={index === activeSlide ? "high" : "low"}
+              className={`hero-showcase__backdrop absolute inset-0 z-0 h-full w-full object-cover transition duration-700 ${
+                index === activeSlide ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
+              }`}
+            />
+          )
+      )}
+      <div className="hero-showcase__wash absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(248,250,247,0.86)_0%,rgba(248,250,247,0.66)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.14)_100%)]" />
+      <SignalField density="rich" className="z-[2] opacity-42" />
+      <div className="absolute inset-x-0 bottom-0 z-[3] h-32 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.78))]" />
+    </>
+  );
+}
+
+interface HeroControlsProps {
+  activeSlide: number;
+  goToNext: () => void;
+  goToPrevious: () => void;
+  setActiveSlide: (index: number) => void;
+}
+
+function HeroControls({ activeSlide, goToNext, goToPrevious, setActiveSlide }: HeroControlsProps) {
+  const { siteCopy } = useLanguage();
+  const heroSlides = siteCopy.topShowcase.heroSlides;
+
+  return (
+    <div className="hero-showcase__controls absolute bottom-10 left-1/2 flex w-[min(100%-2.5rem,80rem)] -translate-x-1/2 items-center justify-between gap-4">
+      <div className="flex items-center gap-3">
+        {heroSlides.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-label={`${siteCopy.topShowcase.heroStatus}: ${item.title}`}
+            aria-pressed={index === activeSlide}
+            onClick={() => setActiveSlide(index)}
+            onMouseEnter={() => setActiveSlide(index)}
+            className={`h-3.5 rounded-[3px] border transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
+              index === activeSlide ? "w-9 border-[#4F9CF9] bg-[#4F9CF9]" : "w-3.5 border-[#BFD0DF] bg-white/75 hover:border-[#7AA2F7]"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="hidden gap-3 sm:flex">
+        <button type="button" onClick={goToPrevious} className="secondary-button h-11 w-11 px-0 py-0" aria-label={siteCopy.topShowcase.previousSlide}>
+          <ChevronLeft aria-hidden="true" className="h-4 w-4" strokeWidth={1.9} />
+        </button>
+        <button type="button" onClick={goToNext} className="secondary-button h-11 w-11 px-0 py-0" aria-label={siteCopy.topShowcase.nextSlide}>
+          <ChevronRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.9} />
+        </button>
       </div>
     </div>
   );
@@ -106,28 +174,16 @@ export function HeroShowcase() {
       aria-label={siteCopy.topShowcase.heroStatus}
       tabIndex={-1}
     >
-      {heroSlides.map((item, index) => nearbySlides.has(index) && (
-        <img
-          key={item.id}
-          src={assetUrl(item.image)}
-          alt=""
-          decoding="async"
-          fetchPriority={index === activeSlide ? "high" : "low"}
-          className={`hero-showcase__backdrop absolute inset-0 h-full w-full object-cover transition duration-700 ${
-            index === activeSlide ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
-          }`}
-        />
-      ))}
-      <div className="hero-showcase__wash absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,247,0.9)_0%,rgba(248,250,247,0.68)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.18)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.78))]" />
+      <HeroBackdrop activeSlide={activeSlide} nearbySlides={nearbySlides} />
 
-      <div className="hero-showcase__shell relative mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
+      <div className="hero-showcase__shell relative z-10 mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
         <div className="w-full">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-center">
             <div className="hero-showcase__content transition duration-500" key={slide.id}>
               <div className="hero-showcase__eyebrow flex flex-wrap items-center gap-3">
                 <p className="section-kicker">{slide.kicker}</p>
-                <span className="rounded-full border border-[#BFD0DF] bg-white/72 px-3 py-1 text-xs font-medium text-[#425466]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#BFD0DF] bg-white/72 px-3 py-1 text-xs font-medium text-[#425466]">
+                  {paused || reducedMotion ? <Pause aria-hidden="true" className="h-3.5 w-3.5" /> : <Play aria-hidden="true" className="h-3.5 w-3.5" />}
                   {paused || reducedMotion ? siteCopy.topShowcase.pausedStatus : siteCopy.topShowcase.playingStatus}
                 </span>
               </div>
@@ -150,33 +206,7 @@ export function HeroShowcase() {
             </div>
           </div>
 
-          <div className="hero-showcase__controls absolute bottom-10 left-1/2 flex w-[min(100%-2.5rem,80rem)] -translate-x-1/2 items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              {heroSlides.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-label={`${siteCopy.nav.language}: ${item.title}`}
-                  aria-pressed={index === activeSlide}
-                  onClick={() => setActiveSlide(index)}
-                  onMouseEnter={() => setActiveSlide(index)}
-                  className={`h-3.5 rounded-[3px] border transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
-                    index === activeSlide
-                      ? "w-9 border-[#4F9CF9] bg-[#4F9CF9]"
-                      : "w-3.5 border-[#BFD0DF] bg-white/75 hover:border-[#7AA2F7]"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="hidden gap-3 sm:flex">
-              <button type="button" onClick={goToPrevious} className="secondary-button h-11 w-11 px-0 py-0" aria-label={siteCopy.topShowcase.previousSlide}>
-                ←
-              </button>
-              <button type="button" onClick={goToNext} className="secondary-button h-11 w-11 px-0 py-0" aria-label={siteCopy.topShowcase.nextSlide}>
-                →
-              </button>
-            </div>
-          </div>
+          <HeroControls activeSlide={activeSlide} goToNext={goToNext} goToPrevious={goToPrevious} setActiveSlide={setActiveSlide} />
           <p className="sr-only" aria-live="polite">
             {siteCopy.topShowcase.heroStatus}: {slide.title}
           </p>

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Download, Mail } from "lucide-react";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
-import { ActionButton } from "../ui/ActionButton";
+import { SignalButton } from "../ui/SignalButton";
+import { SignalField } from "../ui/SignalField";
 
 export function ContactBand() {
   const [copied, setCopied] = useState(false);
@@ -15,6 +17,7 @@ export function ContactBand() {
 
   return (
     <section id="contact" className="content-auto relative mt-12 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933] sm:mt-16">
+      <SignalField tone="dark" density="rich" className="opacity-40" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
       <svg className="absolute inset-0 h-full w-full text-[#4F9CF9]/25" viewBox="0 0 1440 320" fill="none" aria-hidden="true">
         <path d="M90 88H210C250 88 250 50 290 50H430" stroke="currentColor" />
@@ -33,12 +36,12 @@ export function ContactBand() {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <ActionButton href="mailto:example@email.com" variant="ghostDark" onClick={handleEmailClick} className="w-full sm:w-auto">
+          <SignalButton href="mailto:example@email.com" variant="ghost" icon={Mail} iconPosition="start" onClick={handleEmailClick} className="w-full sm:w-auto">
             {home.email}
-          </ActionButton>
-          <ActionButton href={assetUrl("resume.pdf")} download className="w-full bg-white font-semibold text-[#111827] hover:bg-[#EEF4FA] sm:w-auto">
+          </SignalButton>
+          <SignalButton href={assetUrl("resume.pdf")} download icon={Download} iconPosition="start" className="w-full bg-white font-semibold text-[#111827] hover:bg-[#EEF4FA] sm:w-auto">
             {home.download}
-          </ActionButton>
+          </SignalButton>
         </div>
       </div>
     </section>
