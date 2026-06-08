@@ -2,6 +2,11 @@ name: Codex quota refresh reminder
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/codex-quota-refresh.yml"
   schedule:
     # Beijing time: 10:30, 15:30, 20:30.
     # GitHub schedules use UTC by default: 02:30, 07:30, 12:30 UTC.
