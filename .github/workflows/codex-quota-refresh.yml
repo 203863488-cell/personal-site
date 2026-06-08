@@ -46,6 +46,7 @@ jobs:
             const labelName = "codex-quota-refresh";
             const title = "Codex 五小时额度刷新提醒";
             const message = "您的codex五小时额度已刷新！";
+            const recipient = `@${owner}`;
             const trigger = context.eventName === "schedule"
               ? `schedule: ${context.payload.schedule}`
               : context.eventName;
@@ -105,7 +106,7 @@ jobs:
               repo,
               issue_number: issue.number,
               body: [
-                message,
+                `${recipient} ${message}`,
                 "",
                 `北京时间：${beijingTime}`,
                 `触发来源：${trigger}`
