@@ -1,0 +1,1 @@
+import{x as e}from"./MetricGrid-DIUXxQ8O.js?v=bg-crop-20260617";import{n as t}from"./projectCatalog-BAmWV_MF.js?v=bg-crop-20260617";import{t as n}from"./ProjectCollectionPage-BlC0NCdL.js?v=bg-crop-20260617";var r=e();function i(){return(0,r.jsx)(n,{pageKey:`personal`,projects:t.personal})}export{i as PersonalProjectsPage};
