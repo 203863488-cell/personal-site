@@ -29,12 +29,14 @@ jobs:
       - name: Checkout current static snapshot
         uses: actions/checkout@v4
         with:
+          # Keep source history on main and deploy the reviewed static snapshot.
           ref: portfolio-static-20260617
 
       - name: Prepare Pages artifact
         run: |
           mkdir -p dist
-          cp -R assets images index.html favicon.svg icons.svg resume.pdf dist/
+          cp -R assets images index.html favicon.svg icons.svg resume.pdf \
+            site-overrides.css sw.js offline-image.svg dist/
           touch dist/.nojekyll
 
       - name: Configure GitHub Pages
