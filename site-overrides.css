@@ -1,0 +1,174 @@
+/*
+ * Runtime presentation overrides.
+ *
+ * The main stylesheet is a generated production bundle. Keep deployment-
+ * specific responsive and weak-network refinements here so they remain easy
+ * to review without editing generated Tailwind output.
+ */
+
+img {
+  background-color: #eef3f6;
+}
+
+.hero-showcase__backdrop {
+  background-color: #e9eef1;
+}
+
+.low-bandwidth .ambient-lines,
+.low-bandwidth .hero-linework,
+.low-bandwidth .signal-drawing,
+.low-bandwidth .signal-trace,
+.low-bandwidth .signal-wave {
+  animation: none !important;
+}
+
+.low-bandwidth .paper-card,
+.low-bandwidth .metric-tile,
+.low-bandwidth [class*="backdrop-blur"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.low-bandwidth .hero-showcase__backdrop {
+  transition-duration: 0.2s !important;
+}
+
+/*
+ * Tablet landscape is the primary interview presentation layout. The base
+ * bundle switches to desktop columns at 1024px; these rules keep that layout
+ * compact enough for common 10-13 inch tablets without hiding project data.
+ */
+@media (min-width: 768px) and (max-width: 1180px) and (orientation: landscape) {
+  .navbar-shell {
+    padding-inline: 2rem;
+  }
+
+  .hero-showcase,
+  .hero-showcase__shell {
+    min-height: 620px !important;
+  }
+
+  .hero-showcase__shell {
+    padding: 6rem 2rem 5.25rem !important;
+  }
+
+  .hero-showcase__shell > div > .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(19.25rem, 0.62fr) !important;
+    gap: 1.75rem !important;
+  }
+
+  .hero-showcase__content {
+    max-width: 39rem;
+  }
+
+  .hero-showcase__title {
+    max-width: 13ch;
+    margin-top: 1.25rem !important;
+    font-size: clamp(2.65rem, 4.8vw, 3.25rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero-showcase__copy {
+    max-width: 37rem;
+    margin-top: 1.15rem !important;
+    font-size: 0.95rem;
+    line-height: 1.68;
+  }
+
+  .hero-showcase__tags {
+    margin-top: 1.35rem !important;
+    gap: 0.55rem !important;
+  }
+
+  .hero-showcase__tags .pill {
+    padding: 0.42rem 0.78rem;
+    font-size: 0.76rem;
+  }
+
+  .hero-showcase__controls {
+    bottom: 1.4rem !important;
+    width: min(calc(100% - 4rem), 80rem) !important;
+  }
+
+  .hero-showcase__shell .metric-tile {
+    padding: 0.75rem;
+  }
+
+  .hero-showcase__shell .metric-tile > div {
+    gap: 0.35rem;
+  }
+
+  .hero-showcase__shell .metric-tile > div > p {
+    white-space: nowrap;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-showcase__shell .metric-tile > div > span {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .hero-showcase__shell .metric-tile > p:last-child {
+    margin-top: 0.65rem;
+    font-size: 1.05rem;
+    overflow-wrap: normal;
+  }
+
+  .hero-showcase__wash {
+    background: linear-gradient(
+      90deg,
+      rgba(248, 250, 247, 0.92) 0%,
+      rgba(248, 250, 247, 0.75) 44%,
+      rgba(248, 250, 247, 0.38) 76%,
+      rgba(248, 250, 247, 0.2) 100%
+    ) !important;
+  }
+
+  .section-shell {
+    padding-inline: 2.25rem;
+    padding-block: 4rem;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+  }
+
+  .paper-card {
+    box-shadow: 0 14px 42px rgba(31, 41, 51, 0.07);
+  }
+
+  .paper-card .lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-signal-map {
+    padding: 1rem;
+  }
+
+  .project-signal-map__node {
+    min-height: 5rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  .hero-showcase__shell > div > .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-showcase__content {
+    max-width: 42rem;
+  }
+
+  .hero-showcase__title {
+    max-width: 15ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-boot__line::after {
+    animation: none;
+    width: 100%;
+  }
+}

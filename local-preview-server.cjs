@@ -15,6 +15,7 @@ const mime = {
   ".pdf": "application/pdf",
   ".png": "image/png",
   ".svg": "image/svg+xml",
+  ".webp": "image/webp",
 };
 
 function send(res, filePath) {
