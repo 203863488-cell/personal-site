@@ -65,10 +65,10 @@
         document.documentElement.classList.add("low-bandwidth");
       }
     </script>
-    <script type="module" crossorigin src="/personal-site/assets/index-CzQ-yeSi.js?v=competition-four-20260618"></script>
-    <link rel="modulepreload" crossorigin href="/personal-site/assets/MetricGrid-DIUXxQ8O.js?v=competition-four-20260618">
-    <link rel="stylesheet" crossorigin href="/personal-site/assets/index-C9wZ7u0G.css?v=competition-four-20260618">
-    <link rel="stylesheet" href="/personal-site/site-overrides.css?v=competition-four-20260618">
+    <script type="module" crossorigin src="/personal-site/assets/index-CzQ-yeSi.js?v=competition-four-cachefix-20260618"></script>
+    <link rel="modulepreload" crossorigin href="/personal-site/assets/MetricGrid-DIUXxQ8O.js?v=competition-four-cachefix-20260618">
+    <link rel="stylesheet" crossorigin href="/personal-site/assets/index-C9wZ7u0G.css?v=competition-four-cachefix-20260618">
+    <link rel="stylesheet" href="/personal-site/site-overrides.css?v=competition-four-cachefix-20260618">
   </head>
   <body>
     <div id="root">
@@ -83,9 +83,19 @@
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/personal-site/sw.js").catch((error) => {
-            console.warn("Service worker registration failed:", error);
+          let refreshing = false;
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
           });
+
+          navigator.serviceWorker
+            .register("/personal-site/sw.js")
+            .then((registration) => registration.update())
+            .catch((error) => {
+              console.warn("Service worker registration failed:", error);
+            });
         });
       }
     </script>

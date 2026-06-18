@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "portfolio-static-";
-const CACHE_NAME = "portfolio-static-v20260618-4";
+const CACHE_NAME = "portfolio-static-v20260618-5";
 const BASE_URL = new URL("./", self.registration.scope);
 const INDEX_URL = new URL("index.html", BASE_URL).href;
 const OFFLINE_IMAGE_URL = new URL("offline-image.svg", BASE_URL).href;
@@ -60,7 +60,7 @@ async function networkFirstNavigation(request) {
 
 async function cacheFirst(request, fallbackUrl) {
   const cache = await caches.open(CACHE_NAME);
-  const cached = await cache.match(request, { ignoreSearch: true });
+  const cached = await cache.match(request);
   if (cached) {
     return cached;
   }
@@ -72,6 +72,13 @@ async function cacheFirst(request, fallbackUrl) {
     }
     return response;
   } catch {
+    const versionAgnosticCached = await cache.match(request, {
+      ignoreSearch: true,
+    });
+    if (versionAgnosticCached) {
+      return versionAgnosticCached;
+    }
+
     if (fallbackUrl) {
       return (
         (await cache.match(fallbackUrl, { ignoreSearch: true })) ||
