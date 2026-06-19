@@ -36,7 +36,7 @@ jobs:
         run: |
           mkdir -p dist
           cp -R assets images index.html favicon.svg icons.svg resume.pdf \
-            site-overrides.css sw.js offline-image.svg dist/
+            image-viewer.js site-overrides.css sw.js offline-image.svg dist/
           touch dist/.nojekyll
 
       - name: Configure GitHub Pages
