@@ -167,34 +167,8 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         },
         {
-          id: "competition",
-          kicker: "Competition Module",
-          title: "电赛隔离采样与控制平台",
-          description: "从隔离采样、辅助供电、控制板到功率板，形成可复用的电力电子实验平台能力。",
-          image: "images/pcb-closeup.jpg",
-          tags: ["隔离采样", "辅助电源", "控制板", "PCB"],
-          metrics: [
-            { label: "模块数量", value: "3+" },
-            { label: "角色", value: "系统支撑" },
-            { label: "状态", value: "已打板" }
-          ]
-        },
-        {
-          id: "pfc",
-          kicker: "Featured Project 01",
-          title: "1kW CCM Boost PFC",
-          description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，阶段性实测 PF 0.94。",
-          image: "images/pfc-boost-project.jpg",
-          tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II 补偿"],
-          metrics: [
-            { label: "输入", value: "220VAC" },
-            { label: "母线", value: "400VDC" },
-            { label: "PF", value: "0.94" }
-          ]
-        },
-        {
           id: "llc",
-          kicker: "Featured Project 02",
+          kicker: "Featured Project 01",
           title: "数控 SiC 半桥 LLC",
           description: "300VDC 输入、24V / 300W 输出，基于 STM32G4 调频 PI、SiC 双极性栅极驱动和副边同步整流，满载效率 94.4%。",
           image: "images/llc-full-load-board.jpg",
@@ -203,6 +177,32 @@ export const copy: Record<Language, SiteCopy> = {
             { label: "输出", value: "24V / 300W" },
             { label: "效率", value: "94.4%" },
             { label: "纹波", value: "287mVPP" }
+          ]
+        },
+        {
+          id: "flyback",
+          kicker: "Featured Project 02",
+          title: "72W Flyback 反激电源",
+          description: "85-265VAC 宽输入、24V / 3A 隔离输出，采用 UCC287506、TL431 + 光耦反馈和定制变压器，220VAC 满载效率约 85%。",
+          image: "images/flyback-project.jpg",
+          tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 光耦"],
+          metrics: [
+            { label: "输入范围", value: "85-265VAC" },
+            { label: "输出", value: "24V / 3A" },
+            { label: "效率", value: "约 85%" }
+          ]
+        },
+        {
+          id: "pfc",
+          kicker: "Featured Project 03",
+          title: "1kW CCM Boost PFC",
+          description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，阶段性实测 PF 0.94。",
+          image: "images/pfc-boost-project.jpg",
+          tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II 补偿"],
+          metrics: [
+            { label: "输入", value: "220VAC" },
+            { label: "母线", value: "400VDC" },
+            { label: "PF", value: "0.94" }
           ]
         }
       ],
@@ -237,7 +237,7 @@ export const copy: Record<Language, SiteCopy> = {
           tiles: [
             { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "数控 SiC 半桥 LLC", image: "images/llc-full-load-board.jpg" },
-            { title: "72W Flyback 反激电源", image: "images/flyback-doc-board.jpg" }
+            { title: "72W Flyback 反激电源", image: "images/flyback-project.jpg" }
           ]
         },
         {
@@ -370,34 +370,8 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         },
         {
-          id: "competition",
-          kicker: "Competition Module",
-          title: "Isolated Sensing and Control Platform",
-          description: "A reusable power electronics experiment platform built from isolated sensing, auxiliary power, control boards, and power stages.",
-          image: "images/pcb-closeup.jpg",
-          tags: ["Isolated Sensing", "Auxiliary Power", "Control Board", "PCB"],
-          metrics: [
-            { label: "Modules", value: "3+" },
-            { label: "Role", value: "System Support" },
-            { label: "Status", value: "PCB Built" }
-          ]
-        },
-        {
-          id: "pfc",
-          kicker: "Featured Project 01",
-          title: "1kW CCM Boost PFC",
-          description: "UCC28019ADR-based 220VAC to 400VDC PFC covering inrush control, EMI/safety design, and average-current-mode loops, with a measured PF of 0.94.",
-          image: "images/pfc-boost-project.jpg",
-          tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II Compensation"],
-          metrics: [
-            { label: "Input", value: "220VAC" },
-            { label: "Bus", value: "400VDC" },
-            { label: "PF", value: "0.94" }
-          ]
-        },
-        {
           id: "llc",
-          kicker: "Featured Project 02",
+          kicker: "Featured Project 01",
           title: "Digital SiC Half-Bridge LLC",
           description: "300VDC to 24V / 300W with STM32G4 frequency PI control, bipolar SiC gate drive, synchronous rectification, and 94.4% full-load efficiency.",
           image: "images/llc-full-load-board.jpg",
@@ -406,6 +380,32 @@ export const copy: Record<Language, SiteCopy> = {
             { label: "Output", value: "24V / 300W" },
             { label: "Efficiency", value: "94.4%" },
             { label: "Ripple", value: "287mVPP" }
+          ]
+        },
+        {
+          id: "flyback",
+          kicker: "Featured Project 02",
+          title: "72W Flyback Power Supply",
+          description: "An 85-265VAC wide-input isolated 24V / 3A supply using UCC287506, TL431 plus optocoupler feedback, and a custom transformer, with about 85% full-load efficiency at 220VAC.",
+          image: "images/flyback-project.jpg",
+          tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 Optocoupler"],
+          metrics: [
+            { label: "Input Range", value: "85-265VAC" },
+            { label: "Output", value: "24V / 3A" },
+            { label: "Efficiency", value: "About 85%" }
+          ]
+        },
+        {
+          id: "pfc",
+          kicker: "Featured Project 03",
+          title: "1kW CCM Boost PFC",
+          description: "UCC28019ADR-based 220VAC to 400VDC PFC covering inrush control, EMI/safety design, and average-current-mode loops, with a measured PF of 0.94.",
+          image: "images/pfc-boost-project.jpg",
+          tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II Compensation"],
+          metrics: [
+            { label: "Input", value: "220VAC" },
+            { label: "Bus", value: "400VDC" },
+            { label: "PF", value: "0.94" }
           ]
         }
       ],
@@ -440,7 +440,7 @@ export const copy: Record<Language, SiteCopy> = {
           tiles: [
             { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "Digital SiC Half-Bridge LLC", image: "images/llc-full-load-board.jpg" },
-            { title: "72W Flyback Supply", image: "images/flyback-doc-board.jpg" }
+            { title: "72W Flyback Supply", image: "images/flyback-project.jpg" }
           ]
         },
         {
@@ -752,7 +752,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "85-265VAC wide input to isolated 24V / 3A output",
       summary: "A UCC287506DBVR flyback supply with TL431 plus optocoupler feedback and a custom 24:6:5 transformer. At 220VAC full load, efficiency is about 85%, ripple about 390mVPP, and load regulation 0.67%.",
       detailImages: [
-        { src: "images/flyback-doc-board.jpg", title: "24V / 3A Flyback Prototype", description: "Prototype showing input rectification, transformer, control and feedback, and output filtering." },
+        { src: "images/flyback-project.jpg", title: "24V / 3A Flyback Prototype", description: "Prototype showing input rectification, transformer, control and feedback, and output filtering." },
         { src: "images/flyback-input-power.jpg", title: "Full-Load Input Power", description: "220VAC full-load input voltage, current, and active-power record." },
         { src: "images/flyback-output-load.jpg", title: "Electronic Load Output Record", description: "Approximately 24V / 3A and 72W output." },
         { src: "images/flyback-ripple-waveform.jpg", title: "Full-Load Output Ripple", description: "Output ripple and high-frequency spike record with bandwidth limiting and a short ground connection." },

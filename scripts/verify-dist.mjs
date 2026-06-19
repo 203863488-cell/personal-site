@@ -63,6 +63,12 @@ await Promise.all(
   })
 );
 
+await Promise.all(
+  [960, 1672, 2560].map((width) =>
+    access(path.resolve("public/images/generated", `closing-visual-${width}.webp`))
+  )
+);
+
 const resumeStats = await stat(path.resolve("dist/resume.pdf"));
 if (resumeStats.size < 100_000) {
   throw new Error("dist/resume.pdf appears to be a placeholder or incomplete file.");

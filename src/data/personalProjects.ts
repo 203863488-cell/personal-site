@@ -179,10 +179,10 @@ export const personalProjects: PortfolioProject[] = [
     title: "72W Flyback 反激电源",
     subtitle: "85-265VAC 宽输入 -> 24V / 3A 隔离辅助电源",
     summary: "基于 UCC287506DBVR、TL431 + 光耦反馈和 24:6:5 定制变压器；220VAC 满载效率约 85%，纹波约 390mVPP，负载调整率 0.67%。",
-    image: "images/flyback-doc-board.jpg",
+    image: "images/flyback-project.jpg",
     detailImages: [
       {
-        src: "images/flyback-doc-board.jpg",
+        src: "images/flyback-project.jpg",
         title: "24V / 3A 反激电源实物板",
         description: "展示输入整流滤波、主变压器、控制反馈和输出整流滤波区域。"
       },

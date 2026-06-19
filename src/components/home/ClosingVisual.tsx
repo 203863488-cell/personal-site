@@ -1,17 +1,23 @@
-import { responsiveImageSources } from "../../utils/responsiveImage";
+import { assetUrl } from "../../utils/assetUrl";
 
 const CLOSING_IMAGE = "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png";
 
 export function ClosingVisual() {
-  const imageSources = responsiveImageSources(CLOSING_IMAGE);
+  const closingImageSrcSet = [
+    `${assetUrl("images/generated/closing-visual-960.webp")} 960w`,
+    `${assetUrl("images/generated/closing-visual-1672.webp")} 1672w`,
+    `${assetUrl("images/generated/closing-visual-2560.webp")} 2560w`
+  ].join(", ");
 
   return (
     <section className="content-auto relative overflow-hidden border-b border-[#D8E0E7] bg-[#111827]" aria-label="Closing visual">
       <div className="relative min-h-[420px] sm:min-h-[620px] lg:min-h-[760px]">
         <img
-          src={imageSources.original}
-          srcSet={imageSources.srcSet}
+          src={assetUrl(CLOSING_IMAGE)}
+          srcSet={closingImageSrcSet}
           sizes="100vw"
+          width={1672}
+          height={941}
           alt=""
           loading="lazy"
           decoding="async"
