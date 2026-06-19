@@ -1,5 +1,6 @@
 const IMAGE_SELECTOR = ".project-gallery-image";
 const VIEWER_ID = "project-image-viewer";
+const HOME_GALLERY_LABELS = new Set(["已完成项目", "Completed Projects"]);
 const COPY = {
   zh: {
     close: "关闭图片预览",
@@ -269,7 +270,36 @@ function enhanceImage(image) {
   );
 }
 
+function markHomeGalleryImages(root = document) {
+  const panels = new Set();
+
+  if (root instanceof Element) {
+    const closestPanel = root.closest('[role="tabpanel"]');
+    if (closestPanel) panels.add(closestPanel);
+    if (root.matches('[role="tabpanel"]')) panels.add(root);
+  }
+
+  root
+    .querySelectorAll?.('[role="tabpanel"]')
+    .forEach((panel) => panels.add(panel));
+
+  panels.forEach((panel) => {
+    if (!HOME_GALLERY_LABELS.has(panel.getAttribute("aria-label"))) return;
+
+    panel.querySelectorAll("article > img").forEach((image) => {
+      image.classList.add(IMAGE_SELECTOR.slice(1));
+
+      if (!image.alt) {
+        const title = image.parentElement?.querySelector("h4")?.textContent?.trim();
+        image.alt = title || getCopy().image;
+      }
+    });
+  });
+}
+
 function enhanceGallery(root = document) {
+  markHomeGalleryImages(root);
+
   if (root instanceof Element && root.matches(IMAGE_SELECTOR)) {
     enhanceImage(root);
   }
@@ -278,7 +308,8 @@ function enhanceGallery(root = document) {
 }
 
 document.addEventListener("click", (event) => {
-  const image = event.target.closest?.(IMAGE_SELECTOR);
+  const trigger = event.target.closest?.(".project-gallery-trigger");
+  const image = trigger?.querySelector(IMAGE_SELECTOR);
   if (image) {
     openViewer(image);
   }
