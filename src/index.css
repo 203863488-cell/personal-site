@@ -457,11 +457,91 @@ body {
     @apply mt-3 inline-flex rounded-full border border-[#BFD0DF] bg-white px-4 py-2 text-sm font-medium text-[#1F2933] transition hover:border-[#4F9CF9] hover:text-[#2563EB];
   }
 
+  .image-lightbox {
+    @apply fixed inset-0 z-[100] grid place-items-center bg-[#080D14]/96 px-3 py-20 text-white backdrop-blur-sm sm:px-8;
+  }
+
+  .image-lightbox__toolbar {
+    @apply absolute inset-x-0 top-0 flex min-h-16 items-center justify-between border-b border-white/10 bg-black/25 px-4 py-3 sm:px-6;
+  }
+
+  .image-lightbox__counter {
+    @apply rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold tracking-[0.12em] text-white/80;
+  }
+
+  .image-lightbox__action,
+  .image-lightbox__icon-button,
+  .image-lightbox__nav {
+    @apply inline-flex items-center justify-center rounded-full border border-white/15 bg-white/8 text-white transition hover:border-white/35 hover:bg-white/14 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9BC9FF];
+  }
+
+  .image-lightbox__action {
+    @apply min-h-10 gap-2 px-3 text-xs font-semibold sm:px-4;
+  }
+
+  .image-lightbox__icon-button {
+    @apply h-10 w-10;
+  }
+
+  .image-lightbox__nav {
+    @apply absolute top-1/2 z-10 h-12 w-12 -translate-y-1/2 shadow-xl sm:h-14 sm:w-14;
+  }
+
+  .image-lightbox__nav--previous {
+    @apply left-2 sm:left-5;
+  }
+
+  .image-lightbox__nav--next {
+    @apply right-2 sm:right-5;
+  }
+
+  .image-lightbox__figure {
+    @apply flex h-full w-full max-w-[min(96vw,96rem)] flex-col items-center justify-center gap-4;
+  }
+
+  .image-lightbox__image {
+    max-height: min(76vh, calc(100dvh - 11rem));
+    @apply max-w-full select-none object-contain shadow-[0_30px_100px_rgba(0,0,0,0.48)];
+  }
+
+  .image-lightbox__caption {
+    @apply flex max-w-4xl flex-col gap-1 text-center text-xs leading-5 text-white/62 sm:text-sm;
+  }
+
+  .image-lightbox__caption strong {
+    @apply text-sm font-semibold text-white sm:text-base;
+  }
+
   @supports (content-visibility: auto) {
     .content-auto {
       content-visibility: auto;
       contain-intrinsic-size: 1px 760px;
     }
+  }
+}
+
+@media (max-width: 639px) {
+  .image-lightbox {
+    padding-bottom: max(4.75rem, env(safe-area-inset-bottom));
+    padding-top: max(4.75rem, env(safe-area-inset-top));
+  }
+
+  .image-lightbox__image {
+    max-height: calc(100dvh - 12.5rem);
+  }
+
+  .image-lightbox__nav {
+    top: auto;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    transform: none;
+  }
+
+  .image-lightbox__nav--previous {
+    left: calc(50% - 3.5rem);
+  }
+
+  .image-lightbox__nav--next {
+    right: calc(50% - 3.5rem);
   }
 }
 

@@ -1,9 +1,10 @@
 import type { KeyboardEvent } from "react";
-import { Activity, ChevronLeft, ChevronRight, Cpu, Layers, Pause, Play } from "lucide-react";
+import { Activity, ChevronLeft, ChevronRight, Cpu, Download, FolderKanban, Layers, Mail, Pause, Play } from "lucide-react";
 import type { PortfolioMetric } from "../../types/portfolio";
 import { useAutoCarousel } from "../../hooks/useAutoCarousel";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
+import { responsiveImageSources } from "../../utils/responsiveImage";
 import { MetricTile } from "../ui/MetricTile";
 import { Pill } from "../ui/Pill";
 import { SignalField } from "../ui/SignalField";
@@ -36,28 +37,36 @@ function SlideRail({ activeSlide, setActiveSlide }: SlideRailProps) {
     <div className="rounded-lg border border-white/55 bg-white/42 p-3 shadow-[0_18px_55px_rgba(31,41,51,0.1)] backdrop-blur-md">
       <div className="grid gap-2">
         {heroSlides.map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => setActiveSlide(index)}
-            onMouseEnter={() => setActiveSlide(index)}
-            className={`group flex items-center gap-3 rounded-lg border p-2 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
-              index === activeSlide ? "border-[#9BC9FF] bg-white/90 shadow-sm" : "border-transparent hover:border-[#D8E0E7] hover:bg-white/66"
-            }`}
-            aria-pressed={index === activeSlide}
-          >
-            <img
-              src={assetUrl(item.image)}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="h-12 w-16 rounded-md object-cover opacity-78 transition group-hover:opacity-100"
-            />
-            <span className="min-w-0">
-              <span className="balanced-text block text-sm font-semibold leading-tight text-[#111827]">{item.title}</span>
-              <span className="mt-1 block text-xs text-[#6B7280]">{item.kicker}</span>
-            </span>
-          </button>
+          (() => {
+            const sources = responsiveImageSources(item.image);
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveSlide(index)}
+                onMouseEnter={() => setActiveSlide(index)}
+                className={`group flex items-center gap-3 rounded-lg border p-2 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
+                  index === activeSlide ? "border-[#9BC9FF] bg-white/90 shadow-sm" : "border-transparent hover:border-[#D8E0E7] hover:bg-white/66"
+                }`}
+                aria-pressed={index === activeSlide}
+              >
+                <img
+                  src={sources.original}
+                  srcSet={sources.srcSet}
+                  sizes="64px"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="h-12 w-16 rounded-md object-cover opacity-78 transition group-hover:opacity-100"
+                />
+                <span className="min-w-0">
+                  <span className="balanced-text block text-sm font-semibold leading-tight text-[#111827]">{item.title}</span>
+                  <span className="mt-1 block text-xs text-[#6B7280]">{item.kicker}</span>
+                </span>
+              </button>
+            );
+          })()
         ))}
       </div>
     </div>
@@ -70,11 +79,16 @@ function HeroBackdrop({ activeSlide, nearbySlides }: { activeSlide: number; near
   return (
     <>
       {siteCopy.topShowcase.heroSlides.map(
-        (item, index) =>
-          nearbySlides.has(index) && (
+        (item, index) => {
+          const sources = responsiveImageSources(item.image);
+
+          return (
+            nearbySlides.has(index) && (
             <img
               key={item.id}
-              src={assetUrl(item.image)}
+              src={sources.original}
+              srcSet={sources.srcSet}
+              sizes="100vw"
               alt=""
               decoding="async"
               fetchPriority={index === activeSlide ? "high" : "low"}
@@ -83,6 +97,8 @@ function HeroBackdrop({ activeSlide, nearbySlides }: { activeSlide: number; near
               }`}
             />
           )
+          );
+        }
       )}
       <div className="hero-showcase__wash absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(248,250,247,0.86)_0%,rgba(248,250,247,0.66)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.14)_100%)]" />
       <SignalField density="rich" className="z-[2] opacity-42" />
@@ -195,6 +211,20 @@ export function HeroShowcase() {
                 {slide.tags.map((tag) => (
                   <Pill key={tag}>{tag}</Pill>
                 ))}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#/personal" className="primary-button gap-2">
+                  <FolderKanban aria-hidden="true" className="h-4 w-4" />
+                  {siteCopy.topShowcase.projectsAction}
+                </a>
+                <a href={assetUrl("resume.pdf")} download className="secondary-button gap-2">
+                  <Download aria-hidden="true" className="h-4 w-4" />
+                  {siteCopy.topShowcase.resumeAction}
+                </a>
+                <a href="#/contact" className="secondary-button gap-2">
+                  <Mail aria-hidden="true" className="h-4 w-4" />
+                  {siteCopy.topShowcase.contactAction}
+                </a>
               </div>
             </div>
 

@@ -4,10 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "npm run images:generate",
     "dev": "vite",
+    "images:generate": "node scripts/generate-responsive-images.mjs",
+    "prebuild": "npm run images:generate",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify:dist": "node scripts/verify-dist.mjs",
+    "check": "npm run lint && npm run build && npm run verify:dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
@@ -26,8 +31,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "sharp": "^0.35.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.16"
   }
 }

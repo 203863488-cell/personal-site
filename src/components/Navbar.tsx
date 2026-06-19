@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Download, Languages, Menu, X } from "lucide-react";
 import type { Language } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
@@ -44,6 +44,9 @@ function LanguageSwitch({ compact = false }: { compact?: boolean }) {
 
 export function Navbar({ currentRoute }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const { siteCopy } = useLanguage();
   const drawerId = "mobile-navigation-drawer";
 
@@ -61,11 +64,39 @@ export function Navbar({ currentRoute }: NavbarProps) {
     }
 
     const originalOverflow = document.body.style.overflow;
+    const menuButton = menuButtonRef.current;
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus({ preventScroll: true });
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !drawerRef.current) {
+        return;
+      }
+
+      const focusableElements = Array.from(
+        drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+
+      if (!focusableElements.length) {
+        return;
+      }
+
+      const first = focusableElements[0];
+      const last = focusableElements.at(-1);
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -74,6 +105,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      menuButton?.focus({ preventScroll: true });
     };
   }, [open]);
 
@@ -108,6 +140,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
         </nav>
 
         <button
+          ref={menuButtonRef}
           type="button"
           aria-label={siteCopy.nav.menu}
           aria-controls={drawerId}
@@ -129,6 +162,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
           />
 
           <aside
+            ref={drawerRef}
             id={drawerId}
             role="dialog"
             aria-modal="true"
@@ -150,6 +184,7 @@ export function Navbar({ currentRoute }: NavbarProps) {
               </a>
 
               <button
+                ref={closeButtonRef}
                 type="button"
                 aria-label={siteCopy.nav.menu}
                 onClick={() => setOpen(false)}

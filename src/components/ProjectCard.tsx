@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../languageContext";
-import { assetUrl } from "../utils/assetUrl";
+import { responsiveImageSources } from "../utils/responsiveImage";
 import { getProjectHref } from "../routes/portfolioRoutes";
 import { MetricGrid } from "./ui/MetricGrid";
 import { SignalField } from "./ui/SignalField";
@@ -12,6 +12,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { siteCopy } = useLanguage();
+  const imageSources = responsiveImageSources(project.image);
 
   return (
     <a
@@ -20,8 +21,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="relative h-40 overflow-hidden border-b border-[#D8E0E7]/80 sm:h-48">
         <img
-          src={assetUrl(project.image)}
-          alt=""
+          src={imageSources.original}
+          srcSet={imageSources.srcSet}
+          sizes="(min-width: 1024px) 42vw, 92vw"
+          alt={project.title}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover opacity-78 transition duration-500 motion-safe:group-hover:scale-[1.04]"
@@ -52,7 +55,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <MetricGrid
-          metrics={project.metrics}
+          metrics={project.metrics.slice(0, 3)}
           className="mt-6 grid gap-3 sm:grid-cols-3"
           tileClassName="p-3.5 shadow-[0_12px_32px_rgba(31,41,51,0.04)] sm:p-4"
         />

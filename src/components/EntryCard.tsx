@@ -1,6 +1,6 @@
 import { ArrowRight, CircuitBoard } from "lucide-react";
 import { useLanguage } from "../languageContext";
-import { assetUrl } from "../utils/assetUrl";
+import { responsiveImageSources } from "../utils/responsiveImage";
 import { Pill } from "./ui/Pill";
 import { SignalField } from "./ui/SignalField";
 
@@ -18,6 +18,7 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
   const { siteCopy } = useLanguage();
   const accentColor = accent === "blue" ? "text-[#4F9CF9]" : "text-[#5CC8A7]";
   const accentBorder = accent === "blue" ? "group-hover:border-[#9BC9FF]" : "group-hover:border-[#9EDFCF]";
+  const imageSources = responsiveImageSources(image);
 
   return (
     <a
@@ -25,8 +26,10 @@ export function EntryCard({ title, subtitle, description, href, image, tags, acc
       className={`group relative min-h-[25.5rem] overflow-hidden rounded-[1.4rem] border border-[#D8E0E7]/90 bg-white/78 shadow-[0_22px_70px_rgba(31,41,51,0.07)] backdrop-blur-xl transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9] hover:shadow-[0_28px_80px_rgba(31,41,51,0.1)] motion-safe:hover:-translate-y-1 sm:min-h-[31rem] sm:rounded-[1.75rem] ${accentBorder}`}
     >
       <img
-        src={assetUrl(image)}
-        alt=""
+        src={imageSources.original}
+        srcSet={imageSources.srcSet}
+        sizes="(min-width: 1024px) 44vw, 92vw"
+        alt={title}
         loading="lazy"
         decoding="async"
         className="absolute inset-x-0 top-0 h-44 w-full object-cover opacity-72 transition duration-500 motion-safe:group-hover:scale-[1.03] sm:h-56"

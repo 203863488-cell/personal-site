@@ -1,16 +1,19 @@
 import { useLanguage } from "../../languageContext";
-import { assetUrl } from "../../utils/assetUrl";
+import { responsiveImageSources } from "../../utils/responsiveImage";
 import { MediaCard } from "../ui/MediaCard";
 import { Reveal } from "../ui/Reveal";
 import { SignalField } from "../ui/SignalField";
 
 export function GatewaySection() {
   const { siteCopy } = useLanguage();
+  const backgroundImage = responsiveImageSources("images/pcb-closeup.jpg");
 
   return (
     <section className="content-auto relative overflow-hidden border-b border-[#D8E0E7]/70 py-16 sm:py-20">
       <img
-        src={assetUrl("images/pcb-closeup.jpg")}
+        src={backgroundImage.original}
+        srcSet={backgroundImage.srcSet}
+        sizes="100vw"
         alt=""
         loading="lazy"
         decoding="async"

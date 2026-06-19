@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { ZoomIn } from "lucide-react";
 import type { PortfolioProject } from "../../types/portfolio";
 import { useLanguage } from "../../languageContext";
-import { assetUrl } from "../../utils/assetUrl";
+import { responsiveImageSources } from "../../utils/responsiveImage";
+import { ImageLightbox } from "../ui/ImageLightbox";
 
 interface ProjectImageGalleryProps {
   project: PortfolioProject;
@@ -14,6 +17,7 @@ interface ProjectImageGalleryProps {
  */
 export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
   const { siteCopy } = useLanguage();
+  const [activeImage, setActiveImage] = useState<number | null>(null);
 
   if (!project.detailImages?.length) {
     return null;
@@ -27,24 +31,46 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-3">
-        {project.detailImages.map((image) => (
-          <article key={image.src} className="overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78">
-            <div className="relative h-64 overflow-hidden bg-[#F7F9FB]">
-              <img
-                src={assetUrl(image.src)}
-                alt={image.title}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-contain p-3"
-              />
-            </div>
-            <div className="border-t border-[#D8E0E7]/80 p-5">
-              <h4 className="balanced-text font-semibold leading-[1.2] text-[#111827]">{image.title}</h4>
-              <p className="mt-3 text-sm leading-6 text-[#5D6673]">{image.description}</p>
-            </div>
-          </article>
-        ))}
+        {project.detailImages.map((image, index) => {
+          const sources = responsiveImageSources(image.src);
+
+          return (
+            <article key={image.src} className="overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78">
+              <button
+                type="button"
+                className="group relative block h-64 w-full overflow-hidden bg-[#F7F9FB] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4F9CF9]"
+                onClick={() => setActiveImage(index)}
+                aria-label={`${siteCopy.projectDetail.openImage}: ${image.title}`}
+              >
+                <img
+                  src={sources.original}
+                  srcSet={sources.srcSet}
+                  sizes="(min-width: 1024px) 30vw, 92vw"
+                  alt={image.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-contain p-3 transition duration-300 motion-safe:group-hover:scale-[1.02]"
+                />
+                <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full bg-[#111827]/82 px-3 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <ZoomIn aria-hidden="true" className="h-4 w-4" />
+                  {siteCopy.projectDetail.openImage}
+                </span>
+              </button>
+              <div className="border-t border-[#D8E0E7]/80 p-5">
+                <h4 className="balanced-text font-semibold leading-[1.2] text-[#111827]">{image.title}</h4>
+                <p className="mt-3 text-sm leading-6 text-[#5D6673]">{image.description}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
+
+      <ImageLightbox
+        images={project.detailImages}
+        activeIndex={activeImage}
+        onActiveIndexChange={setActiveImage}
+        onClose={() => setActiveImage(null)}
+      />
     </section>
   );
 }

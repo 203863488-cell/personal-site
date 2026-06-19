@@ -1,16 +1,30 @@
 import { useState } from "react";
-import { Activity, ArrowRight, Cpu, Layers } from "lucide-react";
+import { Activity, ArrowRight, Cpu, Layers, ZoomIn } from "lucide-react";
+import type { PortfolioImage } from "../../types/portfolio";
 import { useLanguage } from "../../languageContext";
-import { assetUrl } from "../../utils/assetUrl";
+import { responsiveImageSources } from "../../utils/responsiveImage";
+import { ImageLightbox } from "../ui/ImageLightbox";
 import { SignalField } from "../ui/SignalField";
 
 const capabilityIcons = [Layers, Cpu, Activity];
 
 export function CapabilitySection() {
   const [activeTrack, setActiveTrack] = useState(0);
+  const [activeImage, setActiveImage] = useState<number | null>(null);
   const { siteCopy } = useLanguage();
   const capabilityTracks = siteCopy.topShowcase.capabilityTracks;
   const currentTrack = capabilityTracks[activeTrack];
+  const galleryImages: PortfolioImage[] = currentTrack.tiles.flatMap((tile) =>
+    typeof tile === "string"
+      ? []
+      : [
+          {
+            src: tile.image,
+            title: tile.title,
+            description: currentTrack.subtitle
+          }
+        ]
+  );
 
   return (
     <section className="content-auto relative mt-12 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933] text-white shadow-[0_24px_70px_rgba(31,41,51,0.14)] sm:mt-16">
@@ -49,6 +63,8 @@ export function CapabilitySection() {
           {currentTrack.tiles.map((tile, index) => {
             const tileTitle = typeof tile === "string" ? tile : tile.title;
             const tileImage = typeof tile === "string" ? undefined : tile.image;
+            const imageIndex = tileImage ? galleryImages.findIndex((image) => image.src === tileImage) : -1;
+            const sources = tileImage ? responsiveImageSources(tileImage) : null;
 
             return (
               <article
@@ -57,10 +73,12 @@ export function CapabilitySection() {
                   index === 2 ? "sm:col-span-2" : ""
                 }`}
               >
-                {tileImage ? (
+                {tileImage && sources ? (
                   <img
-                    src={assetUrl(tileImage)}
-                    alt=""
+                    src={sources.original}
+                    srcSet={sources.srcSet}
+                    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
+                    alt={tileTitle}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 h-full w-full object-contain p-5 opacity-74 transition duration-500 motion-safe:group-hover:scale-[1.03] group-hover:opacity-90 sm:p-6"
@@ -73,11 +91,29 @@ export function CapabilitySection() {
                 <div className="relative flex h-full min-h-32 items-end sm:min-h-40">
                   <h4 className="balanced-text text-[1.7rem] font-semibold leading-[1.14] transition duration-300 motion-safe:group-hover:-translate-y-1 sm:text-2xl sm:leading-[1.18]">{tileTitle}</h4>
                 </div>
+                {tileImage ? (
+                  <button
+                    type="button"
+                    className="absolute inset-0 z-20 cursor-zoom-in rounded-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#9BC9FF]"
+                    onClick={() => setActiveImage(imageIndex)}
+                    aria-label={`${siteCopy.projectDetail.openImage}: ${tileTitle}`}
+                  >
+                    <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-[#111827]/60 text-white opacity-0 shadow-lg backdrop-blur transition group-hover:opacity-100 group-focus-within:opacity-100">
+                      <ZoomIn aria-hidden="true" className="h-5 w-5" />
+                    </span>
+                  </button>
+                ) : null}
               </article>
             );
           })}
         </div>
       </div>
+      <ImageLightbox
+        images={galleryImages}
+        activeIndex={activeImage}
+        onActiveIndexChange={setActiveImage}
+        onClose={() => setActiveImage(null)}
+      />
     </section>
   );
 }

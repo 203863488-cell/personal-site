@@ -8,11 +8,12 @@ import { Reveal } from "../components/ui/Reveal";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { SignalField } from "../components/ui/SignalField";
 import { useLanguage } from "../languageContext";
-import { assetUrl } from "../utils/assetUrl";
+import { responsiveImageSources } from "../utils/responsiveImage";
 
 export function HomePage() {
   const { siteCopy } = useLanguage();
   const home = siteCopy.home;
+  const profileImage = responsiveImageSources("images/electronics-lab-oscilloscope.jpg");
 
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
@@ -22,12 +23,12 @@ export function HomePage() {
         <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
-            <h1 className="balanced-text mt-5 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
+            <h2 className="balanced-text mt-5 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
               {home.title}
               <span className="mt-2 block text-2xl font-medium leading-[1.18] text-[#1F2933] sm:text-3xl lg:text-4xl">
                 {home.subtitle}
               </span>
-            </h1>
+            </h2>
             <p className="copy-text mt-6 max-w-3xl">
               {home.description}
             </p>
@@ -43,8 +44,10 @@ export function HomePage() {
           <div className="paper-card relative overflow-hidden">
             <div className="relative h-80">
               <img
-                src={assetUrl("images/electronics-lab-oscilloscope.jpg")}
-                alt=""
+                src={profileImage.original}
+                srcSet={profileImage.srcSet}
+                sizes="(min-width: 1024px) 44vw, 92vw"
+                alt={home.subtitle}
                 loading="lazy"
                 decoding="async"
                 className="h-full w-full object-cover opacity-82"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Download, Mail } from "lucide-react";
+import { Download, GitBranch, Mail } from "lucide-react";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
 import { SignalButton } from "../ui/SignalButton";
@@ -36,8 +36,19 @@ export function ContactBand() {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <SignalButton href="mailto:example@email.com" variant="ghost" icon={Mail} iconPosition="start" onClick={handleEmailClick} className="w-full sm:w-auto">
+          <SignalButton href="mailto:203863488@qq.com" variant="ghost" icon={Mail} iconPosition="start" onClick={handleEmailClick} className="w-full sm:w-auto">
             {home.email}
+          </SignalButton>
+          <SignalButton
+            href="https://github.com/203863488-cell"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="ghost"
+            icon={GitBranch}
+            iconPosition="start"
+            className="w-full sm:w-auto"
+          >
+            {home.github}
           </SignalButton>
           <SignalButton href={assetUrl("resume.pdf")} download icon={Download} iconPosition="start" className="w-full bg-white font-semibold text-[#111827] hover:bg-[#EEF4FA] sm:w-auto">
             {home.download}

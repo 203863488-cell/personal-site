@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../languageContext";
 import { DetailList } from "./project-detail/DetailList";
@@ -26,8 +27,24 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <p className="section-kicker">{labels.kicker}</p>
-            <h2 className="balanced-text mt-4 text-3xl font-semibold leading-[1.14] text-[#111827] sm:text-5xl">{project.title}</h2>
+            <h1 className="balanced-text mt-4 text-3xl font-semibold leading-[1.14] text-[#111827] sm:text-5xl">{project.title}</h1>
             <p className="copy-text mt-5 max-w-3xl">{project.goal}</p>
+            {project.links?.length ? (
+              <div className="mt-6 flex flex-wrap gap-3">
+                {project.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="secondary-button gap-2 py-2"
+                  >
+                    {link.label}
+                    <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </div>
           <span className="w-fit rounded-full border border-[#D8E0E7] bg-white px-4 py-2 text-sm text-[#425466]">
             {siteCopy.common.currentProgress}: {project.status}

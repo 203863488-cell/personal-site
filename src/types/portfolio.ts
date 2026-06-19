@@ -11,6 +11,11 @@ export interface PortfolioImage {
   description: string;
 }
 
+export interface PortfolioLink {
+  label: string;
+  href: string;
+}
+
 export interface PortfolioProject {
   id: string;
   category: ProjectCategory;
@@ -30,4 +35,5 @@ export interface PortfolioProject {
   progress: string;
   validation: string[];
   improvements: string[];
+  links?: PortfolioLink[];
 }

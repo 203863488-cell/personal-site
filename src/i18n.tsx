@@ -4,6 +4,10 @@ import { LanguageContext } from "./languageContext";
 
 const storageKey = "portfolio-language";
 
+function updateMeta(selector: string, value: string) {
+  document.querySelector(selector)?.setAttribute("content", value);
+}
+
 function getInitialLanguage(): Language {
   if (typeof window === "undefined") {
     return "zh";
@@ -21,7 +25,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     window.localStorage.setItem(storageKey, language);
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
     document.title = currentCopy.meta.title;
-    document.querySelector('meta[name="description"]')?.setAttribute("content", currentCopy.meta.description);
+    updateMeta('meta[name="description"]', currentCopy.meta.description);
+    updateMeta('meta[property="og:title"]', currentCopy.meta.title);
+    updateMeta('meta[property="og:description"]', currentCopy.meta.description);
+    updateMeta('meta[name="twitter:title"]', currentCopy.meta.title);
+    updateMeta('meta[name="twitter:description"]', currentCopy.meta.description);
   }, [language]);
 
   const value = useMemo(
