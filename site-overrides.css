@@ -30,6 +30,21 @@
 }
 
 /*
+ * Project cards can expose six metrics. On narrow phones, use two columns so
+ * the evidence stays scannable without turning one card into an excessively
+ * long single-column stack.
+ */
+@media (max-width: 639px) {
+  a.paper-card > div > .mt-6.grid.gap-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  a.paper-card > div > .mt-6.grid.gap-3 .metric-tile {
+    min-width: 0;
+  }
+}
+
+/*
  * Tablet landscape is the primary interview presentation layout. The base
  * bundle switches to desktop columns at 1024px; these rules keep that layout
  * compact enough for common 10-13 inch tablets without hiding project data.

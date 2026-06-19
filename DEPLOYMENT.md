@@ -16,6 +16,21 @@
 5. 执行 JavaScript 语法检查。
 6. 确认 `sw.js`、关键 CSS、JS 和首屏图片均可访问。
 
+## 发布流程
+
+1. 在 `portfolio-static-20260617` 分支完成内容修改、图片接入和本地验证。
+2. 提交并推送静态快照分支。
+3. 在 `main` 分支触发 `Deploy to GitHub Pages` 工作流。工作流会重新检出静态快照分支并发布，不会用构建产物覆盖源码历史。
+4. 等待 GitHub Pages 部署完成后，检查线上首页、个人项目列表和本次修改的项目详情页。
+
+如果 GitHub CLI 已登录，可以直接触发：
+
+```powershell
+gh workflow run deploy.yml --ref main
+```
+
+如果没有 GitHub CLI 登录状态，可以在 `main` 分支推送一个明确的部署提交，或在 GitHub Actions 页面手动运行工作流。
+
 ## 弱网策略
 
 - 首屏 HTML 内置轻量加载状态，主脚本下载期间不会显示空白页。
