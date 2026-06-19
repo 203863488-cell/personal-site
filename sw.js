@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "portfolio-static-";
-const CACHE_NAME = "portfolio-static-v20260619-4";
+const CACHE_NAME = "portfolio-static-v20260619-5";
 const BASE_URL = new URL("./", self.registration.scope);
 const INDEX_URL = new URL("index.html", BASE_URL).href;
 const OFFLINE_IMAGE_URL = new URL("offline-image.svg", BASE_URL).href;
@@ -9,6 +9,7 @@ const CORE_ASSETS = [
   "index.html",
   "favicon.svg",
   "icons.svg",
+  "image-viewer.js",
   "site-overrides.css",
   "assets/index-C9wZ7u0G.css",
   "assets/index-CzQ-yeSi.js",
