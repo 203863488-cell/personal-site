@@ -93,6 +93,8 @@ function HeroBackdrop({ activeSlide, nearbySlides }: { activeSlide: number; near
               decoding="async"
               fetchPriority={index === activeSlide ? "high" : "low"}
               className={`hero-showcase__backdrop absolute inset-0 z-0 h-full w-full object-cover transition duration-700 ${
+                item.id === "welcome" ? "object-[58%_center] sm:object-center" : "object-center"
+              } ${
                 index === activeSlide ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
               }`}
             />

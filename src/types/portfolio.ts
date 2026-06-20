@@ -5,6 +5,10 @@ export interface PortfolioMetric {
   value: string;
 }
 
+export interface PortfolioTechnicalParameter extends PortfolioMetric {
+  note?: string;
+}
+
 export interface PortfolioImage {
   src: string;
   title: string;
@@ -29,6 +33,9 @@ export interface PortfolioProject {
   goal: string;
   responsibilities: string[];
   metrics: PortfolioMetric[];
+  keyComponents?: PortfolioTechnicalParameter[];
+  operatingPrinciples?: string[];
+  engineeringRisks?: string[];
   diagramTitle: string;
   diagramNodes: string[];
   designPoints: string[];

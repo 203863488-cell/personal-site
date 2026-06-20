@@ -33,6 +33,19 @@ const sourceFiles = [
 ];
 const sourceText = (await Promise.all(sourceFiles.map((file) => readFile(path.resolve(file), "utf8")))).join("\n");
 
+for (const marker of [
+  "100V 半桥 / 全桥功率板",
+  "隔离辅助电源板",
+  "engineeringRisks",
+  "images/auxiliary-power-schematic-buck.png",
+  "images/full-bridge-power-schematic-main.png",
+  "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png"
+]) {
+  if (!sourceText.includes(marker)) {
+    throw new Error(`Project source is missing required marker: ${marker}`);
+  }
+}
+
 for (const forbiddenPlaceholder of ["example@email.com", "Resume Placeholder"]) {
   if (sourceText.includes(forbiddenPlaceholder) || indexHtml.includes(forbiddenPlaceholder)) {
     throw new Error(`Placeholder content is still present: ${forbiddenPlaceholder}`);

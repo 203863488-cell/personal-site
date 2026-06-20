@@ -4,6 +4,7 @@ import { useLanguage } from "../languageContext";
 import { DetailList } from "./project-detail/DetailList";
 import { ProjectImageGallery } from "./project-detail/ProjectImageGallery";
 import { SystemDiagram } from "./project-detail/SystemDiagram";
+import { TechnicalParameterGrid } from "./project-detail/TechnicalParameterGrid";
 import { MetricGrid } from "./ui/MetricGrid";
 
 interface ProjectDetailProps {
@@ -66,7 +67,22 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </section>
       </div>
 
+      {project.keyComponents?.length ? (
+        <TechnicalParameterGrid title={labels.keyComponents} parameters={project.keyComponents} />
+      ) : null}
+
       <SystemDiagram project={project} />
+
+      {project.operatingPrinciples?.length || project.engineeringRisks?.length ? (
+        <div className="grid gap-5 xl:grid-cols-2">
+          {project.operatingPrinciples?.length ? (
+            <DetailList title={labels.operatingPrinciples} items={project.operatingPrinciples} />
+          ) : null}
+          {project.engineeringRisks?.length ? (
+            <DetailList title={labels.engineeringRisks} items={project.engineeringRisks} variant="warning" />
+          ) : null}
+        </div>
+      ) : null}
 
       <div className="grid gap-5 xl:grid-cols-2">
         <DetailList title={labels.designPoints} items={project.designPoints} />

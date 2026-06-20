@@ -114,6 +114,9 @@ export interface SiteCopy {
     openImage: string;
     responsibilities: string;
     metrics: string;
+    keyComponents: string;
+    operatingPrinciples: string;
+    engineeringRisks: string;
     systemDiagram: string;
     diagramPlaceholder: string;
     designPoints: string;
@@ -158,7 +161,7 @@ export const copy: Record<Language, SiteCopy> = {
           kicker: "2027 届 · 电源硬件研发",
           title: "蓝宏涛｜电源硬件研发作品集",
           description: "面向电源硬件研发岗位，覆盖 Boost PFC、数控 SiC 半桥 LLC、反激电源、STM32G4 控制与从原理设计到样机调试的完整工程链路。",
-          image: "images/competition-lab-bench-crop.jpg",
+          image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
           tags: ["电源硬件研发", "功率变换器", "磁件 / PCB", "闭环调试"],
           metrics: [
             { label: "LLC 满载效率", value: "94.4%" },
@@ -227,8 +230,8 @@ export const copy: Record<Language, SiteCopy> = {
           subtitle: "采样、辅助供电、控制板与功率板",
           tiles: [
             { title: "隔离采样板", image: "images/isolated-sampling-board.png" },
-            { title: "辅助电源模块", image: "images/auxiliary-power-module.png" },
-            { title: "四 MOS 半桥功率板", image: "images/four-mos-power-board.png" }
+            { title: "隔离辅助电源板", image: "images/auxiliary-power-module.png" },
+            { title: "100V 半桥 / 全桥功率板", image: "images/four-mos-power-board.png" }
           ]
         },
         {
@@ -297,7 +300,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "电赛项目体系",
-        description: "围绕电赛电源类题目，构建可复用的模块化硬件平台。这里集中展示采样、供电、控制、功率级和接口策略等模块。",
+        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、H 桥功率板及模块化接口策略；STM32G4 控制板资料暂保持现状。",
         back: "返回首页"
       },
       personal: {
@@ -319,6 +322,9 @@ export const copy: Record<Language, SiteCopy> = {
       openImage: "查看高清原图",
       responsibilities: "我的职责",
       metrics: "技术指标",
+      keyComponents: "关键器件与参数",
+      operatingPrinciples: "公式与工作逻辑",
+      engineeringRisks: "工程风险与复核项",
       systemDiagram: "System Diagram",
       diagramPlaceholder: "后续可替换为真实系统框图",
       designPoints: "关键设计点",
@@ -361,7 +367,7 @@ export const copy: Record<Language, SiteCopy> = {
           kicker: "Class of 2027 · Power Hardware",
           title: "Hongtao Lan | Power Hardware Portfolio",
           description: "Power-supply hardware portfolio covering Boost PFC, digital SiC half-bridge LLC, flyback conversion, STM32G4 control, and the full path from design to prototype validation.",
-          image: "images/competition-lab-bench-crop.jpg",
+          image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
           tags: ["Power Hardware", "Converters", "Magnetics / PCB", "Closed-Loop Debug"],
           metrics: [
             { label: "LLC Efficiency", value: "94.4%" },
@@ -430,8 +436,8 @@ export const copy: Record<Language, SiteCopy> = {
           subtitle: "Sensing, auxiliary power, control, and power boards",
           tiles: [
             { title: "Isolated Sensing Board", image: "images/isolated-sampling-board.png" },
-            { title: "Auxiliary Power Module", image: "images/auxiliary-power-module.png" },
-            { title: "Four-MOS Half-Bridge Board", image: "images/four-mos-power-board.png" }
+            { title: "Isolated Auxiliary Power Board", image: "images/auxiliary-power-module.png" },
+            { title: "100V Half-Bridge / Full-Bridge Power Board", image: "images/four-mos-power-board.png" }
           ]
         },
         {
@@ -500,7 +506,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "Competition Project System",
-        description: "A reusable modular hardware platform for power-electronics competition problems, covering sensing, power supply, control, power stages, and interface strategy.",
+        description: "A modular 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, the H-bridge power stage, and interface strategy. The STM32G4 control-board material remains unchanged in this update.",
         back: "Back Home"
       },
       personal: {
@@ -522,6 +528,9 @@ export const copy: Record<Language, SiteCopy> = {
       openImage: "View Full-Resolution Image",
       responsibilities: "My Role",
       metrics: "Technical Metrics",
+      keyComponents: "Key Components and Parameters",
+      operatingPrinciples: "Equations and Operating Logic",
+      engineeringRisks: "Engineering Risks and Review Items",
       systemDiagram: "System Diagram",
       diagramPlaceholder: "Can be replaced with the real system diagram later",
       designPoints: "Key Design Points",
@@ -560,40 +569,128 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         }
       ],
       tags: ["AMC1301", "TLV9062", "20mΩ Shunt", "Isolated Power"],
-      status: "PCB completed",
+      status: "Design and PCB complete; calibration pending",
       goal: "Build a reusable isolated sensing module with clear boundaries between the power stage, sensing board, and control board: the high-voltage side handles voltage/current input, the isolation stage handles safety and scaling, and the control side reads 1.65V-biased ADC signals directly.",
       responsibilities: ["Chose the voltage divider ratio, shunt value, and ADC output range from the 85V peak voltage and 4A peak current targets", "Designed the voltage sensing chain and 20mΩ shunt current sensing chain so high-voltage/current signals become low-voltage differential inputs suitable for AMC1301", "Used AMC1301 for isolated amplification and TLV9062 to create a 1.65V-centered ADC signal that fits the 0-3.3V ADC range", "Planned 5V, 3.3V, ISO_5V_1, and ISO_5V_2 power domains with B0505S isolated supplies to avoid direct coupling between the power ground and control ground", "Marked conversion formulas, P/N/GND connector directions, 5V input, test points, and isolated supply nodes on the PCB for fast wiring and troubleshooting"],
       metrics: [
-        { label: "Peak Voltage", value: "85V" },
-        { label: "Peak Current", value: "4A" },
-        { label: "Shunt", value: "20mΩ" }
+        { label: "Design Target", value: "85V / 4A" },
+        { label: "Theoretical Range", value: "±103V / ±5A" },
+        { label: "ADC Interface", value: "3.3V / 12-bit" }
+      ],
+      keyComponents: [
+        { label: "Isolation Amplifiers", value: "AMC1301DWVR ×2", note: "Separate voltage and current isolation channels." },
+        { label: "Output Amplifier", value: "TLV9062IDR", note: "Differential-to-single-ended conversion with a 1.65V midpoint bias." },
+        { label: "Current Shunt", value: "20mΩ", note: "About 0.5W at 5A; requires at least a 1W-class part or equivalent thermal margin." },
+        { label: "Input Filter", value: "39Ω + 39Ω + 10nF", note: "Suppresses switching spikes at the current-channel isolation input." },
+        { label: "Isolated Supplies", value: "B0505S-1WR3 ×2", note: "Independent ISO_5V rails for the two AMC1301 power-side domains." },
+        { label: "Control-Side Supply", value: "AZ1117D-3.3", note: "Used with 10µH, 10µF, and 100nF filtering and decoupling." },
+        { label: "ADC Protection", value: "PESD3V3S1BA-N", note: "Reduces plug-in, miswiring, and transient-spike risk." },
+        { label: "5V Input Protection", value: "SMBJ5.0CA", note: "Input-side transient clamp." }
+      ],
+      operatingPrinciples: [
+        "Bidirectional mapping: the ADC output is about 1.65V at zero input, above 1.65V for the positive direction, and below 1.65V for the negative direction. Firmware should measure the zero point at startup rather than permanently hard-code 1.65V.",
+        "Voltage conversion: V(P→GND) = 62.60 × (VADC_V - Voffset). With an ideal 0-3.3V ADC swing, the theoretical bidirectional range is about ±103.3V.",
+        "Current conversion: I(P→N) = 3.049 × (VADC_I - Ioffset). The 20mΩ shunt produces 100mV at 5A, giving a theoretical bidirectional range of about ±5.03A.",
+        "A 12-bit ADC with a 3.3V reference has about 0.806mV/LSB, corresponding to ideal quantization steps of about 50.4mV/LSB and 2.46mA/LSB. Noise, offset, and sampling timing reduce the effective resolution.",
+        "Protection and closed-loop code should operate on converted physical values with moving-average or first-order filtering. ADC sampling should be synchronized to PWM updates and placed away from switching edges."
+      ],
+      engineeringRisks: [
+        "85V/4A are the current design operating targets. ±103V/±5A are theoretical ADC-span calculations, not completed full-scale accuracy validation.",
+        "The 20mΩ shunt dissipates about 0.5W at 5A. Package rating, copper-area heat spreading, and temperature rise must be verified.",
+        "OVP/OCP limits must stay below theoretical full scale with margin for noise and error. Values around 95V and 4.5A can be evaluated initially, but final thresholds depend on the actual system and calibration data.",
+        "Power-stage common-mode transitions can create ADC spikes. Input filtering, isolated-supply decoupling, return paths, and synchronized sample timing require oscilloscope verification.",
+        "AGND, GND, ISO_5V_1_GND, and ISO_5V_2_GND must follow the schematic isolation boundaries and must not be casually shorted during debug."
       ],
       diagramTitle: "Sensing Chain Block Diagram",
       diagramNodes: ["P/N/GND Input", "Divider / 20mΩ Shunt", "AMC1301 Isolation", "TLV9062 + 3.3V ADC"],
       designPoints: ["The signal chain was derived backward from the measurement targets: 85V peak voltage and 4A peak current define the required ADC swing, which then determines the divider ratio, 20mΩ shunt value, AMC1301 input range, and TLV9062 output bias margin.", "The voltage channel follows a high-impedance divider, isolated amplification, and biased conditioning structure. P-to-GND voltage is scaled before AMC1301 isolation, then TLV9062 centers the ADC signal around 1.65V, with V(P->GND) ≈ 62.60 × (VADC_V - 1.65).", "The current channel uses low-resistance P-N shunt sensing. A 20mΩ shunt produces about 80mV at 4A peak, then the signal passes through 39Ω input resistors, differential filtering, AMC1301 isolation, and op-amp conditioning, with I(P->N) ≈ 3.049 × (VADC_I - 1.65).", "The isolation boundary is deliberately defined as power-side measurement and control-side acquisition. Separate AMC1301 channels and isolated ISO_5V supplies prevent high-voltage ground noise and switching spikes from directly coupling into the MCU sampling ground.", "The debug path was designed into the schematic: TP, 5V, 3.3V, ISO_5V, ADC_V, and ADC_I nodes allow bring-up to proceed by supply, bias, zero point, gain ratio, and dynamic-noise verification."],
-      progress: "The schematic, PCB, and board-level markings are complete. The module has moved from basic signal acquisition to an explainable, calibratable, and debuggable sensing front end: connector direction, conversion formulas, power domains, isolation boundaries, and test points are all explicit, so debug can follow a deterministic procedure instead of ad-hoc probing.",
+      progress: "The schematic, PCB, and board-level markings are complete, with connector direction, conversion equations, power domains, isolation boundaries, and test points made explicit. Public claims are limited to design values and theoretical derivations; measured 0-85V and 0-4A calibration error, switching-noise behavior, and temperature-rise data are still pending.",
       validation: ["Power-integrity validation: verify 5V input, 3.3V regulation, and ISO_5V_1/ISO_5V_2 isolated supplies before checking the AGND/GND and isolated-ground boundaries.", "Zero-point and bias validation: with no input, confirm ADC_V and ADC_I remain near 1.65V to validate the 3.3V reference divider, TLV9062 conditioning stage, and ADC interface.", "Static gain validation: apply known DC voltage and back-calculate with V(P->GND) ≈ 62.60 × (VADC_V - 1.65); apply known load current and back-calculate with I(P->N) ≈ 3.049 × (VADC_I - 1.65).", "Segmented fault isolation: observe the divider/shunt input, AMC1301 output, TLV9062 output, and ADC input separately to distinguish errors from front-end scaling, isolation amplification, biasing, or downstream sampling.", "Dynamic-noise validation: under switching power-stage operation, observe ADC ripple and spikes to evaluate input filtering, decoupling, current return paths, and sampling instant placement."],
-      improvements: ["Build 0-85V voltage and 0-4A current calibration tables with fitted coefficients, zero-offset values, and maximum error.", "Add oscilloscope waveforms for low-voltage open-loop, staged high-voltage, and PWM switching-noise scenarios to make the debug evidence reproducible.", "Use measured noise behavior to review the 10nF / 100nF / 10uF filtering and decoupling choices, and adjust input RC or op-amp output filtering if needed.", "Package the module into a competition-ready checklist covering wiring inspection, power-up order, fault symptoms, and ADC calibration procedure."]
+      improvements: ["Build 0-85V voltage and 0-4A current calibration tables with fitted coefficients, zero offsets, maximum error, and repeatability.", "Add oscilloscope waveforms for low-voltage open-loop, staged high-voltage, and PWM switching-noise scenarios to make the debug evidence reproducible.", "Use measured noise behavior to review the 10nF, 100nF, and 10µF filtering and decoupling choices, and adjust input RC or op-amp output filtering if needed.", "Package the module into a competition-ready checklist covering wiring inspection, power-up order, fault symptoms, and ADC calibration procedure."]
     },
     "auxiliary-power-module": {
-      title: "Auxiliary Power Module",
-      subtitle: "Stable supply for driver, control, and sensing modules",
-      summary: "A low-voltage auxiliary supply module designed around multi-rail needs for control boards, driver boards, and sensing boards.",
-      tags: ["Auxiliary Power", "Multi-Rail Output", "Low-Voltage Validation", "System Supply"],
-      status: "Under validation",
-      goal: "Create a reusable low-voltage auxiliary power solution for fast system assembly and modular debugging.",
-      responsibilities: ["Mapped system power requirements", "Planned output voltages, currents, and interfaces", "Ran low-voltage startup and load checks"],
+      title: "Isolated Auxiliary Power Board",
+      subtitle: "Dual COT buck stages with isolated 15V and 5V rails",
+      summary: "An isolated auxiliary supply for a low-voltage competition power platform. An MSB40M bridge and 440µF bus feed two SY8502FCC COT buck stages that convert the 18V-80V design input into 15V_1 and 15V_2, followed by isolated DC/DC modules that provide ISO_15V and ISO_5V for gate drivers, sensing, and control.",
+      detailImages: [
+        {
+          src: "images/auxiliary-power-module.png",
+          title: "Isolated Auxiliary Power PCB",
+          description: "The board separates the rectifier and bus, dual buck stages, isolated DC/DC modules, and output connectors, with silkscreen identifying the 80V peak input target and isolated 15V / 5V outputs."
+        },
+        {
+          src: "images/auxiliary-power-schematic-buck.png",
+          title: "Rectifier and Dual COT Buck Schematic",
+          description: "The MSB40M bridge and 220µF + 220µF capacitors create V_BUS. Two SY8502FCC stages with 68µH inductors and 115kΩ / 10kΩ feedback networks generate 15V_1 and 15V_2."
+        },
+        {
+          src: "images/auxiliary-power-schematic-isolation.png",
+          title: "Isolated 15V and 5V Output Schematic",
+          description: "The two 15V rails feed isolated DC/DC modules. The output side includes 100µF + 100nF filtering, TVS protection, and multiple two-pin connectors for driver, sensing, and control distribution."
+        }
+      ],
+      tags: ["MSB40M", "SY8502FCC ×2", "COT Buck", "ISO_15V / ISO_5V"],
+      status: "Design complete; hardware validation pending",
+      goal: "Build a reusable auxiliary power tree with explicit power domains: convert a wide low-voltage input into two non-isolated 15V rails and then isolated 15V and 5V rails, reducing coupling between pulsed gate-driver loads and low-noise sensing/control loads.",
+      responsibilities: [
+        "Defined V_BUS, 15V_1, 15V_2, ISO_15V, and ISO_5V power domains from driver, sensing, and control requirements.",
+        "Designed the MSB40M bridge and 220µF + 220µF bus storage so AC or DC input can feed a common V_BUS.",
+        "Used two SY8502FCC COT buck stages, 68µH inductors, and 115kΩ / 10kΩ feedback networks to convert the 18V-80V design input into 15V_1 and 15V_2.",
+        "Added isolated 15V / 5V DC/DC modules, TVS clamps, 100µF + 100nF filtering, and multiple output connectors for modular distribution.",
+        "Reserved a 0Ω emergency link between the two buck outputs while explicitly treating it as a temporary single-channel fault workaround, not a normal parallel connection."
+      ],
       metrics: [
-        { label: "Use", value: "Control / Driver" },
-        { label: "Validation", value: "Low Voltage First" },
-        { label: "Goal", value: "Stable Supply" }
+        { label: "Design Input", value: "18V-80V" },
+        { label: "Isolated Outputs", value: "15V / 5V" },
+        { label: "Bus Storage", value: "440µF" }
+      ],
+      keyComponents: [
+        { label: "Input Rectifier", value: "MSB40M", note: "For AC input, VBUS,peak ≈ √2 × VAC,rms - 2VD." },
+        { label: "Bus Capacitors", value: "220µF + 220µF", note: "440µF total for low-frequency ripple and transient energy." },
+        { label: "Buck Controllers", value: "SY8502FCC ×2", note: "COT control; input-voltage rating must be checked before hardware power-up." },
+        { label: "Buck Inductors", value: "68µH ×2", note: "Used with 100µF + 100nF output filtering." },
+        { label: "Feedback Network", value: "115kΩ / 10kΩ", note: "Targets 15V with an approximately 1.2V feedback reference." },
+        { label: "RON Resistor", value: "1.6MΩ", note: "Participates in COT on-time and operating-frequency setting." },
+        { label: "Isolated 15V", value: "TDK15-24S15W", note: "Its input range must be checked against the actual 15V_1 rail." },
+        { label: "Isolated 5V", value: "TURB2405YMD-15WR3", note: "Its input range must be checked against the actual 15V_2 rail." },
+        { label: "Output Protection", value: "SMAJ15.0CA / SMBJ5.0CA", note: "Protects ISO_15V and ISO_5V respectively." }
+      ],
+      operatingPrinciples: [
+        "For AC input, the rectified bus is approximately VBUS,peak = √2 × VAC,rms - 2VD. Two 220µF capacitors provide 440µF of bus storage.",
+        "Buck output is approximately VOUT = VFB × (1 + 115kΩ / 10kΩ) = 12.5 × VFB. With an approximately 1.2V feedback reference, the target is about 15V.",
+        "COT control depends on sufficient, correctly phased feedback ripple. The 68µH inductor, 100µF output capacitor, and ripple-injection network determine light-load stability and transient response.",
+        "15V_1 and 15V_2 split the isolated 15V and isolated 5V front-end loads, reducing gate-drive transient coupling into the digital sensing supply.",
+        "Recommended bring-up order: current-limited low-voltage input, check V_BUS, verify 15V_1/15V_2 separately, verify ISO_15V/ISO_5V, then connect driver, sensing, and control loads."
+      ],
+      engineeringRisks: [
+        "TDK15-24S15W and TURB2405YMD-15WR3 appear to be 24V nominal-input families. Their allowed input ranges must be confirmed against the current 15V buck outputs.",
+        "The official SY8502FCC datasheet must confirm that its maximum input rating covers an 80V peak bus with margin for input surge and switching spikes.",
+        "COT buck control has a minimum feedback-ripple requirement. Light load may produce jitter, pulse skipping, or instability and requires bandwidth-limited FB and output-ripple measurement.",
+        "The 0Ω link between 15V_1 and 15V_2 should remain unpopulated in normal operation. Permanently paralleling independent buck regulators can create circulating current.",
+        "ISO_15V_GND, ISO_5V_GND, and non-isolated GND must not be casually shorted. Isolation boundaries and connector polarity require meter checks before integration."
       ],
       diagramTitle: "Auxiliary Power Distribution Diagram",
-      diagramNodes: ["Input Power", "Auxiliary Supply", "Control Board", "Driver / Sensing"],
-      designPoints: ["Clear distribution across module power domains", "Connector orientation and startup-sequence awareness", "Reserved test points for power troubleshooting"],
-      progress: "The modular design approach is established. Ripple, load capability, and interface notes are being added.",
-      validation: ["No-load and load output checks", "Key-node ripple observation", "Joint validation with the control board"],
-      improvements: ["Add efficiency and thermal data", "Improve connector silkscreen", "Create a troubleshooting checklist"]
+      diagramNodes: ["AC / DC Input", "MSB40M + 440µF V_BUS", "Dual SY8502FCC COT Buck", "15V_1 / 15V_2", "Isolated DC/DC", "ISO_15V / ISO_5V Loads"],
+      designPoints: [
+        "Rectification, non-isolated conversion, and isolated distribution are separated so different competition systems can use the required power nodes.",
+        "Dual buck rails split driver and sensing/control loads, sharing power while reducing high-di/dt gate-drive contamination of low-noise sensing.",
+        "Each isolated output includes bulk storage, high-frequency decoupling, TVS protection, and multiple connectors for independent load and ripple testing.",
+        "Board silkscreen identifies input, outputs, and power domains; bring-up follows current-limited low-voltage power, staged checks, and load connection last."
+      ],
+      progress: "The two-page schematic, PCB design, and 3D board rendering are complete. Input range, components, and calculations shown publicly are design information. Efficiency, ripple, load capability, and temperature-rise measurements are still pending, so the project is explicitly marked as awaiting hardware validation.",
+      validation: [
+        "Power up without downstream loads using a current-limited low-voltage source and verify rectifier polarity, V_BUS, 15V_1, and 15V_2 in order.",
+        "Measure ISO_15V and ISO_5V no-load voltage, startup behavior, and isolation resistance to rule out incorrect ground connections.",
+        "At 25%, 50%, 75%, and 100% intended load, record output voltage, ripple, efficiency, and the temperature of buck ICs, inductors, bridge, and isolated modules.",
+        "At 18V, nominal input, and staged input near 80V, inspect COT switching, FB ripple, and light-load stability.",
+        "Finally connect driver, sensing, and control loads and check whether pulsed gate-drive loading disturbs ISO_5V or shifts the sensing zero point."
+      ],
+      improvements: [
+        "After datasheet review of the isolated modules and SY8502FCC, lock the supported input range or change the buck target / isolated module selection.",
+        "Add rated current, efficiency curves, ripple, startup overshoot, short-circuit behavior, and critical-component temperature data for each output.",
+        "Use light-load measurements to tune ripple injection, output-capacitor ESR, or minimum load for stable COT operation across the load range.",
+        "Publish connector definitions, the power budget, bring-up order, and a field troubleshooting table."
+      ]
     },
     "stm32g4-control-board": {
       title: "STM32G4 Control Board",
@@ -616,29 +713,94 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       improvements: ["Add a standardized pin table", "Improve control-code templates", "Add debug status indicators"]
     },
     "four-mos-half-bridge-board": {
-      title: "Four-MOS Half-Bridge Power Board",
-      subtitle: "Power-stage platform for multiple converter experiments",
-      summary: "A half-bridge power stage designed around driver loops, power loops, and protection interfaces for competition converter experiments.",
-      tags: ["Half Bridge", "MOSFET", "Driver Loop", "Power Loop"],
-      status: "Design iteration",
-      goal: "Build a reusable half-bridge power board for Buck, Boost, LLC, and related experiments.",
-      responsibilities: ["Planned power and driver loops", "Considered bus capacitors, sensing, and protection interfaces", "Defined a staged low-voltage debug path"],
-      metrics: [
-        { label: "Topology", value: "Half Bridge" },
-        { label: "Devices", value: "4 MOS" },
-        { label: "Validation", value: "Staged" }
+      title: "100V Half-Bridge / Full-Bridge Power Board",
+      subtitle: "Four-MOS H bridge with four floating isolated gate drivers",
+      summary: "A four-MOS H-bridge power board for 100V-class competition inverter and bidirectional-converter experiments. Q1/Q2 and Q3/Q4 form two legs, with differential output between SW1 and SW2. Four UCC23513 drivers and independent B1515S isolated 15V supplies reference each driver to its MOSFET source.",
+      detailImages: [
+        {
+          src: "images/four-mos-power-board.png",
+          title: "100V Half-Bridge / Full-Bridge PCB",
+          description: "Four MOSFETs form the H bridge. The board includes four isolated-driver interfaces, DC+/GND bus terminals, SW1/SW2 switching nodes, and a position for the 1mH experiment inductor."
+        },
+        {
+          src: "images/full-bridge-power-schematic-main.png",
+          title: "H-Bridge Power Stage and Four Isolated Drivers",
+          description: "Q1-Q4 form the full bridge. UCC23513 devices receive PWM_H1/PWM_L1/PWM_H2/PWM_L2 and drive NCEP0178AK MOSFETs through 10Ω gate resistors with 1N4148W asymmetric switching paths."
+        },
+        {
+          src: "images/full-bridge-power-schematic-isolated-supplies.png",
+          title: "Four Floating Isolated 15V Driver Supplies",
+          description: "Four B1515S-1WR3 modules provide independent 15V rails. The high-side negative outputs reference SW1 and SW2, while the low-side outputs reference GND."
+        }
       ],
-      diagramTitle: "Half-Bridge Power Stage Diagram",
-      diagramNodes: ["Bus Input", "Isolated Driver", "MOS Half Bridge", "Load / Transformer"],
-      designPoints: ["Reduce high di/dt loop area", "Separate driver and power-loop regions", "Reserve voltage, current, and temperature observation points"],
-      progress: "The board is in structural optimization, with emphasis on debuggability and safety boundaries.",
-      validation: ["Low-voltage PWM driver test", "Dead-time and waveform check", "Step-by-step bus-voltage increase"],
-      improvements: ["Add thermal design review", "Improve protection chain", "Add layout review notes"]
+      tags: ["100V H Bridge", "NCEP0178AK", "UCC23513 ×4", "Floating 15V Drive"],
+      status: "Design complete; staged validation pending",
+      goal: "Build a reusable 100V H-bridge platform supporting single-leg half-bridge tests, full-bridge unipolar/bipolar SPWM, off-grid inversion, grid-simulation experiments, and bidirectional conversion, with explicit driver references, dead time, and low-voltage bring-up procedures.",
+      responsibilities: [
+        "Defined the Q1/Q2 and Q3/Q4 bridge legs and the DC+, GND, SW1, and SW2 power interfaces.",
+        "Designed four UCC23513 isolated driver paths: 100Ω PWM input limiting followed by 10Ω gate resistors and 1N4148W paths for asymmetric turn-on and turn-off behavior.",
+        "Assigned an independent B1515S-1WR3 isolated 15V supply to each MOSFET, with the high sides floating on SW1/SW2 and the low sides referenced to GND.",
+        "Added 10kΩ gate-source pull-downs, 100nF + 10µF driver decoupling, 100µF + 100nF bus bypassing, and a 1mH experiment inductor.",
+        "Defined a bring-up sequence from driver-only power and complementary PWM/dead-time checks through a current-limited 12V/24V bus, no-load operation, dummy load, and staged voltage increase."
+      ],
+      metrics: [
+        { label: "Bus Class", value: "100V" },
+        { label: "Power Topology", value: "Four-MOS H Bridge" },
+        { label: "Isolated Drive", value: "4 Independent 15V Rails" }
+      ],
+      keyComponents: [
+        { label: "Power MOSFETs", value: "NCEP0178AK ×4", note: "100V-class devices forming the Q1-Q4 bridge." },
+        { label: "Isolated Drivers", value: "UCC23513DWYR ×4", note: "Four PWM inputs independently drive the four MOSFETs." },
+        { label: "Driver Supplies", value: "B1515S-1WR3 ×4", note: "Each rail floats relative to the corresponding MOSFET source." },
+        { label: "Gate Network", value: "10Ω + 1N4148W", note: "Controls switching speed and helps manage ringing and false turn-on." },
+        { label: "Gate Pull-Down", value: "10kΩ ×4", note: "Keeps MOSFETs off while drivers are unpowered or the MCU resets." },
+        { label: "PWM Input", value: "100Ω Series", note: "Limits transient current at the UCC23513 input." },
+        { label: "Driver Decoupling", value: "100nF + 10µF / Channel", note: "Supports high-frequency current and gate-charge transients." },
+        { label: "Bus Decoupling", value: "100µF + 100nF", note: "The 100nF capacitor should stay close to the high-di/dt power loop." },
+        { label: "Experiment Inductor", value: "1mH", note: "Usable as an output filter or series element in topology experiments." }
+      ],
+      operatingPrinciples: [
+        "For the left leg, S1=1 turns Q1 on and Q2 off so SW1≈DC+; S1=0 turns Q1 off and Q2 on so SW1≈GND. S2 controls Q3/Q4 and SW2 in the same way.",
+        "The differential output is VSW1-SW2 = (S1 - S2) × VDC. States 1/0 and 0/1 produce +VDC and -VDC; 1/1 and 0/0 produce zero vectors.",
+        "Bipolar SPWM switches between +VDC and -VDC and is simple but produces larger high-frequency ripple. Unipolar SPWM produces +VDC / 0 / -VDC levels and is generally easier to filter.",
+        "High-side driver returns for Q1 and Q3 must follow SW1 and SW2 respectively; Q2 and Q4 return to GND. Independent isolated supplies avoid bootstrap limits and support long-duty-cycle or low-frequency tests.",
+        "Initial dead time should start conservatively around 500ns-1µs, then be reduced using measured VGS, VDS, and leg-current waveforms. The upper and lower MOSFETs of one leg must never conduct simultaneously."
+      ],
+      engineeringRisks: [
+        "PWM must include hardware or software complementary interlock and dead time. Unconstrained PWM applied to both devices in one leg can short the DC bus.",
+        "Connecting a Q1/Q3 high-side isolated-supply return to system GND instead of SW1/SW2 destroys the floating reference and can overstress the driver or MOSFET.",
+        "A 2.2kΩ minimum-load / bleed resistor dissipates about 0.102W at 15V. A 0603 package may be close to its rating and requires power and temperature review.",
+        "The 10Ω gate resistor is only an initial compromise. Final turn-on and turn-off values require VGS ringing, switching-loss, dv/dt false-turn-on, and EMI measurements.",
+        "The page documents a design, not completed 100V full-bus load testing. Bring-up must begin with a current-limited 12V or 24V bus and staged voltage increase."
+      ],
+      diagramTitle: "100V H-Bridge Power and Driver Path",
+      diagramNodes: ["15V / Four B1515S Rails", "PWM_H1/L1/H2/L2", "Four UCC23513 Drivers", "Q1-Q4 H Bridge", "SW1 / SW2 Differential Output", "1mH / Load / Transformer"],
+      designPoints: [
+        "Four fully isolated drivers avoid high-side bootstrap constraints and support low-frequency, long-duty-cycle, and static-conduction experiments.",
+        "Driver returns follow MOSFET sources exactly: Q1→SW1, Q2→GND, Q3→SW2, and Q4→GND.",
+        "Each driver has local 100nF and 10µF decoupling for high-frequency current and gate-charge transients, while 10kΩ pull-downs enforce an off state during reset.",
+        "The H bridge can be split into a single-leg half bridge or used as a complete SW1-to-SW2 differential full bridge, extending reuse across competition topologies.",
+        "Schematic connectors and nodes expose PWM, driver outputs, SW1/SW2, and bus states for segmented fault isolation."
+      ],
+      progress: "The two-page schematic, PCB design, and 3D board rendering are complete, with the H-bridge topology, four isolated drivers, and floating supply references explicitly defined. The project is not presented as having completed full-voltage testing; validation remains staged across driver-only, low-voltage bus, no-load, dummy-load, and voltage-increase steps.",
+      validation: [
+        "With no DC bus connected, apply only 15V and verify the output voltage, polarity, and reference node of all four B1515S modules.",
+        "Apply low-duty-cycle complementary PWM and measure UCC23513 outputs and all four VGS waveforms for polarity, propagation delay, off state, and dead time.",
+        "Use a current-limited 12V or 24V bus, inspect SW1, SW2, and differential output at no load, then add a resistive dummy load or series inductor.",
+        "At multiple dead-time and gate-network settings, record VGS, VDS, leg current, switching spikes, and temperature to detect cross-conduction and parasitic ringing.",
+        "Only after stable low-voltage validation should bus voltage increase in stages with sensing, overcurrent, overvoltage, and fault-latch functions enabled."
+      ],
+      improvements: [
+        "Add a PCB layout review showing high-di/dt loops, driver loops, bus-decoupling placement, and clearance.",
+        "Use measured waveforms to tune separate turn-on/turn-off gate resistance, diode direction, and dead time while recording efficiency and EMI changes.",
+        "Add hardware fast overcurrent shutdown, bus overvoltage, undervoltage lockout, and fault-latch interfaces to reduce software-failure risk.",
+        "Publish switching waveforms, thermal images, and fault-injection records at 12V, 24V, staged high voltage, and multiple loads."
+      ]
     },
     "competition-interface-strategy": {
       title: "Competition Modular Interface Strategy",
       subtitle: "Fast combination of sensing, control, supply, and power-stage modules",
-      summary: "A unified approach to interfaces, power definitions, signal naming, and debug flow to improve collaboration and reuse.",
+      summary: "The hardware platform centers on the isolated auxiliary supply, bidirectional isolated sensing board, and 100V H bridge. Shared power-domain definitions, signal names, and staged bring-up improve reuse and integration; the STM32G4 board remains only as the control-layer interface in this update.",
       tags: ["Interface Spec", "Modular Design", "Teamwork", "Debug Flow"],
       status: "Ongoing practice",
       goal: "Move competition hardware from one-off builds toward a modular platform with better debug efficiency and reuse.",
@@ -649,10 +811,10 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         { label: "Method", value: "Documented" }
       ],
       diagramTitle: "Modular Platform Relationship Diagram",
-      diagramNodes: ["Auxiliary Power", "Sensing Board", "Control Board", "Power Board"],
-      designPoints: ["Unified interfaces reduce co-debug cost", "Power and signal domains are clearly labeled", "Validate modules first, then integrate the full system"],
-      progress: "The core methodology is established. Interface tables, photos, and debug cases will be added over time.",
-      validation: ["Independent module validation", "Module connection checks", "Full-system co-debug records"],
+      diagramNodes: ["Isolated Auxiliary Power", "Bidirectional Isolated Sensing", "MCU / STM32G4 Control Layer", "100V H-Bridge Power Board"],
+      designPoints: ["The auxiliary board powers the system, the sensing board observes it, the MCU decides, and the H bridge executes", "ISO_15V, ISO_5V, power-ground, and control-ground boundaries are explicit", "Validate supplies and sensing zero first, then drive the H bridge at low voltage, and close the loop only after that"],
+      progress: "The relationships, critical interfaces, and recommended bring-up order of the three hardware modules are now documented. The control-board content remains unchanged and can later receive its own pin table and firmware templates.",
+      validation: ["Current-limited auxiliary-supply bring-up with staged rail checks", "No-input sensing zero check and known-value calibration", "Driver-only validation before a current-limited 12V/24V H-bridge bus", "Ground, isolation-boundary, PWM dead-time, and protection-input checks", "High-voltage and closed-loop loading only after stable low-voltage open-loop operation"],
       improvements: ["Create reusable interface-document templates", "Add a common fault library", "Build team handoff materials"]
     },
     "totem-pole-pfc": {
