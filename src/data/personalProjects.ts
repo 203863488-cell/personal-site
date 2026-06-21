@@ -1,6 +1,6 @@
 import type { PortfolioProject } from "../types/portfolio";
 
-export const personalProjects: PortfolioProject[] = [
+const personalProjectData: PortfolioProject[] = [
   {
     id: "totem-pole-pfc",
     category: "personal",
@@ -12,47 +12,58 @@ export const personalProjects: PortfolioProject[] = [
       {
         src: "images/pfc-boost-project.jpg",
         title: "1kW CCM Boost PFC 样机",
-        description: "实物板包含输入保护与软启动、整流桥、Boost 电感、功率器件散热区、高压母线电容、UCC28019ADR 控制与辅助供电。"
+        description: "实物板包含输入保护与软启动、整流桥、Boost 电感、功率器件散热区、高压母线电容、UCC28019ADR 控制与辅助供电。",
+        kind: "prototype"
       },
       {
         src: "images/pfc-boost-schematic-main.png",
         title: "主功率级、采样与补偿原理图",
-        description: "主图覆盖 Boost 功率级、MOSFET/SiC 二极管、VSENSE/VINS/ISENSE 采样和 UCC28019ADR 电压环、电流环补偿网络。"
+        description: "主图覆盖 Boost 功率级、MOSFET/SiC 二极管、VSENSE/VINS/ISENSE 采样和 UCC28019ADR 电压环、电流环补偿网络。",
+        kind: "schematic"
       },
       {
         src: "images/pfc-boost-input-power.jpg",
         title: "220VAC 输入功率与 PF 记录",
-        description: "带载测试记录输入电压、电流、有功功率和功率因数，实测 PF 0.94。"
+        description: "带载测试记录输入电压、电流、有功功率和功率因数，实测 PF 0.94。",
+        kind: "test"
       },
       {
         src: "images/pfc-boost-bus-ripple.jpg",
         title: "400V 高压母线纹波记录",
-        description: "用于检查外电压环稳定性、母线电容储能能力和 100Hz 二倍频纹波。"
+        description: "用于检查外电压环稳定性、母线电容储能能力和 100Hz 二倍频纹波。",
+        kind: "waveform"
       },
       {
         src: "images/pfc-boost-schematic-aux.png",
         title: "辅助供电与结构接地",
-        description: "包含控制侧辅助电源、继电器驱动、去耦以及保护地和安装点设计。"
+        description: "包含控制侧辅助电源、继电器驱动、去耦以及保护地和安装点设计。",
+        kind: "schematic"
       }
     ],
     tags: ["UCC28019ADR", "CCM Boost PFC", "1kW 设计", "400VDC", "Type-II 补偿", "EMI / 安规"],
     status: "已完成高压闭环与带载验证",
     goal: "完成一套面向 1kW 级电源前级的单相 CCM Boost PFC，从 220VAC 建立 400VDC 高压母线，并通过平均电流模式双环控制改善输入电流波形和功率因数。",
+    quickOverview: {
+      objective: "完成 220VAC 输入、400VDC 母线的 1kW 级 CCM Boost PFC 前级。",
+      challenge: "高压器件应力、软启动、EMI/安规以及电压环和电流环补偿需要协同设计。",
+      contribution: "独立完成器件选型、Simulink 闭环模型、磁性器件参数、PCB、双环补偿和高压带载调试。",
+      outcome: "建立稳定 400VDC 母线；160W 工作点效率 96.9%，PF 0.94。"
+    },
     responsibilities: [
       "完成 MOSFET、整流桥、升压二极管、Boost 电感和高压母线电容等关键器件选型与损耗分析。",
       "使用 Simulink 建立闭环模型，核对关键器件电压、电流应力以及控制环路工作区间。",
       "设计压敏电阻、X/Y 电容、共模电感等输入 EMI 网络，并在 PCB 中控制高压爬电距离。",
       "采用 RC 定时、继电器旁路 NTC 的软启动方案，限制高压母线电容充电浪涌。",
       "基于状态空间平均法分析 CCM PFC 小信号模型，设计电压外环和电流内环 Type-II 补偿。",
-      "完成 220VAC 到 400VDC 高压母线和初步 160W 带载测试，记录效率、PF 和输入电流改善情况。"
+      "完成 220VAC 到 400VDC 高压母线和 160W 带载测试，记录效率、PF 和输入电流改善情况。"
     ],
     metrics: [
-      { label: "设计功率", value: "1kW" },
-      { label: "输入 / 母线", value: "220VAC / 400VDC" },
-      { label: "实测负载", value: "160W" },
-      { label: "实测效率", value: "96.9%" },
-      { label: "功率因数", value: "0.94" },
-      { label: "控制器", value: "UCC28019ADR" }
+      { label: "设计功率", value: "1kW", kind: "design" },
+      { label: "输入 / 母线", value: "220VAC / 400VDC", kind: "design" },
+      { label: "实测效率", value: "96.9%", kind: "measured" },
+      { label: "功率因数", value: "0.94", kind: "measured" },
+      { label: "实测负载", value: "160W", kind: "measured" },
+      { label: "控制器", value: "UCC28019ADR", kind: "design" }
     ],
     diagramTitle: "CCM Boost PFC 功率与控制链路",
     diagramNodes: ["220VAC + EMI / 软启动", "整流桥 + Boost 功率级", "400V 高压母线", "电压 / 电流采样", "UCC28019ADR 双环控制", "PWM 驱动与保护"],
@@ -90,47 +101,61 @@ export const personalProjects: PortfolioProject[] = [
       {
         src: "images/llc-full-load-board.jpg",
         title: "数控 SiC 半桥 LLC 满载样机",
-        description: "完整样机包含主功率板、STM32G4 控制板、辅助供电、PQ40 主变压器、副边同步整流和输出滤波。"
+        description: "完整样机包含主功率板、STM32G4 控制板、辅助供电、PQ40 主变压器、副边同步整流和输出滤波。",
+        kind: "prototype"
       },
       {
         src: "images/llc-full-load-input-power.jpg",
         title: "满载输入功率记录",
-        description: "输入侧记录约 300V / 295.99W，用于与输出功率交叉核算满载效率。"
+        description: "输入侧记录约 300V / 295.99W，用于与输出功率交叉核算满载效率。",
+        kind: "test"
       },
       {
         src: "images/llc-full-load-output-load.jpg",
         title: "24V / 11.7A 输出负载记录",
-        description: "电子负载记录输出约 24V / 11.70A、279.6W，处于 300W 额定附近。"
+        description: "电子负载记录输出约 24V / 11.70A、279.6W，处于 300W 额定附近。",
+        kind: "test"
       },
       {
         src: "images/llc-gs-waveform.jpg",
         title: "SiC 栅源驱动 G-S 波形",
-        description: "检查 UCC23513 隔离驱动、+18V / -3V 双极性栅压、死区和关断裕量。"
+        description: "检查 UCC23513 隔离驱动、+18V / -3V 双极性栅压、死区和关断裕量。",
+        kind: "waveform"
       },
       {
         src: "images/llc-sr-waveform.jpg",
         title: "副边同步整流 SR 波形",
-        description: "用于确认同步整流时序与谐振电流方向匹配，减少体二极管导通和反向电流。"
+        description: "用于确认同步整流时序与谐振电流方向匹配，减少体二极管导通和反向电流。",
+        kind: "waveform"
       },
       {
         src: "images/llc-output-ripple.jpg",
         title: "满载输出纹波 287mVPP",
-        description: "满载输出纹波用于复核输出电容、同步整流、采样噪声和功率回路布局。"
+        description: "满载输出纹波用于复核输出电容、同步整流、采样噪声和功率回路布局。",
+        kind: "waveform"
       },
       {
         src: "images/llc-load-regulation.jpg",
         title: "负载调整率记录",
-        description: "测试结果约 0.06%，用于验证 STM32G4 调频 PI 闭环稳压能力。"
+        description: "测试结果约 0.06%，用于验证 STM32G4 调频 PI 闭环稳压能力。",
+        kind: "test"
       },
       {
         src: "images/design-review.jpg",
         title: "磁件与参数复核",
-        description: "围绕 FHA 增益、谐振腔参数、匝比、漏感集成和 LCR 测量结果进行设计复盘。"
+        description: "围绕 FHA 增益、谐振腔参数、匝比、漏感集成和 LCR 测量结果进行设计复盘。",
+        kind: "test"
       }
     ],
     tags: ["300VDC", "24V / 300W", "SiC 半桥", "STM32G4", "UCC23513", "FHA / 调频 PI"],
     status: "已完成满载闭环验证",
     goal: "完成一套可复盘的 300VDC 到 24V / 300W 隔离数字电源样机，把 LLC 从 FHA 分析、磁件设计、SiC 驱动和 PCB 推进到 STM32G4 闭环、同步整流和满载测试。",
+    quickOverview: {
+      objective: "实现 300VDC 输入、24V / 300W 输出的数控 SiC 半桥 LLC 样机。",
+      challenge: "FHA 参数、PQ40 磁件、SiC 双极性驱动、同步整流和数字调频闭环需要联合调试。",
+      contribution: "独立完成谐振腔与磁件设计、功率板 PCB、STM32G4 调频 PI、保护状态机和满载测试。",
+      outcome: "输出 279.6W，满载效率 94.4%，纹波 287mVPP，负载调整率 0.06%，实现 ZVS 与同步整流。"
+    },
     responsibilities: [
       "完成主功率板、STM32G4 主控板和辅助电源板方案，搭建完整隔离 DC-DC 样机链路。",
       "基于 FHA 模型完成增益与谐振腔参数计算，确定频率上下限并约束容性区边界。",
@@ -141,12 +166,12 @@ export const personalProjects: PortfolioProject[] = [
       "完成输入功率、输出功率、效率、栅极驱动、SR、纹波、负载调整率和 ZVS 验证。"
     ],
     metrics: [
-      { label: "输入规格", value: "300VDC" },
-      { label: "输出规格", value: "24V / 300W" },
-      { label: "满载效率", value: "94.4%" },
-      { label: "输出纹波", value: "287mVPP" },
-      { label: "负载调整率", value: "0.06%" },
-      { label: "主变匝比", value: "30:4:4" }
+      { label: "输入规格", value: "300VDC", kind: "design" },
+      { label: "输出规格", value: "24V / 300W", kind: "design" },
+      { label: "满载效率", value: "94.4%", kind: "measured" },
+      { label: "输出纹波", value: "287mVPP", kind: "measured" },
+      { label: "负载调整率", value: "0.06%", kind: "measured" },
+      { label: "主变匝比", value: "30:4:4", kind: "design" }
     ],
     diagramTitle: "300V 数字调频 LLC 功率与控制链路",
     diagramNodes: ["300VDC 高压母线", "SiC 半桥 + UCC23513", "LLC 谐振腔 / PQ40 主变", "同步整流 + 输出滤波", "采样反馈 / STM32G4", "调频 PI / PWM / 保护状态机"],
@@ -184,32 +209,43 @@ export const personalProjects: PortfolioProject[] = [
       {
         src: "images/flyback-project.jpg",
         title: "24V / 3A 反激电源实物板",
-        description: "展示输入整流滤波、主变压器、控制反馈和输出整流滤波区域。"
+        description: "展示输入整流滤波、主变压器、控制反馈和输出整流滤波区域。",
+        kind: "prototype"
       },
       {
         src: "images/flyback-input-power.jpg",
         title: "输入侧满载功率记录",
-        description: "220VAC 满载工况下记录输入电压、电流和有功功率。"
+        description: "220VAC 满载工况下记录输入电压、电流和有功功率。",
+        kind: "test"
       },
       {
         src: "images/flyback-output-load.jpg",
         title: "输出侧电子负载记录",
-        description: "电子负载记录约 24V / 3A、72W 输出。"
+        description: "电子负载记录约 24V / 3A、72W 输出。",
+        kind: "test"
       },
       {
         src: "images/flyback-ripple-waveform.jpg",
         title: "满载输出纹波",
-        description: "短地弹簧和带宽限制条件下记录输出纹波及高频尖峰。"
+        description: "短地弹簧和带宽限制条件下记录输出纹波及高频尖峰。",
+        kind: "waveform"
       },
       {
         src: "images/flyback-vds-waveform.jpg",
         title: "MOSFET VDS 应力波形",
-        description: "用于核对反射电压、漏感尖峰和 RCD 吸收网络的钳位效果。"
+        description: "用于核对反射电压、漏感尖峰和 RCD 吸收网络的钳位效果。",
+        kind: "waveform"
       }
     ],
     tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 光耦", "RCD 吸收", "宽输入"],
     status: "已完成满载验证",
     goal: "为主功率系统设计一款 24V / 3A 宽输入隔离辅助电源，覆盖功率级、磁件、RCD 吸收、原边采样、二次侧隔离反馈和满载验证。",
+    quickOverview: {
+      objective: "实现 85-265VAC 宽输入、24V / 3A 输出的 72W 隔离反激电源。",
+      challenge: "宽输入器件应力、定制变压器、RCD 钳位和 TL431 光耦补偿需要同时满足。",
+      contribution: "完成拓扑参数、24:6:5 变压器、功率与反馈电路、PCB、满载效率和 VDS 应力验证。",
+      outcome: "220VAC 满载输出 24V / 3A，效率约 85%，纹波约 390mVPP，负载调整率 0.67%。"
+    },
     responsibilities: [
       "根据 85-265VAC 输入和 24V / 3A 输出确定离线反激拓扑与器件应力。",
       "采用 UCC287506DBVR 控制器，设计高压 MOSFET、原边电流采样、辅助绕组供电和二次侧 TL431 + 光耦闭环。",
@@ -218,12 +254,12 @@ export const personalProjects: PortfolioProject[] = [
       "完成输出分压和 Type-II 补偿，验证 24V 稳压、效率、纹波、负载调整率和 VDS 应力。"
     ],
     metrics: [
-      { label: "输入范围", value: "85-265VAC" },
-      { label: "输出规格", value: "24V / 3A" },
-      { label: "满载效率", value: "约 85%" },
-      { label: "输出纹波", value: "约 390mVPP" },
-      { label: "负载调整率", value: "0.67%" },
-      { label: "主变匝比", value: "24:6:5" }
+      { label: "输入范围", value: "85-265VAC", kind: "design" },
+      { label: "输出规格", value: "24V / 3A", kind: "design" },
+      { label: "满载效率", value: "约 85%", kind: "measured" },
+      { label: "输出纹波", value: "约 390mVPP", kind: "measured" },
+      { label: "负载调整率", value: "0.67%", kind: "measured" },
+      { label: "主变匝比", value: "24:6:5", kind: "design" }
     ],
     diagramTitle: "宽输入隔离反激功率链路",
     diagramNodes: ["85-265VAC 输入", "整流与高压母线", "UCC287506 + MOSFET", "24:6:5 反激变压器", "肖特基整流 + 滤波", "TL431 + 光耦反馈"],
@@ -260,12 +296,19 @@ export const personalProjects: PortfolioProject[] = [
       {
         src: "images/stm32g4-llc-host-dashboard.png",
         title: "STM32G4 LLC 遥测仪表盘",
-        description: "界面包含输出电压/电流、开关频率、PI 输出、PWM/故障状态、链路统计和实时图表。"
+        description: "界面包含输出电压/电流、开关频率、PI 输出、PWM/故障状态、链路统计和实时图表。",
+        kind: "software"
       }
     ],
     tags: ["Web Serial", "STM32G4", "921600 8N1", "Chart.js", "CSV", "只读遥测"],
     status: "已完成并投入调试使用",
     goal: "建立一个不下发危险控制命令的只读遥测工具，把 MCU 控制变量、输出状态和通信健康度实时展示并保存，降低数字电源调试记录成本。",
+    quickOverview: {
+      objective: "为 STM32G4 LLC 控制器提供实时、只读、可导出的浏览器遥测界面。",
+      challenge: "921600 波特率下需要可靠处理拆包、坏帧、高频接收与低频 UI 刷新。",
+      contribution: "完成串口协议、缓冲解析、链路统计、实时图表、CSV 与原始日志导出。",
+      outcome: "工具已投入样机调试，可持续显示关键变量并保存完整测试会话。"
+    },
     responsibilities: [
       "定义 STM32G4 USART1_TX 到隔离 CH340 再到浏览器 Web Serial 的硬件与通信链路。",
       "固定 921600 baud、8N1 参数，解析带帧头和序号的 LLC ASCII CSV 协议。",
@@ -274,12 +317,12 @@ export const personalProjects: PortfolioProject[] = [
       "坚持只读遥测边界，浏览器刷新、崩溃或误点击不会直接改变功率级状态。"
     ],
     metrics: [
-      { label: "串口参数", value: "921600 8N1" },
-      { label: "协议", value: "LLC CSV" },
-      { label: "UI 刷新", value: "10Hz" },
-      { label: "图表窗口", value: "3000 点" },
-      { label: "缓存", value: "100000 行" },
-      { label: "安全边界", value: "只读" }
+      { label: "串口参数", value: "921600 8N1", kind: "design" },
+      { label: "协议", value: "LLC CSV", kind: "design" },
+      { label: "UI 刷新", value: "10Hz", kind: "measured" },
+      { label: "图表窗口", value: "3000 点", kind: "design" },
+      { label: "缓存", value: "100000 行", kind: "design" },
+      { label: "安全边界", value: "只读", kind: "design" }
     ],
     diagramTitle: "LLC 上位机数据链路",
     diagramNodes: ["STM32G4 控制变量", "USART1_TX CSV", "隔离 CH340", "Web Serial 解析", "状态卡片 / 图表", "CSV / Raw Log"],
@@ -314,22 +357,31 @@ export const personalProjects: PortfolioProject[] = [
       {
         src: "images/portfolio-site-projects-overview.png",
         title: "个人项目列表",
-        description: "响应式项目网格集中展示 PFC、LLC、反激、STM32G4 上位机和个人网站。"
+        description: "响应式项目网格集中展示 PFC、LLC、反激、STM32G4 上位机和个人网站。",
+        kind: "software"
       },
       {
         src: "images/portfolio-site-project-card.png",
         title: "数据驱动项目卡片",
-        description: "项目标题、摘要、状态、标签和关键指标由统一数据模型生成。"
+        description: "项目标题、摘要、状态、标签和关键指标由统一数据模型生成。",
+        kind: "software"
       },
       {
         src: "images/portfolio-site-project-detail.png",
         title: "可复用项目详情页",
-        description: "详情模板统一展示职责、指标、系统结构、设计点、完成状态、验证结果和成果沉淀。"
+        description: "详情模板统一展示职责、指标、系统结构、设计点、完成状态、验证结果和成果沉淀。",
+        kind: "software"
       }
     ],
     tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "GitHub Pages", "SEO / PWA"],
     status: "已完成并上线运行",
     goal: "提供一个招聘方可以直接浏览的在线作品集，让访问者快速识别求职方向、查看工程证据、下载简历并联系本人，同时保证手机、平板和电脑端体验一致。",
+    quickOverview: {
+      objective: "构建面向电源硬件岗位的中英双语在线作品集。",
+      challenge: "需要兼顾招聘方阅读效率、高清工程图片、移动端体验、SEO 与 GitHub Pages 静态部署。",
+      contribution: "完成信息架构、数据模型、React 组件、Hash 路由、图片优化、离线缓存和自动部署。",
+      outcome: "网站已上线，覆盖 10 个项目、双语内容、响应式高清查看和自动化质量检查。"
+    },
     responsibilities: [
       "围绕招聘方阅读路径设计首页、项目分类、项目详情、联系入口和简历下载。",
       "建立统一项目数据模型和中英双语映射，减少页面重复与内容漂移。",
@@ -340,12 +392,12 @@ export const personalProjects: PortfolioProject[] = [
       "补充 SEO、Service Worker、离线图片占位、构建验证和仓库文档。"
     ],
     metrics: [
-      { label: "项目数量", value: "10 个" },
-      { label: "语言", value: "中 / EN" },
-      { label: "前端", value: "React 19" },
-      { label: "路由", value: "Hash + Lazy" },
-      { label: "部署", value: "GitHub Pages" },
-      { label: "图片", value: "WebP + 原图" }
+      { label: "项目数量", value: "10 个", kind: "measured" },
+      { label: "语言", value: "中 / EN", kind: "design" },
+      { label: "前端", value: "React 19", kind: "design" },
+      { label: "路由", value: "Hash + Lazy", kind: "design" },
+      { label: "部署", value: "GitHub Pages", kind: "measured" },
+      { label: "图片", value: "WebP + 原图", kind: "design" }
     ],
     diagramTitle: "作品集内容、界面与发布链路",
     diagramNodes: ["项目数据与双语文案", "React 复用组件", "Hash 路由与按需加载", "CI 构建与 Pages 部署"],
@@ -381,3 +433,21 @@ export const personalProjects: PortfolioProject[] = [
     ]
   }
 ];
+
+const personalProjectOrder = [
+  "half-bridge-llc",
+  "totem-pole-pfc",
+  "flyback",
+  "stm32-digital-power-host",
+  "personal-portfolio-site"
+] as const;
+
+export const personalProjects = personalProjectOrder.map((projectId) => {
+  const project = personalProjectData.find((item) => item.id === projectId);
+
+  if (!project) {
+    throw new Error(`Missing personal project in configured order: ${projectId}`);
+  }
+
+  return project;
+});

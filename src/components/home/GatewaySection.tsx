@@ -26,7 +26,7 @@ export function GatewaySection() {
         <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           {siteCopy.topShowcase.gatewayCards.map((card, index) => (
             <Reveal key={card.title} delay={index * 70}>
-              <MediaCard image={card.image} title={card.title} subtitle={card.subtitle} className="h-[11rem] sm:h-56" />
+              <MediaCard href={card.href} image={card.image} title={card.title} subtitle={card.subtitle} className="block h-[11rem] sm:h-56" />
             </Reveal>
           ))}
         </div>

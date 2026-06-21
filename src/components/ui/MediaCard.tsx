@@ -3,18 +3,20 @@ import { ArrowUpRight } from "lucide-react";
 import { responsiveImageSources } from "../../utils/responsiveImage";
 
 interface MediaCardProps {
+  href: string;
   image: string;
   title: ReactNode;
   subtitle?: ReactNode;
   className?: string;
 }
 
-export function MediaCard({ image, title, subtitle, className = "" }: MediaCardProps) {
+export function MediaCard({ href, image, title, subtitle, className = "" }: MediaCardProps) {
   const imageSources = responsiveImageSources(image);
 
   return (
-    <article
-      className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-[0_18px_55px_rgba(31,41,51,0.08)] transition duration-300 focus-within:border-[#9BC9FF] hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(31,41,51,0.13)] ${className}`}
+    <a
+      href={href}
+      className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-[0_18px_55px_rgba(31,41,51,0.08)] transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9] hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(31,41,51,0.13)] ${className}`}
     >
       <img
         src={imageSources.original}
@@ -37,6 +39,6 @@ export function MediaCard({ image, title, subtitle, className = "" }: MediaCardP
         </div>
         {subtitle && <p className="mt-2 text-[0.95rem] leading-6 text-white/84 sm:text-sm">{subtitle}</p>}
       </div>
-    </article>
+    </a>
   );
 }

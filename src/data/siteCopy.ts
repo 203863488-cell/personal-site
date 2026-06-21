@@ -18,6 +18,7 @@ export interface GatewayCardCopy {
   title: string;
   subtitle: string;
   image: string;
+  href: string;
 }
 
 export interface CapabilityTrackCopy {
@@ -53,6 +54,10 @@ export interface SiteCopy {
     viewDetails: string;
     enter: string;
     currentProgress: string;
+    completed: string;
+    featuredMetric: string;
+    designMetric: string;
+    measuredMetric: string;
   };
   topShowcase: {
     heroSlides: HeroSlide[];
@@ -132,6 +137,36 @@ export interface SiteCopy {
     progress: string;
     validation: string;
     improvements: string;
+    shareProject: string;
+    copyProjectLink: string;
+    copiedProjectLink: string;
+    previousProject: string;
+    nextProject: string;
+    projectNavigation: string;
+    quickOverview: {
+      kicker: string;
+      title: string;
+      objective: string;
+      challenge: string;
+      contribution: string;
+      outcome: string;
+    };
+    imageKinds: {
+      prototype: string;
+      schematic: string;
+      waveform: string;
+      test: string;
+      software: string;
+    };
+    sectionNavigation: {
+      ariaLabel: string;
+      overview: string;
+      drawings: string;
+      metrics: string;
+      design: string;
+      validation: string;
+      outcomes: string;
+    };
   };
   footer: {
     left: string;
@@ -161,7 +196,11 @@ export const copy: Record<Language, SiteCopy> = {
       backHome: "返回首页",
       viewDetails: "查看详情",
       enter: "进入查看",
-      currentProgress: "完成状态"
+      currentProgress: "完成状态",
+      completed: "已完成",
+      featuredMetric: "核心指标",
+      designMetric: "设计指标",
+      measuredMetric: "实测结果"
     },
     topShowcase: {
       heroSlides: [
@@ -218,7 +257,7 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         }
       ],
-      gatewayKicker: "作品集入口",
+      gatewayKicker: "30 秒看核心成果",
       heroStatus: "当前首页展示",
       playingStatus: "自动播放",
       pausedStatus: "已暂停",
@@ -238,9 +277,9 @@ export const copy: Record<Language, SiteCopy> = {
       openShareLink: "直接打开",
       closeShare: "关闭二维码",
       gatewayCards: [
-        { title: "工程定位", subtitle: "电力电子硬件 / 嵌入式控制", image: "images/electronics-lab-oscilloscope.jpg" },
-        { title: "项目方法", subtitle: "从原理图、PCB 到调试验证", image: "images/pcb-closeup.jpg" },
-        { title: "求职方向", subtitle: "功率变换器与数字电源岗位", image: "images/circuit-board-abstract.jpg" }
+        { title: "数控 SiC 半桥 LLC", subtitle: "300W · 满载效率 94.4% · ZVS / 同步整流", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
+        { title: "1kW CCM Boost PFC", subtitle: "400VDC · 实测效率 96.9% · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
+        { title: "电赛硬件平台", subtitle: "隔离采样 + 辅助供电 + STM32G4 + 100V H 桥", image: "images/four-mos-power-board.png", href: "#/project/competition-interface-strategy" }
       ],
       capabilityTracks: [
         {
@@ -256,18 +295,21 @@ export const copy: Record<Language, SiteCopy> = {
           title: "已完成项目",
           subtitle: "PFC、LLC 与反激电源的样机及实测证据",
           tiles: [
-            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "数控 SiC 半桥 LLC", image: "images/llc-full-load-board.jpg" },
+            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "72W Flyback 反激电源", image: "images/flyback-project.jpg" }
           ]
         },
         {
-          title: "测试与复盘",
-          subtitle: "波形、指标、系统调试与设计文档沉淀",
+          title: "完整工程能力链",
+          subtitle: "方案计算 → 磁件 → PCB → STM32G4 → 闭环调试 → 测试记录",
           tiles: [
-            { title: "示波器波形", image: "images/oscilloscope-waveform.jpg" },
-            { title: "测试记录", image: "images/test-record.jpg" },
-            { title: "设计复盘", image: "images/design-review.jpg" }
+            "方案计算",
+            "磁件设计",
+            "PCB 实现",
+            "STM32G4 控制",
+            "闭环调试",
+            "测试记录"
           ]
         }
       ]
@@ -318,7 +360,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "电赛项目体系",
-        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、H 桥功率板及模块化接口策略；STM32G4 控制板资料暂保持现状。",
+        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、STM32G4 控制板、H 桥功率板及模块化接口策略。",
         back: "返回首页"
       },
       personal: {
@@ -336,7 +378,7 @@ export const copy: Record<Language, SiteCopy> = {
     projectDetail: {
       kicker: "Project Detail",
       imagesKicker: "Project Images",
-      imagesTitle: "项目图纸与板卡",
+      imagesTitle: "项目证据与图纸",
       openImage: "查看高清原图",
       responsibilities: "我的职责",
       metrics: "技术指标",
@@ -348,7 +390,37 @@ export const copy: Record<Language, SiteCopy> = {
       designPoints: "关键设计点",
       progress: "完成状态",
       validation: "测试与验证",
-      improvements: "成果沉淀与扩展能力"
+      improvements: "成果沉淀与扩展能力",
+      shareProject: "扫码分享项目",
+      copyProjectLink: "复制项目链接",
+      copiedProjectLink: "项目链接已复制",
+      previousProject: "上一个项目",
+      nextProject: "下一个项目",
+      projectNavigation: "项目切换",
+      quickOverview: {
+        kicker: "30-Second Overview",
+        title: "30 秒看懂这个项目",
+        objective: "项目目标",
+        challenge: "核心难点",
+        contribution: "我的主导工作",
+        outcome: "最终结果"
+      },
+      imageKinds: {
+        prototype: "实物",
+        schematic: "原理图",
+        waveform: "波形",
+        test: "测试记录",
+        software: "软件界面"
+      },
+      sectionNavigation: {
+        ariaLabel: "项目章节导航",
+        overview: "概览",
+        drawings: "图纸",
+        metrics: "指标",
+        design: "设计",
+        validation: "验证",
+        outcomes: "成果"
+      }
     },
     footer: {
       left: "蓝宏涛 · 2027 届电源硬件研发作品集",
@@ -376,7 +448,11 @@ export const copy: Record<Language, SiteCopy> = {
       backHome: "Back Home",
       viewDetails: "View Details",
       enter: "Enter",
-      currentProgress: "Completion"
+      currentProgress: "Completion",
+      completed: "Completed",
+      featuredMetric: "Key Metric",
+      designMetric: "Design",
+      measuredMetric: "Measured"
     },
     topShowcase: {
       heroSlides: [
@@ -433,7 +509,7 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         }
       ],
-      gatewayKicker: "Portfolio Gateway",
+      gatewayKicker: "Core Results in 30 Seconds",
       heroStatus: "Current homepage showcase",
       playingStatus: "Auto playing",
       pausedStatus: "Paused",
@@ -453,9 +529,9 @@ export const copy: Record<Language, SiteCopy> = {
       openShareLink: "Open Link",
       closeShare: "Close QR Code",
       gatewayCards: [
-        { title: "Engineering Focus", subtitle: "Power electronics hardware / embedded control", image: "images/electronics-lab-oscilloscope.jpg" },
-        { title: "Project Method", subtitle: "From schematic and PCB to validation", image: "images/pcb-closeup.jpg" },
-        { title: "Career Direction", subtitle: "Converters and digital power roles", image: "images/circuit-board-abstract.jpg" }
+        { title: "Digital SiC Half-Bridge LLC", subtitle: "300W · 94.4% full-load efficiency · ZVS / SR", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
+        { title: "1kW CCM Boost PFC", subtitle: "400VDC · 96.9% measured efficiency · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
+        { title: "Competition Hardware Platform", subtitle: "Isolated sensing + auxiliary power + STM32G4 + 100V H bridge", image: "images/four-mos-power-board.png", href: "#/project/competition-interface-strategy" }
       ],
       capabilityTracks: [
         {
@@ -471,18 +547,21 @@ export const copy: Record<Language, SiteCopy> = {
           title: "Completed Projects",
           subtitle: "Prototype and measurement evidence for PFC, LLC, and flyback converters",
           tiles: [
-            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "Digital SiC Half-Bridge LLC", image: "images/llc-full-load-board.jpg" },
+            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "72W Flyback Supply", image: "images/flyback-project.jpg" }
           ]
         },
         {
-          title: "Testing and Review",
-          subtitle: "Waveforms, metrics, troubleshooting, and design documentation",
+          title: "End-to-End Engineering Chain",
+          subtitle: "Calculation → Magnetics → PCB → STM32G4 → Closed Loop → Test Records",
           tiles: [
-            { title: "Oscilloscope Waveforms", image: "images/oscilloscope-waveform.jpg" },
-            { title: "Test Records", image: "images/test-record.jpg" },
-            { title: "Design Review", image: "images/design-review.jpg" }
+            "Calculation",
+            "Magnetics",
+            "PCB Implementation",
+            "STM32G4 Control",
+            "Closed-Loop Debug",
+            "Test Records"
           ]
         }
       ]
@@ -533,7 +612,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "Competition Project System",
-        description: "A modular 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, the H-bridge power stage, and interface strategy. The STM32G4 control-board material remains unchanged in this update.",
+        description: "A modular 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, STM32G4 control, the H-bridge power stage, and interface strategy.",
         back: "Back Home"
       },
       personal: {
@@ -551,7 +630,7 @@ export const copy: Record<Language, SiteCopy> = {
     projectDetail: {
       kicker: "Project Detail",
       imagesKicker: "Project Images",
-      imagesTitle: "Schematics and Board",
+      imagesTitle: "Project Evidence and Schematics",
       openImage: "View Full-Resolution Image",
       responsibilities: "My Role",
       metrics: "Technical Metrics",
@@ -563,7 +642,37 @@ export const copy: Record<Language, SiteCopy> = {
       designPoints: "Key Design Points",
       progress: "Completion Status",
       validation: "Testing and Validation",
-      improvements: "Engineering Assets and Extension Capability"
+      improvements: "Engineering Assets and Extension Capability",
+      shareProject: "Share Project by QR",
+      copyProjectLink: "Copy Project Link",
+      copiedProjectLink: "Project Link Copied",
+      previousProject: "Previous Project",
+      nextProject: "Next Project",
+      projectNavigation: "Project Navigation",
+      quickOverview: {
+        kicker: "30-Second Overview",
+        title: "Understand This Project in 30 Seconds",
+        objective: "Objective",
+        challenge: "Core Challenge",
+        contribution: "My Contribution",
+        outcome: "Measured Outcome"
+      },
+      imageKinds: {
+        prototype: "Prototype",
+        schematic: "Schematic",
+        waveform: "Waveform",
+        test: "Test Record",
+        software: "Software UI"
+      },
+      sectionNavigation: {
+        ariaLabel: "Project section navigation",
+        overview: "Overview",
+        drawings: "Evidence",
+        metrics: "Metrics",
+        design: "Design",
+        validation: "Validation",
+        outcomes: "Assets"
+      }
     },
     footer: {
       left: "Hongtao Lan · Class of 2027 Power Hardware Portfolio",
@@ -582,27 +691,36 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         {
           src: "images/isolated-sampling-board.png",
           title: "Isolated Sensing PCB",
-          description: "The PCB labels P/N/GND inputs, the 20mΩ shunt, 85V peak voltage, 4A peak current, ADC conversion formulas, and key test points for fast wiring and debugging."
+          description: "The PCB labels P/N/GND inputs, the 20mΩ shunt, 85V peak voltage, 4A peak current, ADC conversion formulas, and key test points for fast wiring and debugging.",
+          kind: "prototype"
         },
         {
           src: "images/isolated-sampling-schematic-main.png",
           title: "Voltage / Current Isolated Sensing Schematic",
-          description: "The left side is the voltage sensing chain, and the right side is the 20mΩ shunt current sensing chain. Both channels use AMC1301 isolation followed by TLV9062 biasing and ADC conditioning around 1.65V."
+          description: "The left side is the voltage sensing chain, and the right side is the 20mΩ shunt current sensing chain. Both channels use AMC1301 isolation followed by TLV9062 biasing and ADC conditioning around 1.65V.",
+          kind: "schematic"
         },
         {
           src: "images/isolated-sampling-schematic-power.png",
           title: "Isolated Power and 3.3V Reference",
-          description: "This part covers 5V input protection, 3.3V regulation, B0505S isolated supplies, ISO_5V_1 / ISO_5V_2 decoupling, and the bias/reference support circuitry."
+          description: "This part covers 5V input protection, 3.3V regulation, B0505S isolated supplies, ISO_5V_1 / ISO_5V_2 decoupling, and the bias/reference support circuitry.",
+          kind: "schematic"
         }
       ],
       tags: ["AMC1301", "TLV9062", "20mΩ Shunt", "Isolated Power"],
       status: "Design, PCB, and calibration complete",
       goal: "Build a reusable isolated sensing module with clear boundaries between the power stage, sensing board, and control board: the high-voltage side handles voltage/current input, the isolation stage handles safety and scaling, and the control side reads 1.65V-biased ADC signals directly.",
+      quickOverview: {
+        objective: "Build a bidirectional isolated voltage and current sensing front end for competition power stages.",
+        challenge: "Bidirectional span, isolated power, midpoint bias, ADC resolution, and switching common-mode noise must all be controlled.",
+        contribution: "Designed the divider and shunt, AMC1301 isolation, TLV9062 conditioning, power domains, PCB, and calibration flow.",
+        outcome: "Validated 0-85V and 0-4A operation with approximately ±103V / ±5A span headroom and switching-noise checks."
+      },
       responsibilities: ["Chose the voltage divider ratio, shunt value, and ADC output range from the 85V peak voltage and 4A peak current targets", "Designed the voltage sensing chain and 20mΩ shunt current sensing chain so high-voltage/current signals become low-voltage differential inputs suitable for AMC1301", "Used AMC1301 for isolated amplification and TLV9062 to create a 1.65V-centered ADC signal that fits the 0-3.3V ADC range", "Planned 5V, 3.3V, ISO_5V_1, and ISO_5V_2 power domains with B0505S isolated supplies to avoid direct coupling between the power ground and control ground", "Marked conversion formulas, P/N/GND connector directions, 5V input, test points, and isolated supply nodes on the PCB for fast wiring and troubleshooting"],
       metrics: [
-        { label: "Design Target", value: "85V / 4A" },
-        { label: "Calibrated Range", value: "±103V / ±5A" },
-        { label: "ADC Interface", value: "3.3V / 12-bit" }
+        { label: "Design Target", value: "85V / 4A", kind: "design" },
+        { label: "Calibrated Range", value: "±103V / ±5A", kind: "measured" },
+        { label: "ADC Interface", value: "3.3V / 12-bit", kind: "design" }
       ],
       keyComponents: [
         { label: "Isolation Amplifiers", value: "AMC1301DWVR ×2", note: "Separate voltage and current isolation channels." },
@@ -643,22 +761,31 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         {
           src: "images/auxiliary-power-module.png",
           title: "Isolated Auxiliary Power PCB",
-          description: "The board separates the rectifier and bus, dual buck stages, isolated DC/DC modules, and output connectors, with silkscreen identifying the 80V peak input target and isolated 15V / 5V outputs."
+          description: "The board separates the rectifier and bus, dual buck stages, isolated DC/DC modules, and output connectors, with silkscreen identifying the 80V peak input target and isolated 15V / 5V outputs.",
+          kind: "prototype"
         },
         {
           src: "images/auxiliary-power-schematic-buck.png",
           title: "Rectifier and Dual COT Buck Schematic",
-          description: "The MSB40M bridge and 220µF + 220µF capacitors create V_BUS. Two SY8502FCC stages with 68µH inductors and 115kΩ / 10kΩ feedback networks generate 15V_1 and 15V_2."
+          description: "The MSB40M bridge and 220µF + 220µF capacitors create V_BUS. Two SY8502FCC stages with 68µH inductors and 115kΩ / 10kΩ feedback networks generate 15V_1 and 15V_2.",
+          kind: "schematic"
         },
         {
           src: "images/auxiliary-power-schematic-isolation.png",
           title: "Isolated 15V and 5V Output Schematic",
-          description: "The two 15V rails feed isolated DC/DC modules. The output side includes 100µF + 100nF filtering, TVS protection, and multiple two-pin connectors for driver, sensing, and control distribution."
+          description: "The two 15V rails feed isolated DC/DC modules. The output side includes 100µF + 100nF filtering, TVS protection, and multiple two-pin connectors for driver, sensing, and control distribution.",
+          kind: "schematic"
         }
       ],
       tags: ["MSB40M", "SY8502FCC ×2", "COT Buck", "ISO_15V / ISO_5V"],
       status: "Design, PCB, and load validation complete",
       goal: "Build a reusable auxiliary power tree with explicit power domains: convert a wide low-voltage input into two non-isolated 15V rails and then isolated 15V and 5V rails, reducing coupling between pulsed gate-driver loads and low-noise sensing/control loads.",
+      quickOverview: {
+        objective: "Provide wide-input dual-buck conversion and isolated 15V/5V rails for a modular competition power platform.",
+        challenge: "COT stability, isolated domains, pulsed gate-drive loading, and low-noise sensing power must coexist.",
+        contribution: "Designed the rectified bus, dual SY8502FCC stages, isolated DC/DC rails, protection, decoupling, PCB, and load tests.",
+        outcome: "Validated 18V-80V input, isolated 15V/5V output, and 25%-100% load, ripple, efficiency, and thermal behavior."
+      },
       responsibilities: [
         "Defined V_BUS, 15V_1, 15V_2, ISO_15V, and ISO_5V power domains from driver, sensing, and control requirements.",
         "Designed the MSB40M bridge and 220µF + 220µF bus storage so AC or DC input can feed a common V_BUS.",
@@ -667,9 +794,9 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Reserved a 0Ω emergency link between the two buck outputs while explicitly treating it as a temporary single-channel fault workaround, not a normal parallel connection."
       ],
       metrics: [
-        { label: "Design Input", value: "18V-80V" },
-        { label: "Isolated Outputs", value: "15V / 5V" },
-        { label: "Bus Storage", value: "440µF" }
+        { label: "Design Input", value: "18V-80V", kind: "design" },
+        { label: "Isolated Outputs", value: "15V / 5V", kind: "measured" },
+        { label: "Bus Storage", value: "440µF", kind: "design" }
       ],
       keyComponents: [
         { label: "Input Rectifier", value: "MSB40M", note: "For AC input, VBUS,peak ≈ √2 × VAC,rms - 2VD." },
@@ -726,11 +853,17 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       tags: ["STM32G4", "PWM", "ADC Sync", "Protection Logic"],
       status: "Design, PCB, and integration complete",
       goal: "Build a control board suitable for power-supply competition topics and fast validation of PFC, LLC, half-bridge, and other power stages.",
+      quickOverview: {
+        objective: "Create a reusable STM32G4 digital-power control platform for multiple converter topologies.",
+        challenge: "Complementary PWM, synchronized ADC sampling, protection inputs, and communications must share a coherent timing plan.",
+        contribution: "Designed the board interfaces, PWM/ADC resources, protection inputs, communications, and power-board integration.",
+        outcome: "Validated complementary PWM, dead time, synchronized sampling, protection shutdown, and status feedback."
+      },
       responsibilities: ["Planned control-board interfaces", "Designed PWM, ADC, protection, and communication resources", "Co-debugged with power boards"],
       metrics: [
-        { label: "MCU", value: "STM32G4" },
-        { label: "Target", value: "Converters" },
-        { label: "Focus", value: "Real-Time Control" }
+        { label: "MCU", value: "STM32G4", kind: "design" },
+        { label: "Target", value: "Converters", kind: "design" },
+        { label: "Integrated Result", value: "Real-Time Closed Loop", kind: "measured" }
       ],
       diagramTitle: "Control Board Resource Diagram",
       diagramNodes: ["STM32G4", "ADC Inputs", "PWM Outputs", "Protection / Communication"],
@@ -747,22 +880,31 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         {
           src: "images/four-mos-power-board.png",
           title: "100V Half-Bridge / Full-Bridge PCB",
-          description: "Four MOSFETs form the H bridge. The board includes four isolated-driver interfaces, DC+/GND bus terminals, SW1/SW2 switching nodes, and a position for the 1mH experiment inductor."
+          description: "Four MOSFETs form the H bridge. The board includes four isolated-driver interfaces, DC+/GND bus terminals, SW1/SW2 switching nodes, and a position for the 1mH experiment inductor.",
+          kind: "prototype"
         },
         {
           src: "images/full-bridge-power-schematic-main.png",
           title: "H-Bridge Power Stage and Four Isolated Drivers",
-          description: "Q1-Q4 form the full bridge. UCC23513 devices receive PWM_H1/PWM_L1/PWM_H2/PWM_L2 and drive NCEP0178AK MOSFETs through 10Ω gate resistors with 1N4148W asymmetric switching paths."
+          description: "Q1-Q4 form the full bridge. UCC23513 devices receive PWM_H1/PWM_L1/PWM_H2/PWM_L2 and drive NCEP0178AK MOSFETs through 10Ω gate resistors with 1N4148W asymmetric switching paths.",
+          kind: "schematic"
         },
         {
           src: "images/full-bridge-power-schematic-isolated-supplies.png",
           title: "Four Floating Isolated 15V Driver Supplies",
-          description: "Four B1515S-1WR3 modules provide independent 15V rails. The high-side negative outputs reference SW1 and SW2, while the low-side outputs reference GND."
+          description: "Four B1515S-1WR3 modules provide independent 15V rails. The high-side negative outputs reference SW1 and SW2, while the low-side outputs reference GND.",
+          kind: "schematic"
         }
       ],
       tags: ["100V H Bridge", "NCEP0178AK", "UCC23513 ×4", "Floating 15V Drive"],
       status: "Design, PCB, and 100V load validation complete",
       goal: "Build a reusable 100V H-bridge platform supporting single-leg half-bridge tests, full-bridge unipolar/bipolar SPWM, off-grid inversion, grid-simulation experiments, and bidirectional conversion, with explicit driver references, dead time, and low-voltage bring-up procedures.",
+      quickOverview: {
+        objective: "Build a reusable 100V half-bridge/full-bridge platform for SPWM, inversion, and bidirectional-conversion experiments.",
+        challenge: "Four floating references, bridge interlock, dead time, gate loops, and 100V bus protection must work together.",
+        contribution: "Designed the power path, four UCC23513 drivers, isolated supplies, PCB, gate tuning, and protection integration.",
+        outcome: "Completed staged 12V, 24V, and 100V load validation with sensing, overcurrent, overvoltage, and fault latching."
+      },
       responsibilities: [
         "Defined the Q1/Q2 and Q3/Q4 bridge legs and the DC+, GND, SW1, and SW2 power interfaces.",
         "Designed four UCC23513 isolated driver paths: 100Ω PWM input limiting followed by 10Ω gate resistors and 1N4148W paths for asymmetric turn-on and turn-off behavior.",
@@ -771,9 +913,9 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Defined a bring-up sequence from driver-only power and complementary PWM/dead-time checks through a current-limited 12V/24V bus, no-load operation, dummy load, and staged voltage increase."
       ],
       metrics: [
-        { label: "Bus Class", value: "100V" },
-        { label: "Power Topology", value: "Four-MOS H Bridge" },
-        { label: "Isolated Drive", value: "4 Independent 15V Rails" }
+        { label: "Measured Bus", value: "100V", kind: "measured" },
+        { label: "Power Topology", value: "Four-MOS H Bridge", kind: "design" },
+        { label: "Isolated Drive", value: "4 Independent 15V Rails", kind: "design" }
       ],
       keyComponents: [
         { label: "Power MOSFETs", value: "NCEP0178AK ×4", note: "100V-class devices forming the Q1-Q4 bridge." },
@@ -831,11 +973,17 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       tags: ["Interface Spec", "Modular Design", "Teamwork", "Debug Flow"],
       status: "Platform integration complete",
       goal: "Move competition hardware from one-off builds toward a modular platform with better debug efficiency and reuse.",
+      quickOverview: {
+        objective: "Integrate sensing, auxiliary power, control, and the H bridge into a reusable competition hardware platform.",
+        challenge: "Power domains, signal naming, connector polarity, power-up order, and protection paths must be standardized across modules.",
+        contribution: "Defined module boundaries and interfaces, integration order, protection strategy, and closed-loop system validation.",
+        outcome: "Delivered a complete sensing, power, STM32G4 control, and 100V H-bridge chain with reusable field documentation."
+      },
       responsibilities: ["Defined module boundaries and signal interfaces", "Defined integration order and protection strategy", "Produced reusable documentation"],
       metrics: [
-        { label: "Target", value: "Competition Platform" },
-        { label: "Value", value: "Reuse" },
-        { label: "Method", value: "Documented" }
+        { label: "Target", value: "Competition Platform", kind: "design" },
+        { label: "Integrated Result", value: "Four Modules", kind: "measured" },
+        { label: "Method", value: "Standardized Interfaces", kind: "design" }
       ],
       diagramTitle: "Modular Platform Relationship Diagram",
       diagramNodes: ["Isolated Auxiliary Power", "Bidirectional Isolated Sensing", "MCU / STM32G4 Control Layer", "100V H-Bridge Power Board"],
@@ -849,15 +997,21 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "UCC28019ADR / 220VAC to 400VDC average-current-mode PFC",
       summary: "A completed 1kW-class front-end design covering component selection, EMI and safety, relay-bypassed NTC inrush limiting, dual-loop compensation, and 220VAC-to-400VDC closed-loop validation at a measured 160W operating point.",
       detailImages: [
-        { src: "images/pfc-boost-project.jpg", title: "1kW-Class CCM Boost PFC Prototype", description: "Prototype with input protection, soft start, bridge, boost stage, high-voltage bus, UCC28019ADR control, and auxiliary supply." },
-        { src: "images/pfc-boost-schematic-main.png", title: "Power Stage, Sensing, and Compensation", description: "Main schematic covering the boost stage, VSENSE/VINS/ISENSE paths, and voltage/current loop compensation." },
-        { src: "images/pfc-boost-input-power.jpg", title: "220VAC Input Power and PF Record", description: "Staged-load record used to review input voltage, current, active power, and power factor." },
-        { src: "images/pfc-boost-bus-ripple.jpg", title: "400V Bus Ripple Record", description: "Bus waveform used to review voltage-loop stability and twice-line-frequency energy storage." },
-        { src: "images/pfc-boost-schematic-aux.png", title: "Auxiliary Supply and Protective Earth", description: "Auxiliary control power, relay drive, decoupling, protective earth, and mounting structure." }
+        { src: "images/pfc-boost-project.jpg", title: "1kW-Class CCM Boost PFC Prototype", description: "Prototype with input protection, soft start, bridge, boost stage, high-voltage bus, UCC28019ADR control, and auxiliary supply.", kind: "prototype" },
+        { src: "images/pfc-boost-schematic-main.png", title: "Power Stage, Sensing, and Compensation", description: "Main schematic covering the boost stage, VSENSE/VINS/ISENSE paths, and voltage/current loop compensation.", kind: "schematic" },
+        { src: "images/pfc-boost-input-power.jpg", title: "220VAC Input Power and PF Record", description: "Staged-load record used to review input voltage, current, active power, and power factor.", kind: "test" },
+        { src: "images/pfc-boost-bus-ripple.jpg", title: "400V Bus Ripple Record", description: "Bus waveform used to review voltage-loop stability and twice-line-frequency energy storage.", kind: "waveform" },
+        { src: "images/pfc-boost-schematic-aux.png", title: "Auxiliary Supply and Protective Earth", description: "Auxiliary control power, relay drive, decoupling, protective earth, and mounting structure.", kind: "schematic" }
       ],
       tags: ["UCC28019ADR", "CCM Boost PFC", "1kW Design", "400VDC", "Type-II Compensation", "EMI / Safety"],
       status: "High-voltage closed-loop and load validation complete",
       goal: "Build a 1kW-class single-phase CCM Boost PFC that establishes a 400VDC bus from 220VAC and improves input-current shape and power factor through average-current-mode control.",
+      quickOverview: {
+        objective: "Build a 1kW-class CCM Boost PFC front end from 220VAC to a regulated 400VDC bus.",
+        challenge: "High-voltage stress, soft start, EMI/safety, and dual-loop compensation must be coordinated.",
+        contribution: "Completed component selection, Simulink modeling, magnetics parameters, PCB, loop compensation, and high-voltage load testing.",
+        outcome: "Established a stable 400VDC bus with 96.9% efficiency and PF 0.94 at the measured 160W operating point."
+      },
       responsibilities: [
         "Selected the MOSFET, bridge rectifier, boost diode, inductor, and high-voltage bus capacitors with loss and stress analysis.",
         "Built a Simulink closed-loop model to review device stress and loop behavior.",
@@ -866,12 +1020,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Completed 220VAC to 400VDC closed-loop testing and recorded efficiency, PF, and input-current improvement."
       ],
       metrics: [
-        { label: "Design Power", value: "1kW" },
-        { label: "Input / Bus", value: "220VAC / 400VDC" },
-        { label: "Test Load", value: "160W" },
-        { label: "Measured Efficiency", value: "96.9%" },
-        { label: "Power Factor", value: "0.94" },
-        { label: "Controller", value: "UCC28019ADR" }
+        { label: "Design Power", value: "1kW", kind: "design" },
+        { label: "Input / Bus", value: "220VAC / 400VDC", kind: "design" },
+        { label: "Measured Efficiency", value: "96.9%", kind: "measured" },
+        { label: "Power Factor", value: "0.94", kind: "measured" },
+        { label: "Test Load", value: "160W", kind: "measured" },
+        { label: "Controller", value: "UCC28019ADR", kind: "design" }
       ],
       diagramTitle: "CCM Boost PFC Power and Control Path",
       diagramNodes: ["220VAC + EMI / Soft Start", "Bridge + Boost Stage", "400V Bus", "Voltage / Current Sensing", "UCC28019ADR Dual Loops", "PWM Drive / Protection"],
@@ -896,18 +1050,24 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "300VDC to 24V / 300W STM32G4 frequency-controlled LLC",
       summary: "A complete prototype with the power board, STM32G4 controller, auxiliary supply, PQ40 transformer, and synchronous rectification. Full-load output is 279.6W at 94.4% efficiency with 287mVPP ripple and 0.06% load regulation.",
       detailImages: [
-        { src: "images/llc-full-load-board.jpg", title: "Full-Load Digital SiC LLC Prototype", description: "Complete prototype with power board, controller, auxiliary supply, PQ40 transformer, synchronous rectification, and output filtering." },
-        { src: "images/llc-full-load-input-power.jpg", title: "Full-Load Input Power", description: "Input-side record of about 300V and 295.99W." },
-        { src: "images/llc-full-load-output-load.jpg", title: "24V / 11.7A Output Load", description: "Electronic-load record of about 279.6W output." },
-        { src: "images/llc-gs-waveform.jpg", title: "SiC Gate-Source Waveform", description: "Check of UCC23513 isolation, +18V / -3V gate drive, dead time, and turn-off margin." },
-        { src: "images/llc-sr-waveform.jpg", title: "Synchronous Rectifier Waveform", description: "Secondary MOS timing check against resonant-current direction." },
-        { src: "images/llc-output-ripple.jpg", title: "Full-Load Ripple: 287mVPP", description: "Output-quality record used to review filtering, SR, sensing noise, and layout." },
-        { src: "images/llc-load-regulation.jpg", title: "Load Regulation Record", description: "Measured regulation of about 0.06%." },
-        { src: "images/design-review.jpg", title: "Magnetics and Parameter Review", description: "FHA gain, resonant tank, transformer turns ratio, leakage integration, and LCR review." }
+        { src: "images/llc-full-load-board.jpg", title: "Full-Load Digital SiC LLC Prototype", description: "Complete prototype with power board, controller, auxiliary supply, PQ40 transformer, synchronous rectification, and output filtering.", kind: "prototype" },
+        { src: "images/llc-full-load-input-power.jpg", title: "Full-Load Input Power", description: "Input-side record of about 300V and 295.99W.", kind: "test" },
+        { src: "images/llc-full-load-output-load.jpg", title: "24V / 11.7A Output Load", description: "Electronic-load record of about 279.6W output.", kind: "test" },
+        { src: "images/llc-gs-waveform.jpg", title: "SiC Gate-Source Waveform", description: "Check of UCC23513 isolation, +18V / -3V gate drive, dead time, and turn-off margin.", kind: "waveform" },
+        { src: "images/llc-sr-waveform.jpg", title: "Synchronous Rectifier Waveform", description: "Secondary MOS timing check against resonant-current direction.", kind: "waveform" },
+        { src: "images/llc-output-ripple.jpg", title: "Full-Load Ripple: 287mVPP", description: "Output-quality record used to review filtering, SR, sensing noise, and layout.", kind: "waveform" },
+        { src: "images/llc-load-regulation.jpg", title: "Load Regulation Record", description: "Measured regulation of about 0.06%.", kind: "test" },
+        { src: "images/design-review.jpg", title: "Magnetics and Parameter Review", description: "FHA gain, resonant tank, transformer turns ratio, leakage integration, and LCR review.", kind: "test" }
       ],
       tags: ["300VDC", "24V / 300W", "SiC Half Bridge", "STM32G4", "UCC23513", "FHA / Frequency PI"],
       status: "Full-load closed-loop validation complete",
       goal: "Build a reviewable 300VDC to 24V / 300W isolated digital power prototype from FHA analysis and magnetics through SiC drive, PCB layout, STM32G4 control, synchronous rectification, and full-load validation.",
+      quickOverview: {
+        objective: "Build a 300VDC to 24V / 300W digitally controlled SiC half-bridge LLC prototype.",
+        challenge: "FHA parameters, PQ40 magnetics, bipolar SiC drive, synchronous rectification, and frequency control must be co-optimized.",
+        contribution: "Designed the resonant tank, magnetics, power PCB, STM32G4 frequency PI, protection state machine, and full-load validation.",
+        outcome: "Delivered 279.6W at 94.4% efficiency, 287mVPP ripple, 0.06% load regulation, ZVS, and synchronous rectification."
+      },
       responsibilities: [
         "Completed the main power board, STM32G4 controller, and auxiliary supply.",
         "Designed the resonant tank and operating frequency range with FHA analysis.",
@@ -917,12 +1077,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Collected full-load power, efficiency, gate-drive, SR, ripple, load-regulation, and ZVS evidence."
       ],
       metrics: [
-        { label: "Input", value: "300VDC" },
-        { label: "Output", value: "24V / 300W" },
-        { label: "Full-Load Eff.", value: "94.4%" },
-        { label: "Ripple", value: "287mVPP" },
-        { label: "Load Regulation", value: "0.06%" },
-        { label: "Turns Ratio", value: "30:4:4" }
+        { label: "Input", value: "300VDC", kind: "design" },
+        { label: "Output", value: "24V / 300W", kind: "design" },
+        { label: "Full-Load Eff.", value: "94.4%", kind: "measured" },
+        { label: "Ripple", value: "287mVPP", kind: "measured" },
+        { label: "Load Regulation", value: "0.06%", kind: "measured" },
+        { label: "Turns Ratio", value: "30:4:4", kind: "design" }
       ],
       diagramTitle: "300V Frequency-Controlled LLC Power and Control Path",
       diagramNodes: ["300VDC Bus", "SiC Half Bridge + UCC23513", "LLC Tank / PQ40 Transformer", "Synchronous Rectifier + Filter", "Feedback / STM32G4", "Frequency PI / PWM / Protection"],
@@ -941,23 +1101,29 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "85-265VAC wide input to isolated 24V / 3A output",
       summary: "A UCC287506DBVR flyback supply with TL431 plus optocoupler feedback and a custom 24:6:5 transformer. At 220VAC full load, efficiency is about 85%, ripple about 390mVPP, and load regulation 0.67%.",
       detailImages: [
-        { src: "images/flyback-project.jpg", title: "24V / 3A Flyback Prototype", description: "Prototype showing input rectification, transformer, control and feedback, and output filtering." },
-        { src: "images/flyback-input-power.jpg", title: "Full-Load Input Power", description: "220VAC full-load input voltage, current, and active-power record." },
-        { src: "images/flyback-output-load.jpg", title: "Electronic Load Output Record", description: "Approximately 24V / 3A and 72W output." },
-        { src: "images/flyback-ripple-waveform.jpg", title: "Full-Load Output Ripple", description: "Output ripple and high-frequency spike record with bandwidth limiting and a short ground connection." },
-        { src: "images/flyback-vds-waveform.jpg", title: "MOSFET VDS Stress", description: "Waveform used to review reflected voltage, leakage spike, and RCD clamp behavior." }
+        { src: "images/flyback-project.jpg", title: "24V / 3A Flyback Prototype", description: "Prototype showing input rectification, transformer, control and feedback, and output filtering.", kind: "prototype" },
+        { src: "images/flyback-input-power.jpg", title: "Full-Load Input Power", description: "220VAC full-load input voltage, current, and active-power record.", kind: "test" },
+        { src: "images/flyback-output-load.jpg", title: "Electronic Load Output Record", description: "Approximately 24V / 3A and 72W output.", kind: "test" },
+        { src: "images/flyback-ripple-waveform.jpg", title: "Full-Load Output Ripple", description: "Output ripple and high-frequency spike record with bandwidth limiting and a short ground connection.", kind: "waveform" },
+        { src: "images/flyback-vds-waveform.jpg", title: "MOSFET VDS Stress", description: "Waveform used to review reflected voltage, leakage spike, and RCD clamp behavior.", kind: "waveform" }
       ],
       tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 Optocoupler", "RCD Clamp", "Wide Input"],
       status: "Full-load validation complete",
       goal: "Develop an isolated 24V / 3A auxiliary supply covering the power stage, transformer, RCD clamp, primary current sensing, secondary feedback, and full-load validation.",
+      quickOverview: {
+        objective: "Build an 85-265VAC wide-input isolated 24V / 3A, 72W flyback supply.",
+        challenge: "Wide-input stress, custom magnetics, RCD clamping, and TL431 optocoupler compensation must be balanced.",
+        contribution: "Completed topology calculations, the 24:6:5 transformer, power and feedback circuits, PCB, efficiency, and VDS validation.",
+        outcome: "Delivered 24V / 3A at 220VAC with about 85% efficiency, 390mVPP ripple, and 0.67% load regulation."
+      },
       responsibilities: ["Defined the offline flyback architecture for 85-265VAC and 24V / 3A", "Designed the UCC287506 power, sensing, auxiliary, and TL431 feedback circuits", "Specified the 24:6:5 transformer, 100µH primary inductance, leakage, gap, and insulation", "Designed the RCD clamp from reflected voltage and leakage energy", "Validated output regulation, efficiency, ripple, load regulation, and MOSFET VDS stress"],
       metrics: [
-        { label: "Input Range", value: "85-265VAC" },
-        { label: "Output", value: "24V / 3A" },
-        { label: "Full-Load Eff.", value: "About 85%" },
-        { label: "Ripple", value: "About 390mVPP" },
-        { label: "Load Regulation", value: "0.67%" },
-        { label: "Turns Ratio", value: "24:6:5" }
+        { label: "Input Range", value: "85-265VAC", kind: "design" },
+        { label: "Output", value: "24V / 3A", kind: "design" },
+        { label: "Full-Load Eff.", value: "About 85%", kind: "measured" },
+        { label: "Ripple", value: "About 390mVPP", kind: "measured" },
+        { label: "Load Regulation", value: "0.67%", kind: "measured" },
+        { label: "Turns Ratio", value: "24:6:5", kind: "design" }
       ],
       diagramTitle: "Wide-Input Isolated Flyback Power Path",
       diagramNodes: ["85-265VAC", "Rectifier / HV Bus", "UCC287506 + MOSFET", "24:6:5 Transformer", "Schottky Rectifier / Filter", "TL431 + Optocoupler"],
@@ -971,19 +1137,25 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "Web Serial / 921600 8N1 / read-only telemetry",
       summary: "A local Web Serial dashboard that receives LLC operating data from STM32G4, displays Vin, Vout, Iout, Fsw, PI and PWM/fault state, and exports charts, CSV, and raw logs.",
       detailImages: [
-        { src: "images/stm32g4-llc-host-dashboard.png", title: "STM32G4 LLC Telemetry Dashboard", description: "Interface with voltage, current, switching frequency, PI output, PWM/fault state, link statistics, and real-time charts." }
+        { src: "images/stm32g4-llc-host-dashboard.png", title: "STM32G4 LLC Telemetry Dashboard", description: "Interface with voltage, current, switching frequency, PI output, PWM/fault state, link statistics, and real-time charts.", kind: "software" }
       ],
       tags: ["Web Serial", "STM32G4", "921600 8N1", "Chart.js", "CSV", "Read Only"],
       status: "Complete and in active debug use",
       goal: "Provide read-only telemetry so control variables, output state, and link health can be reviewed without granting the browser direct authority over the power stage.",
+      quickOverview: {
+        objective: "Provide a real-time, read-only, exportable browser telemetry interface for the STM32G4 LLC controller.",
+        challenge: "Reliable framing, invalid data, high-rate receive, and lower-rate UI updates must coexist at 921600 baud.",
+        contribution: "Implemented the serial protocol, buffering, parsing, link statistics, charts, CSV export, and raw logs.",
+        outcome: "The tool is in active prototype debug use and preserves complete test sessions without controlling the power stage."
+      },
       responsibilities: ["Defined the isolated STM32G4 USART to CH340 to Web Serial path", "Implemented framed CSV parsing and link statistics", "Built status cards, charts, pause/clear controls, CSV export, and raw-log storage", "Kept the browser side read-only to preserve the safety boundary"],
       metrics: [
-        { label: "Serial", value: "921600 8N1" },
-        { label: "Protocol", value: "LLC CSV" },
-        { label: "UI Refresh", value: "10Hz" },
-        { label: "Chart Window", value: "3000 points" },
-        { label: "Buffer", value: "100000 rows" },
-        { label: "Safety", value: "Read Only" }
+        { label: "Serial", value: "921600 8N1", kind: "design" },
+        { label: "Protocol", value: "LLC CSV", kind: "design" },
+        { label: "UI Refresh", value: "10Hz", kind: "measured" },
+        { label: "Chart Window", value: "3000 points", kind: "design" },
+        { label: "Buffer", value: "100000 rows", kind: "design" },
+        { label: "Safety", value: "Read Only", kind: "design" }
       ],
       diagramTitle: "LLC Telemetry Data Path",
       diagramNodes: ["STM32G4 Variables", "USART1_TX CSV", "Isolated CH340", "Web Serial Parser", "Cards / Charts", "CSV / Raw Log"],
@@ -997,21 +1169,27 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "Bilingual, data-driven portfolio for power-hardware roles",
       summary: "A React, TypeScript, Vite, and Tailwind CSS portfolio with responsive project details, full-resolution image viewing, WebP previews, offline caching, SEO, and automatic GitHub Pages deployment.",
       detailImages: [
-        { src: "images/portfolio-site-projects-overview.png", title: "Personal Project Collection", description: "Responsive project grid for PFC, LLC, flyback, STM32G4 telemetry, and the portfolio itself." },
-        { src: "images/portfolio-site-project-card.png", title: "Data-Driven Project Card", description: "Titles, summaries, status, tags, and key metrics are generated from the shared project model." },
-        { src: "images/portfolio-site-project-detail.png", title: "Reusable Project Detail Page", description: "Shared detail structure for responsibilities, metrics, system design, decisions, completion status, validation, and engineering assets." }
+        { src: "images/portfolio-site-projects-overview.png", title: "Personal Project Collection", description: "Responsive project grid for PFC, LLC, flyback, STM32G4 telemetry, and the portfolio itself.", kind: "software" },
+        { src: "images/portfolio-site-project-card.png", title: "Data-Driven Project Card", description: "Titles, summaries, status, tags, and key metrics are generated from the shared project model.", kind: "software" },
+        { src: "images/portfolio-site-project-detail.png", title: "Reusable Project Detail Page", description: "Shared detail structure for responsibilities, metrics, system design, decisions, completion status, validation, and engineering assets.", kind: "software" }
       ],
       tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "GitHub Pages", "SEO / PWA"],
       status: "Complete and live",
       goal: "Give recruiters a direct path to identify the target role, inspect engineering evidence, download the resume, and make contact on phones, tablets, and desktops.",
+      quickOverview: {
+        objective: "Build a bilingual online portfolio for power-hardware engineering roles.",
+        challenge: "Recruiter readability, high-resolution engineering images, mobile UX, SEO, and static GitHub Pages delivery must all work together.",
+        contribution: "Designed the information architecture, data model, React components, hash routing, image pipeline, offline cache, and CI deployment.",
+        outcome: "The live site presents 10 projects in two languages with responsive evidence viewing and automated quality checks."
+      },
       responsibilities: ["Designed the recruiter-oriented information architecture", "Created a shared bilingual project data model", "Implemented reusable React components and hash routing", "Built an accessible responsive image viewer", "Generated WebP previews while preserving original images", "Unified source, CI build, and GitHub Pages deployment"],
       metrics: [
-        { label: "Projects", value: "10" },
-        { label: "Languages", value: "ZH / EN" },
-        { label: "Frontend", value: "React 19" },
-        { label: "Routing", value: "Hash + Lazy" },
-        { label: "Deployment", value: "GitHub Pages" },
-        { label: "Images", value: "WebP + Original" }
+        { label: "Projects", value: "10", kind: "measured" },
+        { label: "Languages", value: "ZH / EN", kind: "design" },
+        { label: "Frontend", value: "React 19", kind: "design" },
+        { label: "Routing", value: "Hash + Lazy", kind: "design" },
+        { label: "Deployment", value: "GitHub Pages", kind: "measured" },
+        { label: "Images", value: "WebP + Original", kind: "design" }
       ],
       diagramTitle: "Portfolio Content, UI, and Delivery Path",
       diagramNodes: ["Project Data + Bilingual Copy", "Reusable React Components", "Hash Routes + Lazy Loading", "CI Build + GitHub Pages"],

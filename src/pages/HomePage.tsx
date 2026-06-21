@@ -1,4 +1,5 @@
 import { EntryCard } from "../components/EntryCard";
+import { DocumentMetadata } from "../components/DocumentMetadata";
 import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
 import { TopShowcase } from "../components/home/TopShowcase";
@@ -17,6 +18,7 @@ export function HomePage() {
 
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
+      <DocumentMetadata title={siteCopy.meta.title} description={siteCopy.meta.description} />
       <TopShowcase />
 
       <Reveal as="section" className="content-auto section-shell pb-10 pt-16 sm:pb-12 sm:pt-28">

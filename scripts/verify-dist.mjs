@@ -26,12 +26,13 @@ for (const marker of requiredMarkers) {
   }
 }
 
-const sourceFiles = [
+const projectSourceFiles = [
   "src/data/competitionProjects.ts",
-  "src/data/personalProjects.ts",
-  "src/data/siteCopy.ts"
+  "src/data/personalProjects.ts"
 ];
-const sourceText = (await Promise.all(sourceFiles.map((file) => readFile(path.resolve(file), "utf8")))).join("\n");
+const projectSourceText = (await Promise.all(projectSourceFiles.map((file) => readFile(path.resolve(file), "utf8")))).join("\n");
+const siteCopyText = await readFile(path.resolve("src/data/siteCopy.ts"), "utf8");
+const sourceText = `${projectSourceText}\n${siteCopyText}`;
 
 for (const marker of [
   "100V 半桥 / 全桥功率板",
@@ -53,11 +54,57 @@ for (const forbiddenPlaceholder of ["example@email.com", "Resume Placeholder"]) 
 }
 
 const projectIds = [
-  ...sourceText.matchAll(/\bid:\s*"([^"]+)"[\s\S]{0,80}\bcategory:\s*"(?:competition|personal)"/g)
+  ...projectSourceText.matchAll(/\bid:\s*"([^"]+)"[\s\S]{0,80}\bcategory:\s*"(?:competition|personal)"/g)
 ].map((match) => match[1]);
 
 if (projectIds.length !== new Set(projectIds).size) {
   throw new Error("Project IDs must be unique.");
+}
+
+const projectQuickOverviewCount = [...projectSourceText.matchAll(/\bquickOverview:\s*\{/g)].length;
+if (projectQuickOverviewCount !== projectIds.length) {
+  throw new Error(`Every project must define quickOverview. Expected ${projectIds.length}, found ${projectQuickOverviewCount}.`);
+}
+
+const translationStart = siteCopyText.indexOf("const projectTranslations");
+const translationText = translationStart >= 0 ? siteCopyText.slice(translationStart) : "";
+const translatedQuickOverviewCount = [...translationText.matchAll(/\bquickOverview:\s*\{/g)].length;
+if (translatedQuickOverviewCount !== projectIds.length) {
+  throw new Error(`Every English project translation must define quickOverview. Expected ${projectIds.length}, found ${translatedQuickOverviewCount}.`);
+}
+
+const allowedImageKinds = new Set(["prototype", "schematic", "waveform", "test", "software"]);
+for (const [label, text] of [["project", projectSourceText], ["translated project", translationText]]) {
+  const imageCount = [...text.matchAll(/\bsrc:\s*"images\/[^"]+"/g)].length;
+  const imageKinds = [...text.matchAll(/\bsrc:\s*"images\/[^"]+"[\s\S]{0,600}?\bkind:\s*"([^"]+)"/g)].map((match) => match[1]);
+
+  if (imageKinds.length !== imageCount) {
+    throw new Error(`Every ${label} detail image must define a kind. Expected ${imageCount}, found ${imageKinds.length}.`);
+  }
+
+  const invalidKind = imageKinds.find((kind) => !allowedImageKinds.has(kind));
+  if (invalidKind) {
+    throw new Error(`Invalid project image kind: ${invalidKind}`);
+  }
+}
+
+const projectLinks = [...projectSourceText.matchAll(/\bhref:\s*"([^"]+)"/g)].map((match) => match[1]);
+for (const href of projectLinks) {
+  const url = new URL(href);
+  if (!["http:", "https:"].includes(url.protocol)) {
+    throw new Error(`Project link must use HTTP(S): ${href}`);
+  }
+}
+
+const shareDialogSource = await readFile(path.resolve("src/components/ui/ShareQrDialog.tsx"), "utf8");
+if (!shareDialogSource.includes("window.location.href")) {
+  throw new Error("QR sharing must encode the current page URL.");
+}
+
+for (const projectId of ["half-bridge-llc", "totem-pole-pfc", "competition-interface-strategy"]) {
+  if (!siteCopyText.includes(`href: "#/project/${projectId}"`)) {
+    throw new Error(`Homepage evidence card is missing project link: ${projectId}`);
+  }
 }
 
 const referencedImages = new Set(

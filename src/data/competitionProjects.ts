@@ -12,27 +12,36 @@ export const competitionProjects: PortfolioProject[] = [
       {
         src: "images/isolated-sampling-board.png",
         title: "隔离采样板 PCB",
-        description: "板上集中标注 P/N/GND 输入、20mΩ 分流电阻、峰值电压 85V、峰值电流 4A、ADC 换算公式和关键测试点，便于现场接线与调试。"
+        description: "板上集中标注 P/N/GND 输入、20mΩ 分流电阻、峰值电压 85V、峰值电流 4A、ADC 换算公式和关键测试点，便于现场接线与调试。",
+        kind: "prototype"
       },
       {
         src: "images/isolated-sampling-schematic-main.png",
         title: "电压 / 电流隔离采样主原理图",
-        description: "左侧为电压采样链路，右侧为 20mΩ 分流电流采样链路，两路均经过 AMC1301 隔离放大，再由 TLV9062 完成 1.65V 偏置和 ADC 调理。"
+        description: "左侧为电压采样链路，右侧为 20mΩ 分流电流采样链路，两路均经过 AMC1301 隔离放大，再由 TLV9062 完成 1.65V 偏置和 ADC 调理。",
+        kind: "schematic"
       },
       {
         src: "images/isolated-sampling-schematic-power.png",
         title: "隔离供电与 3.3V 参考部分",
-        description: "包含 5V 输入保护、3.3V 稳压、B0505S 隔离电源、ISO_5V_1 / ISO_5V_2 去耦和 1.65V 偏置相关电路。"
+        description: "包含 5V 输入保护、3.3V 稳压、B0505S 隔离电源、ISO_5V_1 / ISO_5V_2 去耦和 1.65V 偏置相关电路。",
+        kind: "schematic"
       }
     ],
     tags: ["AMC1301", "TLV9062", "20mΩ 分流采样", "隔离供电"],
     status: "已完成设计、制板与标定验证",
     goal: "构建一块可复用的交直流电压电流隔离采样模块，让功率级、采样板和控制板之间形成清晰接口：高压侧只负责接入待测电压/电流，隔离侧完成安全隔离与比例缩放，控制侧直接读取以 1.65V 为零点偏置的 ADC 信号。",
+    quickOverview: {
+      objective: "完成适用于电赛功率级的双向电压、电流隔离采样前端。",
+      challenge: "需要在高共模开关环境中兼顾双向量程、隔离供电、零点偏置和 ADC 有效分辨率。",
+      contribution: "完成分压与分流参数、AMC1301 隔离链路、TLV9062 调理、电源域、PCB 和标定流程。",
+      outcome: "实现 0～85V、0～4A 工作区间，保留约 ±103V / ±5A 量程裕量并完成动态噪声验证。"
+    },
     responsibilities: ["根据 85V 峰值电压和 4A 峰值电流目标，分别确定电压分压比例、电流分流阻值和 ADC 输出范围", "设计电压采样与 20mΩ 电流分流采样链路，把高压/大电流信号先转换为适合 AMC1301 输入的低压差分信号", "使用 AMC1301 实现采样信号隔离放大，并通过 TLV9062 构造 1.65V 中点偏置，使双向电压/电流变化能够落在 0-3.3V ADC 量程内", "规划 5V、3.3V、ISO_5V_1、ISO_5V_2 电源域，利用 B0505S 为隔离侧供电，避免高压侧地与控制侧地直接耦合", "在 PCB 上标注换算公式、P/N/GND 端子方向、5V 输入、测试点和隔离电源节点，方便比赛现场快速接线、测量和排查"],
     metrics: [
-      { label: "设计工作目标", value: "85V / 4A" },
-      { label: "标定量程", value: "±103V / ±5A" },
-      { label: "ADC 接口", value: "3.3V / 12-bit" }
+      { label: "设计工作目标", value: "85V / 4A", kind: "design" },
+      { label: "标定量程", value: "±103V / ±5A", kind: "measured" },
+      { label: "ADC 接口", value: "3.3V / 12-bit", kind: "design" }
     ],
     keyComponents: [
       { label: "隔离放大器", value: "AMC1301DWVR ×2", note: "电压和电流通道分别隔离。" },
@@ -76,22 +85,31 @@ export const competitionProjects: PortfolioProject[] = [
       {
         src: "images/auxiliary-power-module.png",
         title: "隔离辅助电源板 PCB",
-        description: "板上划分整流与母线、双路 Buck、隔离 DC/DC 和多路输出端子区域，丝印标注最大 80V 峰值输入以及隔离 15V / 5V 输出。"
+        description: "板上划分整流与母线、双路 Buck、隔离 DC/DC 和多路输出端子区域，丝印标注最大 80V 峰值输入以及隔离 15V / 5V 输出。",
+        kind: "prototype"
       },
       {
         src: "images/auxiliary-power-schematic-buck.png",
         title: "整流与双路 COT Buck 原理图",
-        description: "输入经 MSB40M 整流和 220µF + 220µF 母线电容形成 V_BUS，两路 SY8502FCC、68µH 电感及 115kΩ / 10kΩ 反馈网络分别产生 15V_1 和 15V_2。"
+        description: "输入经 MSB40M 整流和 220µF + 220µF 母线电容形成 V_BUS，两路 SY8502FCC、68µH 电感及 115kΩ / 10kΩ 反馈网络分别产生 15V_1 和 15V_2。",
+        kind: "schematic"
       },
       {
         src: "images/auxiliary-power-schematic-isolation.png",
         title: "隔离 15V 与 5V 输出原理图",
-        description: "两路 15V 前级分别接入隔离 DC/DC，输出侧配置 100µF + 100nF 滤波、TVS 保护和多组两针端子，用于驱动、采样与控制模块配电。"
+        description: "两路 15V 前级分别接入隔离 DC/DC，输出侧配置 100µF + 100nF 滤波、TVS 保护和多组两针端子，用于驱动、采样与控制模块配电。",
+        kind: "schematic"
       }
     ],
     tags: ["MSB40M", "SY8502FCC ×2", "COT Buck", "ISO_15V / ISO_5V"],
     status: "已完成设计、制板与带载验证",
     goal: "构建一套电源域清晰、可分模块调试的辅助供电平台，把宽范围低压输入转换为两路非隔离 15V，再提供隔离 15V 和隔离 5V，避免驱动类负载与采样/控制类负载共用单一路径造成串扰。",
+    quickOverview: {
+      objective: "为电赛功率平台提供宽输入、双路 Buck 和隔离 15V/5V 的模块化辅助供电。",
+      challenge: "双路 COT 稳定性、隔离电源域、驱动脉冲负载和低噪声采样供电需要兼顾。",
+      contribution: "完成整流母线、双路 SY8502FCC、隔离 DC/DC、保护、去耦、PCB 和全负载测试。",
+      outcome: "覆盖 18V～80V 输入，输出隔离 15V/5V，并完成 25%～100% 负载、纹波与温升验证。"
+    },
     responsibilities: [
       "根据驱动、采样和控制模块的供电需求规划 V_BUS、15V_1、15V_2、ISO_15V 和 ISO_5V 五个主要电源域。",
       "设计 MSB40M 桥式整流和 220µF + 220µF 母线储能网络，使交流或直流输入均可形成统一 V_BUS。",
@@ -100,9 +118,9 @@ export const competitionProjects: PortfolioProject[] = [
       "保留两路 Buck 的 0Ω 应急连接位，但明确其只用于单路故障时的临时旁路，不作为长期并联方案。"
     ],
     metrics: [
-      { label: "设计输入", value: "18V～80V" },
-      { label: "隔离输出", value: "15V / 5V" },
-      { label: "母线储能", value: "440µF" }
+      { label: "设计输入", value: "18V～80V", kind: "design" },
+      { label: "隔离输出", value: "15V / 5V", kind: "measured" },
+      { label: "母线储能", value: "440µF", kind: "design" }
     ],
     keyComponents: [
       { label: "输入整流", value: "MSB40M", note: "交流输入时 VBUS,peak ≈ √2 × VAC,rms - 2VD。" },
@@ -162,11 +180,17 @@ export const competitionProjects: PortfolioProject[] = [
     tags: ["STM32G4", "PWM", "ADC 同步", "保护逻辑"],
     status: "已完成设计、制板与联调验证",
     goal: "沉淀一块适合电源类题目的控制板，支撑 PFC、LLC、半桥等功率级快速验证。",
+    quickOverview: {
+      objective: "构建可复用于多种功率变换器的 STM32G4 数字电源控制平台。",
+      challenge: "互补 PWM、ADC 同步采样、硬件保护和通信资源需要统一规划并与功率板时序匹配。",
+      contribution: "完成控制板接口、PWM/ADC 资源、保护输入、通信链路和功率板联调。",
+      outcome: "完成互补 PWM、死区、同步采样、保护触发与状态反馈验证，可快速接入 PFC、LLC 和 H 桥。"
+    },
     responsibilities: ["规划控制板接口", "设计 PWM、ADC、保护与通信资源", "配合功率板进行联调"],
     metrics: [
-      { label: "MCU", value: "STM32G4" },
-      { label: "控制对象", value: "功率变换器" },
-      { label: "重点", value: "实时控制" }
+      { label: "MCU", value: "STM32G4", kind: "design" },
+      { label: "控制对象", value: "功率变换器", kind: "design" },
+      { label: "联调结果", value: "实时闭环控制", kind: "measured" }
     ],
     diagramTitle: "控制板资源框图",
     diagramNodes: ["STM32G4", "ADC 输入", "PWM 输出", "保护/通信"],
@@ -186,22 +210,31 @@ export const competitionProjects: PortfolioProject[] = [
       {
         src: "images/four-mos-power-board.png",
         title: "100V 半桥 / 全桥功率板 PCB",
-        description: "四只 MOSFET 构成 H 桥，板上包含四路隔离驱动接口、DC+/GND 母线端、SW1/SW2 桥臂节点和 1mH 实验电感位置。"
+        description: "四只 MOSFET 构成 H 桥，板上包含四路隔离驱动接口、DC+/GND 母线端、SW1/SW2 桥臂节点和 1mH 实验电感位置。",
+        kind: "prototype"
       },
       {
         src: "images/full-bridge-power-schematic-main.png",
         title: "H 桥主电路与四路隔离驱动",
-        description: "Q1～Q4 构成全桥，UCC23513 接收 PWM_H1/PWM_L1/PWM_H2/PWM_L2，经过 10Ω 栅极电阻驱动 NCEP0178AK，并配置 1N4148W 非对称开关路径。"
+        description: "Q1～Q4 构成全桥，UCC23513 接收 PWM_H1/PWM_L1/PWM_H2/PWM_L2，经过 10Ω 栅极电阻驱动 NCEP0178AK，并配置 1N4148W 非对称开关路径。",
+        kind: "schematic"
       },
       {
         src: "images/full-bridge-power-schematic-isolated-supplies.png",
         title: "四路悬浮隔离 15V 驱动电源",
-        description: "四个 B1515S-1WR3 为每个 MOSFET 驱动提供独立 15V；高边输出负端分别参考 SW1、SW2，低边输出负端参考 GND。"
+        description: "四个 B1515S-1WR3 为每个 MOSFET 驱动提供独立 15V；高边输出负端分别参考 SW1、SW2，低边输出负端参考 GND。",
+        kind: "schematic"
       }
     ],
     tags: ["100V H 桥", "NCEP0178AK", "UCC23513 ×4", "悬浮 15V 驱动"],
     status: "已完成设计、制板与 100V 带载验证",
     goal: "构建一块可复用的 100V H 桥功率平台，支持单桥臂半桥实验、全桥单极性/双极性 SPWM、离网逆变、模拟并网和双向变换，并把四路驱动参考地、死区和低压上电路径设计清楚。",
+    quickOverview: {
+      objective: "实现可复用的 100V 半桥/全桥功率平台，支持 SPWM、逆变和双向变换实验。",
+      challenge: "四路悬浮驱动参考、桥臂互锁、死区、栅极回路和 100V 母线保护必须协同可靠。",
+      contribution: "完成 H 桥功率回路、四路 UCC23513、独立隔离供电、PCB、栅极参数和保护联调。",
+      outcome: "完成 12V、24V 到 100V 分阶段带载验证，并验证采样、过流、过压和故障锁存。"
+    },
     responsibilities: [
       "规划 Q1/Q2、Q3/Q4 两个桥臂以及 DC+、GND、SW1、SW2 的功率回路和端子定义。",
       "设计四路 UCC23513 隔离驱动链路：PWM 输入经 100Ω 限流，输出经 10Ω 栅极电阻与 1N4148W 形成可调开通/关断速度。",
@@ -210,9 +243,9 @@ export const competitionProjects: PortfolioProject[] = [
       "制定从只上驱动电源、检查互补 PWM 和死区，到 12V/24V 限流母线、空载、假负载、逐步升压的调试顺序。"
     ],
     metrics: [
-      { label: "母线等级", value: "100V" },
-      { label: "功率拓扑", value: "四 MOS H 桥" },
-      { label: "隔离驱动", value: "4 路独立 15V" }
+      { label: "实测母线", value: "100V", kind: "measured" },
+      { label: "功率拓扑", value: "四 MOS H 桥", kind: "design" },
+      { label: "隔离驱动", value: "4 路独立 15V", kind: "design" }
     ],
     keyComponents: [
       { label: "功率 MOSFET", value: "NCEP0178AK ×4", note: "100V 等级器件，构成 Q1～Q4 两个桥臂。" },
@@ -273,11 +306,17 @@ export const competitionProjects: PortfolioProject[] = [
     tags: ["接口规范", "模块化", "团队协作", "调试流程"],
     status: "已完成平台化整合与联调",
     goal: "把电赛硬件从一次性搭建转向模块化平台，提高调试效率与方案复用能力。",
+    quickOverview: {
+      objective: "把采样、供电、控制和 H 桥整合为可快速组合的电赛电源硬件平台。",
+      challenge: "跨模块电源域、信号命名、接口极性、上电顺序和保护链路需要统一。",
+      contribution: "定义模块边界与接口，制定联调顺序和保护策略，并完成整机闭环验证。",
+      outcome: "形成采样、辅助供电、STM32G4 控制和 100V H 桥的完整链路及现场复用文档。"
+    },
     responsibilities: ["定义模块边界和信号接口", "制定模块联调顺序和保护策略", "输出可复用文档"],
     metrics: [
-      { label: "对象", value: "电赛平台" },
-      { label: "价值", value: "复用" },
-      { label: "方式", value: "文档化" }
+      { label: "对象", value: "电赛平台", kind: "design" },
+      { label: "整合结果", value: "四模块联调", kind: "measured" },
+      { label: "方式", value: "接口标准化", kind: "design" }
     ],
     diagramTitle: "模块化平台关系图",
     diagramNodes: ["隔离辅助电源", "双向隔离采样", "MCU / STM32G4 控制层", "100V H 桥功率板"],

@@ -9,11 +9,12 @@ import { SignalField } from "../ui/SignalField";
 const capabilityIcons = [Layers, Cpu, Activity];
 
 export function CapabilitySection() {
-  const [activeTrack, setActiveTrack] = useState(0);
+  const [activeTrack, setActiveTrack] = useState(2);
   const [activeImage, setActiveImage] = useState<number | null>(null);
   const { siteCopy } = useLanguage();
   const capabilityTracks = siteCopy.topShowcase.capabilityTracks;
   const currentTrack = capabilityTracks[activeTrack];
+  const denseTrack = currentTrack.tiles.length > 3;
   const galleryImages: PortfolioImage[] = currentTrack.tiles.flatMap((tile) =>
     typeof tile === "string"
       ? []
@@ -21,7 +22,8 @@ export function CapabilitySection() {
           {
             src: tile.image,
             title: tile.title,
-            description: currentTrack.subtitle
+            description: currentTrack.subtitle,
+            kind: "prototype"
           }
         ]
   );
@@ -70,7 +72,7 @@ export function CapabilitySection() {
               <article
                 key={tileTitle}
                 className={`group relative overflow-hidden border border-white/8 bg-[#273442] p-5 transition duration-300 hover:bg-[#2E3E4E] sm:p-7 ${
-                  index === 2 ? "sm:col-span-2" : ""
+                  !denseTrack && index === 2 ? "sm:col-span-2" : ""
                 }`}
               >
                 {tileImage && sources ? (
@@ -89,7 +91,9 @@ export function CapabilitySection() {
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
                 <div className={`absolute inset-0 transition duration-300 ${tileImage ? "bg-[linear-gradient(180deg,rgba(31,41,51,0.18),rgba(31,41,51,0.64))]" : "group-hover:bg-white/4"}`} />
                 <div className="relative flex h-full min-h-32 items-end sm:min-h-40">
-                  <h4 className="balanced-text text-[1.7rem] font-semibold leading-[1.14] transition duration-300 motion-safe:group-hover:-translate-y-1 sm:text-2xl sm:leading-[1.18]">{tileTitle}</h4>
+                  <h4 className={`balanced-text font-semibold leading-[1.14] transition duration-300 motion-safe:group-hover:-translate-y-1 sm:leading-[1.18] ${
+                    denseTrack ? "text-xl sm:text-[1.35rem]" : "text-[1.7rem] sm:text-2xl"
+                  }`}>{tileTitle}</h4>
                 </div>
                 {tileImage ? (
                   <button

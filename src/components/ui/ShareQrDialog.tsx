@@ -8,7 +8,12 @@ function getShareUrl() {
   return window.location.href;
 }
 
-export function ShareQrDialog() {
+interface ShareQrDialogProps {
+  buttonClassName?: string;
+  buttonLabel?: string;
+}
+
+export function ShareQrDialog({ buttonClassName = "", buttonLabel }: ShareQrDialogProps = {}) {
   const [open, setOpen] = useState(false);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -127,9 +132,9 @@ export function ShareQrDialog() {
 
   return (
     <>
-      <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className="secondary-button gap-2">
+      <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className={`secondary-button gap-2 ${buttonClassName}`}>
         <QrCode aria-hidden="true" className="h-4 w-4" />
-        {labels.shareAction}
+        {buttonLabel ?? labels.shareAction}
       </button>
       {dialog ? createPortal(dialog, document.body) : null}
     </>

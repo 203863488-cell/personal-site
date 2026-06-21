@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ZoomIn } from "lucide-react";
 import type { PortfolioProject } from "../../types/portfolio";
 import { useLanguage } from "../../languageContext";
@@ -9,6 +9,8 @@ interface ProjectImageGalleryProps {
   project: PortfolioProject;
 }
 
+const kindPriority = { prototype: 0, test: 1, waveform: 2, software: 3, schematic: 4 } as const;
+
 /**
  * Optional project media area.
  *
@@ -18,20 +20,24 @@ interface ProjectImageGalleryProps {
 export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
   const { siteCopy } = useLanguage();
   const [activeImage, setActiveImage] = useState<number | null>(null);
+  const images = useMemo(
+    () => [...(project.detailImages ?? [])].sort((left, right) => kindPriority[left.kind] - kindPriority[right.kind]),
+    [project.detailImages]
+  );
 
-  if (!project.detailImages?.length) {
+  if (!images.length) {
     return null;
   }
 
   return (
-    <section className="paper-card p-6">
+    <section id="drawings" className="project-section paper-card p-6">
       <div>
         <p className="section-kicker">{siteCopy.projectDetail.imagesKicker}</p>
         <h3 className="balanced-text mt-3 text-2xl font-semibold leading-[1.18] text-[#111827]">{siteCopy.projectDetail.imagesTitle}</h3>
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-3">
-        {project.detailImages.map((image, index) => {
+        {images.map((image, index) => {
           const sources = responsiveImageSources(image.src);
 
           return (
@@ -42,6 +48,9 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
                 onClick={() => setActiveImage(index)}
                 aria-label={`${siteCopy.projectDetail.openImage}: ${image.title}`}
               >
+                <span className="absolute left-3 top-3 z-10 rounded-full border border-white/70 bg-[#111827]/76 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur">
+                  {siteCopy.projectDetail.imageKinds[image.kind]}
+                </span>
                 <img
                   src={sources.original}
                   srcSet={sources.srcSet}
@@ -66,7 +75,7 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
       </div>
 
       <ImageLightbox
-        images={project.detailImages}
+        images={images}
         activeIndex={activeImage}
         onActiveIndexChange={setActiveImage}
         onClose={() => setActiveImage(null)}

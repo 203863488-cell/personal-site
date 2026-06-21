@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { useMemo } from "react";
+import { DocumentMetadata } from "../components/DocumentMetadata";
 import { ProjectCard } from "../components/ProjectCard";
 import { Reveal } from "../components/ui/Reveal";
 import { SignalButton } from "../components/ui/SignalButton";
@@ -27,6 +28,7 @@ export function ProjectCollectionPage({ pageKey, projects }: ProjectCollectionPa
 
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
+      <DocumentMetadata title={`${page.title} | ${siteCopy.nav.brand}`} description={page.description} />
       <section className="section-shell pt-16">
         <SignalButton href={portfolioHrefs.home} icon={ArrowLeft} iconPosition="start" className="mb-10 py-2">
           {page.back}

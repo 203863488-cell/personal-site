@@ -13,6 +13,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   const { siteCopy } = useLanguage();
   const imageSources = responsiveImageSources(project.image);
+  const strongestMetric = project.metrics.find((metric) => metric.kind === "measured") ?? project.metrics[0];
 
   return (
     <a
@@ -40,9 +41,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <h3 className="balanced-text mt-3 text-xl font-semibold leading-[1.2] text-[#111827]">{project.title}</h3>
           </div>
           <span className="shrink-0 rounded-full border border-[#D8E0E7] bg-white px-3 py-1 text-xs text-[#425466]">
-            {project.status}
+            {siteCopy.common.completed}
           </span>
         </div>
+
+        {strongestMetric ? (
+          <div className="mt-4 flex items-center justify-between gap-4 rounded-lg border border-[#BFD0DF]/80 bg-[#F4F8FC] px-4 py-3">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB]">{siteCopy.common.featuredMetric}</span>
+            <span className="text-right text-sm font-semibold text-[#111827]">{strongestMetric.label} · {strongestMetric.value}</span>
+          </div>
+        ) : null}
 
         <p className="mt-4 text-sm leading-6 text-[#6B7280]">{project.summary}</p>
 

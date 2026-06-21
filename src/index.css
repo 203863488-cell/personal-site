@@ -441,6 +441,10 @@ body {
     content: none;
   }
 
+  .project-section {
+    scroll-margin-top: 9.25rem;
+  }
+
   .contact-card {
     @apply rounded-lg border border-[#D8E0E7]/80 bg-white/72 p-5 shadow-[0_18px_55px_rgba(31,41,51,0.05)];
   }
