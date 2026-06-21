@@ -73,13 +73,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
       <SystemDiagram project={project} />
 
-      {project.operatingPrinciples?.length || project.engineeringRisks?.length ? (
+      {project.operatingPrinciples?.length || project.engineeringHighlights?.length ? (
         <div className="grid gap-5 xl:grid-cols-2">
           {project.operatingPrinciples?.length ? (
             <DetailList title={labels.operatingPrinciples} items={project.operatingPrinciples} />
           ) : null}
-          {project.engineeringRisks?.length ? (
-            <DetailList title={labels.engineeringRisks} items={project.engineeringRisks} variant="warning" />
+          {project.engineeringHighlights?.length ? (
+            <DetailList title={labels.engineeringHighlights} items={project.engineeringHighlights} />
           ) : null}
         </div>
       ) : null}

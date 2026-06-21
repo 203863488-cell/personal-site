@@ -7,6 +7,7 @@ import { assetUrl } from "../../utils/assetUrl";
 import { responsiveImageSources } from "../../utils/responsiveImage";
 import { MetricTile } from "../ui/MetricTile";
 import { Pill } from "../ui/Pill";
+import { ShareQrDialog } from "../ui/ShareQrDialog";
 import { SignalField } from "../ui/SignalField";
 
 const AUTO_PLAY_MS = 3000;
@@ -227,6 +228,7 @@ export function HeroShowcase() {
                   <Mail aria-hidden="true" className="h-4 w-4" />
                   {siteCopy.topShowcase.contactAction}
                 </a>
+                <ShareQrDialog />
               </div>
             </div>
 

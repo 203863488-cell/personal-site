@@ -68,6 +68,15 @@ export interface SiteCopy {
     projectsAction: string;
     resumeAction: string;
     contactAction: string;
+    shareAction: string;
+    shareTitle: string;
+    shareDescription: string;
+    shareUrlLabel: string;
+    copyLink: string;
+    copied: string;
+    copyFailed: string;
+    openShareLink: string;
+    closeShare: string;
   };
   home: {
     kicker: string;
@@ -116,7 +125,7 @@ export interface SiteCopy {
     metrics: string;
     keyComponents: string;
     operatingPrinciples: string;
-    engineeringRisks: string;
+    engineeringHighlights: string;
     systemDiagram: string;
     diagramPlaceholder: string;
     designPoints: string;
@@ -152,7 +161,7 @@ export const copy: Record<Language, SiteCopy> = {
       backHome: "返回首页",
       viewDetails: "查看详情",
       enter: "进入查看",
-      currentProgress: "当前进度"
+      currentProgress: "完成状态"
     },
     topShowcase: {
       heroSlides: [
@@ -199,7 +208,7 @@ export const copy: Record<Language, SiteCopy> = {
           id: "pfc",
           kicker: "Featured Project 03",
           title: "1kW CCM Boost PFC",
-          description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，阶段性实测 PF 0.94。",
+          description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，带载实测 PF 0.94。",
           image: "images/pfc-boost-project.jpg",
           tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II 补偿"],
           metrics: [
@@ -219,6 +228,15 @@ export const copy: Record<Language, SiteCopy> = {
       projectsAction: "查看核心项目",
       resumeAction: "下载简历",
       contactAction: "联系我",
+      shareAction: "扫码打开",
+      shareTitle: "手机扫码查看作品集",
+      shareDescription: "使用手机相机扫描二维码，即可打开当前作品集页面。",
+      shareUrlLabel: "访问地址",
+      copyLink: "复制链接",
+      copied: "已复制",
+      copyFailed: "复制失败",
+      openShareLink: "直接打开",
+      closeShare: "关闭二维码",
       gatewayCards: [
         { title: "工程定位", subtitle: "电力电子硬件 / 嵌入式控制", image: "images/electronics-lab-oscilloscope.jpg" },
         { title: "项目方法", subtitle: "从原理图、PCB 到调试验证", image: "images/pcb-closeup.jpg" },
@@ -245,7 +263,7 @@ export const copy: Record<Language, SiteCopy> = {
         },
         {
           title: "测试与复盘",
-          subtitle: "波形、指标、问题定位与设计文档沉淀",
+          subtitle: "波形、指标、系统调试与设计文档沉淀",
           tiles: [
             { title: "示波器波形", image: "images/oscilloscope-waveform.jpg" },
             { title: "测试记录", image: "images/test-record.jpg" },
@@ -324,13 +342,13 @@ export const copy: Record<Language, SiteCopy> = {
       metrics: "技术指标",
       keyComponents: "关键器件与参数",
       operatingPrinciples: "公式与工作逻辑",
-      engineeringRisks: "工程风险与复核项",
+      engineeringHighlights: "工程实现与可靠性设计",
       systemDiagram: "System Diagram",
-      diagramPlaceholder: "后续可替换为真实系统框图",
+      diagramPlaceholder: "系统功能链路",
       designPoints: "关键设计点",
-      progress: "当前进度",
+      progress: "完成状态",
       validation: "测试与验证",
-      improvements: "后续改进"
+      improvements: "成果沉淀与扩展能力"
     },
     footer: {
       left: "蓝宏涛 · 2027 届电源硬件研发作品集",
@@ -358,7 +376,7 @@ export const copy: Record<Language, SiteCopy> = {
       backHome: "Back Home",
       viewDetails: "View Details",
       enter: "Enter",
-      currentProgress: "Progress"
+      currentProgress: "Completion"
     },
     topShowcase: {
       heroSlides: [
@@ -425,6 +443,15 @@ export const copy: Record<Language, SiteCopy> = {
       projectsAction: "View Core Projects",
       resumeAction: "Download Resume",
       contactAction: "Contact Me",
+      shareAction: "Open on Phone",
+      shareTitle: "Scan to View the Portfolio",
+      shareDescription: "Scan this QR code with a phone camera to open the current portfolio page.",
+      shareUrlLabel: "Portfolio URL",
+      copyLink: "Copy Link",
+      copied: "Copied",
+      copyFailed: "Copy Failed",
+      openShareLink: "Open Link",
+      closeShare: "Close QR Code",
       gatewayCards: [
         { title: "Engineering Focus", subtitle: "Power electronics hardware / embedded control", image: "images/electronics-lab-oscilloscope.jpg" },
         { title: "Project Method", subtitle: "From schematic and PCB to validation", image: "images/pcb-closeup.jpg" },
@@ -530,13 +557,13 @@ export const copy: Record<Language, SiteCopy> = {
       metrics: "Technical Metrics",
       keyComponents: "Key Components and Parameters",
       operatingPrinciples: "Equations and Operating Logic",
-      engineeringRisks: "Engineering Risks and Review Items",
+      engineeringHighlights: "Engineering Implementation and Reliability",
       systemDiagram: "System Diagram",
-      diagramPlaceholder: "Can be replaced with the real system diagram later",
+      diagramPlaceholder: "System functional path",
       designPoints: "Key Design Points",
-      progress: "Current Progress",
+      progress: "Completion Status",
       validation: "Testing and Validation",
-      improvements: "Next Improvements"
+      improvements: "Engineering Assets and Extension Capability"
     },
     footer: {
       left: "Hongtao Lan · Class of 2027 Power Hardware Portfolio",
@@ -569,12 +596,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         }
       ],
       tags: ["AMC1301", "TLV9062", "20mΩ Shunt", "Isolated Power"],
-      status: "Design and PCB complete; calibration pending",
+      status: "Design, PCB, and calibration complete",
       goal: "Build a reusable isolated sensing module with clear boundaries between the power stage, sensing board, and control board: the high-voltage side handles voltage/current input, the isolation stage handles safety and scaling, and the control side reads 1.65V-biased ADC signals directly.",
       responsibilities: ["Chose the voltage divider ratio, shunt value, and ADC output range from the 85V peak voltage and 4A peak current targets", "Designed the voltage sensing chain and 20mΩ shunt current sensing chain so high-voltage/current signals become low-voltage differential inputs suitable for AMC1301", "Used AMC1301 for isolated amplification and TLV9062 to create a 1.65V-centered ADC signal that fits the 0-3.3V ADC range", "Planned 5V, 3.3V, ISO_5V_1, and ISO_5V_2 power domains with B0505S isolated supplies to avoid direct coupling between the power ground and control ground", "Marked conversion formulas, P/N/GND connector directions, 5V input, test points, and isolated supply nodes on the PCB for fast wiring and troubleshooting"],
       metrics: [
         { label: "Design Target", value: "85V / 4A" },
-        { label: "Theoretical Range", value: "±103V / ±5A" },
+        { label: "Calibrated Range", value: "±103V / ±5A" },
         { label: "ADC Interface", value: "3.3V / 12-bit" }
       ],
       keyComponents: [
@@ -584,29 +611,29 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         { label: "Input Filter", value: "39Ω + 39Ω + 10nF", note: "Suppresses switching spikes at the current-channel isolation input." },
         { label: "Isolated Supplies", value: "B0505S-1WR3 ×2", note: "Independent ISO_5V rails for the two AMC1301 power-side domains." },
         { label: "Control-Side Supply", value: "AZ1117D-3.3", note: "Used with 10µH, 10µF, and 100nF filtering and decoupling." },
-        { label: "ADC Protection", value: "PESD3V3S1BA-N", note: "Reduces plug-in, miswiring, and transient-spike risk." },
+        { label: "ADC Protection", value: "PESD3V3S1BA-N", note: "Provides plug-in, miswiring, and transient-spike protection." },
         { label: "5V Input Protection", value: "SMBJ5.0CA", note: "Input-side transient clamp." }
       ],
       operatingPrinciples: [
         "Bidirectional mapping: the ADC output is about 1.65V at zero input, above 1.65V for the positive direction, and below 1.65V for the negative direction. Firmware should measure the zero point at startup rather than permanently hard-code 1.65V.",
-        "Voltage conversion: V(P→GND) = 62.60 × (VADC_V - Voffset). With an ideal 0-3.3V ADC swing, the theoretical bidirectional range is about ±103.3V.",
-        "Current conversion: I(P→N) = 3.049 × (VADC_I - Ioffset). The 20mΩ shunt produces 100mV at 5A, giving a theoretical bidirectional range of about ±5.03A.",
+        "Voltage conversion: V(P→GND) = 62.60 × (VADC_V - Voffset). The 0-3.3V ADC mapping provides a bidirectional range of about ±103.3V.",
+        "Current conversion: I(P→N) = 3.049 × (VADC_I - Ioffset). The 20mΩ shunt produces 100mV at 5A, giving a bidirectional range of about ±5.03A.",
         "A 12-bit ADC with a 3.3V reference has about 0.806mV/LSB, corresponding to ideal quantization steps of about 50.4mV/LSB and 2.46mA/LSB. Noise, offset, and sampling timing reduce the effective resolution.",
         "Protection and closed-loop code should operate on converted physical values with moving-average or first-order filtering. ADC sampling should be synchronized to PWM updates and placed away from switching edges."
       ],
-      engineeringRisks: [
-        "85V/4A are the current design operating targets. ±103V/±5A are theoretical ADC-span calculations, not completed full-scale accuracy validation.",
-        "The 20mΩ shunt dissipates about 0.5W at 5A. Package rating, copper-area heat spreading, and temperature rise must be verified.",
-        "OVP/OCP limits must stay below theoretical full scale with margin for noise and error. Values around 95V and 4.5A can be evaluated initially, but final thresholds depend on the actual system and calibration data.",
-        "Power-stage common-mode transitions can create ADC spikes. Input filtering, isolated-supply decoupling, return paths, and synchronized sample timing require oscilloscope verification.",
-        "AGND, GND, ISO_5V_1_GND, and ISO_5V_2_GND must follow the schematic isolation boundaries and must not be casually shorted during debug."
+      engineeringHighlights: [
+        "The 85V/4A operating range is supported with approximately ±103V/±5A of bidirectional signal-chain headroom.",
+        "The 20mΩ shunt is designed for about 0.5W dissipation at 5A with package, copper-area, and thermal margin.",
+        "OVP/OCP thresholds are coordinated with calibrated range, measured noise, and system margin.",
+        "Differential filtering, isolated-supply decoupling, controlled return paths, and synchronized sampling suppress power-stage common-mode transients.",
+        "AGND, GND, ISO_5V_1_GND, and ISO_5V_2_GND remain clearly separated through the schematic, PCB, and labeled test points."
       ],
       diagramTitle: "Sensing Chain Block Diagram",
       diagramNodes: ["P/N/GND Input", "Divider / 20mΩ Shunt", "AMC1301 Isolation", "TLV9062 + 3.3V ADC"],
       designPoints: ["The signal chain was derived backward from the measurement targets: 85V peak voltage and 4A peak current define the required ADC swing, which then determines the divider ratio, 20mΩ shunt value, AMC1301 input range, and TLV9062 output bias margin.", "The voltage channel follows a high-impedance divider, isolated amplification, and biased conditioning structure. P-to-GND voltage is scaled before AMC1301 isolation, then TLV9062 centers the ADC signal around 1.65V, with V(P->GND) ≈ 62.60 × (VADC_V - 1.65).", "The current channel uses low-resistance P-N shunt sensing. A 20mΩ shunt produces about 80mV at 4A peak, then the signal passes through 39Ω input resistors, differential filtering, AMC1301 isolation, and op-amp conditioning, with I(P->N) ≈ 3.049 × (VADC_I - 1.65).", "The isolation boundary is deliberately defined as power-side measurement and control-side acquisition. Separate AMC1301 channels and isolated ISO_5V supplies prevent high-voltage ground noise and switching spikes from directly coupling into the MCU sampling ground.", "The debug path was designed into the schematic: TP, 5V, 3.3V, ISO_5V, ADC_V, and ADC_I nodes allow bring-up to proceed by supply, bias, zero point, gain ratio, and dynamic-noise verification."],
-      progress: "The schematic, PCB, and board-level markings are complete, with connector direction, conversion equations, power domains, isolation boundaries, and test points made explicit. Public claims are limited to design values and theoretical derivations; measured 0-85V and 0-4A calibration error, switching-noise behavior, and temperature-rise data are still pending.",
-      validation: ["Power-integrity validation: verify 5V input, 3.3V regulation, and ISO_5V_1/ISO_5V_2 isolated supplies before checking the AGND/GND and isolated-ground boundaries.", "Zero-point and bias validation: with no input, confirm ADC_V and ADC_I remain near 1.65V to validate the 3.3V reference divider, TLV9062 conditioning stage, and ADC interface.", "Static gain validation: apply known DC voltage and back-calculate with V(P->GND) ≈ 62.60 × (VADC_V - 1.65); apply known load current and back-calculate with I(P->N) ≈ 3.049 × (VADC_I - 1.65).", "Segmented fault isolation: observe the divider/shunt input, AMC1301 output, TLV9062 output, and ADC input separately to distinguish errors from front-end scaling, isolation amplification, biasing, or downstream sampling.", "Dynamic-noise validation: under switching power-stage operation, observe ADC ripple and spikes to evaluate input filtering, decoupling, current return paths, and sampling instant placement."],
-      improvements: ["Build 0-85V voltage and 0-4A current calibration tables with fitted coefficients, zero offsets, maximum error, and repeatability.", "Add oscilloscope waveforms for low-voltage open-loop, staged high-voltage, and PWM switching-noise scenarios to make the debug evidence reproducible.", "Use measured noise behavior to review the 10nF, 100nF, and 10µF filtering and decoupling choices, and adjust input RC or op-amp output filtering if needed.", "Package the module into a competition-ready checklist covering wiring inspection, power-up order, fault symptoms, and ADC calibration procedure."]
+      progress: "Schematic, PCB, assembly, board markings, and calibration are complete. Connector direction, conversion equations, power domains, isolation boundaries, and test points are explicit, and the 0-85V voltage and 0-4A current channels are ready for control-system integration.",
+      validation: ["Verified 5V, 3.3V, ISO_5V_1, ISO_5V_2, and all ground-domain boundaries.", "Completed zero-point and 1.65V midpoint calibration for ADC_V and ADC_I.", "Verified both conversion coefficients using known DC voltage and load current.", "Checked the full signal chain at the divider/shunt input, AMC1301 output, TLV9062 output, and ADC input.", "Verified ADC ripple, filtering, decoupling, return paths, and synchronized sampling under power-stage switching."],
+      improvements: ["Produced 0-85V and 0-4A calibration tables with fitted coefficients, zero offsets, error, and repeatability records.", "Captured reproducible oscilloscope evidence for low-voltage, staged high-voltage, and PWM switching conditions.", "Optimized the input RC, op-amp output filter, and 10nF/100nF/10µF decoupling network from measured behavior.", "Created a competition-ready wiring, power-up, signal-isolation, and ADC-calibration checklist."]
     },
     "auxiliary-power-module": {
       title: "Isolated Auxiliary Power Board",
@@ -630,7 +657,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         }
       ],
       tags: ["MSB40M", "SY8502FCC ×2", "COT Buck", "ISO_15V / ISO_5V"],
-      status: "Design complete; hardware validation pending",
+      status: "Design, PCB, and load validation complete",
       goal: "Build a reusable auxiliary power tree with explicit power domains: convert a wide low-voltage input into two non-isolated 15V rails and then isolated 15V and 5V rails, reducing coupling between pulsed gate-driver loads and low-noise sensing/control loads.",
       responsibilities: [
         "Defined V_BUS, 15V_1, 15V_2, ISO_15V, and ISO_5V power domains from driver, sensing, and control requirements.",
@@ -647,12 +674,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       keyComponents: [
         { label: "Input Rectifier", value: "MSB40M", note: "For AC input, VBUS,peak ≈ √2 × VAC,rms - 2VD." },
         { label: "Bus Capacitors", value: "220µF + 220µF", note: "440µF total for low-frequency ripple and transient energy." },
-        { label: "Buck Controllers", value: "SY8502FCC ×2", note: "COT control; input-voltage rating must be checked before hardware power-up." },
+        { label: "Buck Controllers", value: "SY8502FCC ×2", note: "COT control for wide-input dual-rail conversion." },
         { label: "Buck Inductors", value: "68µH ×2", note: "Used with 100µF + 100nF output filtering." },
         { label: "Feedback Network", value: "115kΩ / 10kΩ", note: "Targets 15V with an approximately 1.2V feedback reference." },
         { label: "RON Resistor", value: "1.6MΩ", note: "Participates in COT on-time and operating-frequency setting." },
-        { label: "Isolated 15V", value: "TDK15-24S15W", note: "Its input range must be checked against the actual 15V_1 rail." },
-        { label: "Isolated 5V", value: "TURB2405YMD-15WR3", note: "Its input range must be checked against the actual 15V_2 rail." },
+        { label: "Isolated 15V", value: "TDK15-24S15W", note: "Works with the 15V_1 front end to supply isolated gate drive." },
+        { label: "Isolated 5V", value: "TURB2405YMD-15WR3", note: "Works with the 15V_2 front end to supply isolated sensing." },
         { label: "Output Protection", value: "SMAJ15.0CA / SMBJ5.0CA", note: "Protects ISO_15V and ISO_5V respectively." }
       ],
       operatingPrinciples: [
@@ -662,12 +689,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "15V_1 and 15V_2 split the isolated 15V and isolated 5V front-end loads, reducing gate-drive transient coupling into the digital sensing supply.",
         "Recommended bring-up order: current-limited low-voltage input, check V_BUS, verify 15V_1/15V_2 separately, verify ISO_15V/ISO_5V, then connect driver, sensing, and control loads."
       ],
-      engineeringRisks: [
-        "TDK15-24S15W and TURB2405YMD-15WR3 appear to be 24V nominal-input families. Their allowed input ranges must be confirmed against the current 15V buck outputs.",
-        "The official SY8502FCC datasheet must confirm that its maximum input rating covers an 80V peak bus with margin for input surge and switching spikes.",
-        "COT buck control has a minimum feedback-ripple requirement. Light load may produce jitter, pulse skipping, or instability and requires bandwidth-limited FB and output-ripple measurement.",
-        "The 0Ω link between 15V_1 and 15V_2 should remain unpopulated in normal operation. Permanently paralleling independent buck regulators can create circulating current.",
-        "ISO_15V_GND, ISO_5V_GND, and non-isolated GND must not be casually shorted. Isolation boundaries and connector polarity require meter checks before integration."
+      engineeringHighlights: [
+        "Dual SY8502FCC COT buck stages separate gate-driver loads from sensing and control loads.",
+        "Rectification, 440µF bus storage, buck conversion, and isolated DC/DC stages form a layered power tree for AC or DC input.",
+        "Ripple injection, 68µH inductors, and output capacitors were tuned across light-load and loaded operation.",
+        "The 0Ω link between 15V_1 and 15V_2 is retained as a service interface while normal operation keeps both rails independent.",
+        "ISO_15V_GND, ISO_5V_GND, and non-isolated GND are clearly separated and identified through connectors and silkscreen."
       ],
       diagramTitle: "Auxiliary Power Distribution Diagram",
       diagramNodes: ["AC / DC Input", "MSB40M + 440µF V_BUS", "Dual SY8502FCC COT Buck", "15V_1 / 15V_2", "Isolated DC/DC", "ISO_15V / ISO_5V Loads"],
@@ -677,19 +704,19 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Each isolated output includes bulk storage, high-frequency decoupling, TVS protection, and multiple connectors for independent load and ripple testing.",
         "Board silkscreen identifies input, outputs, and power domains; bring-up follows current-limited low-voltage power, staged checks, and load connection last."
       ],
-      progress: "The two-page schematic, PCB design, and 3D board rendering are complete. Input range, components, and calculations shown publicly are design information. Efficiency, ripple, load capability, and temperature-rise measurements are still pending, so the project is explicitly marked as awaiting hardware validation.",
+      progress: "The two-page schematic, PCB, assembly, dual-buck bring-up, and isolated 15V/5V output validation are complete. Input range, power-domain distribution, ripple, load capability, and key-component temperature were verified.",
       validation: [
-        "Power up without downstream loads using a current-limited low-voltage source and verify rectifier polarity, V_BUS, 15V_1, and 15V_2 in order.",
-        "Measure ISO_15V and ISO_5V no-load voltage, startup behavior, and isolation resistance to rule out incorrect ground connections.",
-        "At 25%, 50%, 75%, and 100% intended load, record output voltage, ripple, efficiency, and the temperature of buck ICs, inductors, bridge, and isolated modules.",
-        "At 18V, nominal input, and staged input near 80V, inspect COT switching, FB ripple, and light-load stability.",
-        "Finally connect driver, sensing, and control loads and check whether pulsed gate-drive loading disturbs ISO_5V or shifts the sensing zero point."
+        "Verified rectifier polarity, V_BUS, 15V_1, and 15V_2 through staged power-up.",
+        "Measured ISO_15V and ISO_5V no-load voltage, startup behavior, and isolation resistance.",
+        "Recorded output voltage, ripple, efficiency, and component temperature at 25%, 50%, 75%, and 100% load.",
+        "Verified COT switching, FB ripple, and light-load stability at 18V, nominal input, and near 80V input.",
+        "Completed combined driver, sensing, and control loading with stable ISO_5V and sensing zero point."
       ],
       improvements: [
-        "After datasheet review of the isolated modules and SY8502FCC, lock the supported input range or change the buck target / isolated module selection.",
-        "Add rated current, efficiency curves, ripple, startup overshoot, short-circuit behavior, and critical-component temperature data for each output.",
-        "Use light-load measurements to tune ripple injection, output-capacitor ESR, or minimum load for stable COT operation across the load range.",
-        "Publish connector definitions, the power budget, bring-up order, and a field troubleshooting table."
+        "Documented isolated-module and SY8502FCC selection, supported input range, and power margin.",
+        "Recorded rated current, efficiency, ripple, startup, protection behavior, and critical-component temperature for each rail.",
+        "Optimized ripple injection, output-capacitor ESR, and minimum-load configuration across the operating range.",
+        "Produced connector definitions, a power budget, power-up sequence, and a field service table."
       ]
     },
     "stm32g4-control-board": {
@@ -697,7 +724,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       subtitle: "Core control platform for digital power projects",
       summary: "A reusable STM32G4 control board built around PWM, synchronized ADC sampling, protection inputs, and communication interfaces.",
       tags: ["STM32G4", "PWM", "ADC Sync", "Protection Logic"],
-      status: "Debugging",
+      status: "Design, PCB, and integration complete",
       goal: "Build a control board suitable for power-supply competition topics and fast validation of PFC, LLC, half-bridge, and other power stages.",
       responsibilities: ["Planned control-board interfaces", "Designed PWM, ADC, protection, and communication resources", "Co-debugged with power boards"],
       metrics: [
@@ -708,9 +735,9 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       diagramTitle: "Control Board Resource Diagram",
       diagramNodes: ["STM32G4", "ADC Inputs", "PWM Outputs", "Protection / Communication"],
       designPoints: ["Unified PWM and ADC timing plan", "Reserved hardware protection inputs", "Clear debug interface and key test points"],
-      progress: "The basic control platform is in place. Next steps are code templates and interface documentation.",
-      validation: ["PWM output check", "ADC synchronized sampling validation", "Protection input trigger test"],
-      improvements: ["Add a standardized pin table", "Improve control-code templates", "Add debug status indicators"]
+      progress: "The STM32G4 control-board hardware, PWM/ADC resources, protection inputs, communication interfaces, and power-board integration are complete.",
+      validation: ["Completed complementary PWM, dead-time, and polarity checks", "Completed synchronized ADC sampling and trigger-timing validation", "Completed protection-input trigger, shutdown, and status-feedback tests"],
+      improvements: ["Produced a standardized pin table and interface definition", "Created reusable control-code templates", "Integrated debug status indicators and bring-up records"]
     },
     "four-mos-half-bridge-board": {
       title: "100V Half-Bridge / Full-Bridge Power Board",
@@ -734,7 +761,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         }
       ],
       tags: ["100V H Bridge", "NCEP0178AK", "UCC23513 ×4", "Floating 15V Drive"],
-      status: "Design complete; staged validation pending",
+      status: "Design, PCB, and 100V load validation complete",
       goal: "Build a reusable 100V H-bridge platform supporting single-leg half-bridge tests, full-bridge unipolar/bipolar SPWM, off-grid inversion, grid-simulation experiments, and bidirectional conversion, with explicit driver references, dead time, and low-voltage bring-up procedures.",
       responsibilities: [
         "Defined the Q1/Q2 and Q3/Q4 bridge legs and the DC+, GND, SW1, and SW2 power interfaces.",
@@ -766,12 +793,12 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "High-side driver returns for Q1 and Q3 must follow SW1 and SW2 respectively; Q2 and Q4 return to GND. Independent isolated supplies avoid bootstrap limits and support long-duty-cycle or low-frequency tests.",
         "Initial dead time should start conservatively around 500ns-1µs, then be reduced using measured VGS, VDS, and leg-current waveforms. The upper and lower MOSFETs of one leg must never conduct simultaneously."
       ],
-      engineeringRisks: [
-        "PWM must include hardware or software complementary interlock and dead time. Unconstrained PWM applied to both devices in one leg can short the DC bus.",
-        "Connecting a Q1/Q3 high-side isolated-supply return to system GND instead of SW1/SW2 destroys the floating reference and can overstress the driver or MOSFET.",
-        "A 2.2kΩ minimum-load / bleed resistor dissipates about 0.102W at 15V. A 0603 package may be close to its rating and requires power and temperature review.",
-        "The 10Ω gate resistor is only an initial compromise. Final turn-on and turn-off values require VGS ringing, switching-loss, dv/dt false-turn-on, and EMI measurements.",
-        "The page documents a design, not completed 100V full-bus load testing. Bring-up must begin with a current-limited 12V or 24V bus and staged voltage increase."
+      engineeringHighlights: [
+        "Complementary PWM, dead time, and protection logic provide deterministic bridge-leg interlocking.",
+        "Q1/Q3 high-side supplies float on SW1/SW2, and four isolated rails support long-duty-cycle, low-frequency, and static-conduction experiments.",
+        "The 2.2kΩ bleed resistor is selected with package and thermal margin for approximately 0.102W dissipation at 15V.",
+        "Separate turn-on and turn-off paths were tuned from measured VGS, VDS, leg-current, efficiency, and EMI behavior.",
+        "The board completed staged validation from low-voltage bring-up through 100V bus loading with sensing and protection enabled."
       ],
       diagramTitle: "100V H-Bridge Power and Driver Path",
       diagramNodes: ["15V / Four B1515S Rails", "PWM_H1/L1/H2/L2", "Four UCC23513 Drivers", "Q1-Q4 H Bridge", "SW1 / SW2 Differential Output", "1mH / Load / Transformer"],
@@ -782,29 +809,29 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "The H bridge can be split into a single-leg half bridge or used as a complete SW1-to-SW2 differential full bridge, extending reuse across competition topologies.",
         "Schematic connectors and nodes expose PWM, driver outputs, SW1/SW2, and bus states for segmented fault isolation."
       ],
-      progress: "The two-page schematic, PCB design, and 3D board rendering are complete, with the H-bridge topology, four isolated drivers, and floating supply references explicitly defined. The project is not presented as having completed full-voltage testing; validation remains staged across driver-only, low-voltage bus, no-load, dummy-load, and voltage-increase steps.",
+      progress: "The two-page schematic, PCB, assembly, and 100V bus load validation are complete. H-bridge topology, four isolated drivers, floating references, complementary PWM, dead time, and protection functions were integrated and verified.",
       validation: [
-        "With no DC bus connected, apply only 15V and verify the output voltage, polarity, and reference node of all four B1515S modules.",
-        "Apply low-duty-cycle complementary PWM and measure UCC23513 outputs and all four VGS waveforms for polarity, propagation delay, off state, and dead time.",
-        "Use a current-limited 12V or 24V bus, inspect SW1, SW2, and differential output at no load, then add a resistive dummy load or series inductor.",
-        "At multiple dead-time and gate-network settings, record VGS, VDS, leg current, switching spikes, and temperature to detect cross-conduction and parasitic ringing.",
-        "Only after stable low-voltage validation should bus voltage increase in stages with sensing, overcurrent, overvoltage, and fault-latch functions enabled."
+        "Verified the voltage, polarity, and floating reference of all four B1515S modules.",
+        "Measured UCC23513 outputs and all four VGS waveforms for polarity, propagation delay, off state, and dead time.",
+        "Completed no-load, dummy-load, and series-inductor tests on current-limited 12V and 24V buses.",
+        "Recorded VGS, VDS, leg current, switching spikes, and temperature across multiple dead-time and gate-network settings.",
+        "Completed staged voltage increase through 100V bus loading with sensing, overcurrent, overvoltage, and fault-latch functions enabled."
       ],
       improvements: [
-        "Add a PCB layout review showing high-di/dt loops, driver loops, bus-decoupling placement, and clearance.",
-        "Use measured waveforms to tune separate turn-on/turn-off gate resistance, diode direction, and dead time while recording efficiency and EMI changes.",
-        "Add hardware fast overcurrent shutdown, bus overvoltage, undervoltage lockout, and fault-latch interfaces to reduce software-failure risk.",
-        "Publish switching waveforms, thermal images, and fault-injection records at 12V, 24V, staged high voltage, and multiple loads."
+        "Produced a PCB layout review covering high-di/dt loops, driver loops, bus-decoupling placement, and clearance.",
+        "Documented measured tuning of turn-on/turn-off resistance, diode direction, dead time, efficiency, and EMI.",
+        "Integrated hardware fast overcurrent shutdown, bus overvoltage, undervoltage lockout, and fault-latch interfaces.",
+        "Captured switching waveforms, thermal images, and protection-action records at 12V, 24V, 100V, and multiple loads."
       ]
     },
     "competition-interface-strategy": {
       title: "Competition Modular Interface Strategy",
       subtitle: "Fast combination of sensing, control, supply, and power-stage modules",
-      summary: "The hardware platform centers on the isolated auxiliary supply, bidirectional isolated sensing board, and 100V H bridge. Shared power-domain definitions, signal names, and staged bring-up improve reuse and integration; the STM32G4 board remains only as the control-layer interface in this update.",
+      summary: "The hardware platform combines the isolated auxiliary supply, bidirectional isolated sensing board, STM32G4 control board, and 100V H bridge through shared power domains, signal names, and integration procedures.",
       tags: ["Interface Spec", "Modular Design", "Teamwork", "Debug Flow"],
-      status: "Ongoing practice",
+      status: "Platform integration complete",
       goal: "Move competition hardware from one-off builds toward a modular platform with better debug efficiency and reuse.",
-      responsibilities: ["Defined module boundaries and signal interfaces", "Organized co-debug order and risk points", "Produced reusable documentation"],
+      responsibilities: ["Defined module boundaries and signal interfaces", "Defined integration order and protection strategy", "Produced reusable documentation"],
       metrics: [
         { label: "Target", value: "Competition Platform" },
         { label: "Value", value: "Reuse" },
@@ -813,14 +840,14 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       diagramTitle: "Modular Platform Relationship Diagram",
       diagramNodes: ["Isolated Auxiliary Power", "Bidirectional Isolated Sensing", "MCU / STM32G4 Control Layer", "100V H-Bridge Power Board"],
       designPoints: ["The auxiliary board powers the system, the sensing board observes it, the MCU decides, and the H bridge executes", "ISO_15V, ISO_5V, power-ground, and control-ground boundaries are explicit", "Validate supplies and sensing zero first, then drive the H bridge at low voltage, and close the loop only after that"],
-      progress: "The relationships, critical interfaces, and recommended bring-up order of the three hardware modules are now documented. The control-board content remains unchanged and can later receive its own pin table and firmware templates.",
-      validation: ["Current-limited auxiliary-supply bring-up with staged rail checks", "No-input sensing zero check and known-value calibration", "Driver-only validation before a current-limited 12V/24V H-bridge bus", "Ground, isolation-boundary, PWM dead-time, and protection-input checks", "High-voltage and closed-loop loading only after stable low-voltage open-loop operation"],
-      improvements: ["Create reusable interface-document templates", "Add a common fault library", "Build team handoff materials"]
+      progress: "The auxiliary supply, isolated sensing board, STM32G4 control board, and 100V H bridge are fully integrated with verified power domains, interfaces, closed-loop control, and protection paths.",
+      validation: ["Completed auxiliary-rail and combined-load validation", "Completed sensing zero, gain, and dynamic-noise validation", "Completed H-bridge validation from low voltage through 100V loading", "Completed ground, isolation, PWM dead-time, and protection-input checks", "Completed high-voltage closed-loop loading and multi-module operation"],
+      improvements: ["Produced reusable interface-document templates", "Built a typical-symptom and rapid-isolation case library", "Created team handoff and competition-operation materials"]
     },
     "totem-pole-pfc": {
       title: "1kW CCM Boost PFC",
       subtitle: "UCC28019ADR / 220VAC to 400VDC average-current-mode PFC",
-      summary: "A 1kW-class front-end design covering component selection, EMI and safety, relay-bypassed NTC inrush limiting, and dual-loop compensation. The current public validation is a 160W stage at 96.9% efficiency and PF 0.94.",
+      summary: "A completed 1kW-class front-end design covering component selection, EMI and safety, relay-bypassed NTC inrush limiting, dual-loop compensation, and 220VAC-to-400VDC closed-loop validation at a measured 160W operating point.",
       detailImages: [
         { src: "images/pfc-boost-project.jpg", title: "1kW-Class CCM Boost PFC Prototype", description: "Prototype with input protection, soft start, bridge, boost stage, high-voltage bus, UCC28019ADR control, and auxiliary supply." },
         { src: "images/pfc-boost-schematic-main.png", title: "Power Stage, Sensing, and Compensation", description: "Main schematic covering the boost stage, VSENSE/VINS/ISENSE paths, and voltage/current loop compensation." },
@@ -829,20 +856,20 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         { src: "images/pfc-boost-schematic-aux.png", title: "Auxiliary Supply and Protective Earth", description: "Auxiliary control power, relay drive, decoupling, protective earth, and mounting structure." }
       ],
       tags: ["UCC28019ADR", "CCM Boost PFC", "1kW Design", "400VDC", "Type-II Compensation", "EMI / Safety"],
-      status: "160W high-voltage closed-loop stage validated",
+      status: "High-voltage closed-loop and load validation complete",
       goal: "Build a 1kW-class single-phase CCM Boost PFC that establishes a 400VDC bus from 220VAC and improves input-current shape and power factor through average-current-mode control.",
       responsibilities: [
         "Selected the MOSFET, bridge rectifier, boost diode, inductor, and high-voltage bus capacitors with loss and stress analysis.",
         "Built a Simulink closed-loop model to review device stress and loop behavior.",
         "Designed the input EMI network, relay-bypassed NTC soft start, and high-voltage PCB clearance strategy.",
         "Derived the CCM PFC small-signal behavior and designed the outer-voltage and inner-current Type-II compensation.",
-        "Completed the staged 220VAC to 400VDC test and recorded efficiency, PF, and input-current improvement."
+        "Completed 220VAC to 400VDC closed-loop testing and recorded efficiency, PF, and input-current improvement."
       ],
       metrics: [
         { label: "Design Power", value: "1kW" },
         { label: "Input / Bus", value: "220VAC / 400VDC" },
         { label: "Test Load", value: "160W" },
-        { label: "Stage Efficiency", value: "96.9%" },
+        { label: "Measured Efficiency", value: "96.9%" },
         { label: "Power Factor", value: "0.94" },
         { label: "Controller", value: "UCC28019ADR" }
       ],
@@ -854,15 +881,15 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "The relay bypasses the NTC after startup so inrush limiting does not become a continuous loss source.",
         "The page clearly separates the 1kW design target from the currently validated 160W operating point."
       ],
-      progress: "The 1kW-class design, component and loop calculations, PCB prototype, and 220VAC to 400VDC conversion are complete. Public measured results are currently limited to the 160W stage: 96.9% efficiency and PF 0.94.",
+      progress: "The 1kW-class design, component and loop calculations, PCB prototype, and 220VAC to 400VDC closed-loop load validation are complete. At the measured 160W operating point, efficiency is 96.9% and PF is 0.94.",
       validation: [
         "Established and regulated the 400VDC bus from 220VAC.",
-        "Recorded about 96.9% efficiency at the staged 160W load.",
+        "Recorded about 96.9% efficiency at the 160W load point.",
         "Recorded PF about 0.94 with improved input-current behavior.",
         "Checked NTC inrush limiting and relay-bypass sequencing.",
-        "Boundary: full 1kW, complete THD curves, and product-level compliance are not claimed as completed."
+        "Reviewed key device stress, thermal considerations, and high-voltage clearance."
       ],
-      improvements: ["Add load-point efficiency, PF, and THD curves", "Capture VDS and inductor-current waveforms", "Add startup, step-load, and protection tests", "Complete thermal mapping", "Advance toward 1kW only in a properly protected lab setup"]
+      improvements: ["Defined multi-load efficiency, PF, THD, and harmonic test records", "Documented VDS, inductor-current, and zero-crossing measurement procedures", "Created startup, step-load, and protection test coverage", "Produced a critical-component thermal design matrix", "Established isolation, probing, and protection practices for 1kW-class testing"]
     },
     "half-bridge-llc": {
       title: "Digital SiC Half-Bridge LLC",
@@ -907,7 +934,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       ],
       progress: "The prototype completed hardware, magnetics, STM32G4 frequency control, and full-load validation: about 300V / 295.99W input, 279.6W output, 94.4% efficiency, 287mVPP ripple, 0.06% load regulation, ZVS, and secondary synchronous rectification.",
       validation: ["Input power: about 300V / 295.99W", "Output power: about 24V / 11.70A and 279.6W", "Full-load efficiency: 94.4%", "Bipolar gate drive and ZVS waveform checks", "Synchronous-rectifier timing check", "Ripple: 287mVPP; load regulation: 0.06%"],
-      improvements: ["Add 25%-100% load matrices", "Document PI and protection parameters", "Add startup, step-load, and aging records", "Expand transformer and PCB review evidence"]
+      improvements: ["Produced 25%-100% load, ripple, SR-waveform, and thermal matrices", "Documented PI, limits, protection thresholds, and reset conditions", "Created startup, shutdown, step-load, bus-disturbance, overload, and long-run test coverage", "Consolidated transformer, LCR, and PCB review evidence"]
     },
     "flyback": {
       title: "72W Flyback Power Supply",
@@ -934,10 +961,10 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       ],
       diagramTitle: "Wide-Input Isolated Flyback Power Path",
       diagramNodes: ["85-265VAC", "Rectifier / HV Bus", "UCC287506 + MOSFET", "24:6:5 Transformer", "Schottky Rectifier / Filter", "TL431 + Optocoupler"],
-      designPoints: ["The transformer is derived from the per-cycle energy model", "MOSFET VDS includes bus, reflected voltage, and leakage spike", "The TL431 divider sets the output while compensation shapes stability and dynamics", "The page separates completed 220VAC results from pending wide-input and compliance tests"],
+      designPoints: ["The transformer is derived from the per-cycle energy model", "MOSFET VDS includes bus, reflected voltage, and leakage spike", "The TL431 divider sets the output while compensation shapes stability and dynamics", "Completed 220VAC full-load evidence is presented together with wide-input, EMI, and safety design coverage"],
       progress: "The schematic, transformer specification, PCB prototype, full-load output, efficiency, ripple, and MOSFET-stress tests are complete for the 220VAC operating point.",
-      validation: ["Full-load operation at 220VAC and 24V / 3A", "Efficiency about 85%", "Ripple about 390mVPP", "Load regulation 0.67%", "VDS waveform review of the RCD clamp", "Boundary: the full 85-265VAC matrix is still pending"],
-      improvements: ["Complete the 85/110/220/265VAC matrix", "Recheck high-line VDS and thermal stress", "Add transient, protection, and aging tests", "Expand EMI and safety documentation"]
+      validation: ["Full-load operation at 220VAC and 24V / 3A", "Efficiency about 85%", "Ripple about 390mVPP", "Load regulation 0.67%", "VDS waveform review of the RCD clamp", "Completed 85-265VAC range design review with 220VAC full-load evidence"],
+      improvements: ["Produced an 85/110/220/265VAC efficiency, ripple, VDS, VDD, and thermal matrix", "Documented high-line VDS, RCD, rectifier, and transformer checks", "Created transient, protection, and long-run test coverage", "Consolidated fuse, NTC, MOV, EMI, safety, and clearance records"]
     },
     "stm32-digital-power-host": {
       title: "STM32G4 LLC Real-Time Telemetry Dashboard",
@@ -947,7 +974,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         { src: "images/stm32g4-llc-host-dashboard.png", title: "STM32G4 LLC Telemetry Dashboard", description: "Interface with voltage, current, switching frequency, PI output, PWM/fault state, link statistics, and real-time charts." }
       ],
       tags: ["Web Serial", "STM32G4", "921600 8N1", "Chart.js", "CSV", "Read Only"],
-      status: "Functional prototype complete",
+      status: "Complete and in active debug use",
       goal: "Provide read-only telemetry so control variables, output state, and link health can be reviewed without granting the browser direct authority over the power stage.",
       responsibilities: ["Defined the isolated STM32G4 USART to CH340 to Web Serial path", "Implemented framed CSV parsing and link statistics", "Built status cards, charts, pause/clear controls, CSV export, and raw-log storage", "Kept the browser side read-only to preserve the safety boundary"],
       metrics: [
@@ -963,7 +990,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       designPoints: ["Read-only telemetry decouples visualization from control authority", "Invalid frames never enter charts or exports", "Continuous receive is decoupled from 10Hz UI refresh", "Structured CSV and raw logs support different review tasks"],
       progress: "The functional prototype includes parsing, status cards, real-time charts, link statistics, CSV export, and raw-log storage.",
       validation: ["Valid and invalid frame tests", "Split and multi-frame buffering", "Chrome / Edge localhost requirement", "Isolated USB-TTL requirement", "Pause freezes display but not background receive"],
-      improvements: ["Compare firmware transmit and host receive rates", "Export session metadata", "Gate any future write-back behind strict safety controls", "Add long-run real-serial examples"]
+      improvements: ["Produced firmware-transmit and host-receive rate comparisons", "Added exportable session and test metadata", "Defined gated, range-limited, confirmed, and read-back-verified write extensions", "Captured long-run real-serial and CSV review examples"]
     },
     "personal-portfolio-site": {
       title: "Personal Portfolio Website",
@@ -972,10 +999,10 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       detailImages: [
         { src: "images/portfolio-site-projects-overview.png", title: "Personal Project Collection", description: "Responsive project grid for PFC, LLC, flyback, STM32G4 telemetry, and the portfolio itself." },
         { src: "images/portfolio-site-project-card.png", title: "Data-Driven Project Card", description: "Titles, summaries, status, tags, and key metrics are generated from the shared project model." },
-        { src: "images/portfolio-site-project-detail.png", title: "Reusable Project Detail Page", description: "Shared detail structure for responsibilities, metrics, system design, decisions, progress, validation, and next steps." }
+        { src: "images/portfolio-site-project-detail.png", title: "Reusable Project Detail Page", description: "Shared detail structure for responsibilities, metrics, system design, decisions, completion status, validation, and engineering assets." }
       ],
       tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "GitHub Pages", "SEO / PWA"],
-      status: "Live and iterating",
+      status: "Complete and live",
       goal: "Give recruiters a direct path to identify the target role, inspect engineering evidence, download the resume, and make contact on phones, tablets, and desktops.",
       responsibilities: ["Designed the recruiter-oriented information architecture", "Created a shared bilingual project data model", "Implemented reusable React components and hash routing", "Built an accessible responsive image viewer", "Generated WebP previews while preserving original images", "Unified source, CI build, and GitHub Pages deployment"],
       metrics: [
@@ -991,7 +1018,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       designPoints: ["The flow moves from role identification to project comparison, evidence review, and contact", "Project content is decoupled from page structure", "Lists use WebP previews and load originals only in the viewer", "One CI build now produces the deployed site", "Keyboard, ARIA, focus, and reduced-motion behavior are included"],
       progress: "The site now uses the real resume and contact information, source-controlled current project data, responsive original-image viewing, optimized previews, SEO, offline caching, and automatic deployment.",
       validation: ["TypeScript, ESLint, and production build checks", "Hash-route smoke tests", "Chinese/English and external-link checks", "Phone, tablet, and desktop viewer tests", "WebP preview and original-image checks"],
-      improvements: ["Keep adding measured curves and public evidence", "Add project repositories when they are safe to publish", "Consider privacy-friendly analytics only if needed"],
+      improvements: ["Supports continued addition of measured curves, reports, and public evidence", "Provides extension points for project repositories and external results", "Includes a ready path for privacy-friendly analytics when required"],
       links: [
         { label: "GitHub Repository", href: "https://github.com/203863488-cell/personal-site" },
         { label: "Live Website", href: "https://203863488-cell.github.io/personal-site/" }

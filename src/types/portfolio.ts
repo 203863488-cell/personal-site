@@ -35,7 +35,7 @@ export interface PortfolioProject {
   metrics: PortfolioMetric[];
   keyComponents?: PortfolioTechnicalParameter[];
   operatingPrinciples?: string[];
-  engineeringRisks?: string[];
+  engineeringHighlights?: string[];
   diagramTitle: string;
   diagramNodes: string[];
   designPoints: string[];
