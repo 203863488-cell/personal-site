@@ -61,7 +61,13 @@ export function CapabilitySection() {
           </div>
         </div>
 
-        <div className="grid min-h-[420px] grid-cols-1 sm:min-h-[520px] sm:grid-cols-2" role="tabpanel" aria-label={currentTrack.title}>
+        <div
+          className={`grid min-h-[420px] sm:min-h-[520px] ${
+            denseTrack ? "grid-cols-2 grid-rows-3 sm:grid-cols-3 sm:grid-rows-2" : "grid-cols-1 sm:grid-cols-2"
+          }`}
+          role="tabpanel"
+          aria-label={currentTrack.title}
+        >
           {currentTrack.tiles.map((tile, index) => {
             const tileTitle = typeof tile === "string" ? tile : tile.title;
             const tileImage = typeof tile === "string" ? undefined : tile.image;
@@ -72,7 +78,7 @@ export function CapabilitySection() {
               <article
                 key={tileTitle}
                 className={`group relative overflow-hidden border border-white/8 bg-[#273442] transition duration-300 hover:bg-[#2E3E4E] ${
-                  denseTrack ? "aspect-video min-h-0" : "p-5 sm:p-7"
+                  denseTrack ? "min-h-0" : "p-5 sm:p-7"
                 } ${
                   !denseTrack && index === 2 ? "sm:col-span-2" : ""
                 }`}
@@ -83,7 +89,11 @@ export function CapabilitySection() {
                     height={720}
                     src={sources.original}
                     srcSet={sources.srcSet}
-                    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
+                    sizes={
+                      denseTrack
+                        ? "(min-width: 1024px) 21vw, (min-width: 640px) 33vw, 50vw"
+                        : "(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
+                    }
                     alt={tileTitle}
                     loading="lazy"
                     decoding="async"
