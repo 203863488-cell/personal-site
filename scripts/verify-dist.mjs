@@ -101,11 +101,49 @@ if (!shareDialogSource.includes("window.location.href")) {
   throw new Error("QR sharing must encode the current page URL.");
 }
 
-for (const projectId of ["half-bridge-llc", "totem-pole-pfc", "competition-interface-strategy"]) {
+const deletedProjectId = ["competition", "interface", "strategy"].join("-");
+if (sourceText.includes(deletedProjectId)) {
+  throw new Error(`Deleted project ID is still referenced: ${deletedProjectId}`);
+}
+
+for (const projectId of ["half-bridge-llc", "totem-pole-pfc", "flyback"]) {
   if (!siteCopyText.includes(`href: "#/project/${projectId}"`)) {
     throw new Error(`Homepage evidence card is missing project link: ${projectId}`);
   }
 }
+
+const capabilityImages = [
+  "capability-calculation.jpg",
+  "capability-magnetics.jpg",
+  "capability-pcb-layout.jpg",
+  "capability-stm32g4-control.jpg",
+  "capability-closed-loop-debug.jpg",
+  "capability-test-record.jpg"
+];
+
+const serviceWorkerText = await readFile(path.resolve("public/sw.js"), "utf8");
+if (!serviceWorkerText.includes("ignoreVary: true")) {
+  throw new Error("Service worker cache matching must tolerate Vary differences for offline module requests.");
+}
+
+await Promise.all(
+  capabilityImages.flatMap((fileName) => {
+    if (!siteCopyText.includes(`images/${fileName}`)) {
+      throw new Error(`Capability image is not referenced by homepage copy: ${fileName}`);
+    }
+
+    if (!serviceWorkerText.includes(`images/generated/${path.parse(fileName).name}-480.webp`)) {
+      throw new Error(`Capability image is not precached for weak networks: ${fileName}`);
+    }
+
+    const fileStem = path.parse(fileName).name;
+    return [
+      access(path.resolve("public/images", fileName)),
+      access(path.resolve("public/images/generated", `${fileStem}-480.webp`)),
+      access(path.resolve("public/images/generated", `${fileStem}-960.webp`))
+    ];
+  })
+);
 
 const referencedImages = new Set(
   [...sourceText.matchAll(/["`](images\/[^"`]+\.(?:jpe?g|png))["`]/gi)].map((match) => match[1])

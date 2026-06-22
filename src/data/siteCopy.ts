@@ -279,7 +279,7 @@ export const copy: Record<Language, SiteCopy> = {
       gatewayCards: [
         { title: "数控 SiC 半桥 LLC", subtitle: "300W · 满载效率 94.4% · ZVS / 同步整流", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
         { title: "1kW CCM Boost PFC", subtitle: "400VDC · 实测效率 96.9% · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
-        { title: "电赛硬件平台", subtitle: "隔离采样 + 辅助供电 + STM32G4 + 100V H 桥", image: "images/four-mos-power-board.png", href: "#/project/competition-interface-strategy" }
+        { title: "72W Flyback 反激电源", subtitle: "24V / 3A · 满载效率约 85% · 负载调整率 0.67%", image: "images/flyback-project.jpg", href: "#/project/flyback" }
       ],
       capabilityTracks: [
         {
@@ -304,12 +304,12 @@ export const copy: Record<Language, SiteCopy> = {
           title: "完整工程能力链",
           subtitle: "方案计算 → 磁件 → PCB → STM32G4 → 闭环调试 → 测试记录",
           tiles: [
-            "方案计算",
-            "磁件设计",
-            "PCB 实现",
-            "STM32G4 控制",
-            "闭环调试",
-            "测试记录"
+            { title: "方案计算", image: "images/capability-calculation.jpg" },
+            { title: "磁件设计", image: "images/capability-magnetics.jpg" },
+            { title: "PCB 实现", image: "images/capability-pcb-layout.jpg" },
+            { title: "STM32G4 控制", image: "images/capability-stm32g4-control.jpg" },
+            { title: "闭环调试", image: "images/capability-closed-loop-debug.jpg" },
+            { title: "测试记录", image: "images/capability-test-record.jpg" }
           ]
         }
       ]
@@ -332,7 +332,7 @@ export const copy: Record<Language, SiteCopy> = {
         {
           title: "电赛项目体系",
           subtitle: "Competition System",
-          description: "围绕电赛电源类题目，展示隔离采样、辅助供电、控制板、功率板和模块化接口策略。",
+          description: "围绕电赛电源类题目，展示隔离采样、辅助供电、STM32G4 控制板和 100V H 桥功率板。",
           href: "#/competition",
           image: "images/pcb-closeup.jpg",
           tags: ["隔离采样", "辅助电源", "控制板", "功率板"],
@@ -360,7 +360,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "电赛项目体系",
-        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、STM32G4 控制板、H 桥功率板及模块化接口策略。",
+        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、STM32G4 控制板和 H 桥功率板。",
         back: "返回首页"
       },
       personal: {
@@ -531,7 +531,7 @@ export const copy: Record<Language, SiteCopy> = {
       gatewayCards: [
         { title: "Digital SiC Half-Bridge LLC", subtitle: "300W · 94.4% full-load efficiency · ZVS / SR", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
         { title: "1kW CCM Boost PFC", subtitle: "400VDC · 96.9% measured efficiency · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
-        { title: "Competition Hardware Platform", subtitle: "Isolated sensing + auxiliary power + STM32G4 + 100V H bridge", image: "images/four-mos-power-board.png", href: "#/project/competition-interface-strategy" }
+        { title: "72W Flyback Power Supply", subtitle: "24V / 3A · About 85% full-load efficiency · 0.67% load regulation", image: "images/flyback-project.jpg", href: "#/project/flyback" }
       ],
       capabilityTracks: [
         {
@@ -556,12 +556,12 @@ export const copy: Record<Language, SiteCopy> = {
           title: "End-to-End Engineering Chain",
           subtitle: "Calculation → Magnetics → PCB → STM32G4 → Closed Loop → Test Records",
           tiles: [
-            "Calculation",
-            "Magnetics",
-            "PCB Implementation",
-            "STM32G4 Control",
-            "Closed-Loop Debug",
-            "Test Records"
+            { title: "Calculation", image: "images/capability-calculation.jpg" },
+            { title: "Magnetics", image: "images/capability-magnetics.jpg" },
+            { title: "PCB Implementation", image: "images/capability-pcb-layout.jpg" },
+            { title: "STM32G4 Control", image: "images/capability-stm32g4-control.jpg" },
+            { title: "Closed-Loop Debug", image: "images/capability-closed-loop-debug.jpg" },
+            { title: "Test Records", image: "images/capability-test-record.jpg" }
           ]
         }
       ]
@@ -584,7 +584,7 @@ export const copy: Record<Language, SiteCopy> = {
         {
           title: "Competition Project System",
           subtitle: "Competition System",
-          description: "A modular power-electronics platform covering isolated sensing, auxiliary power, control boards, power boards, and interface strategy.",
+          description: "A power-electronics platform covering isolated sensing, auxiliary power, STM32G4 control, and a 100V H-bridge power stage.",
           href: "#/competition",
           image: "images/pcb-closeup.jpg",
           tags: ["Isolated Sensing", "Auxiliary Power", "Control Board", "Power Board"],
@@ -612,7 +612,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "Competition Project System",
-        description: "A modular 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, STM32G4 control, the H-bridge power stage, and interface strategy.",
+        description: "A 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, STM32G4 control, and the H-bridge power stage.",
         back: "Back Home"
       },
       personal: {
@@ -965,32 +965,6 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Integrated hardware fast overcurrent shutdown, bus overvoltage, undervoltage lockout, and fault-latch interfaces.",
         "Captured switching waveforms, thermal images, and protection-action records at 12V, 24V, 100V, and multiple loads."
       ]
-    },
-    "competition-interface-strategy": {
-      title: "Competition Modular Interface Strategy",
-      subtitle: "Fast combination of sensing, control, supply, and power-stage modules",
-      summary: "The hardware platform combines the isolated auxiliary supply, bidirectional isolated sensing board, STM32G4 control board, and 100V H bridge through shared power domains, signal names, and integration procedures.",
-      tags: ["Interface Spec", "Modular Design", "Teamwork", "Debug Flow"],
-      status: "Platform integration complete",
-      goal: "Move competition hardware from one-off builds toward a modular platform with better debug efficiency and reuse.",
-      quickOverview: {
-        objective: "Integrate sensing, auxiliary power, control, and the H bridge into a reusable competition hardware platform.",
-        challenge: "Power domains, signal naming, connector polarity, power-up order, and protection paths must be standardized across modules.",
-        contribution: "Defined module boundaries and interfaces, integration order, protection strategy, and closed-loop system validation.",
-        outcome: "Delivered a complete sensing, power, STM32G4 control, and 100V H-bridge chain with reusable field documentation."
-      },
-      responsibilities: ["Defined module boundaries and signal interfaces", "Defined integration order and protection strategy", "Produced reusable documentation"],
-      metrics: [
-        { label: "Target", value: "Competition Platform", kind: "design" },
-        { label: "Integrated Result", value: "Four Modules", kind: "measured" },
-        { label: "Method", value: "Standardized Interfaces", kind: "design" }
-      ],
-      diagramTitle: "Modular Platform Relationship Diagram",
-      diagramNodes: ["Isolated Auxiliary Power", "Bidirectional Isolated Sensing", "MCU / STM32G4 Control Layer", "100V H-Bridge Power Board"],
-      designPoints: ["The auxiliary board powers the system, the sensing board observes it, the MCU decides, and the H bridge executes", "ISO_15V, ISO_5V, power-ground, and control-ground boundaries are explicit", "Validate supplies and sensing zero first, then drive the H bridge at low voltage, and close the loop only after that"],
-      progress: "The auxiliary supply, isolated sensing board, STM32G4 control board, and 100V H bridge are fully integrated with verified power domains, interfaces, closed-loop control, and protection paths.",
-      validation: ["Completed auxiliary-rail and combined-load validation", "Completed sensing zero, gain, and dynamic-noise validation", "Completed H-bridge validation from low voltage through 100V loading", "Completed ground, isolation, PWM dead-time, and protection-input checks", "Completed high-voltage closed-loop loading and multi-module operation"],
-      improvements: ["Produced reusable interface-document templates", "Built a typical-symptom and rapid-isolation case library", "Created team handoff and competition-operation materials"]
     },
     "totem-pole-pfc": {
       title: "1kW CCM Boost PFC",

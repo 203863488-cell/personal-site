@@ -71,26 +71,32 @@ export function CapabilitySection() {
             return (
               <article
                 key={tileTitle}
-                className={`group relative overflow-hidden border border-white/8 bg-[#273442] p-5 transition duration-300 hover:bg-[#2E3E4E] sm:p-7 ${
+                className={`group relative overflow-hidden border border-white/8 bg-[#273442] transition duration-300 hover:bg-[#2E3E4E] ${
+                  denseTrack ? "aspect-video min-h-0" : "p-5 sm:p-7"
+                } ${
                   !denseTrack && index === 2 ? "sm:col-span-2" : ""
                 }`}
               >
                 {tileImage && sources ? (
                   <img
+                    width={1280}
+                    height={720}
                     src={sources.original}
                     srcSet={sources.srcSet}
                     sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
                     alt={tileTitle}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-contain p-5 opacity-74 transition duration-500 motion-safe:group-hover:scale-[1.03] group-hover:opacity-90 sm:p-6"
+                    className={`absolute inset-0 h-full w-full opacity-74 transition duration-500 motion-safe:group-hover:scale-[1.03] group-hover:opacity-90 ${
+                      denseTrack ? "object-cover" : "object-contain p-5 sm:p-6"
+                    }`}
                   />
                 ) : (
                   <SignalField tone="dark" className="opacity-55 transition duration-300 group-hover:opacity-80" />
                 )}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
                 <div className={`absolute inset-0 transition duration-300 ${tileImage ? "bg-[linear-gradient(180deg,rgba(31,41,51,0.18),rgba(31,41,51,0.64))]" : "group-hover:bg-white/4"}`} />
-                <div className="relative flex h-full min-h-32 items-end sm:min-h-40">
+                <div className={`relative flex h-full items-end ${denseTrack ? "p-5 sm:p-6" : "min-h-32 sm:min-h-40"}`}>
                   <h4 className={`balanced-text font-semibold leading-[1.14] transition duration-300 motion-safe:group-hover:-translate-y-1 sm:leading-[1.18] ${
                     denseTrack ? "text-xl sm:text-[1.35rem]" : "text-[1.7rem] sm:text-2xl"
                   }`}>{tileTitle}</h4>

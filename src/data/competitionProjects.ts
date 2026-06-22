@@ -295,34 +295,5 @@ export const competitionProjects: PortfolioProject[] = [
       "集成硬件级快速过流关断、母线过压、欠压锁定和故障锁存接口。",
       "形成 12V、24V、100V 及不同负载下的开关波形、热像和保护动作记录。"
     ]
-  },
-  {
-    id: "competition-interface-strategy",
-    category: "competition",
-    title: "电赛模块化接口策略",
-    subtitle: "让采样、控制、供电、功率级可以快速组合",
-    summary: "以隔离辅助电源、双向隔离采样、STM32G4 控制板和 100V H 桥为主体，通过统一电源域、信号命名和分阶段上电流程形成可快速组合的电赛硬件平台。",
-    image: "images/circuit-board-abstract.jpg",
-    tags: ["接口规范", "模块化", "团队协作", "调试流程"],
-    status: "已完成平台化整合与联调",
-    goal: "把电赛硬件从一次性搭建转向模块化平台，提高调试效率与方案复用能力。",
-    quickOverview: {
-      objective: "把采样、供电、控制和 H 桥整合为可快速组合的电赛电源硬件平台。",
-      challenge: "跨模块电源域、信号命名、接口极性、上电顺序和保护链路需要统一。",
-      contribution: "定义模块边界与接口，制定联调顺序和保护策略，并完成整机闭环验证。",
-      outcome: "形成采样、辅助供电、STM32G4 控制和 100V H 桥的完整链路及现场复用文档。"
-    },
-    responsibilities: ["定义模块边界和信号接口", "制定模块联调顺序和保护策略", "输出可复用文档"],
-    metrics: [
-      { label: "对象", value: "电赛平台", kind: "design" },
-      { label: "整合结果", value: "四模块联调", kind: "measured" },
-      { label: "方式", value: "接口标准化", kind: "design" }
-    ],
-    diagramTitle: "模块化平台关系图",
-    diagramNodes: ["隔离辅助电源", "双向隔离采样", "MCU / STM32G4 控制层", "100V H 桥功率板"],
-    designPoints: ["辅助电源负责供电，采样板负责观测，MCU 负责决策，H 桥负责执行", "ISO_15V、ISO_5V、功率地和控制地边界清晰标注", "先独立验证供电与零点，再低压驱动 H 桥，最后闭环带载"],
-    progress: "已完成辅助电源、隔离采样、STM32G4 控制板和 100V H 桥的系统整合，电源域、关键接口、上电顺序、闭环控制与保护链路均完成联调。",
-    validation: ["完成辅助电源各路输出与联合带载验证", "完成采样板零点、比例和动态噪声验证", "完成 H 桥从低压驱动到 100V 带载验证", "完成模块地线、隔离边界、PWM 死区与保护输入检查", "完成高压闭环带载与模块协同运行验证"],
-    improvements: ["形成模板化接口文档", "沉淀典型现象与快速定位案例库", "形成团队交接与比赛现场操作资料"]
   }
 ];
