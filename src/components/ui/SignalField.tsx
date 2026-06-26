@@ -13,7 +13,10 @@ export function SignalField({ className = "", density = "calm", tone = "light" }
   const isDark = tone === "dark";
 
   useEffect(() => {
-    if (reducedMotion) {
+    const shouldUseStaticSignals =
+      reducedMotion || window.matchMedia("(pointer: coarse), (hover: none)").matches;
+
+    if (shouldUseStaticSignals) {
       return;
     }
 

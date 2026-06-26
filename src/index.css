@@ -39,12 +39,22 @@ body {
     padding-inline: 1rem;
   }
 
+  .navbar-brand-group {
+    max-width: calc(100% - 4.5rem);
+  }
+
   .navbar-shell__brand {
     min-width: 0;
-    max-width: calc(100% - 4.5rem);
+    max-width: min(6rem, 40vw);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .navbar-phone {
+    padding-inline: 0.45rem !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0 !important;
   }
 
   .navbar-menu-trigger {
@@ -661,6 +671,21 @@ body {
 
   .image-lightbox__nav--next {
     right: calc(50% - 3.5rem);
+  }
+}
+
+@media (pointer: coarse), (hover: none) {
+  .hero-linework,
+  .signal-drawing,
+  .signal-field--rich .signal-field__lines path:nth-child(1),
+  .signal-field--rich .signal-field__lines path:nth-child(2),
+  .signal-trace,
+  .signal-wave {
+    animation: none !important;
+  }
+
+  .signal-field__focus {
+    transition: none;
   }
 }
 

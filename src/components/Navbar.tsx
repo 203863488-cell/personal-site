@@ -14,6 +14,8 @@ const languageOptions: Array<{ language: Language; label: string }> = [
   { language: "en", label: "EN" }
 ];
 
+const phoneNumber = "19830186478";
+
 function LanguageSwitch({ compact = false }: { compact?: boolean }) {
   const { language, setLanguage, siteCopy } = useLanguage();
 
@@ -112,13 +114,21 @@ export function Navbar({ currentRoute }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-[#D8E0E7]/70 bg-[#F8FAF7]/86 backdrop-blur-xl">
       <div className="navbar-shell mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
-        <a
-          href={portfolioHrefs.home}
-          className="navbar-shell__brand text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
-          onClick={() => setOpen(false)}
-        >
-          {siteCopy.nav.brand}
-        </a>
+        <div className="navbar-brand-group flex min-w-0 items-center gap-2.5">
+          <a
+            href={portfolioHrefs.home}
+            className="navbar-shell__brand min-w-0 truncate text-base font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9]"
+            onClick={() => setOpen(false)}
+          >
+            {siteCopy.nav.brand}
+          </a>
+          <a
+            href={`tel:${phoneNumber}`}
+            className="navbar-phone shrink-0 whitespace-nowrap rounded-full border border-[#D8E0E7] bg-white/72 px-2.5 py-1 text-[0.68rem] font-semibold tracking-[0.04em] text-[#425466] transition hover:border-[#BFD0DF] hover:text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] sm:px-3 sm:text-xs"
+          >
+            {phoneNumber}
+          </a>
+        </div>
 
         <nav className="hidden items-center gap-6 md:flex">
           {siteCopy.nav.items.map((item) => (
