@@ -69,16 +69,16 @@ export function ProjectSectionNav({ hasImages }: ProjectSectionNavProps) {
   return (
     <nav
       aria-label={labels.ariaLabel}
-      className="sticky top-[4.55rem] z-30 -mx-1 overflow-x-auto rounded-xl border border-[#D8E0E7]/80 bg-[#F8FAF7]/92 p-1.5 shadow-[0_14px_40px_rgba(31,41,51,0.08)] backdrop-blur-xl"
+      className="mobile-scrollbar sticky top-[4.6rem] z-30 -mx-1 overflow-x-auto rounded-lg border border-[#D8E0E7]/80 bg-[#F8FAF7]/94 p-1 shadow-[0_10px_30px_rgba(31,41,51,0.07)] backdrop-blur-xl sm:top-[4.55rem] sm:rounded-xl sm:p-1.5 sm:shadow-[0_14px_40px_rgba(31,41,51,0.08)]"
     >
-      <div className="flex min-w-max gap-1">
+      <div className="flex min-w-max gap-0.5 sm:gap-1">
         {availableSectionIds.map((id) => (
           <button
             key={id}
             type="button"
             onClick={() => scrollToSection(id)}
             aria-current={activeSection === id ? "location" : undefined}
-            className={`rounded-lg px-4 py-2.5 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
+            className={`rounded-md px-2.5 py-1.5 text-[0.72rem] font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] sm:rounded-lg sm:px-4 sm:py-2.5 sm:text-sm ${
               activeSection === id ? "bg-[#1F2933] text-white shadow-sm" : "text-[#55616E] hover:bg-white hover:text-[#111827]"
             }`}
           >

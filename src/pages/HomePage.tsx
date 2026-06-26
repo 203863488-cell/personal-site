@@ -3,6 +3,7 @@ import { DocumentMetadata } from "../components/DocumentMetadata";
 import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
 import { TopShowcase } from "../components/home/TopShowcase";
+import { CompactMetricStrip } from "../components/ui/CompactMetricStrip";
 import { MetricGrid } from "../components/ui/MetricGrid";
 import { Pill } from "../components/ui/Pill";
 import { Reveal } from "../components/ui/Reveal";
@@ -21,20 +22,20 @@ export function HomePage() {
       <DocumentMetadata title={siteCopy.meta.title} description={siteCopy.meta.description} />
       <TopShowcase />
 
-      <Reveal as="section" className="content-auto section-shell pb-10 pt-16 sm:pb-12 sm:pt-28">
-        <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <Reveal as="section" className="content-auto section-shell pb-8 pt-10 sm:pb-12 sm:pt-28">
+        <div className="grid gap-7 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="section-kicker">{home.kicker}</p>
-            <h2 className="balanced-text mt-5 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
+            <h2 className="balanced-text mt-3 max-w-4xl text-3xl font-semibold leading-[1.1] text-[#111827] sm:mt-5 sm:text-5xl sm:leading-[1.12] lg:text-6xl">
               {home.title}
-              <span className="mt-2 block text-2xl font-medium leading-[1.18] text-[#1F2933] sm:text-3xl lg:text-4xl">
+              <span className="mt-1.5 block text-xl font-medium leading-[1.16] text-[#1F2933] sm:mt-2 sm:text-3xl sm:leading-[1.18] lg:text-4xl">
                 {home.subtitle}
               </span>
             </h2>
-            <p className="copy-text mt-6 max-w-3xl">
+            <p className="copy-text mt-4 max-w-3xl text-sm leading-6 sm:mt-6 sm:text-base sm:leading-7">
               {home.description}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
               {home.tags.map((tag) => (
                 <Pill key={tag}>
                   {tag}
@@ -44,7 +45,7 @@ export function HomePage() {
           </div>
 
           <div className="paper-card relative overflow-hidden">
-            <div className="relative h-80">
+            <div className="relative h-56 sm:h-80">
               <img
                 src={profileImage.original}
                 srcSet={profileImage.srcSet}
@@ -63,11 +64,12 @@ export function HomePage() {
                 <path d="M190 104H260M380 104H450" stroke="currentColor" />
                 <path d="M70 240C110 188 150 292 190 240C230 188 270 292 310 240C350 188 390 292 430 240" stroke="currentColor" />
               </svg>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                <CompactMetricStrip metrics={home.metricCards} className="pb-0.5 sm:hidden" />
                 <MetricGrid
                   metrics={home.metricCards}
-                  className="grid gap-3 sm:grid-cols-3"
-                  tileClassName="bg-white/84 p-4 shadow-[0_14px_38px_rgba(31,41,51,0.055)]"
+                  className="hidden gap-3 sm:grid sm:grid-cols-3"
+                  tileClassName="min-w-[10.75rem] snap-start bg-white/84 p-3 shadow-[0_14px_38px_rgba(31,41,51,0.055)] sm:min-w-0 sm:p-4"
                 />
               </div>
             </div>

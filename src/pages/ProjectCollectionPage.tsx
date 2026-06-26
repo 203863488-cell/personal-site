@@ -30,19 +30,19 @@ export function ProjectCollectionPage({ pageKey, projects }: ProjectCollectionPa
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <DocumentMetadata title={`${page.title} | ${siteCopy.nav.brand}`} description={page.description} />
       <section className="section-shell pt-16">
-        <SignalButton href={portfolioHrefs.home} icon={ArrowLeft} iconPosition="start" className="mb-10 py-2">
+        <SignalButton href={portfolioHrefs.home} icon={ArrowLeft} iconPosition="start" className="mb-6 py-2 sm:mb-10">
           {page.back}
         </SignalButton>
 
-        <Reveal className="mb-12">
+        <Reveal className="mb-8 sm:mb-12">
           <p className="section-kicker">{page.kicker}</p>
           <h1 className="section-title balanced-text">{page.title}</h1>
           <p className="section-copy">{page.description}</p>
         </Reveal>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
           {localizedProjects.map((project, index) => (
-            <Reveal key={project.id} delay={index * 70}>
+            <Reveal key={project.id} className="min-w-0" delay={index * 70}>
               <ProjectCard project={project} />
             </Reveal>
           ))}

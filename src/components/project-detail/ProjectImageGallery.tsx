@@ -30,25 +30,25 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
   }
 
   return (
-    <section id="drawings" className="project-section paper-card p-6">
+    <section id="drawings" className="project-section paper-card p-3.5 sm:p-6">
       <div>
         <p className="section-kicker">{siteCopy.projectDetail.imagesKicker}</p>
-        <h3 className="balanced-text mt-3 text-2xl font-semibold leading-[1.18] text-[#111827]">{siteCopy.projectDetail.imagesTitle}</h3>
+        <h3 className="balanced-text mt-2 text-lg font-semibold leading-[1.16] text-[#111827] sm:mt-3 sm:text-2xl sm:leading-[1.18]">{siteCopy.projectDetail.imagesTitle}</h3>
       </div>
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-3">
+      <div className="mobile-scrollbar -mx-3.5 mt-3.5 flex snap-x gap-2.5 overflow-x-auto px-3.5 pb-1.5 sm:mx-0 sm:mt-6 sm:grid sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
         {images.map((image, index) => {
           const sources = responsiveImageSources(image.src);
 
           return (
-            <article key={image.src} className="overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78">
+            <article key={image.src} className="min-w-[74vw] max-w-[17rem] snap-start overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78 sm:min-w-0 sm:max-w-none">
               <button
                 type="button"
-                className="group relative block h-64 w-full overflow-hidden bg-[#F7F9FB] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4F9CF9]"
+                className="group relative block h-36 w-full overflow-hidden bg-[#F7F9FB] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4F9CF9] sm:h-64"
                 onClick={() => setActiveImage(index)}
                 aria-label={`${siteCopy.projectDetail.openImage}: ${image.title}`}
               >
-                <span className="absolute left-3 top-3 z-10 rounded-full border border-white/70 bg-[#111827]/76 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur">
+                <span className="absolute left-2.5 top-2.5 z-10 rounded-full border border-white/70 bg-[#111827]/76 px-2.5 py-1 text-[0.68rem] font-semibold text-white shadow-lg backdrop-blur sm:left-3 sm:top-3 sm:px-3 sm:py-1.5 sm:text-xs">
                   {siteCopy.projectDetail.imageKinds[image.kind]}
                 </span>
                 <img
@@ -60,14 +60,14 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
                   decoding="async"
                   className="h-full w-full object-contain p-3 transition duration-300 motion-safe:group-hover:scale-[1.02]"
                 />
-                <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full bg-[#111827]/82 px-3 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100">
-                  <ZoomIn aria-hidden="true" className="h-4 w-4" />
+                <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 rounded-full bg-[#111827]/82 px-2.5 py-1.5 text-[0.68rem] font-semibold text-white opacity-100 shadow-lg transition sm:bottom-3 sm:right-3 sm:gap-2 sm:px-3 sm:py-2 sm:text-xs sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
+                  <ZoomIn aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {siteCopy.projectDetail.openImage}
                 </span>
               </button>
-              <div className="border-t border-[#D8E0E7]/80 p-5">
-                <h4 className="balanced-text font-semibold leading-[1.2] text-[#111827]">{image.title}</h4>
-                <p className="mt-3 text-sm leading-6 text-[#5D6673]">{image.description}</p>
+              <div className="border-t border-[#D8E0E7]/80 p-3 sm:p-5">
+                <h4 className="balanced-text text-sm font-semibold leading-[1.18] text-[#111827] sm:text-base sm:leading-[1.2]">{image.title}</h4>
+                <p className="mobile-line-clamp-2 mt-2 text-[0.78rem] leading-5 text-[#5D6673] sm:mt-3 sm:text-sm sm:leading-6">{image.description}</p>
               </div>
             </article>
           );

@@ -103,7 +103,7 @@ function HeroBackdrop({ activeSlide, nearbySlides }: { activeSlide: number; near
           );
         }
       )}
-      <div className="hero-showcase__wash absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(248,250,247,0.86)_0%,rgba(248,250,247,0.66)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.14)_100%)]" />
+      <div className="hero-showcase__wash absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(248,250,247,0.92)_0%,rgba(248,250,247,0.82)_56%,rgba(248,250,247,0.58)_100%)] sm:bg-[linear-gradient(90deg,rgba(248,250,247,0.86)_0%,rgba(248,250,247,0.66)_42%,rgba(248,250,247,0.3)_78%,rgba(248,250,247,0.14)_100%)]" />
       <SignalField density="rich" className="z-[2] opacity-42" />
       <div className="absolute inset-x-0 bottom-0 z-[3] h-32 bg-[linear-gradient(180deg,transparent,rgba(248,250,247,0.78))]" />
     </>
@@ -122,8 +122,8 @@ function HeroControls({ activeSlide, goToNext, goToPrevious, setActiveSlide }: H
   const heroSlides = siteCopy.topShowcase.heroSlides;
 
   return (
-    <div className="hero-showcase__controls absolute bottom-10 left-1/2 flex w-[min(100%-2.5rem,80rem)] -translate-x-1/2 items-center justify-between gap-4">
-      <div className="flex items-center gap-3">
+    <div className="hero-showcase__controls absolute bottom-3.5 left-5 right-5 z-20 flex w-auto items-center justify-between gap-4 sm:bottom-10 sm:left-1/2 sm:right-auto sm:w-[min(100%-2.5rem,80rem)] sm:-translate-x-1/2">
+      <div className="flex items-center gap-2.5 sm:gap-3">
         {heroSlides.map((item, index) => (
           <button
             key={item.id}
@@ -132,8 +132,8 @@ function HeroControls({ activeSlide, goToNext, goToPrevious, setActiveSlide }: H
             aria-pressed={index === activeSlide}
             onClick={() => setActiveSlide(index)}
             onMouseEnter={() => setActiveSlide(index)}
-            className={`h-3.5 rounded-[3px] border transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] ${
-              index === activeSlide ? "w-9 border-[#4F9CF9] bg-[#4F9CF9]" : "w-3.5 border-[#BFD0DF] bg-white/75 hover:border-[#7AA2F7]"
+            className={`h-2.5 rounded-[3px] border transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] sm:h-3.5 ${
+              index === activeSlide ? "w-7 border-[#4F9CF9] bg-[#4F9CF9] sm:w-9" : "w-2.5 border-[#BFD0DF] bg-white/75 hover:border-[#7AA2F7] sm:w-3.5"
             }`}
           />
         ))}
@@ -183,7 +183,7 @@ export function HeroShowcase() {
 
   return (
     <section
-      className="hero-showcase relative min-h-[720px] overflow-hidden border-b border-[#D8E0E7]"
+      className="hero-showcase relative min-h-[31.5rem] overflow-hidden border-b border-[#D8E0E7] sm:min-h-[720px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -195,7 +195,7 @@ export function HeroShowcase() {
     >
       <HeroBackdrop activeSlide={activeSlide} nearbySlides={nearbySlides} />
 
-      <div className="hero-showcase__shell relative z-10 mx-auto flex min-h-[720px] max-w-7xl items-center px-5 py-20 sm:px-8 lg:px-10">
+      <div className="hero-showcase__shell relative z-10 mx-auto flex min-h-[31.5rem] max-w-7xl items-start px-4 pb-[3.25rem] pt-[3.5rem] sm:min-h-[720px] sm:items-center sm:px-8 sm:py-20 lg:px-10">
         <div className="w-full">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-center">
             <div className="hero-showcase__content transition duration-500" key={slide.id}>
@@ -206,29 +206,29 @@ export function HeroShowcase() {
                   {paused || reducedMotion ? siteCopy.topShowcase.pausedStatus : siteCopy.topShowcase.playingStatus}
                 </span>
               </div>
-              <h1 className="hero-showcase__title balanced-text mt-6 max-w-4xl text-4xl font-semibold leading-[1.12] text-[#111827] sm:text-5xl lg:text-6xl">
+              <h1 className="hero-showcase__title balanced-text mt-3.5 max-w-[12ch] text-[clamp(1.85rem,7.5vw,2.45rem)] font-semibold leading-[1.05] text-[#111827] sm:mt-6 sm:max-w-4xl sm:text-5xl sm:leading-[1.12] lg:text-6xl">
                 {slide.title}
               </h1>
-              <p className="hero-showcase__copy copy-text mt-6 max-w-3xl">{slide.description}</p>
-              <div className="hero-showcase__tags mt-8 flex flex-wrap gap-3">
+              <p className="hero-showcase__copy copy-text mt-3.5 max-w-[18rem] text-[0.86rem] leading-6 sm:mt-6 sm:max-w-3xl sm:text-base sm:leading-7">{slide.description}</p>
+              <div className="hero-showcase__tags mt-4 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
                 {slide.tags.map((tag) => (
-                  <Pill key={tag}>{tag}</Pill>
+                  <Pill key={tag} className="px-2.5 py-1 text-[0.68rem] sm:px-4 sm:py-2 sm:text-sm">{tag}</Pill>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#/personal" className="primary-button gap-2">
-                  <FolderKanban aria-hidden="true" className="h-4 w-4" />
+              <div className="mt-4 grid max-w-[17rem] grid-cols-2 gap-2 sm:mt-8 sm:flex sm:max-w-none sm:flex-wrap sm:gap-3">
+                <a href="#/personal" className="primary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
+                  <FolderKanban aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {siteCopy.topShowcase.projectsAction}
                 </a>
-                <a href={assetUrl("resume.pdf")} download className="secondary-button gap-2">
-                  <Download aria-hidden="true" className="h-4 w-4" />
+                <a href={assetUrl("resume.pdf")} download className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
+                  <Download aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {siteCopy.topShowcase.resumeAction}
                 </a>
-                <a href="#/contact" className="secondary-button gap-2">
-                  <Mail aria-hidden="true" className="h-4 w-4" />
+                <a href="#/contact" className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
+                  <Mail aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {siteCopy.topShowcase.contactAction}
                 </a>
-                <ShareQrDialog />
+                <ShareQrDialog buttonClassName="w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm" />
               </div>
             </div>
 
