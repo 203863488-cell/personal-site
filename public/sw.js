@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "portfolio-";
-const CACHE_NAME = "portfolio-source-v20260622-1";
+const CACHE_NAME = "portfolio-source-v20260710-1";
 const BASE_URL = new URL("./", self.registration.scope);
 const INDEX_URL = new URL("index.html", BASE_URL).href;
 const OFFLINE_IMAGE_URL = new URL("offline-image.svg", BASE_URL).href;
@@ -83,17 +83,16 @@ async function updateCachedNavigation(request) {
   }
 }
 
-async function staleWhileRevalidateNavigation(request, event) {
+async function networkFirstNavigation(request) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(INDEX_URL, { ignoreSearch: true, ignoreVary: true });
-  const networkResponse = updateCachedNavigation(request);
+  const networkResponse = await updateCachedNavigation(request);
 
-  if (cached) {
-    event.waitUntil(networkResponse);
-    return cached;
+  if (networkResponse) {
+    return networkResponse;
   }
 
-  return (await networkResponse) || Response.error();
+  return cached || Response.error();
 }
 
 function getSmallImageFallbackUrl(url) {
@@ -198,7 +197,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (request.mode === "navigate" && (url.pathname === APP_PATH || url.pathname === INDEX_PATH)) {
-    event.respondWith(staleWhileRevalidateNavigation(request, event));
+    event.respondWith(networkFirstNavigation(request));
     return;
   }
 

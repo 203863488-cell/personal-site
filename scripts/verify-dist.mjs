@@ -122,6 +122,14 @@ const capabilityImages = [
 ];
 
 const serviceWorkerText = await readFile(path.resolve("public/sw.js"), "utf8");
+if (!serviceWorkerText.includes('CACHE_NAME = "portfolio-source-v20260710-1"')) {
+  throw new Error("Service worker cache version must be bumped for the current deployment.");
+}
+
+if (!serviceWorkerText.includes("networkFirstNavigation")) {
+  throw new Error("Service worker navigation must prefer fresh network content before cached app shell.");
+}
+
 if (!serviceWorkerText.includes("ignoreVary: true")) {
   throw new Error("Service worker cache matching must tolerate Vary differences for offline module requests.");
 }
