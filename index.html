@@ -1,93 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+    <base href="/personal-site/" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="canonical" href="https://203863488-cell.github.io/personal-site/" />
+    <link
+      rel="preload"
+      as="image"
+      href="images/generated/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8-960.webp"
+      imagesrcset="images/generated/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8-480.webp 480w, images/generated/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8-960.webp 960w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>只写给你的纪念册</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#F8FAF7" />
+    <meta name="author" content="蓝宏涛" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="蓝宏涛的电源硬件研发求职作品集，展示 CCM Boost PFC、数控 SiC 半桥 LLC、反激电源、STM32G4 控制和样机测试。邮箱：203863488@qq.com"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content="蓝宏涛｜2027 届电源硬件研发作品集" />
+    <meta
+      property="og:description"
+      content="CCM Boost PFC、数控 SiC 半桥 LLC、72W 反激、STM32G4 控制与完整样机测试证据。"
+    />
+    <meta property="og:url" content="https://203863488-cell.github.io/personal-site/" />
+    <meta
+      property="og:image"
+      content="https://203863488-cell.github.io/personal-site/images/portfolio-site-projects-overview.png"
+    />
+    <meta property="og:image:alt" content="蓝宏涛个人电源硬件项目作品集页面" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="蓝宏涛｜2027 届电源硬件研发作品集" />
+    <meta
+      name="twitter:description"
+      content="CCM Boost PFC、数控 SiC 半桥 LLC、72W 反激、STM32G4 控制与完整样机测试证据。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://203863488-cell.github.io/personal-site/images/portfolio-site-projects-overview.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "蓝宏涛",
+        "alternateName": "Hongtao Lan",
+        "email": "mailto:203863488@qq.com",
+        "url": "https://203863488-cell.github.io/personal-site/",
+        "sameAs": ["https://github.com/203863488-cell"],
+        "jobTitle": "电源硬件研发求职者",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "深圳技术大学"
+        },
+        "knowsAbout": [
+          "Power Electronics",
+          "CCM Boost PFC",
+          "SiC Half-Bridge LLC",
+          "Flyback Converter",
+          "STM32G4",
+          "PCB Design"
+        ]
+      }
+    </script>
+    <title>蓝宏涛｜2027 届电源硬件研发作品集</title>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="topbar" aria-label="页面导航">
-        <a class="brand" href="#top" aria-label="回到开头">
-          <span class="brand-symbol" aria-hidden="true">L</span>
-          <span class="brand-text">Only You</span>
-        </a>
-        <nav class="nav-links" aria-label="章节">
-          <a href="#memories">时间线</a>
-          <a href="#orbit">光影结尾</a>
-        </nav>
-      </header>
-
-      <main id="top">
-        <section class="hero" aria-label="恋爱纪念册封面">
-          <canvas class="ambient-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-          <div class="hero-grid" aria-hidden="true"></div>
-
-          <div class="hero-inner">
-            <div class="hero-copy reveal">
-              <p class="kicker">For her, and only her</p>
-              <h1 class="hero-title">
-                <span>把你写进</span>
-                <span>每一个心动瞬间</span>
-              </h1>
-              <p class="lead">
-                我想把那些没来得及好好说出口的喜欢，慢慢放进这一页里。每一张照片，都是我认真收藏你的证据。
-              </p>
-              <div class="hero-stats" aria-label="纪念标签">
-                <span>初见</span>
-                <span>偏爱</span>
-                <span>以后</span>
-              </div>
-            </div>
-
-            <div class="hero-visual reveal" aria-hidden="true">
-              <div class="portrait-stack" id="heroStack"></div>
-              <div class="orbit-note">
-                <span>our time</span>
-                <strong>所有偶然，都在靠近你</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="statement" aria-label="纪念引语">
-          <p>有些瞬间很轻，但因为是你，所以值得被认真收藏。</p>
-        </section>
-
-        <section class="memories" id="memories" aria-label="恋爱时间线">
-          <div class="section-heading reveal">
-            <p class="kicker">Memory line</p>
-            <h2>把我们的时间慢慢排成星河</h2>
-            <p>
-              从某个普通日子开始，很多小事都因为你变得特别。以后每想起一段，就在这里多放一颗星。
-            </p>
-          </div>
-
-          <div class="timeline" id="timelineList"></div>
-        </section>
-
-        <section class="orbit-section" id="orbit" aria-label="照片光影特效">
-          <canvas class="ambient-canvas orbit-canvas" id="orbitCanvas" aria-hidden="true"></canvas>
-          <div class="orbit-heading reveal">
-            <p class="kicker">Final scene</p>
-            <h2>最后，光影会替我继续说</h2>
-            <p>如果时间会绕成一个环，我希望每一次回到原点，旁边还是你。</p>
-          </div>
-
-          <div class="orbit-stage reveal" id="orbitStage" aria-label="动态照片卡片环绕">
-            <div class="orbit-caption" id="orbitCaption">
-              <span>所有偶然</span>
-              <strong>都是命中注定的必然</strong>
-            </div>
-            <div class="orbit-scene" id="orbitScene"></div>
-            <div class="stage-vignette" aria-hidden="true"></div>
-          </div>
-        </section>
-      </main>
-    </div>
-
-    <script src="content.js"></script>
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
