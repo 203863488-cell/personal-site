@@ -425,4 +425,3 @@ export const personalProjects = personalProjectOrder.map((projectId) => {
 
   return project;
 });
-
