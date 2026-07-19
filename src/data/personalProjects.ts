@@ -94,7 +94,7 @@ const personalProjectData: PortfolioProject[] = [
     id: "half-bridge-llc",
     category: "personal",
     title: "数控 SiC 半桥 LLC",
-    subtitle: "300VDC -> 24V / 300W STM32G4 数字调频 LLC",
+    subtitle: "400VDC -> 24V / 300W STM32G4 数字调频 LLC",
     summary: "完成主功率板、STM32G4 主控板、辅助电源、PQ40 主变压器和同步整流方案；满载输出 279.6W，效率 94.4%，纹波 287mVPP，负载调整率 0.06%。",
     image: "images/llc-full-load-board.jpg",
     detailImages: [
@@ -103,12 +103,6 @@ const personalProjectData: PortfolioProject[] = [
         title: "数控 SiC 半桥 LLC 满载样机",
         description: "完整样机包含主功率板、STM32G4 控制板、辅助供电、PQ40 主变压器、副边同步整流和输出滤波。",
         kind: "prototype"
-      },
-      {
-        src: "images/llc-full-load-input-power.jpg",
-        title: "满载输入功率记录",
-        description: "输入侧记录约 300V / 295.99W，用于与输出功率交叉核算满载效率。",
-        kind: "test"
       },
       {
         src: "images/llc-full-load-output-load.jpg",
@@ -123,12 +117,6 @@ const personalProjectData: PortfolioProject[] = [
         kind: "waveform"
       },
       {
-        src: "images/llc-sr-waveform.jpg",
-        title: "副边同步整流 SR 波形",
-        description: "用于确认同步整流时序与谐振电流方向匹配，减少体二极管导通和反向电流。",
-        kind: "waveform"
-      },
-      {
         src: "images/llc-output-ripple.jpg",
         title: "满载输出纹波 287mVPP",
         description: "满载输出纹波用于复核输出电容、同步整流、采样噪声和功率回路布局。",
@@ -139,19 +127,13 @@ const personalProjectData: PortfolioProject[] = [
         title: "负载调整率记录",
         description: "测试结果约 0.06%，用于验证 STM32G4 调频 PI 闭环稳压能力。",
         kind: "test"
-      },
-      {
-        src: "images/design-review.jpg",
-        title: "磁件与参数复核",
-        description: "围绕 FHA 增益、谐振腔参数、匝比、漏感集成和 LCR 测量结果进行设计复盘。",
-        kind: "test"
       }
     ],
-    tags: ["300VDC", "24V / 300W", "SiC 半桥", "STM32G4", "UCC23513", "FHA / 调频 PI"],
+    tags: ["400VDC", "24V / 300W", "SiC 半桥", "STM32G4", "UCC23513", "FHA / 调频 PI"],
     status: "已完成满载闭环验证",
-    goal: "完成一套可复盘的 300VDC 到 24V / 300W 隔离数字电源样机，把 LLC 从 FHA 分析、磁件设计、SiC 驱动和 PCB 推进到 STM32G4 闭环、同步整流和满载测试。",
+    goal: "完成一套可复盘的 400VDC 到 24V / 300W 隔离数字电源样机，把 LLC 从 FHA 分析、磁件设计、SiC 驱动和 PCB 推进到 STM32G4 闭环、同步整流和满载测试。",
     quickOverview: {
-      objective: "实现 300VDC 输入、24V / 300W 输出的数控 SiC 半桥 LLC 样机。",
+      objective: "实现 400VDC 输入、24V / 300W 输出的数控 SiC 半桥 LLC 样机。",
       challenge: "FHA 参数、PQ40 磁件、SiC 双极性驱动、同步整流和数字调频闭环需要联合调试。",
       contribution: "独立完成谐振腔与磁件设计、功率板 PCB、STM32G4 调频 PI、保护状态机和满载测试。",
       outcome: "输出 279.6W，满载效率 94.4%，纹波 287mVPP，负载调整率 0.06%，实现 ZVS 与同步整流。"
@@ -166,15 +148,15 @@ const personalProjectData: PortfolioProject[] = [
       "完成输入功率、输出功率、效率、栅极驱动、SR、纹波、负载调整率和 ZVS 验证。"
     ],
     metrics: [
-      { label: "输入规格", value: "300VDC", kind: "design" },
+      { label: "输入规格", value: "400VDC", kind: "design" },
       { label: "输出规格", value: "24V / 300W", kind: "design" },
       { label: "满载效率", value: "94.4%", kind: "measured" },
       { label: "输出纹波", value: "287mVPP", kind: "measured" },
       { label: "负载调整率", value: "0.06%", kind: "measured" },
       { label: "主变匝比", value: "30:4:4", kind: "design" }
     ],
-    diagramTitle: "300V 数字调频 LLC 功率与控制链路",
-    diagramNodes: ["300VDC 高压母线", "SiC 半桥 + UCC23513", "LLC 谐振腔 / PQ40 主变", "同步整流 + 输出滤波", "采样反馈 / STM32G4", "调频 PI / PWM / 保护状态机"],
+    diagramTitle: "400V 数字调频 LLC 功率与控制链路",
+    diagramNodes: ["400VDC 高压母线", "SiC 半桥 + UCC23513", "LLC 谐振腔 / PQ40 主变", "同步整流 + 输出滤波", "采样反馈 / STM32G4", "调频 PI / PWM / 保护状态机"],
     designPoints: [
       "设计围绕增益曲线、谐振点、频率上下限、负载变化和容性区边界展开，不只核算单一额定点。",
       "主变压器同时考虑 Ap/Aw/Ae 裕量、窗口利用率、绝缘、漏感可控性和大电流副边铜损。",
@@ -182,9 +164,9 @@ const personalProjectData: PortfolioProject[] = [
       "功率板压缩半桥换流环、母线退耦环和变压器原边回路，并控制 SW 节点面积和采样地耦合。",
       "满载验证遵循输入功率、输出功率、效率、驱动、SR、纹波和稳压性能的证据链。"
     ],
-    progress: "样机已完成硬件、磁件、STM32G4 调频闭环和满载验证。输入约 300V / 295.99W，输出约 279.6W，效率 94.4%，输出纹波 287mVPP，负载调整率 0.06%，满载实现 ZVS 与副边同步整流。",
+    progress: "样机已完成硬件、磁件、STM32G4 调频闭环和满载验证。输入约 400V / 295.99W，输出约 279.6W，效率 94.4%，输出纹波 287mVPP，负载调整率 0.06%，满载实现 ZVS 与副边同步整流。",
     validation: [
-      "输入功率：满载输入约 300V / 295.99W。",
+      "输入功率：满载输入约 400V / 295.99W。",
       "输出功率：电子负载记录约 24V / 11.70A、279.6W。",
       "效率：按输入和输出功率计算满载效率约 94.4%。",
       "栅极驱动与软开关：检查 +18V / -3V 栅压、死区和满载 ZVS。",
@@ -228,12 +210,6 @@ const personalProjectData: PortfolioProject[] = [
         src: "images/flyback-ripple-waveform.jpg",
         title: "满载输出纹波",
         description: "短地弹簧和带宽限制条件下记录输出纹波及高频尖峰。",
-        kind: "waveform"
-      },
-      {
-        src: "images/flyback-vds-waveform.jpg",
-        title: "MOSFET VDS 应力波形",
-        description: "用于核对反射电压、漏感尖峰和 RCD 吸收网络的钳位效果。",
         kind: "waveform"
       }
     ],
@@ -437,9 +413,7 @@ const personalProjectData: PortfolioProject[] = [
 const personalProjectOrder = [
   "half-bridge-llc",
   "totem-pole-pfc",
-  "flyback",
-  "stm32-digital-power-host",
-  "personal-portfolio-site"
+  "flyback"
 ] as const;
 
 export const personalProjects = personalProjectOrder.map((projectId) => {
@@ -451,3 +425,4 @@ export const personalProjects = personalProjectOrder.map((projectId) => {
 
   return project;
 });
+
