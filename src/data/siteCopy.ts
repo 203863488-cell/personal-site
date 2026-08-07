@@ -10,6 +10,8 @@ export interface HeroSlide {
   title: string;
   description: string;
   image: string;
+  href: string;
+  actionLabel: string;
   tags: string[];
   metrics: PortfolioMetric[];
 }
@@ -178,7 +180,7 @@ export const copy: Record<Language, SiteCopy> = {
   zh: {
     meta: {
       title: "蓝宏涛｜2027 届电源硬件研发作品集",
-      description: "蓝宏涛的电源硬件研发求职作品集，展示 CCM Boost PFC、数控 SiC 半桥 LLC、反激电源、STM32G4 控制和样机测试。"
+      description: "蓝宏涛的电源硬件研发求职作品集，展示 2026 电赛省级二等奖 AC-AC 系统、CCM Boost PFC、数控 SiC 半桥 LLC、反激电源和 STM32G4 控制。"
     },
     nav: {
       brand: "蓝宏涛",
@@ -210,6 +212,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "蓝宏涛｜电源硬件研发作品集",
           description: "面向电源硬件研发岗位，覆盖 Boost PFC、数控 SiC 半桥 LLC、反激电源、STM32G4 控制与从原理设计到样机调试的完整工程链路。",
           image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
+          href: "#/personal",
+          actionLabel: "查看核心项目",
           tags: ["电源硬件研发", "功率变换器", "磁件 / PCB", "闭环调试"],
           metrics: [
             { label: "LLC 满载效率", value: "94.4%" },
@@ -218,11 +222,28 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         },
         {
+          id: "contest-2026",
+          kicker: "2026 全国大学生电子设计竞赛 · 省级二等奖",
+          title: "2026电赛电源题",
+          description: "担任队长并主导总体架构与全部硬件，采用四开关图腾柱无桥 PFC、直流母线和三相全桥构成 AC-AC 变换系统，团队软件使用 SVPWM 生成三相对称输出。",
+          image: "images/contest-2026-three-phase-waveform.jpg",
+          href: "#/project/2026-contest-ac-ac",
+          actionLabel: "查看项目详情",
+          tags: ["图腾柱无桥 PFC", "三相全桥", "SVPWM", "AC-AC"],
+          metrics: [
+            { label: "获奖", value: "省级二等奖" },
+            { label: "PFC", value: "四开关图腾柱" },
+            { label: "逆变", value: "三相全桥 / SVPWM" }
+          ]
+        },
+        {
           id: "llc",
           kicker: "Featured Project 01",
           title: "数控 SiC 半桥 LLC",
           description: "400VDC 输入、24V / 300W 输出，基于 STM32G4 调频 PI、SiC 双极性栅极驱动和副边同步整流，满载效率 94.4%。",
           image: "images/llc-full-load-board.jpg",
+          href: "#/project/half-bridge-llc",
+          actionLabel: "查看项目详情",
           tags: ["SiC 半桥", "STM32G4", "FHA", "ZVS / 同步整流"],
           metrics: [
             { label: "输出", value: "24V / 300W" },
@@ -236,6 +257,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "72W Flyback 反激电源",
           description: "85-265VAC 宽输入、24V / 3A 隔离输出，采用 UCC287506、TL431 + 光耦反馈和定制变压器，220VAC 满载效率约 85%。",
           image: "images/flyback-project.jpg",
+          href: "#/project/flyback",
+          actionLabel: "查看项目详情",
           tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 光耦"],
           metrics: [
             { label: "输入范围", value: "85-265VAC" },
@@ -249,6 +272,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "1kW CCM Boost PFC",
           description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，带载实测 PF 0.94。",
           image: "images/pfc-boost-project.jpg",
+          href: "#/project/totem-pole-pfc",
+          actionLabel: "查看项目详情",
           tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II 补偿"],
           metrics: [
             { label: "输入", value: "220VAC" },
@@ -277,6 +302,7 @@ export const copy: Record<Language, SiteCopy> = {
       openShareLink: "直接打开",
       closeShare: "关闭二维码",
       gatewayCards: [
+        { title: "2026电赛电源题", subtitle: "图腾柱无桥 PFC · 三相全桥 SVPWM · 省级二等奖", image: "images/contest-2026-three-phase-waveform.jpg", href: "#/project/2026-contest-ac-ac" },
         { title: "数控 SiC 半桥 LLC", subtitle: "300W · 满载效率 94.4% · ZVS / 同步整流", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
         { title: "1kW CCM Boost PFC", subtitle: "400VDC · 实测效率 96.9% · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
         { title: "72W Flyback 反激电源", subtitle: "24V / 3A · 满载效率约 85% · 负载调整率 0.67%", image: "images/flyback-project.jpg", href: "#/project/flyback" }
@@ -332,10 +358,10 @@ export const copy: Record<Language, SiteCopy> = {
         {
           title: "电赛项目体系",
           subtitle: "Competition System",
-          description: "围绕电赛电源类题目，展示隔离采样、辅助供电、STM32G4 控制板和 100V H 桥功率板。",
+          description: "展示获得省级二等奖的图腾柱 PFC + 三相全桥 AC-AC 系统，以及隔离采样、辅助供电、STM32G4 控制板和功率板。",
           href: "#/competition",
-          image: "images/pcb-closeup.jpg",
-          tags: ["隔离采样", "辅助电源", "控制板", "功率板"],
+          image: "images/contest-2026-system-waveform-bench.jpg",
+          tags: ["省级二等奖", "图腾柱 PFC", "三相全桥", "模块化硬件"],
           accent: "blue"
         },
         {
@@ -360,7 +386,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "电赛项目体系",
-        description: "围绕 100V 低压电力电子平台，集中展示双向隔离采样、隔离辅助电源、STM32G4 控制板和 H 桥功率板。",
+        description: "以获得省级二等奖的 2026 AC-AC 变换系统为核心，展示图腾柱无桥 PFC、三相全桥以及可复用的隔离采样、辅助供电、STM32G4 控制和功率模块。",
         back: "返回首页"
       },
       personal: {
@@ -430,7 +456,7 @@ export const copy: Record<Language, SiteCopy> = {
   en: {
     meta: {
       title: "Hongtao Lan | Class of 2027 Power Hardware Portfolio",
-      description: "Power hardware portfolio covering CCM Boost PFC, digital SiC half-bridge LLC, flyback conversion, STM32G4 control, and prototype validation."
+      description: "Power hardware portfolio covering a 2026 contest Provincial Second Prize AC-AC system, CCM Boost PFC, digital SiC half-bridge LLC, flyback conversion, and STM32G4 control."
     },
     nav: {
       brand: "Hongtao Lan",
@@ -462,6 +488,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "Hongtao Lan | Power Hardware Portfolio",
           description: "Power-supply hardware portfolio covering Boost PFC, digital SiC half-bridge LLC, flyback conversion, STM32G4 control, and the full path from design to prototype validation.",
           image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
+          href: "#/personal",
+          actionLabel: "View Core Projects",
           tags: ["Power Hardware", "Converters", "Magnetics / PCB", "Closed-Loop Debug"],
           metrics: [
             { label: "LLC Efficiency", value: "94.4%" },
@@ -470,11 +498,28 @@ export const copy: Record<Language, SiteCopy> = {
           ]
         },
         {
+          id: "contest-2026",
+          kicker: "2026 National Undergraduate Electronics Design Contest · Provincial Second Prize",
+          title: "2026 Contest Power Electronics Project",
+          description: "As team captain, I led the system architecture, staffing, and all hardware work for an AC-AC converter using a four-switch totem-pole bridgeless PFC, DC link, and three-phase full bridge. Teammates implemented the SVPWM software.",
+          image: "images/contest-2026-three-phase-waveform.jpg",
+          href: "#/project/2026-contest-ac-ac",
+          actionLabel: "View Project Details",
+          tags: ["Totem-Pole PFC", "Three-Phase Bridge", "SVPWM", "AC-AC"],
+          metrics: [
+            { label: "Award", value: "Provincial 2nd Prize" },
+            { label: "PFC", value: "Four-Switch Totem Pole" },
+            { label: "Inverter", value: "3-Phase Bridge / SVPWM" }
+          ]
+        },
+        {
           id: "llc",
           kicker: "Featured Project 01",
           title: "Digital SiC Half-Bridge LLC",
           description: "400VDC to 24V / 300W with STM32G4 frequency PI control, bipolar SiC gate drive, synchronous rectification, and 94.4% full-load efficiency.",
           image: "images/llc-full-load-board.jpg",
+          href: "#/project/half-bridge-llc",
+          actionLabel: "View Project Details",
           tags: ["SiC Half Bridge", "STM32G4", "FHA", "ZVS / SR"],
           metrics: [
             { label: "Output", value: "24V / 300W" },
@@ -488,6 +533,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "72W Flyback Power Supply",
           description: "An 85-265VAC wide-input isolated 24V / 3A supply using UCC287506, TL431 plus optocoupler feedback, and a custom transformer, with about 85% full-load efficiency at 220VAC.",
           image: "images/flyback-project.jpg",
+          href: "#/project/flyback",
+          actionLabel: "View Project Details",
           tags: ["Flyback", "UCC287506", "24V / 3A", "TL431 Optocoupler"],
           metrics: [
             { label: "Input Range", value: "85-265VAC" },
@@ -501,6 +548,8 @@ export const copy: Record<Language, SiteCopy> = {
           title: "1kW CCM Boost PFC",
           description: "UCC28019ADR-based 220VAC to 400VDC PFC covering inrush control, EMI/safety design, and average-current-mode loops, with a measured PF of 0.94.",
           image: "images/pfc-boost-project.jpg",
+          href: "#/project/totem-pole-pfc",
+          actionLabel: "View Project Details",
           tags: ["UCC28019ADR", "CCM PFC", "400VDC", "Type-II Compensation"],
           metrics: [
             { label: "Input", value: "220VAC" },
@@ -529,6 +578,7 @@ export const copy: Record<Language, SiteCopy> = {
       openShareLink: "Open Link",
       closeShare: "Close QR Code",
       gatewayCards: [
+        { title: "2026 Contest Power Electronics Project", subtitle: "Totem-pole PFC · Three-phase SVPWM bridge · Provincial Second Prize", image: "images/contest-2026-three-phase-waveform.jpg", href: "#/project/2026-contest-ac-ac" },
         { title: "Digital SiC Half-Bridge LLC", subtitle: "300W · 94.4% full-load efficiency · ZVS / SR", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
         { title: "1kW CCM Boost PFC", subtitle: "400VDC · 96.9% measured efficiency · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
         { title: "72W Flyback Power Supply", subtitle: "24V / 3A · About 85% full-load efficiency · 0.67% load regulation", image: "images/flyback-project.jpg", href: "#/project/flyback" }
@@ -584,10 +634,10 @@ export const copy: Record<Language, SiteCopy> = {
         {
           title: "Competition Project System",
           subtitle: "Competition System",
-          description: "A power-electronics platform covering isolated sensing, auxiliary power, STM32G4 control, and a 100V H-bridge power stage.",
+          description: "A Provincial Second Prize totem-pole PFC plus three-phase AC-AC system, together with reusable isolated sensing, auxiliary power, STM32G4 control, and power modules.",
           href: "#/competition",
-          image: "images/pcb-closeup.jpg",
-          tags: ["Isolated Sensing", "Auxiliary Power", "Control Board", "Power Board"],
+          image: "images/contest-2026-system-waveform-bench.jpg",
+          tags: ["Provincial Second Prize", "Totem-Pole PFC", "Three-Phase Bridge", "Modular Hardware"],
           accent: "blue"
         },
         {
@@ -612,7 +662,7 @@ export const copy: Record<Language, SiteCopy> = {
       competition: {
         kicker: "Competition System",
         title: "Competition Project System",
-        description: "A 100V low-voltage power-electronics platform covering bidirectional isolated sensing, isolated auxiliary power, STM32G4 control, and the H-bridge power stage.",
+        description: "Centered on the Provincial Second Prize 2026 AC-AC converter, this collection covers the totem-pole bridgeless PFC, three-phase full bridge, and reusable isolated sensing, auxiliary power, STM32G4 control, and power modules.",
         back: "Back Home"
       },
       personal: {
@@ -683,6 +733,113 @@ export const copy: Record<Language, SiteCopy> = {
 
 const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> = {
   en: {
+    "2026-contest-ac-ac": {
+      title: "2026 Contest Power Electronics Project",
+      subtitle: "Totem-pole bridgeless PFC and three-phase full-bridge SVPWM AC-AC converter",
+      summary: "A 2026 National Undergraduate Electronics Design Contest AC-AC converter. The contest input is 36V / 50Hz single-phase AC; a four-switch totem-pole bridgeless PFC establishes the DC link, followed by a three-phase full bridge driven by team-developed SVPWM software. The project received a Provincial Second Prize.",
+      detailImages: [
+        {
+          src: "images/contest-2026-system-bench.jpg",
+          title: "Complete AC-AC System Wiring and Lab Bench",
+          description: "The full setup includes the totem-pole bridgeless PFC, three-phase bridge, control and sensing modules, filter network, protection wiring, and test instruments for staged bring-up and integration.",
+          kind: "prototype"
+        },
+        {
+          src: "images/contest-2026-system-waveform-bench.jpg",
+          title: "Power Boards, Controller, and Three-Phase Waveform Debug",
+          description: "The controller, PFC, and inverter boards operate together while the oscilloscope monitors the three-phase symmetric output.",
+          kind: "prototype"
+        },
+        {
+          src: "images/contest-2026-pfc-power-meter.jpg",
+          title: "Low-Voltage Single-Phase Input Power Record",
+          description: "The power analyzer shows 33.319Vrms, 3.9074Arms, 128.73W, and PF 0.989. These values are reported only for the photographed debug condition.",
+          kind: "test"
+        },
+        {
+          src: "images/contest-2026-mains-test-setup.jpg",
+          title: "Mains Regulation, Isolation, and Breaker Protection",
+          description: "The mains supply passes through a variac, isolation transformer, and breaker protection before becoming the low-voltage single-phase AC input required by the contest task.",
+          kind: "test"
+        },
+        {
+          src: "images/contest-2026-three-phase-waveform.jpg",
+          title: "Three-Phase Symmetric AC Output Waveform",
+          description: "The oscilloscope records an approximately 49.98Hz three-phase symmetric waveform as integration evidence; it is not presented as a substitute for the specified 30Hz / 60Hz acceptance points.",
+          kind: "waveform"
+        }
+      ],
+      tags: ["Totem-Pole PFC", "Three-Phase Full Bridge", "SVPWM", "AC-AC", "Provincial Second Prize"],
+      status: "Completed | 2026 National Undergraduate Electronics Design Contest Provincial Second Prize",
+      goal: "Build a single-phase low-voltage AC to three-phase symmetric AC converter with explicit power, sensing, drive, and protection interfaces between the totem-pole bridgeless PFC, DC link, and three-phase bridge, then deliver an integrated system within the contest schedule through modular hardware and team coordination.",
+      quickOverview: {
+        objective: "Convert the 36V / 50Hz single-phase contest input into a three-phase symmetric AC output.",
+        challenge: "The totem-pole PFC, three-phase bridge, isolated drives, sensing, protection, and SVPWM interface all had to be completed and integrated within a short contest schedule.",
+        contribution: "Served as team captain, led the architecture, technical direction, staffing, and integration schedule, and independently owned all hardware. Teammates implemented SVPWM and the control software.",
+        outcome: "Completed full-system integration with photographed PF 0.989 and three-phase waveform evidence; the project received a Provincial Second Prize."
+      },
+      responsibilities: [
+        "Served as team captain and defined the overall architecture across the totem-pole bridgeless PFC, DC link, three-phase full bridge, and control system.",
+        "Assigned team roles, decomposed tasks, defined module interfaces and bring-up order, and coordinated hardware-software integration.",
+        "Independently completed all hardware work, including the four-switch totem-pole PFC, three-phase bridge, isolated drives, sensing, protection, DC link, filtering, wiring, and hardware debugging.",
+        "Planned the variac, isolation, breaker-protection, and low-voltage current-limited bring-up path, progressing through auxiliary power, drives, sensing, individual legs, PFC, and three-phase inversion.",
+        "Organized power-analyzer and oscilloscope tests to review input PF, phase sequence, symmetry, frequency, and overall system state.",
+        "SVPWM and control software were implemented by teammates. My responsibility was hardware interfaces, power-stage constraints, and integration; I did not implement the software."
+      ],
+      metrics: [
+        { label: "Contest Result", value: "Provincial 2nd Prize", kind: "measured" },
+        { label: "Photographed PF", value: "0.989", kind: "measured" },
+        { label: "Input Target", value: "36V / 50Hz", kind: "design" },
+        { label: "Base Output Target", value: "32V / 60Hz / 2A", kind: "design" },
+        { label: "Output THD Target", value: "≤2%", kind: "design" },
+        { label: "Regulation Target", value: "≤0.3%", kind: "design" }
+      ],
+      keyComponents: [
+        { label: "Input Safety Boundary", value: "Variac + Isolation + Breaker", note: "The mains supply is regulated and isolated before producing the contest low-voltage AC input." },
+        { label: "PFC Power Stage", value: "Four-Switch Totem Pole", note: "Two half bridges perform half-cycle commutation, current shaping, and DC-link energy transfer." },
+        { label: "DC Link", value: "Storage + Sensing + Protection", note: "Decouples the PFC and inverter while supporting ripple energy storage and overvoltage monitoring." },
+        { label: "Inverter Power Stage", value: "Three-Phase Full Bridge", note: "Three legs generate PWM voltages that are filtered before driving the three-phase resistive load." },
+        { label: "Modulation", value: "SVPWM", note: "Implemented by teammates; the hardware provides six drive channels, sensing, protection, and interface constraints." },
+        { label: "Test Instruments", value: "Power Analyzer + Oscilloscope", note: "Used to record input PF and the three-phase output waveform." }
+      ],
+      operatingPrinciples: [
+        "A variac, isolation transformer, and breaker protection convert the mains source into the specified 36V / 50Hz single-phase low-voltage AC input with a controlled safety boundary.",
+        "The four-switch totem-pole bridgeless PFC assigns high-frequency current modulation and line-frequency commutation to different devices in each half cycle so input current follows input voltage while energy is transferred to the DC link.",
+        "The DC link decouples the front and rear stages; bus voltage, current, and fault signals are passed to the control system through sensing and protection paths.",
+        "Three bridge legs form the inverter. Team-developed SVPWM software determines the six switch states, while the hardware drive stage provides isolation, level shifting, dead-time operating conditions, and reliable device switching.",
+        "The three PWM phase voltages are filtered into symmetric AC outputs separated by 120° before being applied to the three-phase resistive load."
+      ],
+      engineeringHighlights: [
+        "The four-switch totem-pole bridgeless PFC removes the conventional input bridge conduction path and combines PF correction with DC-link generation.",
+        "PFC, DC link, three-phase bridge, gate drives, sensing, and control interfaces are modularized for fast replacement, staged isolation, and parallel contest development.",
+        "As captain, I unified the hardware-software boundary by defining six PWM signals, sensing polarity and scaling, fault polarity, latching behavior, and safe startup states.",
+        "Bring-up progressed from isolated low voltage and individual modules to single-leg operation and finally integrated PFC plus three-phase inversion, limiting the scope of faults.",
+        "Power-analyzer and oscilloscope records preserve evidence at both the input and output of the complete AC-AC power path."
+      ],
+      diagramTitle: "Totem-Pole PFC and Three-Phase Inverter AC-AC Chain",
+      diagramNodes: ["Mains Regulation / Isolation", "36V / 50Hz Single-Phase Input", "Four-Switch Totem-Pole Bridgeless PFC", "DC Link", "Three-Phase Full Bridge", "SVPWM + Output Filter", "Three-Phase Resistive Load"],
+      designPoints: [
+        "The base contest condition is a 36V / 50Hz single-phase input and a three-phase 32V±0.1V line voltage, 60Hz±0.2Hz frequency, and 2A line current; a 32V / 30Hz / 2A operating point is also specified.",
+        "PF≥0.98, efficiency≥95%, output line-voltage THD≤2%, and load/input regulation≤0.3% are presented as contest design targets, not as fully measured achievements without supporting records.",
+        "The four totem-pole switches must coordinate high-frequency modulation, line-frequency commutation, dead time, and zero-crossing behavior with consistent drive, sensing direction, and protection logic.",
+        "The three-phase bridge uses interlocked default-off drive channels. The hardware allows the software to combine active and zero SVPWM vectors while preventing shoot-through within each leg.",
+        "High-di/dt power loops, gate-drive loops, analog sensing, and digital control are physically separated, with test points retained for the DC link, bridge legs, sensing, and faults."
+      ],
+      progress: "The system architecture, all hardware, modular wiring, staged bring-up, and full integration are complete. Teammates completed the SVPWM control software and integrated it with the hardware. Photographed records show PF 0.989 and an approximately 49.98Hz three-phase symmetric waveform, and the project received a Provincial Second Prize.",
+      validation: [
+        "System evidence: completed integrated operation of the PFC, three-phase bridge, controller, sensing, drive, filtering, and protection modules.",
+        "Input record: the photographed power analyzer shows 33.319Vrms, 3.9074Arms, 128.73W, and PF 0.989.",
+        "Output record: the oscilloscope shows three symmetric phase waveforms with sequential phase displacement and an approximately 49.98Hz frequency.",
+        "Safety path: a variac, isolation transformer, and breaker protection establish the low-voltage input, with current-limited and staged bring-up.",
+        "Evidence boundary: efficiency, THD, load regulation, and input regulation remain contest design targets because the supplied photos do not independently document all acceptance points."
+      ],
+      improvements: [
+        "Delivered the architecture, hardware, and team coordination as captain; the project received a 2026 National Undergraduate Electronics Design Contest Provincial Second Prize.",
+        "Produced a reusable totem-pole bridgeless PFC, DC-link, and three-phase bridge hardware chain for future motor-drive, inverter, and AC-AC experiments.",
+        "Established a contest-ready debug sequence covering mains isolation, staged power-up, leg checks, protection confirmation, PFC measurement, and three-phase waveform review.",
+        "Formal 30Hz / 60Hz, 2A load, efficiency, THD, and regulation tables can be added later without changing the current evidence-tiered wording."
+      ]
+    },
     "isolated-sampling-board": {
       title: "AC/DC Voltage and Current Isolated Sensing Board",
       subtitle: "Dual-channel isolated sensing front end based on AMC1301",

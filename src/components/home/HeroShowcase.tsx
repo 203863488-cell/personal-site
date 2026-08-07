@@ -216,9 +216,9 @@ export function HeroShowcase() {
                 ))}
               </div>
               <div className="mt-4 grid max-w-[17rem] grid-cols-2 gap-2 sm:mt-8 sm:flex sm:max-w-none sm:flex-wrap sm:gap-3">
-                <a href="#/personal" className="primary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
+                <a href={slide.href} className="primary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
                   <FolderKanban aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  {siteCopy.topShowcase.projectsAction}
+                  {slide.actionLabel}
                 </a>
                 <a href={assetUrl("resume.pdf")} download className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
                   <Download aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />

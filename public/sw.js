@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "portfolio-";
-const CACHE_NAME = "portfolio-source-v20260710-1";
+const CACHE_NAME = "portfolio-source-v20260807-1";
 const BASE_URL = new URL("./", self.registration.scope);
 const INDEX_URL = new URL("index.html", BASE_URL).href;
 const OFFLINE_IMAGE_URL = new URL("offline-image.svg", BASE_URL).href;
@@ -9,6 +9,7 @@ const INDEX_PATH = new URL("index.html", BASE_URL).pathname;
 const CORE_ASSET_PATHS = [
   "favicon.svg",
   "offline-image.svg",
+  "images/generated/contest-2026-three-phase-waveform-480.webp",
   "images/generated/llc-full-load-board-480.webp",
   "images/generated/pfc-boost-project-480.webp",
   "images/generated/flyback-project-480.webp",

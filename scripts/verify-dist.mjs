@@ -1,4 +1,4 @@
-import { access, readFile, stat } from "node:fs/promises";
+import { access, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 const requiredFiles = [
@@ -35,6 +35,12 @@ const siteCopyText = await readFile(path.resolve("src/data/siteCopy.ts"), "utf8"
 const sourceText = `${projectSourceText}\n${siteCopyText}`;
 
 for (const marker of [
+  "2026电赛电源题",
+  "2026-contest-ac-ac",
+  "省级二等奖",
+  "PF 0.989",
+  "未参与软件代码实现",
+  "images/contest-2026-three-phase-waveform.jpg",
   "100V 半桥 / 全桥功率板",
   "隔离辅助电源板",
   "engineeringHighlights",
@@ -106,9 +112,40 @@ if (sourceText.includes(deletedProjectId)) {
   throw new Error(`Deleted project ID is still referenced: ${deletedProjectId}`);
 }
 
-for (const projectId of ["half-bridge-llc", "totem-pole-pfc", "flyback"]) {
+for (const projectId of ["2026-contest-ac-ac", "half-bridge-llc", "totem-pole-pfc", "flyback"]) {
   if (!siteCopyText.includes(`href: "#/project/${projectId}"`)) {
     throw new Error(`Homepage evidence card is missing project link: ${projectId}`);
+  }
+}
+
+const contestImageNames = [
+  "contest-2026-system-bench.jpg",
+  "contest-2026-pfc-power-meter.jpg",
+  "contest-2026-three-phase-waveform.jpg",
+  "contest-2026-system-waveform-bench.jpg",
+  "contest-2026-mains-test-setup.jpg"
+];
+
+await Promise.all(
+  contestImageNames.flatMap((fileName) => {
+    const fileStem = path.parse(fileName).name;
+    return [
+      access(path.resolve("public/images", fileName)),
+      access(path.resolve("public/images/generated", `${fileStem}-480.webp`)),
+      access(path.resolve("public/images/generated", `${fileStem}-960.webp`))
+    ];
+  })
+);
+
+const publicFileNames = await readdir(path.resolve("public"), { recursive: true });
+for (const privateSourceName of [
+  "A题_AC-AC变换电路(1).pdf",
+  "codex-clipboard-5566bdeb-af5d-4bbc-885f-69eff45e9cd7.png",
+  "codex-clipboard-b87de873-1cb9-488a-a604-576d314f10ba.png",
+  "codex-clipboard-1926f4e3-d6ba-48af-8b63-e19ced108559.png"
+]) {
+  if (publicFileNames.some((fileName) => fileName.endsWith(privateSourceName))) {
+    throw new Error(`Private reference file must not be published: ${privateSourceName}`);
   }
 }
 
@@ -122,7 +159,7 @@ const capabilityImages = [
 ];
 
 const serviceWorkerText = await readFile(path.resolve("public/sw.js"), "utf8");
-if (!serviceWorkerText.includes('CACHE_NAME = "portfolio-source-v20260710-1"')) {
+if (!serviceWorkerText.includes('CACHE_NAME = "portfolio-source-v20260807-1"')) {
   throw new Error("Service worker cache version must be bumped for the current deployment.");
 }
 
