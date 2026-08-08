@@ -39,7 +39,7 @@ for (const marker of [
   "2026-contest-ac-ac",
   "省级二等奖",
   "PF 0.989",
-  "未参与软件代码实现",
+  "没有参与软件代码实现",
   "images/contest-2026-three-phase-waveform.jpg",
   "100V 半桥 / 全桥功率板",
   "隔离辅助电源板",
