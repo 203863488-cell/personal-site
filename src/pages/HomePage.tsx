@@ -1,8 +1,10 @@
 import { EntryCard } from "../components/EntryCard";
 import { DocumentMetadata } from "../components/DocumentMetadata";
+import { CapabilitySection } from "../components/home/CapabilitySection";
 import { ClosingVisual } from "../components/home/ClosingVisual";
 import { ContactBand } from "../components/home/ContactBand";
-import { TopShowcase } from "../components/home/TopShowcase";
+import { GatewaySection } from "../components/home/GatewaySection";
+import { HeroShowcase } from "../components/home/HeroShowcase";
 import { CompactMetricStrip } from "../components/ui/CompactMetricStrip";
 import { MetricGrid } from "../components/ui/MetricGrid";
 import { Pill } from "../components/ui/Pill";
@@ -20,13 +22,13 @@ export function HomePage() {
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <DocumentMetadata title={siteCopy.meta.title} description={siteCopy.meta.description} />
-      <TopShowcase />
+      <HeroShowcase />
 
-      <Reveal as="section" className="content-auto section-shell pb-8 pt-10 sm:pb-12 sm:pt-28">
-        <div className="grid gap-7 sm:gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <Reveal as="section" className="content-auto section-shell pb-8 pt-10 sm:pb-12 sm:pt-14 lg:pt-20">
+        <div className="grid gap-7 sm:gap-8 md:grid-cols-[0.92fr_1.08fr] md:items-center lg:gap-12">
           <div>
             <p className="section-kicker">{home.kicker}</p>
-            <h2 className="balanced-text mt-3 max-w-4xl text-3xl font-semibold leading-[1.1] text-[#111827] sm:mt-5 sm:text-5xl sm:leading-[1.12] lg:text-6xl">
+            <h2 className="balanced-text mt-3 max-w-4xl text-3xl font-semibold leading-[1.1] text-[#111827] sm:mt-5 sm:text-4xl sm:leading-[1.12] lg:text-6xl">
               {home.title}
               <span className="mt-1.5 block text-xl font-medium leading-[1.16] text-[#1F2933] sm:mt-2 sm:text-3xl sm:leading-[1.18] lg:text-4xl">
                 {home.subtitle}
@@ -77,6 +79,9 @@ export function HomePage() {
         </div>
       </Reveal>
 
+      <GatewaySection />
+      <CapabilitySection />
+
       <Reveal as="section" className="content-auto section-shell pt-6 sm:pt-8">
         <SectionHeader className="mb-10" kicker={home.entranceKicker} title={home.entranceTitle} description={home.entranceDescription} />
 
@@ -90,7 +95,9 @@ export function HomePage() {
       <Reveal>
         <ContactBand />
       </Reveal>
-      <ClosingVisual />
+      <div className="md:hidden xl:block">
+        <ClosingVisual />
+      </div>
     </div>
   );
 }

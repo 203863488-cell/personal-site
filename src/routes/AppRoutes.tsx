@@ -3,6 +3,7 @@ import { HomePage } from "../pages/HomePage";
 import { getProjectIdFromRoute, portfolioRoutes } from "./portfolioRoutes";
 
 const CompetitionPage = lazy(() => import("../pages/CompetitionPage").then((module) => ({ default: module.CompetitionPage })));
+const ContactPage = lazy(() => import("../pages/ContactPage").then((module) => ({ default: module.ContactPage })));
 const PersonalProjectsPage = lazy(() => import("../pages/PersonalProjectsPage").then((module) => ({ default: module.PersonalProjectsPage })));
 const ProjectDetailPage = lazy(() => import("../pages/ProjectDetailPage").then((module) => ({ default: module.ProjectDetailPage })));
 
@@ -28,6 +29,10 @@ function resolveRoute(route: string): ReactNode {
 
   if (route === portfolioRoutes.personal) {
     return <PersonalProjectsPage />;
+  }
+
+  if (route === portfolioRoutes.contact) {
+    return <ContactPage />;
   }
 
   const projectId = getProjectIdFromRoute(route);

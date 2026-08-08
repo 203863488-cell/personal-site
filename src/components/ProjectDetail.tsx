@@ -1,7 +1,8 @@
-import { Check, Copy, ExternalLink } from "lucide-react";
+import { BadgeCheck, Check, Copy, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import type { PortfolioProject } from "../types/portfolio";
 import { useLanguage } from "../languageContext";
+import { responsiveImageSources } from "../utils/responsiveImage";
 import { DetailList } from "./project-detail/DetailList";
 import { ProjectImageGallery } from "./project-detail/ProjectImageGallery";
 import { ProjectSectionNav } from "./project-detail/ProjectSectionNav";
@@ -27,6 +28,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
   const { siteCopy } = useLanguage();
   const labels = siteCopy.projectDetail;
   const [copied, setCopied] = useState(false);
+  const coverImage = responsiveImageSources(project.image);
 
   const copyProjectLink = async () => {
     try {
@@ -40,12 +42,21 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <section id="overview" className="project-section paper-card p-4 sm:p-8">
-        <div className="flex flex-col gap-3 sm:gap-5 lg:flex-row lg:items-start lg:justify-between">
+      <section id="overview" className="project-section paper-card overflow-hidden p-4 sm:p-6 lg:p-8">
+        <div className="grid gap-5 md:grid-cols-[minmax(0,1.08fr)_minmax(16rem,0.92fr)] md:items-stretch lg:gap-8">
           <div>
             <p className="section-kicker">{labels.kicker}</p>
-            <h1 className="balanced-text mt-2.5 text-2xl font-semibold leading-[1.12] text-[#111827] sm:mt-4 sm:text-5xl sm:leading-[1.14]">{project.title}</h1>
+            <span className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-[#9BC9FF]/70 bg-[#EEF5FC] px-3 py-1.5 text-xs font-semibold text-[#1D4F91] sm:mt-4 sm:text-sm">
+              <BadgeCheck aria-hidden="true" className="h-4 w-4 shrink-0" />
+              {project.status}
+            </span>
+            <h1 className="balanced-text mt-3 text-2xl font-semibold leading-[1.12] text-[#111827] sm:text-4xl sm:leading-[1.14] lg:text-5xl">{project.title}</h1>
             <p className="copy-text mobile-line-clamp-3 mt-3 max-w-3xl text-sm leading-6 sm:mt-5 sm:text-base sm:leading-7">{project.goal}</p>
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+              {project.tags.slice(0, 4).map((tag) => (
+                <span key={tag} className="rounded-full border border-[#D8E0E7] bg-white/78 px-3 py-1 text-xs font-medium text-[#425466]">{tag}</span>
+              ))}
+            </div>
             {project.links?.length ? (
               <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
                 {project.links.map((link) => (
@@ -70,9 +81,22 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </button>
             </div>
           </div>
-          <span className="w-fit rounded-full border border-[#D8E0E7] bg-white px-3 py-1.5 text-xs text-[#425466] sm:px-4 sm:py-2 sm:text-sm">
-            {siteCopy.common.currentProgress}: {project.status}
-          </span>
+          <div className="relative min-h-52 overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-[#EEF3F7] md:min-h-full">
+            <img
+              src={coverImage.original}
+              srcSet={coverImage.srcSet}
+              sizes="(min-width: 1024px) 38vw, (min-width: 768px) 42vw, 92vw"
+              alt={project.title}
+              decoding="async"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(12,22,34,0.74))]" />
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/68">{siteCopy.common.featuredMetric}</p>
+              <p className="mt-1.5 text-base font-semibold leading-snug sm:text-lg">{project.subtitle}</p>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Download, Languages, Menu, X } from "lucide-react";
+import { ArrowRight, FileText, Languages, Menu, X } from "lucide-react";
 import type { Language } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
 import { portfolioHrefs } from "../routes/portfolioRoutes";
@@ -13,8 +13,6 @@ const languageOptions: Array<{ language: Language; label: string }> = [
   { language: "zh", label: "中文" },
   { language: "en", label: "EN" }
 ];
-
-const phoneNumber = "19830186478";
 
 function LanguageSwitch({ compact = false }: { compact?: boolean }) {
   const { language, setLanguage, siteCopy } = useLanguage();
@@ -122,20 +120,17 @@ export function Navbar({ currentRoute }: NavbarProps) {
           >
             {siteCopy.nav.brand}
           </a>
-          <a
-            href={`tel:${phoneNumber}`}
-            className="navbar-phone shrink-0 whitespace-nowrap rounded-full border border-[#D8E0E7] bg-white/72 px-2.5 py-1 text-[0.68rem] font-semibold tracking-[0.04em] text-[#425466] transition hover:border-[#BFD0DF] hover:text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] sm:px-3 sm:text-xs"
-          >
-            {phoneNumber}
-          </a>
+          <span className="navbar-phone shrink-0 whitespace-nowrap rounded-full border border-[#D8E0E7] bg-white/72 px-2.5 py-1 text-[0.68rem] font-semibold tracking-[0.04em] text-[#425466] sm:px-3 sm:text-xs">
+            {siteCopy.nav.cohort}
+          </span>
         </div>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-3 lg:gap-6 md:flex">
           {siteCopy.nav.items.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`text-sm transition hover:text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9] ${
+              className={`text-xs transition hover:text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4F9CF9] lg:text-sm ${
                 isActive(item.href) ? "font-semibold text-[#111827]" : "text-[#55616E]"
               }`}
             >
@@ -143,8 +138,8 @@ export function Navbar({ currentRoute }: NavbarProps) {
             </a>
           ))}
           <LanguageSwitch />
-          <a href={assetUrl("resume.pdf")} download className="secondary-button gap-2 py-2">
-            <Download aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+          <a href={assetUrl("resume.pdf")} target="_blank" rel="noopener noreferrer" className="secondary-button gap-2 px-3 py-2 lg:px-5">
+            <FileText aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
             <span>{siteCopy.nav.resume}</span>
           </a>
         </nav>
@@ -254,11 +249,12 @@ export function Navbar({ currentRoute }: NavbarProps) {
 
               <a
                 href={assetUrl("resume.pdf")}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="primary-button mt-4 min-h-12 w-full gap-2 rounded-2xl text-base shadow-[0_18px_45px_rgba(31,41,51,0.18)]"
                 onClick={() => setOpen(false)}
               >
-                <Download aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+                <FileText aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
                 <span>{siteCopy.nav.resume}</span>
               </a>
             </div>

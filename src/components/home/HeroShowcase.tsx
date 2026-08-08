@@ -1,5 +1,5 @@
 import type { KeyboardEvent } from "react";
-import { Activity, ChevronLeft, ChevronRight, Cpu, Download, FolderKanban, Layers, Mail, Pause, Play } from "lucide-react";
+import { Activity, ChevronLeft, ChevronRight, Cpu, FileText, FolderKanban, Layers, Mail, Pause, Play } from "lucide-react";
 import type { PortfolioMetric } from "../../types/portfolio";
 import { useAutoCarousel } from "../../hooks/useAutoCarousel";
 import { useLanguage } from "../../languageContext";
@@ -158,16 +158,27 @@ export function HeroShowcase() {
     setActiveIndex: setActiveSlide,
     paused,
     setPaused,
+    setUserPaused,
     reducedMotion,
     goToPrevious,
     goToNext
-  } = useAutoCarousel({ itemCount: heroSlides.length, intervalMs: AUTO_PLAY_MS });
+  } = useAutoCarousel({ itemCount: heroSlides.length, intervalMs: AUTO_PLAY_MS, pauseOnCoarseTablet: true });
   const slide = heroSlides[activeSlide];
   const nearbySlides = new Set([
     activeSlide,
     (activeSlide + 1) % heroSlides.length,
     (activeSlide - 1 + heroSlides.length) % heroSlides.length
   ]);
+
+  const toggleAutoplay = () => {
+    if (paused) {
+      setUserPaused(false);
+      setPaused(false);
+      return;
+    }
+
+    setUserPaused(true);
+  };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "ArrowLeft") {
@@ -201,10 +212,16 @@ export function HeroShowcase() {
             <div className="hero-showcase__content transition duration-500" key={slide.id}>
               <div className="hero-showcase__eyebrow flex flex-wrap items-center gap-3">
                 <p className="section-kicker">{slide.kicker}</p>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#BFD0DF] bg-white/72 px-3 py-1 text-xs font-medium text-[#425466]">
-                  {paused || reducedMotion ? <Pause aria-hidden="true" className="h-3.5 w-3.5" /> : <Play aria-hidden="true" className="h-3.5 w-3.5" />}
-                  {paused || reducedMotion ? siteCopy.topShowcase.pausedStatus : siteCopy.topShowcase.playingStatus}
-                </span>
+                <button
+                  type="button"
+                  onClick={toggleAutoplay}
+                  disabled={reducedMotion}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#BFD0DF] bg-white/78 px-3 py-1 text-xs font-medium text-[#425466] shadow-sm transition hover:border-[#8DB7DF] hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F9CF9] disabled:cursor-default"
+                  aria-label={paused || reducedMotion ? siteCopy.topShowcase.resumeCarousel : siteCopy.topShowcase.pauseCarousel}
+                >
+                  {paused || reducedMotion ? <Play aria-hidden="true" className="h-3.5 w-3.5" /> : <Pause aria-hidden="true" className="h-3.5 w-3.5" />}
+                  {paused || reducedMotion ? siteCopy.topShowcase.resumeCarousel : siteCopy.topShowcase.pauseCarousel}
+                </button>
               </div>
               <h1 className="hero-showcase__title balanced-text mt-3.5 max-w-[12ch] text-[clamp(1.85rem,7.5vw,2.45rem)] font-semibold leading-[1.05] text-[#111827] sm:mt-6 sm:max-w-4xl sm:text-5xl sm:leading-[1.12] lg:text-6xl">
                 {slide.title}
@@ -220,8 +237,8 @@ export function HeroShowcase() {
                   <FolderKanban aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {slide.actionLabel}
                 </a>
-                <a href={assetUrl("resume.pdf")} download className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
-                  <Download aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <a href={assetUrl("resume.pdf")} target="_blank" rel="noopener noreferrer" className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">
+                  <FileText aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {siteCopy.topShowcase.resumeAction}
                 </a>
                 <a href="#/contact" className="secondary-button w-full gap-1.5 px-2.5 py-2 text-[0.72rem] sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm">

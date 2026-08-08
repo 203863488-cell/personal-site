@@ -17,30 +17,11 @@ export function useHashRoute() {
   }, []);
 
   useEffect(() => {
-    if (route === portfolioRoutes.contact) {
-      const alignContactSection = () => {
-        const contactSection = document.getElementById("contact");
-        if (!contactSection) {
-          return;
-        }
+    const frameId = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
 
-        const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
-        const targetTop = window.scrollY + contactSection.getBoundingClientRect().top - headerHeight - 16;
-        window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
-      };
-
-      const frameId = window.requestAnimationFrame(alignContactSection);
-      const settleTimer = window.setTimeout(alignContactSection, 300);
-      const contentVisibilityTimer = window.setTimeout(alignContactSection, 900);
-
-      return () => {
-        window.cancelAnimationFrame(frameId);
-        window.clearTimeout(settleTimer);
-        window.clearTimeout(contentVisibilityTimer);
-      };
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    return () => window.cancelAnimationFrame(frameId);
   }, [route]);
 
   return route;

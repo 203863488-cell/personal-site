@@ -36,7 +36,7 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
         <h3 className="balanced-text mt-2 text-lg font-semibold leading-[1.16] text-[#111827] sm:mt-3 sm:text-2xl sm:leading-[1.18]">{siteCopy.projectDetail.imagesTitle}</h3>
       </div>
 
-      <div className="mobile-scrollbar -mx-3.5 mt-3.5 flex snap-x gap-2.5 overflow-x-auto px-3.5 pb-1.5 sm:mx-0 sm:mt-6 sm:grid sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+      <div className="mobile-scrollbar -mx-3.5 mt-3.5 flex snap-x gap-2.5 overflow-x-auto px-3.5 pb-1.5 sm:mx-0 sm:mt-6 sm:grid sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-2 lg:grid-cols-3">
         {images.map((image, index) => {
           const sources = responsiveImageSources(image.src);
 
@@ -44,7 +44,7 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
             <article key={image.src} className="min-w-[74vw] max-w-[17rem] snap-start overflow-hidden rounded-lg border border-[#D8E0E7]/90 bg-white/78 sm:min-w-0 sm:max-w-none">
               <button
                 type="button"
-                className="group relative block h-36 w-full overflow-hidden bg-[#F7F9FB] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4F9CF9] sm:h-64"
+                className="group relative block h-36 w-full overflow-hidden bg-[#F7F9FB] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4F9CF9] sm:h-64 md:h-52 lg:h-64"
                 onClick={() => setActiveImage(index)}
                 aria-label={`${siteCopy.projectDetail.openImage}: ${image.title}`}
               >
@@ -54,7 +54,7 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
                 <img
                   src={sources.original}
                   srcSet={sources.srcSet}
-                  sizes="(min-width: 1024px) 30vw, 92vw"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 92vw"
                   alt={image.title}
                   loading="lazy"
                   decoding="async"

@@ -46,6 +46,7 @@ export interface SiteCopy {
   };
   nav: {
     brand: string;
+    cohort: string;
     items: Array<{ label: string; href: string }>;
     resume: string;
     menu: string;
@@ -69,6 +70,8 @@ export interface SiteCopy {
     heroStatus: string;
     playingStatus: string;
     pausedStatus: string;
+    pauseCarousel: string;
+    resumeCarousel: string;
     previousSlide: string;
     nextSlide: string;
     capabilityLabel: string;
@@ -184,13 +187,14 @@ export const copy: Record<Language, SiteCopy> = {
     },
     nav: {
       brand: "蓝宏涛",
+      cohort: "2027 届",
       items: [
         { label: "首页", href: "#/" },
         { label: "电赛项目", href: "#/competition" },
         { label: "个人项目", href: "#/personal" },
         { label: "联系", href: "#/contact" }
       ],
-      resume: "下载简历",
+      resume: "查看简历",
       menu: "切换菜单",
       language: "语言"
     },
@@ -210,15 +214,15 @@ export const copy: Record<Language, SiteCopy> = {
           id: "welcome",
           kicker: "2027 届 · 电源硬件研发",
           title: "蓝宏涛｜电源硬件研发作品集",
-          description: "面向电源硬件研发岗位，覆盖 Boost PFC、数控 SiC 半桥 LLC、反激电源、STM32G4 控制与从原理设计到样机调试的完整工程链路。",
+          description: "2027 届电源硬件研发求职作品集。担任 2026 电赛队长并独立完成全部硬件，同时完成 Boost PFC、数控 SiC 半桥 LLC 与反激电源样机调试。",
           image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
           href: "#/personal",
           actionLabel: "查看核心项目",
-          tags: ["电源硬件研发", "功率变换器", "磁件 / PCB", "闭环调试"],
+          tags: ["电源硬件研发", "图腾柱 PFC", "磁件 / PCB", "闭环调试"],
           metrics: [
-            { label: "LLC 满载效率", value: "94.4%" },
-            { label: "PFC 功率因数", value: "0.94" },
-            { label: "反激输出", value: "24V / 3A" }
+            { label: "电赛成果", value: "省级二等奖" },
+            { label: "现场 PF", value: "0.989" },
+            { label: "LLC 满载效率", value: "94.4%" }
           ]
         },
         {
@@ -286,11 +290,13 @@ export const copy: Record<Language, SiteCopy> = {
       heroStatus: "当前首页展示",
       playingStatus: "自动播放",
       pausedStatus: "已暂停",
+      pauseCarousel: "暂停轮播",
+      resumeCarousel: "继续播放",
       previousSlide: "上一张展示",
       nextSlide: "下一张展示",
       capabilityLabel: "能力模块切换",
       projectsAction: "查看核心项目",
-      resumeAction: "下载简历",
+      resumeAction: "查看简历",
       contactAction: "联系我",
       shareAction: "扫码打开",
       shareTitle: "手机扫码查看作品集",
@@ -349,7 +355,7 @@ export const copy: Record<Language, SiteCopy> = {
       metricCards: [
         { label: "方向", value: "电力电子" },
         { label: "能力", value: "硬件 + 控制" },
-        { label: "形式", value: "点击式作品集" }
+        { label: "项目", value: "实物样机" }
       ],
       entranceKicker: "Portfolio Entrance",
       entranceTitle: "选择你想了解的项目方向",
@@ -376,11 +382,11 @@ export const copy: Record<Language, SiteCopy> = {
       ],
       contactKicker: "Contact",
       contactTitle: "求职方向：电源硬件研发岗（2027 届）",
-      contactDescription: "欢迎通过邮箱联系，也可以查看 GitHub 代码仓库或下载完整简历。电话和微信仅保留在简历中，不在网页正文公开。",
+      contactDescription: "欢迎通过邮箱联系，也可以直接查看我的 GitHub 和在线简历。电话和微信留在简历里，网页不单独展示。",
       email: "邮箱联系",
       emailFeedback: "正在打开邮箱客户端",
       github: "GitHub",
-      download: "下载简历"
+      download: "查看简历"
     },
     pages: {
       competition: {
@@ -460,13 +466,14 @@ export const copy: Record<Language, SiteCopy> = {
     },
     nav: {
       brand: "Hongtao Lan",
+      cohort: "Class of 2027",
       items: [
         { label: "Home", href: "#/" },
         { label: "Competition", href: "#/competition" },
         { label: "Projects", href: "#/personal" },
         { label: "Contact", href: "#/contact" }
       ],
-      resume: "Resume",
+      resume: "View Resume",
       menu: "Toggle menu",
       language: "Language"
     },
@@ -486,15 +493,15 @@ export const copy: Record<Language, SiteCopy> = {
           id: "welcome",
           kicker: "Class of 2027 · Power Hardware",
           title: "Hongtao Lan | Power Hardware Portfolio",
-          description: "Power-supply hardware portfolio covering Boost PFC, digital SiC half-bridge LLC, flyback conversion, STM32G4 control, and the full path from design to prototype validation.",
+          description: "Class of 2027 power-hardware portfolio. I captained the 2026 contest team and owned all hardware, while also completing Boost PFC, digital SiC half-bridge LLC, and flyback prototypes.",
           image: "images/ed3b9c61-6574-47e7-9f1f-f1a1d9248eb8.png",
           href: "#/personal",
           actionLabel: "View Core Projects",
-          tags: ["Power Hardware", "Converters", "Magnetics / PCB", "Closed-Loop Debug"],
+          tags: ["Power Hardware", "Totem-Pole PFC", "Magnetics / PCB", "Closed-Loop Debug"],
           metrics: [
-            { label: "LLC Efficiency", value: "94.4%" },
-            { label: "PFC PF", value: "0.94" },
-            { label: "Flyback Output", value: "24V / 3A" }
+            { label: "Contest Result", value: "Provincial 2nd Prize" },
+            { label: "Measured PF", value: "0.989" },
+            { label: "LLC Efficiency", value: "94.4%" }
           ]
         },
         {
@@ -562,11 +569,13 @@ export const copy: Record<Language, SiteCopy> = {
       heroStatus: "Current homepage showcase",
       playingStatus: "Auto playing",
       pausedStatus: "Paused",
+      pauseCarousel: "Pause slides",
+      resumeCarousel: "Resume slides",
       previousSlide: "Previous slide",
       nextSlide: "Next slide",
       capabilityLabel: "Capability track switcher",
       projectsAction: "View Core Projects",
-      resumeAction: "Download Resume",
+      resumeAction: "View Resume",
       contactAction: "Contact Me",
       shareAction: "Open on Phone",
       shareTitle: "Scan to View the Portfolio",
@@ -625,7 +634,7 @@ export const copy: Record<Language, SiteCopy> = {
       metricCards: [
         { label: "Focus", value: "Power Electronics" },
         { label: "Skills", value: "Hardware + Control" },
-        { label: "Format", value: "Clickable Portfolio" }
+        { label: "Projects", value: "Working Prototypes" }
       ],
       entranceKicker: "Portfolio Entrance",
       entranceTitle: "Choose a project direction",
@@ -652,11 +661,11 @@ export const copy: Record<Language, SiteCopy> = {
       ],
       contactKicker: "Contact",
       contactTitle: "Target role: Power Hardware R&D, Class of 2027",
-      contactDescription: "Contact me by email, review the GitHub repository, or download the full resume. Phone and WeChat remain in the resume rather than the public page body.",
+      contactDescription: "Email me, review my GitHub work, or open the resume online. Phone and WeChat details remain in the resume rather than the public page body.",
       email: "Email",
       emailFeedback: "Opening email client",
       github: "GitHub",
-      download: "Resume"
+      download: "View Resume"
     },
     pages: {
       competition: {

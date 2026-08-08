@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Download, GitBranch, Mail } from "lucide-react";
+import { FileText, GitBranch, Mail } from "lucide-react";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
 import { SignalButton } from "../ui/SignalButton";
@@ -50,7 +50,7 @@ export function ContactBand() {
           >
             {home.github}
           </SignalButton>
-          <SignalButton href={assetUrl("resume.pdf")} download icon={Download} iconPosition="start" className="w-full bg-white font-semibold text-[#111827] hover:bg-[#EEF4FA] sm:w-auto">
+          <SignalButton href={assetUrl("resume.pdf")} target="_blank" rel="noopener noreferrer" icon={FileText} iconPosition="start" className="w-full bg-white font-semibold text-[#111827] hover:bg-[#EEF4FA] sm:w-auto">
             {home.download}
           </SignalButton>
         </div>

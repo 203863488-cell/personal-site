@@ -44,8 +44,8 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
   return (
     <div className="animate-[reveal-up_0.5s_ease-out]">
       <DocumentMetadata title={`${project.title} | ${siteCopy.nav.brand}`} description={project.summary} />
-      <section className="section-shell pt-16">
-        <div className="mb-10 flex flex-wrap gap-3">
+      <section className="section-shell pt-10 md:pt-8 lg:pt-10">
+        <div className="mb-6 flex flex-wrap gap-3 lg:mb-8">
           <SignalButton href={backHref} icon={ArrowLeft} iconPosition="start" className="py-2">
             {backLabel}
           </SignalButton>

@@ -32,8 +32,8 @@ export function CapabilitySection() {
     <section className="content-auto relative mt-6 overflow-hidden border-y border-[#D8E0E7] bg-[#1F2933] text-white shadow-[0_24px_70px_rgba(31,41,51,0.14)] sm:mt-16">
       <SignalField tone="dark" density="rich" className="opacity-45" />
       <div className="relative grid sm:min-h-[520px] lg:grid-cols-[0.38fr_0.62fr]">
-        <div className="px-4 py-4 sm:px-8 sm:py-16 lg:py-24 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] lg:pr-12">
-          <div className="grid grid-cols-3 rounded-xl border border-white/10 bg-white/7 p-1 shadow-[0_14px_38px_rgba(8,17,29,0.18)] sm:hidden" role="tablist" aria-label={siteCopy.topShowcase.capabilityLabel}>
+        <div className="px-4 py-4 sm:px-8 sm:py-5 lg:py-24 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] lg:pr-12">
+          <div className="grid grid-cols-3 rounded-xl border border-white/10 bg-white/7 p-1 shadow-[0_14px_38px_rgba(8,17,29,0.18)] lg:hidden" role="tablist" aria-label={siteCopy.topShowcase.capabilityLabel}>
             {capabilityTracks.map((track, index) => {
               const Icon = capabilityIcons[index % capabilityIcons.length];
               const active = index === activeTrack;
@@ -50,14 +50,14 @@ export function CapabilitySection() {
                   }`}
                 >
                   <Icon aria-hidden="true" className={`h-3.5 w-3.5 ${active ? "text-[#2563EB]" : "text-[#9BC9FF]"}`} strokeWidth={1.8} />
-                  <span className="w-full truncate text-[0.66rem] font-semibold leading-none">{track.title}</span>
+                  <span className="w-full truncate text-[0.66rem] font-semibold leading-none sm:text-xs">{track.title}</span>
                 </button>
               );
             })}
           </div>
-          <p className="mobile-line-clamp-2 mt-2.5 text-[0.78rem] leading-5 text-white/68 sm:hidden">{currentTrack.subtitle}</p>
+          <p className="mobile-line-clamp-2 mt-2.5 text-[0.78rem] leading-5 text-white/68 lg:hidden">{currentTrack.subtitle}</p>
 
-          <div className="hidden sm:block sm:space-y-10" role="tablist" aria-label={siteCopy.topShowcase.capabilityLabel}>
+          <div className="hidden lg:block lg:space-y-10" role="tablist" aria-label={siteCopy.topShowcase.capabilityLabel}>
             {capabilityTracks.map((track, index) => {
               const Icon = capabilityIcons[index % capabilityIcons.length];
               const active = index === activeTrack;
