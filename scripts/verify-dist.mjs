@@ -37,7 +37,7 @@ const sourceText = `${projectSourceText}\n${siteCopyText}`;
 for (const marker of [
   "2026电赛电源题",
   "2026-contest-ac-ac",
-  "省级二等奖",
+  "省级一等奖",
   "PF 0.989",
   "没有参与软件代码实现",
   "images/contest-2026-three-phase-waveform.jpg",

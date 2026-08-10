@@ -6,7 +6,7 @@ export const competitionProjects: PortfolioProject[] = [
     category: "competition",
     title: "2026电赛电源题",
     subtitle: "图腾柱无桥 PFC 与三相全桥 SVPWM AC-AC 变换系统",
-    summary: "这是我们参加 2026 年全国大学生电子设计竞赛时做的 AC-AC 变换电路。前级用四开关图腾柱无桥 PFC，把 36V / 50Hz 单相交流送入直流母线；后级是三相全桥，由队友编写的 SVPWM 程序控制。比赛中我担任队长，并独立完成全部硬件，最终获得省级二等奖。",
+    summary: "这是我们参加 2026 年全国大学生电子设计竞赛时做的 AC-AC 变换电路。前级用四开关图腾柱无桥 PFC，把 36V / 50Hz 单相交流送入直流母线；后级是三相全桥，由队友编写的 SVPWM 程序控制。比赛中我担任队长，并独立完成全部硬件，最终获得省级一等奖。",
     image: "images/contest-2026-three-phase-waveform.jpg",
     detailImages: [
       {
@@ -40,14 +40,14 @@ export const competitionProjects: PortfolioProject[] = [
         kind: "waveform"
       }
     ],
-    tags: ["图腾柱无桥 PFC", "三相全桥", "SVPWM", "AC-AC", "省级二等奖"],
-    status: "已完赛｜2026 年全国大学生电子设计竞赛省级二等奖",
+    tags: ["图腾柱无桥 PFC", "三相全桥", "SVPWM", "AC-AC", "省级一等奖"],
+    status: "已完赛｜2026 年全国大学生电子设计竞赛省级一等奖",
     goal: "把 36V / 50Hz 单相交流经过 PFC 和直流母线，变成可调的三相交流输出。比赛时间很紧，硬件既要能拆开单独调试，也要能快速接上队友的控制程序跑整机。",
     quickOverview: {
       objective: "用 36V / 50Hz 单相交流输入，做出一套能带三相阻性负载的 AC-AC 变换系统。",
       challenge: "图腾柱 PFC、三相全桥、驱动、采样和保护都要在比赛周期内做完，还要给队友的软件留好接口。",
       contribution: "我担任队长，负责方案、分工和联调安排；硬件全部由我独立完成，SVPWM 控制软件由队友负责。",
-      outcome: "整机顺利跑通，现场记录到 PF 0.989 和三相输出波形，最后拿到省级二等奖。"
+      outcome: "整机顺利跑通，现场记录到 PF 0.989 和三相输出波形，最后拿到省级一等奖。"
     },
     responsibilities: [
       "我担任队长，先定下图腾柱无桥 PFC、直流母线和三相全桥这条技术路线，再按模块给队员分工。",
@@ -58,7 +58,7 @@ export const competitionProjects: PortfolioProject[] = [
       "SVPWM 和控制软件由队友完成，我没有参与软件代码实现，主要负责硬件接口和整机联调。"
     ],
     metrics: [
-      { label: "竞赛成果", value: "省级二等奖", kind: "measured" },
+      { label: "竞赛成果", value: "省级一等奖", kind: "measured" },
       { label: "现场 PF 记录", value: "0.989", kind: "measured" },
       { label: "赛题输入目标", value: "36V / 50Hz", kind: "design" },
       { label: "基本输出目标", value: "32V / 60Hz / 2A", kind: "design" },
@@ -96,7 +96,7 @@ export const competitionProjects: PortfolioProject[] = [
       "三相桥的六路驱动按桥臂做互锁，默认状态全部关断。这样即使控制板刚上电或信号异常，也不会让同一桥臂直通。",
       "布局和接线时把高 di/dt 功率回路、驱动、模拟采样和数字控制分开，并给母线、桥臂和故障信号留出测试点。"
     ],
-    progress: "整机已经完成接线和联合调试。硬件由我独立完成，队友负责 SVPWM 控制程序。现场照片记录到输入侧 PF 0.989 和约 49.98Hz 的三相波形，项目最终获得省级二等奖。",
+    progress: "整机已经完成接线和联合调试。硬件由我独立完成，队友负责 SVPWM 控制程序。现场照片记录到输入侧 PF 0.989 和约 49.98Hz 的三相波形，项目最终获得省级一等奖。",
     validation: [
       "PFC、三相全桥、控制板、驱动、采样、滤波和保护已经接成完整系统，并完成联合运行。",
       "功率分析仪照片显示 33.319Vrms、3.9074Arms、128.73W，PF 为 0.989。这些数据只对应照片里的调试工况。",
