@@ -222,7 +222,7 @@ export const copy: Record<Language, SiteCopy> = {
           metrics: [
             { label: "电赛成果", value: "省级一等奖" },
             { label: "现场 PF", value: "0.989" },
-            { label: "LLC 满载效率", value: "94.4%" }
+            { label: "现场 THD", value: "1.1%" }
           ]
         },
         {
@@ -501,7 +501,7 @@ export const copy: Record<Language, SiteCopy> = {
           metrics: [
             { label: "Contest Result", value: "Provincial 1st Prize" },
             { label: "Measured PF", value: "0.989" },
-            { label: "LLC Efficiency", value: "94.4%" }
+            { label: "Measured THD", value: "1.1%" }
           ]
         },
         {
