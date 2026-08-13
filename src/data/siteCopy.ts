@@ -273,7 +273,7 @@ export const copy: Record<Language, SiteCopy> = {
         {
           id: "pfc",
           kicker: "Featured Project 03",
-          title: "1kW CCM Boost PFC",
+          title: "160W CCM Boost PFC",
           description: "基于 UCC28019ADR 完成 220VAC 到 400VDC 高压母线、软启动、EMI/安规和平均电流模式双环设计，带载实测 PF 0.94。",
           image: "images/pfc-boost-project.jpg",
           href: "#/project/totem-pole-pfc",
@@ -310,7 +310,7 @@ export const copy: Record<Language, SiteCopy> = {
       gatewayCards: [
         { title: "2026电赛电源题", subtitle: "图腾柱无桥 PFC · 三相全桥 SVPWM · 省级一等奖", image: "images/contest-2026-three-phase-waveform.jpg", href: "#/project/2026-contest-ac-ac" },
         { title: "数控 SiC 半桥 LLC", subtitle: "300W · 满载效率 94.4% · ZVS / 同步整流", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
-        { title: "1kW CCM Boost PFC", subtitle: "400VDC · 实测效率 96.9% · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
+        { title: "160W CCM Boost PFC", subtitle: "400VDC · 实测效率 96.9% · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
         { title: "72W Flyback 反激电源", subtitle: "24V / 3A · 满载效率约 85% · 负载调整率 0.67%", image: "images/flyback-project.jpg", href: "#/project/flyback" }
       ],
       capabilityTracks: [
@@ -328,7 +328,7 @@ export const copy: Record<Language, SiteCopy> = {
           subtitle: "PFC、LLC 与反激电源的样机及实测证据",
           tiles: [
             { title: "数控 SiC 半桥 LLC", image: "images/llc-full-load-board.jpg" },
-            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
+            { title: "160W CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "72W Flyback 反激电源", image: "images/flyback-project.jpg" }
           ]
         },
@@ -552,7 +552,7 @@ export const copy: Record<Language, SiteCopy> = {
         {
           id: "pfc",
           kicker: "Featured Project 03",
-          title: "1kW CCM Boost PFC",
+          title: "160W CCM Boost PFC",
           description: "UCC28019ADR-based 220VAC to 400VDC PFC covering inrush control, EMI/safety design, and average-current-mode loops, with a measured PF of 0.94.",
           image: "images/pfc-boost-project.jpg",
           href: "#/project/totem-pole-pfc",
@@ -589,7 +589,7 @@ export const copy: Record<Language, SiteCopy> = {
       gatewayCards: [
         { title: "2026 Contest Power Electronics Project", subtitle: "Totem-pole PFC · Three-phase SVPWM bridge · Provincial First Prize", image: "images/contest-2026-three-phase-waveform.jpg", href: "#/project/2026-contest-ac-ac" },
         { title: "Digital SiC Half-Bridge LLC", subtitle: "300W · 94.4% full-load efficiency · ZVS / SR", image: "images/llc-full-load-board.jpg", href: "#/project/half-bridge-llc" },
-        { title: "1kW CCM Boost PFC", subtitle: "400VDC · 96.9% measured efficiency · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
+        { title: "160W CCM Boost PFC", subtitle: "400VDC · 96.9% measured efficiency · PF 0.94", image: "images/pfc-boost-project.jpg", href: "#/project/totem-pole-pfc" },
         { title: "72W Flyback Power Supply", subtitle: "24V / 3A · About 85% full-load efficiency · 0.67% load regulation", image: "images/flyback-project.jpg", href: "#/project/flyback" }
       ],
       capabilityTracks: [
@@ -607,7 +607,7 @@ export const copy: Record<Language, SiteCopy> = {
           subtitle: "Prototype and measurement evidence for PFC, LLC, and flyback converters",
           tiles: [
             { title: "Digital SiC Half-Bridge LLC", image: "images/llc-full-load-board.jpg" },
-            { title: "1kW CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
+            { title: "160W CCM Boost PFC", image: "images/pfc-boost-project.jpg" },
             { title: "72W Flyback Supply", image: "images/flyback-project.jpg" }
           ]
         },
@@ -1133,21 +1133,21 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
       ]
     },
     "totem-pole-pfc": {
-      title: "1kW CCM Boost PFC",
+      title: "160W CCM Boost PFC",
       subtitle: "UCC28019ADR / 220VAC to 400VDC average-current-mode PFC",
-      summary: "A completed 1kW-class front-end design covering component selection, EMI and safety, relay-bypassed NTC inrush limiting, dual-loop compensation, and 220VAC-to-400VDC closed-loop validation at a measured 160W operating point.",
+      summary: "A completed 160W CCM Boost PFC prototype covering component selection, EMI and safety, relay-bypassed NTC inrush limiting, dual-loop compensation, and 220VAC-to-400VDC closed-loop validation, with 96.9% measured efficiency and PF 0.94.",
       detailImages: [
-        { src: "images/pfc-boost-project.jpg", title: "1kW-Class CCM Boost PFC Prototype", description: "Prototype with input protection, soft start, bridge, boost stage, high-voltage bus, UCC28019ADR control, and auxiliary supply.", kind: "prototype" },
+        { src: "images/pfc-boost-project.jpg", title: "160W CCM Boost PFC Prototype", description: "Prototype with input protection, soft start, bridge, boost stage, high-voltage bus, UCC28019ADR control, and auxiliary supply.", kind: "prototype" },
         { src: "images/pfc-boost-schematic-main.png", title: "Power Stage, Sensing, and Compensation", description: "Main schematic covering the boost stage, VSENSE/VINS/ISENSE paths, and voltage/current loop compensation.", kind: "schematic" },
         { src: "images/pfc-boost-input-power.jpg", title: "220VAC Input Power and PF Record", description: "Staged-load record used to review input voltage, current, active power, and power factor.", kind: "test" },
         { src: "images/pfc-boost-bus-ripple.jpg", title: "400V Bus Ripple Record", description: "Bus waveform used to review voltage-loop stability and twice-line-frequency energy storage.", kind: "waveform" },
         { src: "images/pfc-boost-schematic-aux.png", title: "Auxiliary Supply and Protective Earth", description: "Auxiliary control power, relay drive, decoupling, protective earth, and mounting structure.", kind: "schematic" }
       ],
-      tags: ["UCC28019ADR", "CCM Boost PFC", "1kW Design", "400VDC", "Type-II Compensation", "EMI / Safety"],
+      tags: ["UCC28019ADR", "CCM Boost PFC", "160W Measured", "400VDC", "Type-II Compensation", "EMI / Safety"],
       status: "High-voltage closed-loop and load validation complete",
-      goal: "Build a 1kW-class single-phase CCM Boost PFC that establishes a 400VDC bus from 220VAC and improves input-current shape and power factor through average-current-mode control.",
+      goal: "Build a 160W single-phase CCM Boost PFC prototype that establishes a 400VDC bus from 220VAC and improves input-current shape and power factor through average-current-mode control.",
       quickOverview: {
-        objective: "Build a 1kW-class CCM Boost PFC front end from 220VAC to a regulated 400VDC bus.",
+        objective: "Build a 160W CCM Boost PFC prototype from 220VAC to a regulated 400VDC bus.",
         challenge: "High-voltage stress, soft start, EMI/safety, and dual-loop compensation must be coordinated.",
         contribution: "Completed component selection, Simulink modeling, magnetics parameters, PCB, loop compensation, and high-voltage load testing.",
         outcome: "Established a stable 400VDC bus with 96.9% efficiency and PF 0.94 at the measured 160W operating point."
@@ -1160,11 +1160,10 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Completed 220VAC to 400VDC closed-loop testing and recorded efficiency, PF, and input-current improvement."
       ],
       metrics: [
-        { label: "Design Power", value: "1kW", kind: "design" },
+        { label: "Measured Power", value: "160W", kind: "measured" },
         { label: "Input / Bus", value: "220VAC / 400VDC", kind: "design" },
         { label: "Measured Efficiency", value: "96.9%", kind: "measured" },
         { label: "Power Factor", value: "0.94", kind: "measured" },
-        { label: "Test Load", value: "160W", kind: "measured" },
         { label: "Controller", value: "UCC28019ADR", kind: "design" }
       ],
       diagramTitle: "CCM Boost PFC Power and Control Path",
@@ -1173,9 +1172,9 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "The outer loop regulates the 400V bus while the inner loop tracks the rectified-line envelope; bandwidth separation limits 100Hz bus-ripple interaction.",
         "The voltage-loop crossover is around 10Hz and the current-loop bandwidth is in the 5kHz-10kHz range.",
         "The relay bypasses the NTC after startup so inrush limiting does not become a continuous loss source.",
-        "The page clearly separates the 1kW design target from the currently validated 160W operating point."
+        "Power, efficiency, and power factor are presented at the same measured 160W operating point, without implying a higher validated power level."
       ],
-      progress: "The 1kW-class design, component and loop calculations, PCB prototype, and 220VAC to 400VDC closed-loop load validation are complete. At the measured 160W operating point, efficiency is 96.9% and PF is 0.94.",
+      progress: "Component and loop calculations, the PCB prototype, and 220VAC to 400VDC closed-loop validation at 160W are complete. Measured efficiency is 96.9% and PF is 0.94.",
       validation: [
         "Established and regulated the 400VDC bus from 220VAC.",
         "Recorded about 96.9% efficiency at the 160W load point.",
@@ -1183,7 +1182,7 @@ const projectTranslations: Record<"en", Record<string, LocalizedProjectFields>> 
         "Checked NTC inrush limiting and relay-bypass sequencing.",
         "Reviewed key device stress, thermal considerations, and high-voltage clearance."
       ],
-      improvements: ["Defined multi-load efficiency, PF, THD, and harmonic test records", "Documented VDS, inductor-current, and zero-crossing measurement procedures", "Created startup, step-load, and protection test coverage", "Produced a critical-component thermal design matrix", "Established isolation, probing, and protection practices for 1kW-class testing"]
+      improvements: ["Defined multi-load efficiency, PF, THD, and harmonic test records", "Documented VDS, inductor-current, and zero-crossing measurement procedures", "Created startup, step-load, and protection test coverage", "Produced a critical-component thermal design matrix", "Established isolation, probing, and protection practices for high-voltage PFC testing"]
     },
     "half-bridge-llc": {
       title: "Digital SiC Half-Bridge LLC",

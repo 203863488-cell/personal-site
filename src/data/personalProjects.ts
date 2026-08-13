@@ -4,14 +4,14 @@ const personalProjectData: PortfolioProject[] = [
   {
     id: "totem-pole-pfc",
     category: "personal",
-    title: "1kW CCM Boost PFC",
+    title: "160W CCM Boost PFC",
     subtitle: "UCC28019ADR / 220VAC -> 400VDC 平均电流模式 PFC",
-    summary: "面向 1kW 级电源前级，完成关键器件选型、EMI/安规、继电器旁路 NTC 软启动和双环补偿设计；完成 220VAC 到 400VDC 高压闭环与 160W 带载验证，效率 96.9%、PF 0.94。",
+    summary: "完成 160W CCM Boost PFC 样机，覆盖关键器件选型、EMI/安规、继电器旁路 NTC 软启动和双环补偿设计；实现 220VAC 到 400VDC 高压闭环，实测效率 96.9%、PF 0.94。",
     image: "images/pfc-boost-project.jpg",
     detailImages: [
       {
         src: "images/pfc-boost-project.jpg",
-        title: "1kW CCM Boost PFC 样机",
+        title: "160W CCM Boost PFC 样机",
         description: "实物板包含输入保护与软启动、整流桥、Boost 电感、功率器件散热区、高压母线电容、UCC28019ADR 控制与辅助供电。",
         kind: "prototype"
       },
@@ -40,11 +40,11 @@ const personalProjectData: PortfolioProject[] = [
         kind: "schematic"
       }
     ],
-    tags: ["UCC28019ADR", "CCM Boost PFC", "1kW 设计", "400VDC", "Type-II 补偿", "EMI / 安规"],
+    tags: ["UCC28019ADR", "CCM Boost PFC", "160W 实测", "400VDC", "Type-II 补偿", "EMI / 安规"],
     status: "已完成高压闭环与带载验证",
-    goal: "完成一套面向 1kW 级电源前级的单相 CCM Boost PFC，从 220VAC 建立 400VDC 高压母线，并通过平均电流模式双环控制改善输入电流波形和功率因数。",
+    goal: "完成一套 160W 单相 CCM Boost PFC 样机，从 220VAC 建立 400VDC 高压母线，并通过平均电流模式双环控制改善输入电流波形和功率因数。",
     quickOverview: {
-      objective: "完成 220VAC 输入、400VDC 母线的 1kW 级 CCM Boost PFC 前级。",
+      objective: "完成 220VAC 输入、400VDC 母线的 160W CCM Boost PFC 样机。",
       challenge: "高压器件应力、软启动、EMI/安规以及电压环和电流环补偿需要协同设计。",
       contribution: "独立完成器件选型、Simulink 闭环模型、磁性器件参数、PCB、双环补偿和高压带载调试。",
       outcome: "建立稳定 400VDC 母线；160W 工作点效率 96.9%，PF 0.94。"
@@ -58,11 +58,10 @@ const personalProjectData: PortfolioProject[] = [
       "完成 220VAC 到 400VDC 高压母线和 160W 带载测试，记录效率、PF 和输入电流改善情况。"
     ],
     metrics: [
-      { label: "设计功率", value: "1kW", kind: "design" },
+      { label: "实测功率", value: "160W", kind: "measured" },
       { label: "输入 / 母线", value: "220VAC / 400VDC", kind: "design" },
       { label: "实测效率", value: "96.9%", kind: "measured" },
       { label: "功率因数", value: "0.94", kind: "measured" },
-      { label: "实测负载", value: "160W", kind: "measured" },
       { label: "控制器", value: "UCC28019ADR", kind: "design" }
     ],
     diagramTitle: "CCM Boost PFC 功率与控制链路",
@@ -72,9 +71,9 @@ const personalProjectData: PortfolioProject[] = [
       "电压外环穿越频率控制在约 10Hz，电流内环带宽设置在 5kHz-10kHz 量级，兼顾正弦电流跟踪和开关噪声抑制。",
       "输入浪涌、持续损耗和继电器时序联合考虑：NTC 只承担启动阶段限流，母线稳定后由继电器旁路。",
       "高压网络和继电器引脚区域采用挖槽与距离约束，功率回路、采样回路和控制地回流分区处理。",
-      "1kW 设计目标与 160W 实测工作点分别呈现，使方案指标和测试证据清晰对应。"
+      "页面中的功率、效率和功率因数均对应 160W 实测工作点，避免把设计预留能力写成已经完成的结果。"
     ],
-    progress: "已完成 1kW 级方案设计、关键器件与环路参数计算、PCB 样机、220VAC -> 400VDC 高压母线转换及闭环带载验证；160W 工作点实测效率 96.9%、PF 0.94。",
+    progress: "已完成关键器件与环路参数计算、PCB 样机、220VAC -> 400VDC 高压母线转换及 160W 闭环带载验证；实测效率 96.9%、PF 0.94。",
     validation: [
       "高压闭环：完成 220VAC 输入到 400VDC 母线建立和稳压验证。",
       "带载效率：160W 条件下记录效率约 96.9%。",
@@ -87,7 +86,7 @@ const personalProjectData: PortfolioProject[] = [
       "沉淀 MOSFET VDS、Boost 电感电流和过零区波形的测量流程。",
       "完成启动浪涌、母线过冲、负载阶跃、输入变化和保护触发/恢复测试设计。",
       "形成 MOSFET、SiC 二极管、电感、采样电阻、NTC/继电器和母线电容的热设计矩阵。",
-      "建立适用于 1kW 级高压测试的隔离、探头和保护规范。"
+      "建立适用于高压 PFC 调试的隔离、探头和保护规范。"
     ]
   },
   {
