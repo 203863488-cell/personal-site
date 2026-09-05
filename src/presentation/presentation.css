@@ -236,3 +236,32 @@
 @media (prefers-reduced-motion: reduce) {
   .presentation-track, .presentation-pagination button span { transition: none; }
 }
+
+/* Fullscreen has room for a balanced composition, not taller stretched cards. */
+@media (min-width: 900px) and (min-height: 700px) and (orientation: landscape) {
+  :root:fullscreen .presentation-page:has(> .presentation-contest-grid),
+  :root:fullscreen .presentation-page:has(> .presentation-power-grid) {
+    justify-content: center;
+    padding: 20px clamp(32px, 4vw, 64px);
+    gap: 22px;
+  }
+  :root:fullscreen .presentation-contest-grid {
+    flex: 0 0 auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: 32px;
+  }
+  :root:fullscreen .presentation-contest-photo {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+  :root:fullscreen .presentation-contest-copy .presentation-work-list li { font-size: 15px; }
+  :root:fullscreen .presentation-power-grid { flex: 0 0 auto; gap: 22px; }
+  :root:fullscreen .presentation-power-photo { height: clamp(130px, 19vh, 170px); }
+  :root:fullscreen .presentation-power-content { padding: 15px 17px 10px; }
+  :root:fullscreen .presentation-power-content h3 { font-size: 26px; }
+  :root:fullscreen .presentation-power-card .presentation-work-list { margin: 13px 0; gap: 6px; }
+  :root:fullscreen .presentation-power-card .presentation-work-list li { font-size: 15px; line-height: 1.7; }
+  :root:fullscreen .presentation-power-result { padding-top: 12px; }
+  :root:fullscreen .presentation-power-result strong { font-size: 30px; }
+}
