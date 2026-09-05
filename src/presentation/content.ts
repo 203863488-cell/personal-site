@@ -59,6 +59,24 @@ export function presentationProject(project: PortfolioProject, language: Languag
           : "Team captain and hardware lead. Designed and debugged the hardware and coordinated PFC, inverter and system integration. A teammate implemented SVPWM.",
         outcome: zh ? "获省级一等奖；竞赛成绩 PF 0.99、输出 THD 1.3%。" : "Provincial first prize; competition PF 0.99 and output THD 1.3%."
       },
+      progress: zh
+        ? "整机已完成接线和联合调试。我担任队长兼硬件负责人，独立完成全部硬件；队友负责 SVPWM 控制程序。项目获省级一等奖，竞赛成绩为 PF 0.99、输出 THD 1.3%。"
+        : "System wiring and integration are complete. As captain and hardware lead, I independently completed the hardware; a teammate implemented SVPWM. The project received a Provincial First Prize with competition PF 0.99 and output THD 1.3%.",
+      designPoints: project.designPoints.map((point, index) => index === 1
+        ? (zh
+          ? "赛题目标为 PF≥0.98、效率≥95%、输出 THD≤2%、负载及输入电压调整率≤0.3%。最终竞赛成绩为 PF 0.99、输出 THD 1.3%；效率与调整率仍按设计目标标注。"
+          : "Contest targets are PF≥0.98, efficiency≥95%, output THD≤2%, and load/input regulation≤0.3%. Final competition results are PF 0.99 and output THD 1.3%; efficiency and regulation remain labeled as design targets.")
+        : point),
+      validation: project.validation.map((point, index) => index === 4
+        ? (zh
+          ? "最终竞赛成绩：PF 0.99、输出 THD 1.3%。上方照片保留各自的调试工况；效率和调整率尚未列为实测成绩。"
+          : "Final competition results: PF 0.99 and output THD 1.3%. The photographs retain their individual debug conditions; efficiency and regulation are not claimed as measured results.")
+        : point),
+      improvements: project.improvements.map((point, index) => index === 3
+        ? (zh
+          ? "后续可补充不同频率、负载点的效率与调整率测试表，形成更完整的分工况记录。"
+          : "Future documentation can add efficiency and regulation tables across frequency and load conditions.")
+        : point),
       metrics: [
         { label: zh ? "竞赛成果" : "Award", value: zh ? "省级一等奖" : "Provincial first prize", kind: "measured" },
         { label: zh ? "竞赛 PF" : "Competition PF", value: "0.99", kind: "measured" },
