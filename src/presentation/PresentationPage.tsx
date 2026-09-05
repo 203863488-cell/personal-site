@@ -147,16 +147,15 @@ export function PresentationPage({ onExit, onOpenProject }: Props) {
       {pageHeading("01 / COMPETITION", zh ? "电赛成果" : "Competition", zh ? "图腾柱 PFC + 三相逆变 · AC-AC 变换系统" : "Totem-pole PFC + three-phase inverter · AC-AC conversion")}
       <div className="presentation-contest-grid">
         <div className="presentation-contest-photo">
-          <Photo src="images/contest-2026-system-bench.jpg" alt={zh ? "电赛 AC-AC 系统完整样机" : "Complete contest AC-AC prototype"} />
-          <span className="presentation-photo-caption">{zh ? "比赛现场 · 整机硬件与接线" : "Competition bench · complete hardware"}</span>
+          <Photo src="images/contest-2026-three-phase-waveform.jpg" alt={zh ? "三相逆变输出波形" : "Three-phase inverter output waveforms"} />
+          <span className="presentation-photo-caption">{zh ? "三相逆变输出波形 · 整机联调记录" : "Three-phase inverter output · system integration record"}</span>
         </div>
         <div className="presentation-contest-copy">
           <span className="presentation-role">{zh ? "队长兼硬件负责人" : "Team captain & hardware lead"}</span>
-          <h3>{zh ? "我负责把方案推进到整机跑通" : "From the system plan to a working prototype"}</h3>
           <ul className="presentation-work-list">
-            <li>{zh ? "统筹技术路线、任务分工与联调安排。" : "Led the architecture, team tasks and integration schedule."}</li>
-            <li>{zh ? "独立完成硬件设计与调试，覆盖功率级、隔离采样、驱动和辅助供电。" : "Designed and debugged the power stages, isolated sensing, gate drives and auxiliary supplies."}</li>
-            <li>{zh ? "对齐 PWM、采样和保护接口，完成 PFC 与三相逆变级联测试。" : "Aligned PWM, sensing and protection interfaces; integrated the PFC and three-phase inverter."}</li>
+            <li><strong>{zh ? "竞赛描述：" : "Overview: "}</strong>{zh ? "主导并带领完成“市电输入—PFC 整流—三相逆变”两级功率变换系统的设计、级联与整机调试。" : "Led the design, cascading and system debugging of a two-stage power conversion system: mains input, PFC rectification and three-phase inversion."}</li>
+            <li><strong>{zh ? "竞赛职责：" : "Responsibilities: "}</strong>{zh ? "担任队长兼硬件负责人，独立完成隔离采样、驱动及辅助模块的设计与调试，统筹前级 PFC 与后级三相逆变级联。" : "Team captain and hardware lead. Independently designed and debugged isolated sensing, drive and auxiliary modules, and coordinated cascading of the PFC front end with the three-phase inverter."}</li>
+            <li><strong>{zh ? "竞赛成果：" : "Results: "}</strong>{zh ? "三相输出电压总谐波畸变率（THD）1.3%，交流输入功率因数（PF）0.99，获省一等奖。" : "Three-phase output voltage THD of 1.3%, AC input PF of 0.99, and a provincial first prize."}</li>
           </ul>
           <p className="presentation-team-note">{zh ? "团队协作：SVPWM 控制软件由队友负责。" : "Team contribution: a teammate implemented the SVPWM control software."}</p>
           <div className="presentation-contest-metrics">
