@@ -7,6 +7,7 @@ import { ImageLightbox } from "../ui/ImageLightbox";
 
 interface ProjectImageGalleryProps {
   project: PortfolioProject;
+  swipeEnabled?: boolean;
 }
 
 const kindPriority = { prototype: 0, test: 1, waveform: 2, software: 3, schematic: 4 } as const;
@@ -17,7 +18,7 @@ const kindPriority = { prototype: 0, test: 1, waveform: 2, software: 3, schemati
  * Projects can be published before detailed photos are ready; the null return
  * keeps that data state explicit without forcing placeholder content.
  */
-export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
+export function ProjectImageGallery({ project, swipeEnabled = false }: ProjectImageGalleryProps) {
   const { siteCopy } = useLanguage();
   const [activeImage, setActiveImage] = useState<number | null>(null);
   const images = useMemo(
@@ -75,6 +76,7 @@ export function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
       </div>
 
       <ImageLightbox
+        swipeEnabled={swipeEnabled}
         images={images}
         activeIndex={activeImage}
         onActiveIndexChange={setActiveImage}

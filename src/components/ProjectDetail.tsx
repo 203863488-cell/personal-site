@@ -15,6 +15,7 @@ import { ShareQrDialog } from "./ui/ShareQrDialog";
 
 interface ProjectDetailProps {
   project: PortfolioProject;
+  presentationMode?: boolean;
 }
 
 /**
@@ -24,7 +25,7 @@ interface ProjectDetailProps {
  * blocks live in smaller components. Future detail fields can be inserted here
  * without changing image, diagram, or metric rendering internals.
  */
-export function ProjectDetail({ project }: ProjectDetailProps) {
+export function ProjectDetail({ project, presentationMode = false }: ProjectDetailProps) {
   const { siteCopy } = useLanguage();
   const labels = siteCopy.projectDetail;
   const [copied, setCopied] = useState(false);
@@ -74,7 +75,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
             ) : null}
             <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
-              <ShareQrDialog buttonLabel={labels.shareProject} buttonClassName="gap-1.5 px-3 py-2 text-xs sm:gap-2 sm:px-5 sm:text-sm" />
+              <ShareQrDialog compactDialog={presentationMode} buttonLabel={labels.shareProject} buttonClassName="gap-1.5 px-3 py-2 text-xs sm:gap-2 sm:px-5 sm:text-sm" />
               <button type="button" onClick={copyProjectLink} className="secondary-button gap-1.5 px-3 py-2 text-xs sm:gap-2 sm:px-5 sm:text-sm">
                 {copied ? <Check aria-hidden="true" className="h-4 w-4" /> : <Copy aria-hidden="true" className="h-4 w-4" />}
                 {copied ? labels.copiedProjectLink : labels.copyProjectLink}
@@ -102,7 +103,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
       <QuickOverview project={project} />
       <ProjectSectionNav hasImages={Boolean(project.detailImages?.length)} />
-      <ProjectImageGallery project={project} />
+      <ProjectImageGallery project={project} swipeEnabled={presentationMode} />
 
       <div id="metrics" className="project-section grid gap-5 xl:grid-cols-2">
         <DetailList title={labels.responsibilities} items={project.responsibilities} />

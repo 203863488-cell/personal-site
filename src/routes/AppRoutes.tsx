@@ -9,6 +9,7 @@ const ProjectDetailPage = lazy(() => import("../pages/ProjectDetailPage").then((
 
 interface AppRoutesProps {
   route: string;
+  presentationMode?: boolean;
 }
 
 function PageFallback() {
@@ -22,7 +23,7 @@ function PageFallback() {
   );
 }
 
-function resolveRoute(route: string): ReactNode {
+function resolveRoute(route: string, presentationMode: boolean): ReactNode {
   if (route === portfolioRoutes.competition) {
     return <CompetitionPage />;
   }
@@ -38,7 +39,7 @@ function resolveRoute(route: string): ReactNode {
   const projectId = getProjectIdFromRoute(route);
 
   if (projectId !== null) {
-    return <ProjectDetailPage projectId={projectId} />;
+    return <ProjectDetailPage projectId={projectId} presentationMode={presentationMode} />;
   }
 
   return <HomePage />;
@@ -48,6 +49,6 @@ function resolveRoute(route: string): ReactNode {
  * Routing stays isolated from the app chrome so future pages can be added by
  * editing route definitions here, without touching providers, nav, or footer.
  */
-export function AppRoutes({ route }: AppRoutesProps) {
-  return <Suspense fallback={<PageFallback />}>{resolveRoute(route)}</Suspense>;
+export function AppRoutes({ route, presentationMode = false }: AppRoutesProps) {
+  return <Suspense fallback={<PageFallback />}>{resolveRoute(route, presentationMode)}</Suspense>;
 }

@@ -7,7 +7,8 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "sw.js",
-  "offline-image.svg"
+  "offline-image.svg",
+  "offline-manifest.json"
 ];
 
 await Promise.all(requiredFiles.map((file) => access(path.resolve("dist", file))));
@@ -159,8 +160,10 @@ const capabilityImages = [
 ];
 
 const serviceWorkerText = await readFile(path.resolve("public/sw.js"), "utf8");
-if (!serviceWorkerText.includes('CACHE_NAME = "portfolio-source-v20260807-1"')) {
-  throw new Error("Service worker cache version must be bumped for the current deployment.");
+const offlineManifest = JSON.parse(await readFile(path.resolve("dist/offline-manifest.json"), "utf8"));
+const builtWorker = await readFile(path.resolve("dist/sw.js"), "utf8");
+if (!builtWorker.includes(offlineManifest.version) || builtWorker.includes("__PORTFOLIO_BUILD__")) {
+  throw new Error("Built service worker and offline manifest must use the same content version.");
 }
 
 if (!serviceWorkerText.includes("networkFirstNavigation")) {

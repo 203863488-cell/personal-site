@@ -11,9 +11,10 @@ function getShareUrl() {
 interface ShareQrDialogProps {
   buttonClassName?: string;
   buttonLabel?: string;
+  compactDialog?: boolean;
 }
 
-export function ShareQrDialog({ buttonClassName = "", buttonLabel }: ShareQrDialogProps = {}) {
+export function ShareQrDialog({ buttonClassName = "", buttonLabel, compactDialog = false }: ShareQrDialogProps = {}) {
   const [open, setOpen] = useState(false);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -59,7 +60,7 @@ export function ShareQrDialog({ buttonClassName = "", buttonLabel }: ShareQrDial
   };
 
   const dialog = open ? (
-    <div className="fixed inset-0 z-[120] grid place-items-center px-4 py-8 sm:px-8">
+    <div className={"fixed inset-0 z-[120] grid place-items-center px-4 py-8 sm:px-8" + (compactDialog ? " presentation-share-overlay" : "")}>
       <button
         type="button"
         className="absolute inset-0 bg-[#08111D]/72 backdrop-blur-md"
@@ -72,7 +73,7 @@ export function ShareQrDialog({ buttonClassName = "", buttonLabel }: ShareQrDial
         aria-modal="true"
         aria-labelledby="share-portfolio-title"
         aria-describedby="share-portfolio-description"
-        className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-white/70 bg-[#F8FAF7] p-6 shadow-[0_30px_100px_rgba(8,17,29,0.36)] sm:p-8"
+        className={"relative w-full max-w-md overflow-hidden rounded-[2rem] border border-white/70 bg-[#F8FAF7] p-6 shadow-[0_30px_100px_rgba(8,17,29,0.36)] sm:p-8" + (compactDialog ? " presentation-share-dialog" : "")}
       >
         <div className="pointer-events-none absolute -right-20 -top-20 h-52 w-52 rounded-full bg-[#4F9CF9]/18 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-20 h-52 w-52 rounded-full bg-[#5CC8A7]/18 blur-3xl" />

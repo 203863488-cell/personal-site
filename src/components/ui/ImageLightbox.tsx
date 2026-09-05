@@ -4,20 +4,23 @@ import { createPortal } from "react-dom";
 import type { PortfolioImage } from "../../types/portfolio";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
+import { swipeDirection, type SwipePoint } from "../../presentation/interaction";
 
 interface ImageLightboxProps {
   images: PortfolioImage[];
   activeIndex: number | null;
   onActiveIndexChange: (index: number) => void;
   onClose: () => void;
+  swipeEnabled?: boolean;
 }
 
-export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClose }: ImageLightboxProps) {
+export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClose, swipeEnabled = false }: ImageLightboxProps) {
   const { language } = useLanguage();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const isOpen = activeIndex !== null;
+  const swipeStart = useRef<(SwipePoint & { pointerId: number }) | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -144,7 +147,28 @@ export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClos
         </button>
       ) : null}
 
-      <figure className="image-lightbox__figure">
+      <figure className="image-lightbox__figure"
+        style={swipeEnabled ? { touchAction: "pan-y pinch-zoom" } : undefined}
+        onPointerDown={event => {
+          if (!swipeEnabled || !event.isPrimary) { swipeStart.current = null; return; }
+          swipeStart.current = { x: event.clientX, y: event.clientY, time: performance.now(), pointerId: event.pointerId };
+        }}
+        onPointerMove={event => {
+          const start = swipeStart.current;
+          if (start && Math.abs(event.clientX - start.x) > 15 && Math.abs(event.clientX - start.x) > Math.abs(event.clientY - start.y) * 1.5) {
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }
+        }}
+        onPointerCancel={() => { swipeStart.current = null; }}
+        onPointerUp={event => {
+          const start = swipeStart.current;
+          if (start && start.pointerId === event.pointerId && hasMultipleImages) {
+            const direction = swipeDirection(start, { x: event.clientX, y: event.clientY, time: performance.now() }, event.currentTarget.clientWidth);
+            if (direction) onActiveIndexChange((activeIndex + direction + images.length) % images.length);
+          }
+          swipeStart.current = null;
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+        }}>
         <img src={assetUrl(image.src)} alt={image.title} className="image-lightbox__image" draggable={false} />
         <figcaption className="image-lightbox__caption">
           <strong>{image.title}</strong>

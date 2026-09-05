@@ -6,15 +6,18 @@ import { findProjectById, projectCollections } from "../data/projectCatalog";
 import { localizeProject } from "../data/siteCopy";
 import { useLanguage } from "../languageContext";
 import { getCategoryHref, getProjectHref, portfolioHrefs } from "../routes/portfolioRoutes";
+import { presentationProject } from "../presentation/content";
 
 interface ProjectDetailPageProps {
   projectId: string;
+  presentationMode?: boolean;
 }
 
-export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
+export function ProjectDetailPage({ projectId, presentationMode = false }: ProjectDetailPageProps) {
   const { language, siteCopy } = useLanguage();
   const sourceProject = findProjectById(projectId);
-  const project = sourceProject ? localizeProject(sourceProject, language) : undefined;
+  const localized = sourceProject ? localizeProject(sourceProject, language) : undefined;
+  const project = localized && presentationMode ? presentationProject(localized, language) : localized;
 
   if (!project) {
     return (
@@ -53,7 +56,7 @@ export function ProjectDetailPage({ projectId }: ProjectDetailPageProps) {
             {siteCopy.common.backHome}
           </SignalButton>
         </div>
-        <ProjectDetail project={project} />
+        <ProjectDetail project={project} presentationMode={presentationMode} />
         {previousProject || nextProject ? (
           <nav className="mt-8 grid gap-4 sm:grid-cols-2" aria-label={siteCopy.projectDetail.projectNavigation}>
             {previousProject ? (
