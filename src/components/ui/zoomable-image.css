@@ -1,0 +1,13 @@
+.image-lightbox--touch { grid-template-rows: minmax(0, 1fr); }
+.image-lightbox--touch .image-lightbox__figure { min-height: 0; height: 100%; gap: 10px; }
+.image-lightbox--touch .image-lightbox__caption { max-height: 80px; overflow-y: auto; flex-shrink: 0; }
+.zoomable-image { display: flex; flex-direction: column; width: 100%; min-height: 0; flex: 1; gap: 8px; }
+.zoomable-image__viewport { position: relative; width: 100%; min-height: 0; flex: 1; overflow: hidden; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; touch-action: none; user-select: none; }
+.zoomable-image__viewport * { touch-action: none; }
+.zoomable-image__viewport img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform-origin: center; user-select: none; -webkit-user-drag: none; }
+.zoomable-image__controls { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+.zoomable-image__controls button { min-width: 44px; height: 40px; border: 1px solid #ffffff30; background: #ffffff12; border-radius: 20px; color: white; font-size: 14px; touch-action: manipulation; }
+.zoomable-image__controls button:disabled { opacity: .35; }
+.zoomable-image__controls button:focus-visible { outline: 2px solid #9bc9ff; outline-offset: 2px; }
+.zoomable-image__controls span { font-size: 11px; color: #c5cedb; }
+@media (max-width: 639px) { .zoomable-image__controls span { width: 100%; text-align: center; } }

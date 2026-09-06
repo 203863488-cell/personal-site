@@ -3,7 +3,58 @@ import { createHash, webcrypto } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
+import { ImageGesture } from "../src/presentation/imageGesture.ts";
 import { isPresentationDevice, swipeDirection } from "../src/presentation/interaction.ts";
+
+test("pinch keeps the touched image point anchored and supports one-finger continuation", () => {
+  const gesture = new ImageGesture();
+  gesture.setBounds(400, 300, 400, 300);
+  gesture.start(1, { x: 0, y: 0 }, 0);
+  gesture.start(2, { x: 100, y: 0 }, 10);
+  gesture.move(2, { x: 200, y: 0 });
+  assert.deepEqual(gesture.transform, { scale: 2, x: 0, y: 0 });
+  assert.equal(gesture.end(2, { x: 200, y: 0 }, 100).swipe, 0);
+  gesture.move(1, { x: 80, y: 40 });
+  assert.deepEqual(gesture.transform, { scale: 2, x: 80, y: 40 });
+  assert.deepEqual(gesture.end(1, { x: 80, y: 40 }, 200), { swipe: 0, tap: false });
+});
+
+test("zoom and pan stay bounded and dragging a zoomed image never changes pictures", () => {
+  const gesture = new ImageGesture();
+  gesture.setBounds(400, 300, 400, 200);
+  gesture.zoom(20);
+  assert.equal(gesture.transform.scale, 6);
+  gesture.start(1, { x: 0, y: 0 }, 0);
+  gesture.move(1, { x: -2000, y: 2000 });
+  assert.deepEqual(gesture.transform, { scale: 6, x: -1000, y: 450 });
+  assert.equal(gesture.end(1, { x: -2000, y: 2000 }, 300).swipe, 0);
+  gesture.zoom(.5);
+  assert.deepEqual(gesture.transform, { scale: 1, x: 0, y: 0 });
+});
+
+test("fit-size swipe changes images but vertical moves and cancelled gestures do not", () => {
+  const gesture = new ImageGesture();
+  gesture.setBounds(400, 300, 400, 300);
+  gesture.start(1, { x: 150, y: 0 }, 0);
+  assert.equal(gesture.end(1, { x: -150, y: 10 }, 300).swipe, 1);
+  gesture.start(2, { x: 0, y: 0 }, 400);
+  assert.equal(gesture.end(2, { x: 20, y: 150 }, 600).swipe, 0);
+  gesture.start(3, { x: 150, y: 0 }, 700);
+  assert.deepEqual(gesture.end(3, { x: -150, y: 0 }, 800, true), { swipe: 0, tap: false });
+});
+
+test("pinching back to fit cannot accidentally become a swipe", () => {
+  const gesture = new ImageGesture();
+  gesture.setBounds(400, 300, 400, 300);
+  gesture.zoom(2);
+  gesture.start(1, { x: -100, y: 0 }, 0);
+  gesture.start(2, { x: 100, y: 0 }, 0);
+  gesture.move(1, { x: -20, y: 0 });
+  gesture.move(2, { x: 20, y: 0 });
+  assert.equal(gesture.transform.scale, 1);
+  gesture.end(2, { x: 20, y: 0 }, 200);
+  assert.equal(gesture.end(1, { x: -190, y: 0 }, 300).swipe, 0);
+});
 
 test("phone and tablet activation leaves a mouse-driven desktop unchanged", () => {
   assert.equal(isPresentationDevice(true, 1152, 720), true);

@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import type { PortfolioImage } from "../../types/portfolio";
 import { useLanguage } from "../../languageContext";
 import { assetUrl } from "../../utils/assetUrl";
-import { swipeDirection, type SwipePoint } from "../../presentation/interaction";
+import { ZoomableImage } from "./ZoomableImage";
 
 interface ImageLightboxProps {
   images: PortfolioImage[];
@@ -20,7 +20,9 @@ export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClos
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const isOpen = activeIndex !== null;
-  const swipeStart = useRef<(SwipePoint & { pointerId: number }) | null>(null);
+  const touchViewer = swipeEnabled || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
   useEffect(() => {
     if (!isOpen) {
@@ -106,7 +108,7 @@ export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClos
   return createPortal(
     <div
       ref={dialogRef}
-      className="image-lightbox"
+      className={touchViewer ? "image-lightbox image-lightbox--touch" : "image-lightbox"}
       role="dialog"
       aria-modal="true"
       aria-label={copy.dialog}
@@ -147,29 +149,10 @@ export function ImageLightbox({ images, activeIndex, onActiveIndexChange, onClos
         </button>
       ) : null}
 
-      <figure className="image-lightbox__figure"
-        style={swipeEnabled ? { touchAction: "pan-y pinch-zoom" } : undefined}
-        onPointerDown={event => {
-          if (!swipeEnabled || !event.isPrimary) { swipeStart.current = null; return; }
-          swipeStart.current = { x: event.clientX, y: event.clientY, time: performance.now(), pointerId: event.pointerId };
-        }}
-        onPointerMove={event => {
-          const start = swipeStart.current;
-          if (start && Math.abs(event.clientX - start.x) > 15 && Math.abs(event.clientX - start.x) > Math.abs(event.clientY - start.y) * 1.5) {
-            event.currentTarget.setPointerCapture(event.pointerId);
-          }
-        }}
-        onPointerCancel={() => { swipeStart.current = null; }}
-        onPointerUp={event => {
-          const start = swipeStart.current;
-          if (start && start.pointerId === event.pointerId && hasMultipleImages) {
-            const direction = swipeDirection(start, { x: event.clientX, y: event.clientY, time: performance.now() }, event.currentTarget.clientWidth);
-            if (direction) onActiveIndexChange((activeIndex + direction + images.length) % images.length);
-          }
-          swipeStart.current = null;
-          if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-        }}>
-        <img src={assetUrl(image.src)} alt={image.title} className="image-lightbox__image" draggable={false} />
+      <figure className="image-lightbox__figure">
+        {touchViewer ? <ZoomableImage key={image.src} src={assetUrl(image.src)} alt={image.title} zh={language === "zh"}
+          onSwipe={direction => { if (hasMultipleImages) onActiveIndexChange((activeIndex + direction + images.length) % images.length); }} />
+          : <img src={assetUrl(image.src)} alt={image.title} className="image-lightbox__image" draggable={false} />}
         <figcaption className="image-lightbox__caption">
           <strong>{image.title}</strong>
           {image.description ? <span>{image.description}</span> : null}
