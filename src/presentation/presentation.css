@@ -16,6 +16,9 @@
 .presentation-header-actions button { min-height: 44px; min-width: 44px; display: inline-flex; gap: 7px; align-items: center; justify-content: center; padding: 0 10px; border-radius: 8px; font-size: 13px; font-weight: 600; }
 .presentation-header-actions button:hover { background: #eaf0f3; }
 .presentation-stage { min-width: 0; overflow: hidden; touch-action: pan-y pinch-zoom; overscroll-behavior-x: contain; }
+/* Touch arbitration stops at the nearest scroll container, including overflow:hidden
+   cards. Set the policy on hit targets too so nested content cannot cancel a swipe. */
+.presentation-stage * { touch-action: pan-y pinch-zoom; }
 .presentation-track { display: flex; width: 100%; height: 100%; transition: transform 330ms cubic-bezier(.22,.7,.18,1); will-change: transform; }
 .presentation-stage.is-dragging .presentation-track { transition: none; user-select: none; }
 .presentation-slide { flex: 0 0 100%; min-width: 0; height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-color: #c9d5df transparent; }
